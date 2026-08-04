@@ -1,7 +1,41 @@
 {
-  "generated_at_utc": "2026-08-04T16:36:34Z",
+  "generated_at_utc": "2026-08-04T17:57:01Z",
   "catalog_datasets": 25,
-  "sources": {},
+  "layer_json_files": 10,
+  "sources": {
+    "global-samples": {
+      "source": "open-meteo-samples",
+      "ok": true,
+      "city_count": 6,
+      "ok_count": 6,
+      "generated_at_utc": "2026-08-04T17:28:58Z"
+    },
+    "igra": {
+      "source": "noaa-igra",
+      "ok": true,
+      "station_count": 2931,
+      "file_count": 801,
+      "generated_at_utc": "2026-08-04T17:28:49Z"
+    },
+    "msds-ground": {
+      "source": "msds-casey-ground",
+      "ok": true,
+      "date": "2026-08-03",
+      "generated_at_utc": "2026-08-04T17:28:51Z"
+    },
+    "ndbc": {
+      "source": "ndbc",
+      "ok": true,
+      "station_count": 1936,
+      "sample_stations": [
+        "41001",
+        "46026",
+        "44025",
+        "46013"
+      ],
+      "generated_at_utc": "2026-08-04T17:29:54Z"
+    }
+  },
   "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
   "data_hub": "https://www.midwestsds.com/portal.html",
   "curator": "Midwest Stratospheric Data Systems"
