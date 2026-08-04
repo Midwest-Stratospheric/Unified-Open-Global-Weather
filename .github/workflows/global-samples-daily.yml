@@ -1,4 +1,4 @@
-# Daily multi-city surface samples (Open-Meteo) for hub charts / maps
+# Daily multi-city surface samples worldwide (Open-Meteo) — US + foreign
 name: Global Samples Daily
 
 on:
@@ -18,26 +18,68 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Fetch multi-city samples
+      - name: Fetch worldwide city samples
         run: |
           set -e
           DATE=$(date -u +%Y-%m-%d)
           mkdir -p layers/ground/samples snapshots/${DATE} status
           python3 << 'PY'
-          import json, os, urllib.request
+          import json, os, urllib.request, urllib.parse
           from datetime import datetime, timezone
 
           date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
           now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+          # Multi-continent coverage — North America, South America, Europe,
+          # Africa, Middle East, Asia, Oceania
           cities = [
-            {"id": "casey_il", "name": "Casey, IL", "lat": 39.2992, "lon": -87.9925, "tz": "America/Chicago"},
-            {"id": "chicago_il", "name": "Chicago, IL", "lat": 41.8781, "lon": -87.6298, "tz": "America/Chicago"},
-            {"id": "houston_tx", "name": "Houston, TX", "lat": 29.7604, "lon": -95.3698, "tz": "America/Chicago"},
-            {"id": "london_uk", "name": "London, UK", "lat": 51.5074, "lon": -0.1278, "tz": "Europe/London"},
-            {"id": "tokyo_jp", "name": "Tokyo, JP", "lat": 35.6762, "lon": 139.6503, "tz": "Asia/Tokyo"},
-            {"id": "sydney_au", "name": "Sydney, AU", "lat": -33.8688, "lon": 151.2093, "tz": "Australia/Sydney"},
+            # North America
+            {"id": "casey_il", "name": "Casey, IL, US", "lat": 39.2992, "lon": -87.9925, "tz": "America/Chicago", "country": "US"},
+            {"id": "chicago_il", "name": "Chicago, IL, US", "lat": 41.8781, "lon": -87.6298, "tz": "America/Chicago", "country": "US"},
+            {"id": "houston_tx", "name": "Houston, TX, US", "lat": 29.7604, "lon": -95.3698, "tz": "America/Chicago", "country": "US"},
+            {"id": "toronto_ca", "name": "Toronto, CA", "lat": 43.6532, "lon": -79.3832, "tz": "America/Toronto", "country": "CA"},
+            {"id": "mexico_city_mx", "name": "Mexico City, MX", "lat": 19.4326, "lon": -99.1332, "tz": "America/Mexico_City", "country": "MX"},
+            # South America
+            {"id": "sao_paulo_br", "name": "Sao Paulo, BR", "lat": -23.5505, "lon": -46.6333, "tz": "America/Sao_Paulo", "country": "BR"},
+            {"id": "buenos_aires_ar", "name": "Buenos Aires, AR", "lat": -34.6037, "lon": -58.3816, "tz": "America/Argentina/Buenos_Aires", "country": "AR"},
+            {"id": "lima_pe", "name": "Lima, PE", "lat": -12.0464, "lon": -77.0428, "tz": "America/Lima", "country": "PE"},
+            # Europe
+            {"id": "london_uk", "name": "London, UK", "lat": 51.5074, "lon": -0.1278, "tz": "Europe/London", "country": "GB"},
+            {"id": "paris_fr", "name": "Paris, FR", "lat": 48.8566, "lon": 2.3522, "tz": "Europe/Paris", "country": "FR"},
+            {"id": "berlin_de", "name": "Berlin, DE", "lat": 52.52, "lon": 13.405, "tz": "Europe/Berlin", "country": "DE"},
+            {"id": "madrid_es", "name": "Madrid, ES", "lat": 40.4168, "lon": -3.7038, "tz": "Europe/Madrid", "country": "ES"},
+            {"id": "rome_it", "name": "Rome, IT", "lat": 41.9028, "lon": 12.4964, "tz": "Europe/Rome", "country": "IT"},
+            {"id": "oslo_no", "name": "Oslo, NO", "lat": 59.9139, "lon": 10.7522, "tz": "Europe/Oslo", "country": "NO"},
+            {"id": "stockholm_se", "name": "Stockholm, SE", "lat": 59.3293, "lon": 18.0686, "tz": "Europe/Stockholm", "country": "SE"},
+            {"id": "reykjavik_is", "name": "Reykjavik, IS", "lat": 64.1466, "lon": -21.9426, "tz": "Atlantic/Reykjavik", "country": "IS"},
+            {"id": "moscow_ru", "name": "Moscow, RU", "lat": 55.7558, "lon": 37.6173, "tz": "Europe/Moscow", "country": "RU"},
+            {"id": "istanbul_tr", "name": "Istanbul, TR", "lat": 41.0082, "lon": 28.9784, "tz": "Europe/Istanbul", "country": "TR"},
+            # Africa
+            {"id": "cairo_eg", "name": "Cairo, EG", "lat": 30.0444, "lon": 31.2357, "tz": "Africa/Cairo", "country": "EG"},
+            {"id": "nairobi_ke", "name": "Nairobi, KE", "lat": -1.2921, "lon": 36.8219, "tz": "Africa/Nairobi", "country": "KE"},
+            {"id": "johannesburg_za", "name": "Johannesburg, ZA", "lat": -26.2041, "lon": 28.0473, "tz": "Africa/Johannesburg", "country": "ZA"},
+            {"id": "lagos_ng", "name": "Lagos, NG", "lat": 6.5244, "lon": 3.3792, "tz": "Africa/Lagos", "country": "NG"},
+            # Middle East
+            {"id": "dubai_ae", "name": "Dubai, AE", "lat": 25.2048, "lon": 55.2708, "tz": "Asia/Dubai", "country": "AE"},
+            # Asia
+            {"id": "mumbai_in", "name": "Mumbai, IN", "lat": 19.076, "lon": 72.8777, "tz": "Asia/Kolkata", "country": "IN"},
+            {"id": "beijing_cn", "name": "Beijing, CN", "lat": 39.9042, "lon": 116.4074, "tz": "Asia/Shanghai", "country": "CN"},
+            {"id": "tokyo_jp", "name": "Tokyo, JP", "lat": 35.6762, "lon": 139.6503, "tz": "Asia/Tokyo", "country": "JP"},
+            {"id": "seoul_kr", "name": "Seoul, KR", "lat": 37.5665, "lon": 126.978, "tz": "Asia/Seoul", "country": "KR"},
+            {"id": "singapore_sg", "name": "Singapore, SG", "lat": 1.3521, "lon": 103.8198, "tz": "Asia/Singapore", "country": "SG"},
+            {"id": "bangkok_th", "name": "Bangkok, TH", "lat": 13.7563, "lon": 100.5018, "tz": "Asia/Bangkok", "country": "TH"},
+            {"id": "jakarta_id", "name": "Jakarta, ID", "lat": -6.2088, "lon": 106.8456, "tz": "Asia/Jakarta", "country": "ID"},
+            # Oceania
+            {"id": "sydney_au", "name": "Sydney, AU", "lat": -33.8688, "lon": 151.2093, "tz": "Australia/Sydney", "country": "AU"},
+            {"id": "auckland_nz", "name": "Auckland, NZ", "lat": -36.8509, "lon": 174.7645, "tz": "Pacific/Auckland", "country": "NZ"},
+            # Pacific / edge
+            {"id": "honolulu_us", "name": "Honolulu, HI, US", "lat": 21.3069, "lon": -157.8583, "tz": "Pacific/Honolulu", "country": "US"},
+            {"id": "anchorage_us", "name": "Anchorage, AK, US", "lat": 61.2181, "lon": -149.9003, "tz": "America/Anchorage", "country": "US"},
           ]
+
           results = []
           for c in cities:
               url = (
@@ -46,61 +88,91 @@ jobs:
                   "&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,pressure_msl"
                   f"&timezone={urllib.parse.quote(c['tz'])}&wind_speed_unit=ms"
               )
-              import urllib.parse
-              url = (
-                  "https://api.open-meteo.com/v1/forecast"
-                  f"?latitude={c['lat']}&longitude={c['lon']}"
-                  "&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_direction_10m,pressure_msl"
-                  f"&timezone={urllib.parse.quote(c['tz'])}&wind_speed_unit=ms"
-              )
               try:
-                  with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Midwest-Stratospheric/UOGW-samples"}), timeout=60) as r:
-                      payload = json.loads(r.read().decode())
+                  with urllib.request.urlopen(
+                      urllib.request.Request(url, headers={"User-Agent": "Midwest-Stratospheric/UOGW-samples"}),
+                      timeout=60,
+                  ) as resp:
+                      data = json.loads(resp.read().decode())
+                  cur = data.get("current") or {}
                   results.append({
-                      **c,
-                      "current": payload.get("current"),
+                      "id": c["id"],
+                      "name": c["name"],
+                      "country": c["country"],
+                      "lat": c["lat"],
+                      "lon": c["lon"],
                       "ok": True,
+                      "current": cur,
+                      "fetched_at_utc": now,
                   })
               except Exception as e:
-                  results.append({**c, "ok": False, "error": str(e)})
+                  results.append({
+                      "id": c["id"],
+                      "name": c["name"],
+                      "country": c["country"],
+                      "lat": c["lat"],
+                      "lon": c["lon"],
+                      "ok": False,
+                      "error": str(e)[:200],
+                      "fetched_at_utc": now,
+                  })
 
+          countries = sorted({r["country"] for r in results})
           doc = {
+              "source": "open-meteo",
+              "layer": "ground",
+              "type": "global-city-surface-samples",
               "generated_at_utc": now,
               "date": date,
-              "product": "Global surface sample set (Open-Meteo current)",
-              "license": "Open-Meteo CC BY 4.0",
               "city_count": len(results),
+              "ok_count": sum(1 for x in results if x.get("ok")),
+              "countries": countries,
+              "country_count": len(countries),
+              "curator": "Midwest Stratospheric Data Systems",
+              "license_note": "Open-Meteo CC BY 4.0; cite Open-Meteo and original NWP sources",
               "cities": results,
-              "curator": "Midwest Stratospheric Data Systems / UOGW",
           }
           for p in [
               f"layers/ground/samples/cities-{date}.json",
               "layers/ground/samples/cities-latest.json",
-              f"snapshots/{date}/global-city-samples.json",
+              f"snapshots/{date}/global-cities.json",
           ]:
               os.makedirs(os.path.dirname(p), exist_ok=True)
               with open(p, "w") as f:
                   json.dump(doc, f, indent=2)
+
           with open("status/global-samples.json", "w") as f:
               json.dump({
                   "source": "open-meteo-samples",
                   "ok": any(x.get("ok") for x in results),
                   "city_count": len(results),
                   "ok_count": sum(1 for x in results if x.get("ok")),
+                  "country_count": len(countries),
+                  "countries": countries,
                   "generated_at_utc": now,
               }, f, indent=2)
-          print("cities", len(results), "ok", sum(1 for x in results if x.get("ok")))
+          print("cities", len(results), "ok", sum(1 for x in results if x.get("ok")), "countries", len(countries))
           PY
 
-      - name: Commit
+      - name: Commit (retry on race)
         run: |
+          set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
-          git pull --rebase origin main || true
           git add layers/ground/samples snapshots status || true
           if git diff --staged --quiet; then
             echo "No changes"
-          else
-            git commit -m "chore(samples): daily global city surface set $(date -u +%Y-%m-%d)"
-            git push
+            exit 0
           fi
+          git commit -m "chore(samples): worldwide city surface set $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then
+              echo "Pushed OK"
+              exit 0
+            fi
+            sleep $((i * 3))
+          done
+          echo "Push failed after retries"
+          exit 1

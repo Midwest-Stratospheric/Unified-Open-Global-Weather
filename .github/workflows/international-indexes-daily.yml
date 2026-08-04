@@ -1,0 +1,180 @@
+# Daily international station indexes (GHCN global + foreign open sources)
+name: International Indexes Daily
+
+on:
+  schedule:
+    - cron: "30 5 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-international
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  indexes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build GHCN + international indexes
+        run: |
+          set -e
+          DATE=$(date -u +%Y-%m-%d)
+          mkdir -p layers/ground/ghcn layers/ground/international status snapshots/${DATE}
+          python3 << 'PY'
+          import json, os, urllib.request, collections
+          from datetime import datetime, timezone
+
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          ua = {"User-Agent": "Midwest-Stratospheric/UOGW-international"}
+
+          # ---- GHCN-Daily station inventory (global, includes foreign countries) ----
+          ghcn_url = "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt"
+          stations = []
+          by_country = collections.Counter()
+          try:
+              with urllib.request.urlopen(urllib.request.Request(ghcn_url, headers=ua), timeout=180) as resp:
+                  text = resp.read().decode("utf-8", errors="replace")
+              for line in text.splitlines():
+                  if len(line) < 38:
+                      continue
+                  # Fixed-width: ID(0:11) LAT(12:20) LON(21:30) ELEV(31:37) STATE(38:40) NAME(41:71) ...
+                  sid = line[0:11].strip()
+                  try:
+                      lat = float(line[12:20].strip())
+                      lon = float(line[21:30].strip())
+                  except ValueError:
+                      continue
+                  name = line[41:71].strip() if len(line) > 41 else ""
+                  # Country code is first 2 chars of station id for most GHCN ids (e.g. USW..., GME..., CA...)
+                  cc = sid[:2]
+                  by_country[cc] += 1
+                  stations.append({
+                      "id": sid,
+                      "name": name,
+                      "lat": lat,
+                      "lon": lon,
+                      "country_code": cc,
+                  })
+              ghcn_ok = True
+              ghcn_err = None
+          except Exception as e:
+              ghcn_ok = False
+              ghcn_err = str(e)[:300]
+              stations = []
+
+          # Compact index: counts + sample stations per top countries (not full dump — keeps repo light)
+          top_countries = by_country.most_common(40)
+          samples_by_cc = {}
+          for cc, _ in top_countries:
+              samples_by_cc[cc] = [s for s in stations if s["country_code"] == cc][:5]
+
+          ghcn_doc = {
+              "source": "noaa-ghcnd",
+              "layer": "ground",
+              "type": "global-station-index",
+              "generated_at_utc": now,
+              "date": date,
+              "ok": ghcn_ok,
+              "error": ghcn_err,
+              "station_count": len(stations),
+              "country_count": len(by_country),
+              "countries_top40": [{"code": c, "stations": n} for c, n in top_countries],
+              "sample_stations_by_country": samples_by_cc,
+              "authority_url": "https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily",
+              "raw_stations_url": ghcn_url,
+              "curator": "Midwest Stratospheric Data Systems",
+              "note": "Full GHCN station list is global (US + foreign). UOGW stores counts + samples; fetch full list from NOAA for complete inventory.",
+          }
+          for p in [
+              f"layers/ground/ghcn/stations-index-{date}.json",
+              "layers/ground/ghcn/stations-index-latest.json",
+              f"snapshots/{date}/ghcn-stations-index.json",
+          ]:
+              os.makedirs(os.path.dirname(p), exist_ok=True)
+              with open(p, "w") as f:
+                  json.dump(ghcn_doc, f, indent=2)
+
+          # ---- International open-source registry snapshot (foreign met services) ----
+          foreign_sources = [
+              {"id": "dwd-germany", "name": "Deutscher Wetterdienst Open Data", "country": "DE", "url": "https://opendata.dwd.de/", "domains": ["ground", "radar"]},
+              {"id": "met-norway", "name": "MET Norway / Yr", "country": "NO", "url": "https://api.met.no/", "domains": ["ground", "marine"]},
+              {"id": "eccc-canada", "name": "Environment and Climate Change Canada", "country": "CA", "url": "https://climate.weather.gc.ca/", "domains": ["ground"]},
+              {"id": "bom-australia", "name": "Bureau of Meteorology Australia", "country": "AU", "url": "http://www.bom.gov.au/climate/data/", "domains": ["ground"]},
+              {"id": "jma-japan", "name": "Japan Meteorological Agency", "country": "JP", "url": "https://www.jma.go.jp/", "domains": ["ground", "upper-air"]},
+              {"id": "meteo-france", "name": "Meteo-France Open Data", "country": "FR", "url": "https://donneespubliques.meteofrance.fr/", "domains": ["ground"]},
+              {"id": "knmi-netherlands", "name": "KNMI Netherlands", "country": "NL", "url": "https://www.knmi.nl/nederland-nu/klimatologie",
+               "domains": ["ground"]},
+              {"id": "smhi-sweden", "name": "SMHI Sweden Open Data", "country": "SE", "url": "https://www.smhi.se/data",
+               "domains": ["ground"]},
+              {"id": "uk-metoffice", "name": "UK Met Office DataPoint / open products", "country": "GB", "url": "https://www.metoffice.gov.uk/", "domains": ["ground"]},
+              {"id": "imd-india", "name": "India Meteorological Department", "country": "IN", "url": "https://mausam.imd.gov.in/", "domains": ["ground"]},
+              {"id": "cma-china", "name": "China Meteorological Administration", "country": "CN", "url": "http://www.cma.gov.cn/", "domains": ["ground"]},
+              {"id": "sa-weather", "name": "South African Weather Service", "country": "ZA", "url": "https://www.weathersa.co.za/", "domains": ["ground"]},
+              {"id": "inmet-brazil", "name": "INMET Brazil", "country": "BR", "url": "https://portal.inmet.gov.br/", "domains": ["ground"]},
+              {"id": "wmo-oscar", "name": "WMO OSCAR Observing Systems", "country": "INT", "url": "https://oscar.wmo.int/", "domains": ["ground", "upper-air", "satellite"]},
+              {"id": "woudc", "name": "WOUDC Ozone Network", "country": "INT", "url": "https://woudc.org/", "domains": ["stratospheric"]},
+              {"id": "argo", "name": "Argo Float Array (international)", "country": "INT", "url": "https://argo.ucsd.edu/", "domains": ["marine"]},
+              {"id": "copernicus-cds", "name": "Copernicus Climate Data Store", "country": "EU", "url": "https://cds.climate.copernicus.eu/", "domains": ["reanalysis", "satellite"]},
+              {"id": "open-meteo", "name": "Open-Meteo (global model + obs fusion)", "country": "INT", "url": "https://open-meteo.com/", "domains": ["ground"]},
+          ]
+          intl_doc = {
+              "source": "uogw-international-registry",
+              "layer": "ground",
+              "type": "foreign-open-weather-sources",
+              "generated_at_utc": now,
+              "date": date,
+              "source_count": len(foreign_sources),
+              "sources": foreign_sources,
+              "curator": "Midwest Stratospheric Data Systems",
+              "note": "Curated index of major foreign and international open weather authorities. UOGW links and tracks these; primary data remains at the source.",
+          }
+          for p in [
+              f"layers/ground/international/sources-{date}.json",
+              "layers/ground/international/sources-latest.json",
+              f"snapshots/{date}/international-sources.json",
+          ]:
+              with open(p, "w") as f:
+                  json.dump(intl_doc, f, indent=2)
+
+          with open("status/international.json", "w") as f:
+              json.dump({
+                  "source": "international-indexes",
+                  "ok": ghcn_ok,
+                  "ghcn_station_count": len(stations),
+                  "ghcn_country_count": len(by_country),
+                  "foreign_source_count": len(foreign_sources),
+                  "generated_at_utc": now,
+              }, f, indent=2)
+
+          print("GHCN stations", len(stations), "countries", len(by_country), "foreign sources", len(foreign_sources))
+          PY
+
+      - name: Commit (retry on race)
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add layers/ground/ghcn layers/ground/international snapshots status || true
+          if git diff --staged --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "chore(international): GHCN + foreign source indexes $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then
+              echo "Pushed OK"
+              exit 0
+            fi
+            sleep $((i * 3))
+          done
+          echo "Push failed after retries"
+          exit 1
