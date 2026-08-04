@@ -1,11 +1,14 @@
-# Independent daily automation: Casey, IL ground weather → msds-data
-# Runs on GitHub Actions without depending on midwestsds.com
+# Daily Casey ground weather → msds-data + UOGW layers/ground
 name: MSDS Ground Daily
 
 on:
   schedule:
     - cron: "15 1 * * *"
   workflow_dispatch:
+
+concurrency:
+  group: uogw-msds-ground
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -14,6 +17,11 @@ jobs:
   casey-daily:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout UOGW
+        uses: actions/checkout@v4
+        with:
+          path: uogw
+
       - name: Checkout msds-data
         uses: actions/checkout@v4
         with:
@@ -26,16 +34,17 @@ jobs:
           LAT: "39.2992"
           LON: "-87.9925"
         run: |
+          set -e
           DATE=$(date -u -d "yesterday" +%Y-%m-%d 2>/dev/null || date -u -v-1d +%Y-%m-%d)
           echo "Building daily file for $DATE"
           URL="https://archive-api.open-meteo.com/v1/archive?latitude=${LAT}&longitude=${LON}&start_date=${DATE}&end_date=${DATE}&hourly=temperature_2m,relative_humidity_2m,dewpoint_2m,precipitation,weathercode,pressure_msl,surface_pressure,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum,windspeed_10m_max&timezone=America%2FChicago&windspeed_unit=ms"
-          mkdir -p msds-data/ground-weather/daily
           curl -fsSL -A "Midwest-Stratospheric/UOGW-msds-ground-daily" "$URL" -o /tmp/om.json
           python3 << 'PY'
           import json, os
           from datetime import datetime, timezone
           date = os.popen("date -u -d yesterday +%Y-%m-%d 2>/dev/null || date -u -v-1d +%Y-%m-%d").read().strip()
           om = json.load(open("/tmp/om.json"))
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
           out = {
             "date": date,
             "site": {
@@ -49,27 +58,56 @@ jobs:
               "provider": "Open-Meteo",
               "license": "CC BY 4.0",
               "url": "https://open-meteo.com/",
-              "retrieved_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+              "retrieved_at_utc": now,
               "curator": "Midwest Stratospheric Data Systems"
             },
             "hourly": om.get("hourly", {}),
             "daily": om.get("daily", {}),
             "meta": {"generator": "uogw/msds-ground-daily", "uogw": True}
           }
-          path = f"msds-data/ground-weather/daily/{date}.json"
-          with open(path, "w") as f:
-            json.dump(out, f, indent=2)
-          print("Wrote", path)
+          for base in ["msds-data/ground-weather/daily", "uogw/layers/ground/casey/daily"]:
+              os.makedirs(base, exist_ok=True)
+              path = f"{base}/{date}.json"
+              with open(path, "w") as f:
+                  json.dump(out, f, indent=2)
+              print("Wrote", path)
+          # latest pointer in UOGW
+          latest = "uogw/layers/ground/casey/latest.json"
+          with open(latest, "w") as f:
+              json.dump(out, f, indent=2)
+          status = {
+              "source": "msds-casey-ground",
+              "ok": True,
+              "date": date,
+              "generated_at_utc": now,
+          }
+          os.makedirs("uogw/status", exist_ok=True)
+          with open("uogw/status/msds-ground.json", "w") as f:
+              json.dump(status, f, indent=2)
           PY
 
-      - name: Commit if changed
+      - name: Commit UOGW ground index
+        working-directory: uogw
+        run: |
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git pull --rebase origin main || true
+          git add layers/ground status || true
+          if git diff --staged --quiet; then
+            echo "No UOGW changes"
+          else
+            git commit -m "chore(ground): Casey daily $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Commit msds-data
         working-directory: msds-data
         run: |
           git config user.name "msds-bot"
           git config user.email "bot@midwestsds.com"
           git add ground-weather/daily || true
           if git diff --staged --quiet; then
-            echo "No changes"
+            echo "No msds-data changes"
           else
             git commit -m "chore(ground): daily Casey weather $(date -u +%Y-%m-%d)"
             git push

@@ -1,4 +1,4 @@
-# Rebuild status rollup + ensure catalog present after any data push
+# Rebuild status/last_update.json after data pushes
 name: Catalog Rebuild
 
 on:
@@ -11,6 +11,10 @@ on:
   schedule:
     - cron: "0 8 * * *"
   workflow_dispatch:
+
+concurrency:
+  group: uogw-catalog
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -28,19 +32,26 @@ jobs:
           from datetime import datetime, timezone
           now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
           sources = {}
-          for path in glob.glob("status/*.json"):
+          for path in sorted(glob.glob("status/*.json")):
               if path.endswith("last_update.json"):
                   continue
               try:
                   sources[os.path.basename(path).replace(".json","")] = json.load(open(path))
               except Exception as e:
-                  sources[os.path.basename(path)] = {"ok": False, "error": str(e)}
+                  sources[os.path.basename(path).replace(".json","")] = {"ok": False, "error": str(e)}
           cat = {}
           if os.path.exists("catalog/catalog.json"):
               cat = json.load(open("catalog/catalog.json"))
+          # Count layer JSON files
+          layer_files = []
+          for root, _, files in os.walk("layers"):
+              for fn in files:
+                  if fn.endswith(".json"):
+                      layer_files.append(os.path.join(root, fn))
           rollup = {
             "generated_at_utc": now,
             "catalog_datasets": len(cat.get("datasets", [])),
+            "layer_json_files": len(layer_files),
             "sources": sources,
             "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
             "data_hub": "https://www.midwestsds.com/portal.html",
@@ -49,14 +60,15 @@ jobs:
           os.makedirs("status", exist_ok=True)
           with open("status/last_update.json", "w") as f:
               json.dump(rollup, f, indent=2)
-          print(json.dumps(rollup, indent=2)[:800])
+          print(json.dumps(rollup, indent=2)[:1200])
           PY
 
       - name: Commit status
         run: |
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
-          git add status/last_update.json catalog || true
+          git pull --rebase origin main || true
+          git add status/last_update.json || true
           if git diff --staged --quiet; then
             echo "No changes"
           else
