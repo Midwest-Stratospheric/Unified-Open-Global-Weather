@@ -7,8 +7,11 @@
 [![Catalog](https://img.shields.io/badge/catalog-25%2B%20datasets-0a1628)](./catalog/catalog.json)
 [![Automations](https://img.shields.io/badge/automations-GitHub%20Actions-success)](./.github/workflows/)
 [![Coverage](https://img.shields.io/badge/coverage-global%20%2B%20foreign-blue)](./layers/ground/international/)
+[![Wiki](https://img.shields.io/badge/wiki-docs%2F-0a1628)](./docs/Home.md)
 
 > **Mission:** Build one of the most complete *open, multi-layer, versioned* discovery layers for global ground, marine, upper-air, stratospheric, satellite, and near-space atmospheric observations — with independent automation, full attribution, international sources, and a public Data Hub.
+
+**Project wiki:** [`docs/Home.md`](./docs/Home.md) — catalog, data types, layers, international coverage, automations, API/status, citation.
 
 ---
 
@@ -162,6 +165,7 @@ Agencies remain the **system of record**. UOGW is the **open discovery + MSDS co
 | Resource | URL |
 |----------|-----|
 | **This repository** | https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather |
+| **Project wiki** | [`docs/Home.md`](./docs/Home.md) |
 | **Data Hub** | https://www.midwestsds.com/portal.html |
 | **API catalog** | https://midwestsds.com/data/v1/catalog.json |
 | **MSDS flight & ground data** | https://github.com/Midwest-Stratospheric/msds-data |
@@ -179,6 +183,7 @@ Agencies remain the **system of record**. UOGW is the **open discovery + MSDS co
 ```
 ├── catalog/catalog.json          # Master machine-readable dataset list
 ├── sources/registry.json         # US + foreign authority registry
+├── docs/                         # Project wiki
 ├── layers/
 │   ├── ground/
 │   │   ├── casey/                # MSDS local ground
