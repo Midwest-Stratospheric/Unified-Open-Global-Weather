@@ -1,0 +1,65 @@
+# Rebuild status rollup + ensure catalog present after any data push
+name: Catalog Rebuild
+
+on:
+  push:
+    paths:
+      - "layers/**"
+      - "sources/**"
+      - "catalog/**"
+      - "status/**"
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Roll up status/last_update.json
+        run: |
+          python3 << 'PY'
+          import json, os, glob
+          from datetime import datetime, timezone
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          sources = {}
+          for path in glob.glob("status/*.json"):
+              if path.endswith("last_update.json"):
+                  continue
+              try:
+                  sources[os.path.basename(path).replace(".json","")] = json.load(open(path))
+              except Exception as e:
+                  sources[os.path.basename(path)] = {"ok": False, "error": str(e)}
+          cat = {}
+          if os.path.exists("catalog/catalog.json"):
+              cat = json.load(open("catalog/catalog.json"))
+          rollup = {
+            "generated_at_utc": now,
+            "catalog_datasets": len(cat.get("datasets", [])),
+            "sources": sources,
+            "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+            "data_hub": "https://www.midwestsds.com/portal.html",
+            "curator": "Midwest Stratospheric Data Systems"
+          }
+          os.makedirs("status", exist_ok=True)
+          with open("status/last_update.json", "w") as f:
+              json.dump(rollup, f, indent=2)
+          print(json.dumps(rollup, indent=2)[:800])
+          PY
+
+      - name: Commit status
+        run: |
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add status/last_update.json catalog || true
+          if git diff --staged --quiet; then
+            echo "No changes"
+          else
+            git commit -m "chore(catalog): rebuild status rollup $(date -u +%Y-%m-%d)"
+            git push
+          fi
