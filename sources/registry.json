@@ -1,0 +1,34 @@
+{
+  "title": "UOGW Source Registry",
+  "version": "1.1",
+  "updated": "2026-08-04",
+  "policy": {
+    "include": "Public domain, open government, research open data, and explicitly redistributable citizen science",
+    "exclude": "Proprietary commercial PWS bulk dumps without redistribution rights",
+    "mirror_policy": "Prefer indexes and selective extracts; full bulk remains at authoritative hosts",
+    "attribution": "Required for every use — curator + original provider"
+  },
+  "sources": [
+    {"id": "noaa-igra", "name": "NOAA Integrated Global Radiosonde Archive", "org": "NOAA NCEI", "domains": ["upper-air"], "cadence": "daily", "authority_url": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive", "uogw_role": "daily station index snapshot", "automation": "igra-index-daily.yml"},
+    {"id": "noaa-ghcnd", "name": "Global Historical Climatology Network daily", "org": "NOAA NCEI", "domains": ["ground"], "authority_url": "https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily"},
+    {"id": "ndbc", "name": "National Data Buoy Center", "org": "NOAA NDBC", "domains": ["marine"], "authority_url": "https://www.ndbc.noaa.gov/", "automation": "ndbc-marine-daily.yml"},
+    {"id": "open-meteo", "name": "Open-Meteo", "org": "Open-Meteo", "domains": ["ground"], "license": "CC BY 4.0", "authority_url": "https://open-meteo.com/", "automation": "msds-ground-daily.yml"},
+    {"id": "nasa-globe", "name": "NASA GLOBE Program", "org": "NASA", "domains": ["ground", "citizen"], "authority_url": "https://www.globe.gov/"},
+    {"id": "argo", "name": "Argo Float Array", "org": "Argo / international partners", "domains": ["marine"], "authority_url": "https://argo.ucsd.edu/"},
+    {"id": "swoosh", "name": "SWOOSH", "org": "NOAA CSL / NASA", "domains": ["stratospheric"], "authority_url": "https://csl.noaa.gov/groups/csl8/swoosh/"},
+    {"id": "woudc", "name": "World Ozone and Ultraviolet Radiation Data Centre", "org": "WMO / ECCC", "domains": ["stratospheric"], "authority_url": "https://woudc.org/"},
+    {"id": "gruan", "name": "GRUAN", "org": "GRUAN / DWD lead", "domains": ["upper-air"], "authority_url": "https://www.gruan.org/"},
+    {"id": "uwyo", "name": "University of Wyoming Soundings", "org": "University of Wyoming", "domains": ["upper-air"], "authority_url": "https://weather.uwyo.edu/upperair/sounding.html"},
+    {"id": "goes-aws", "name": "NOAA GOES on AWS Open Data", "org": "NOAA / AWS", "domains": ["satellite"], "authority_url": "https://registry.opendata.aws/noaa-goes/"},
+    {"id": "cosmic", "name": "COSMIC GNSS Radio Occultation", "org": "UCAR / partners", "domains": ["satellite", "upper-air"], "authority_url": "https://www.cosmic.ucar.edu/"},
+    {"id": "merra2", "name": "MERRA-2", "org": "NASA GMAO", "domains": ["satellite", "reanalysis"], "authority_url": "https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/"},
+    {"id": "arm", "name": "DOE ARM", "org": "US DOE", "domains": ["ground", "upper-air"], "authority_url": "https://www.arm.gov/"},
+    {"id": "icoads", "name": "ICOADS", "org": "NOAA", "domains": ["marine"], "authority_url": "https://icoads.noaa.gov/"},
+    {"id": "nasa-power", "name": "NASA POWER", "org": "NASA LaRC", "domains": ["ground"], "authority_url": "https://power.larc.nasa.gov/"},
+    {"id": "iem", "name": "Iowa Environmental Mesonet", "org": "Iowa State University", "domains": ["ground"], "authority_url": "https://mesonet.agron.iastate.edu/"},
+    {"id": "qbo-fu-berlin", "name": "QBO dataset (FU Berlin)", "org": "Freie Universität Berlin", "domains": ["stratospheric"], "authority_url": "https://www.geo.fu-berlin.de/en/met/ag/strat/produkte/qbo/index.html"},
+    {"id": "shadoz", "name": "SHADOZ", "org": "NASA GSFC / partners", "domains": ["stratospheric"], "authority_url": "https://tropo.gsfc.nasa.gov/shadoz/"},
+    {"id": "ecmwf-open", "name": "ECMWF Open Data", "org": "ECMWF", "domains": ["satellite", "model"], "authority_url": "https://www.ecmwf.int/en/forecasts/datasets/open-data"},
+    {"id": "msds-first-party", "name": "Midwest Stratospheric Data Systems first-party", "org": "MSDS", "domains": ["ground", "flight"], "license": "CC BY 4.0 (unless noted)", "authority_url": "https://www.midwestsds.com", "uogw_role": "Casey ground + HAB flight packages", "automation": "msds-ground-daily.yml + manual flight release"}
+  ]
+}
