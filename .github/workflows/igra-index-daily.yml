@@ -1,0 +1,78 @@
+# Independent daily automation: NOAA IGRA year-to-date inventory index
+# Does NOT download full station sounding archives (too large).
+# Publishes a lightweight discoverability snapshot inside UOGW.
+name: IGRA Index Daily
+
+on:
+  schedule:
+    - cron: "30 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  igra-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build IGRA Y2D index snapshot
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          YEAR=$(date -u +%Y)
+          mkdir -p layers/upper-air/igra snapshots/${DATE}
+          curl -fsSL -A "Midwest-Stratospheric/UOGW-igra-index" \
+            "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/" \
+            -o /tmp/igra_y2d.html || true
+          python3 << PY
+          import re, json, os
+          from datetime import datetime, timezone
+          date = os.environ.get("DATE") or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          html = open("/tmp/igra_y2d.html").read() if os.path.exists("/tmp/igra_y2d.html") else ""
+          zips = sorted(set(re.findall(r'href="([^"]+\.zip)"', html, flags=re.I)))
+          stations = []
+          for z in zips:
+              stations.append({"file": z, "url": f"https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/{z}"})
+          doc = {
+            "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "date": date,
+            "product": "IGRA data-y2d directory index",
+            "authoritative": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive",
+            "y2d_root": "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/",
+            "citation": "Durre et al. (2016) IGRA v2, NOAA NCEI, DOI:10.7289/V5X63K0Q",
+            "file_count": len(stations),
+            "files": stations[:5000],
+            "note": "Index only. Full sounding files remain at NCEI. UOGW does not claim ownership of IGRA observations.",
+            "curator": "Midwest Stratospheric Data Systems / UOGW"
+          }
+          path = f"layers/upper-air/igra/y2d-index-{date}.json"
+          latest = "layers/upper-air/igra/y2d-index-latest.json"
+          snap = f"snapshots/{date}/igra-y2d-index.json"
+          for p in (path, latest, snap):
+              os.makedirs(os.path.dirname(p), exist_ok=True)
+              with open(p, "w") as f:
+                  json.dump(doc, f, indent=2)
+          status = {
+            "source": "noaa-igra",
+            "ok": True,
+            "file_count": len(stations),
+            "generated_at_utc": doc["generated_at_utc"]
+          }
+          os.makedirs("status", exist_ok=True)
+          with open("status/igra.json", "w") as f:
+              json.dump(status, f, indent=2)
+          print("IGRA index files:", len(stations))
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add layers/upper-air/igra snapshots status || true
+          if git diff --staged --quiet; then
+            echo "No changes"
+          else
+            git commit -m "chore(igra): daily Y2D index $(date -u +%Y-%m-%d)"
+            git push
+          fi
