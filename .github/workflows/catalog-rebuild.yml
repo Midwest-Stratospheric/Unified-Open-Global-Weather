@@ -1,4 +1,4 @@
-# Rebuild status/last_update.json after data pushes
+# Rebuild status/last_update.json after data pushes (no self-trigger on status/**)
 name: Catalog Rebuild
 
 on:
@@ -6,8 +6,7 @@ on:
     paths:
       - "layers/**"
       - "sources/**"
-      - "catalog/**"
-      - "status/**"
+      - "catalog/catalog.json"
   schedule:
     - cron: "0 8 * * *"
   workflow_dispatch:
@@ -24,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Roll up status/last_update.json
         run: |
@@ -42,7 +43,6 @@ jobs:
           cat = {}
           if os.path.exists("catalog/catalog.json"):
               cat = json.load(open("catalog/catalog.json"))
-          # Count layer JSON files
           layer_files = []
           for root, _, files in os.walk("layers"):
               for fn in files:
@@ -60,18 +60,34 @@ jobs:
           os.makedirs("status", exist_ok=True)
           with open("status/last_update.json", "w") as f:
               json.dump(rollup, f, indent=2)
-          print(json.dumps(rollup, indent=2)[:1200])
+          print(json.dumps(rollup, indent=2)[:1500])
           PY
 
-      - name: Commit status
+      - name: Commit status (retry on race)
         run: |
+          set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
-          git pull --rebase origin main || true
           git add status/last_update.json || true
           if git diff --staged --quiet; then
             echo "No changes"
-          else
-            git commit -m "chore(catalog): rebuild status rollup $(date -u +%Y-%m-%d)"
-            git push
+            exit 0
           fi
+          git commit -m "chore(catalog): rebuild status rollup $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5 6; do
+            echo "Push attempt $i"
+            git fetch origin main
+            git rebase origin/main || {
+              git rebase --abort || true
+              git reset --soft origin/main
+              git add status/last_update.json
+              git commit -m "chore(catalog): rebuild status rollup $(date -u +%Y-%m-%dT%H:%MZ)" || true
+            }
+            if git push origin HEAD:main; then
+              echo "Pushed OK"
+              exit 0
+            fi
+            sleep $((i * 4))
+          done
+          echo "Push failed after retries — non-fatal for status rollup"
+          exit 0
