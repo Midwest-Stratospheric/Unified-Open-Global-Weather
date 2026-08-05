@@ -1,0 +1,118 @@
+{
+  "schema": "uogw.health_report.v1",
+  "date_utc": "2026-08-05",
+  "generated_at_utc": "2026-08-05T05:42:40Z",
+  "ok": false,
+  "critical_fail": true,
+  "checks": [
+    {
+      "id": "global-cities",
+      "status": "ok",
+      "path": "layers/ground/samples/cities-latest.json",
+      "reasons": [],
+      "critical": true,
+      "workflow": "global-samples-daily.yml"
+    },
+    {
+      "id": "casey-hourly",
+      "status": "ok",
+      "path": "data/latest/casey-hourly.json",
+      "reasons": [],
+      "critical": true,
+      "workflow": "msds-ground-daily.yml"
+    },
+    {
+      "id": "ndbc-realtime",
+      "status": "ok",
+      "path": "data/latest/ndbc-realtime.json",
+      "reasons": [],
+      "critical": true,
+      "workflow": "ndbc-marine-daily.yml"
+    },
+    {
+      "id": "research-summary",
+      "status": "missing",
+      "path": null,
+      "reasons": [
+        "file not found"
+      ],
+      "critical": true,
+      "workflow": "daily-research-package.yml"
+    },
+    {
+      "id": "science-package",
+      "status": "missing",
+      "path": null,
+      "reasons": [
+        "file not found"
+      ],
+      "critical": true,
+      "workflow": "daily-research-package.yml"
+    },
+    {
+      "id": "anomaly-report",
+      "status": "ok",
+      "path": "data/latest/anomaly-report.json",
+      "reasons": [],
+      "critical": false,
+      "workflow": "anomaly-detection-daily.yml"
+    },
+    {
+      "id": "rolling-baseline",
+      "status": "ok",
+      "path": "data/latest/rolling-baseline.json",
+      "reasons": [],
+      "critical": false,
+      "workflow": "rolling-baseline-daily.yml"
+    },
+    {
+      "id": "satellite-index",
+      "status": "ok",
+      "path": "data/latest/satellite-radiance-index.json",
+      "reasons": [],
+      "critical": false,
+      "workflow": "satellite-radiance-daily.yml"
+    },
+    {
+      "id": "fair-metadata",
+      "status": "ok",
+      "path": "data/latest/fair-metadata.json",
+      "reasons": [],
+      "critical": false,
+      "workflow": "fair-metadata-daily.yml"
+    },
+    {
+      "id": "charts-markdown",
+      "status": "ok",
+      "path": "visuals/latest/CHARTS.md",
+      "reasons": [],
+      "critical": false,
+      "workflow": "charts-daily.yml"
+    },
+    {
+      "id": "catalog",
+      "status": "ok",
+      "path": "catalog/catalog.json",
+      "reasons": [],
+      "critical": true,
+      "workflow": null
+    }
+  ],
+  "heal_actions": [
+    {
+      "copied": "layers/ground/samples/cities-latest.json",
+      "to": "data/latest/global-cities.json"
+    }
+  ],
+  "redispatch_workflows": [
+    "daily-research-package.yml"
+  ],
+  "summary": {
+    "total": 11,
+    "ok": 9,
+    "missing": 2,
+    "stale": 0,
+    "invalid_json": 0
+  },
+  "curator": "Midwest Stratospheric Data Systems"
+}
