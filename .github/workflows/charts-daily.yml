@@ -1,19 +1,37 @@
 name: Charts Daily
 
+# Fully automated chart generation from repo data
 on:
   schedule:
+    # After most daily producers (01:15–10:00 UTC) have finished
     - cron: "0 11 * * *"
+    # Second pass in case morning jobs ran late
+    - cron: "30 13 * * *"
   workflow_dispatch:
+  # Rebuild charts when upstream data workflows complete successfully
+  workflow_run:
+    workflows:
+      - Daily Research Package
+      - Global Samples Daily
+      - NDBC Marine Daily
+      - MSDS Ground Daily
+      - Anomaly Detection Daily
+    types:
+      - completed
 
 concurrency:
   group: uogw-charts
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 permissions:
   contents: write
 
 jobs:
   charts:
+    # For workflow_run events, only proceed if the upstream job succeeded
+    if: >
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,319 +43,27 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install matplotlib numpy
 
-      - name: Render PNG and GitHub Markdown charts
+      - name: Generate charts (automated)
         run: |
           set -e
-          DATE=$(date -u +%Y-%m-%d)
-          mkdir -p "visuals/${DATE}" visuals/latest data/entries/${DATE} status
-          python3 <<'PY'
-          import json, os, math
-          from datetime import datetime, timezone
-          import matplotlib
-          matplotlib.use("Agg")
-          import matplotlib.pyplot as plt
-          import numpy as np
+          python3 scripts/generate_charts.py
 
-          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-          def load(p):
-              if not os.path.exists(p):
-                  return None
-              try:
-                  return json.load(open(p))
-              except Exception:
-                  return None
-
-          cities = load("data/latest/global-cities.json") or load("layers/ground/samples/cities-latest.json") or {}
-          ndbc = load("data/latest/ndbc-realtime.json") or {}
-          casey = load("data/latest/casey-hourly.json") or load("layers/ground/casey/latest.json") or {}
-          anomaly = load("data/latest/anomaly-report.json") or {}
-          climate = load("data/latest/daily-climate.json") or {}
-
-          out_dirs = [f"visuals/{date}", "visuals/latest"]
-          written = []
-
-          def save(fig, name):
-              for d in out_dirs:
-                  os.makedirs(d, exist_ok=True)
-                  path = os.path.join(d, name)
-                  fig.savefig(path, dpi=140, bbox_inches="tight", facecolor=fig.get_facecolor())
-                  written.append(path)
-              plt.close(fig)
-
-          plt.rcParams.update({
-              "font.size": 10,
-              "axes.facecolor": "#0a1628",
-              "figure.facecolor": "#0a1628",
-              "axes.edgecolor": "#00d4ff",
-              "axes.labelcolor": "#e8f4ff",
-              "xtick.color": "#b8c9d9",
-              "ytick.color": "#b8c9d9",
-              "text.color": "#e8f4ff",
-              "grid.color": "#1a3050",
-          })
-          CYAN, ORANGE, RED, YELLOW = "#00d4ff", "#ff9f43", "#ff6b6b", "#feca57"
-
-          city_rows = []
-          for c in cities.get("cities") or []:
-              if not c.get("ok"):
-                  continue
-              obs = c.get("observation") or {}
-              t = obs.get("temperature_c")
-              if t is None and isinstance(c.get("current"), dict):
-                  t = c["current"].get("temperature_2m")
-              if t is None:
-                  continue
-              city_rows.append((c.get("name") or c.get("id"), float(t), c.get("lat"), c.get("lon")))
-          city_rows.sort(key=lambda x: x[1])
-
-          if city_rows:
-              fig, ax = plt.subplots(figsize=(10, max(4, 0.28 * len(city_rows))))
-              names = [r[0] for r in city_rows]
-              temps = [r[1] for r in city_rows]
-              colors = [RED if t >= 35 else ORANGE if t >= 30 else CYAN if t >= 0 else "#74b9ff" for t in temps]
-              ax.barh(names, temps, color=colors)
-              ax.set_xlabel("Temperature (C)")
-              ax.set_title(f"UOGW Global City Temperatures - {date}")
-              ax.grid(True, axis="x", alpha=0.4)
-              save(fig, "global-city-temperatures.png")
-
-              fig, ax = plt.subplots(figsize=(11, 5.5))
-              sc = ax.scatter([r[3] for r in city_rows], [r[2] for r in city_rows], c=[r[1] for r in city_rows], cmap="coolwarm", s=60, edgecolors="white", linewidths=0.4)
-              cb = plt.colorbar(sc, ax=ax, fraction=0.03)
-              cb.set_label("C")
-              ax.set_xlabel("Longitude")
-              ax.set_ylabel("Latitude")
-              ax.set_title(f"UOGW City Temperature Map - {date}")
-              ax.set_xlim(-180, 180)
-              ax.set_ylim(-60, 75)
-              ax.grid(True, alpha=0.35)
-              save(fig, "global-city-temp-map.png")
-
-          cob = casey.get("observations") or []
-          if not cob and isinstance(casey.get("hourly"), dict):
-              times = casey["hourly"].get("time") or []
-              temps = casey["hourly"].get("temperature_2m") or []
-              cob = [{"time": t, "temperature_c": temps[i] if i < len(temps) else None} for i, t in enumerate(times)]
-          if cob:
-              times = [str(o.get("time", ""))[-5:] for o in cob]
-              vals = [o.get("temperature_c") for o in cob]
-              fig, ax1 = plt.subplots(figsize=(11, 4.2))
-              ax1.plot(times, vals, color=CYAN, marker="o", markersize=3)
-              ax1.set_ylabel("Temperature (C)")
-              ax1.set_xlabel("Local time")
-              ax1.set_title(f"Casey IL Hourly Temperature - {casey.get('date', date)}")
-              ax1.grid(True, alpha=0.35)
-              if len(times) > 12:
-                  step = max(1, len(times) // 12)
-                  ax1.set_xticks(list(range(0, len(times), step)))
-                  ax1.set_xticklabels([times[i] for i in range(0, len(times), step)], rotation=45, ha="right")
-              save(fig, "casey-hourly-temperature.png")
-
-          ndbc_obs = ndbc.get("observations") or {}
-          if ndbc_obs:
-              sids = list(ndbc_obs.keys())
-              waves = [(ndbc_obs[s].get("latest_observation") or {}).get("wave_height_m") for s in sids]
-              fig, ax = plt.subplots(figsize=(9, 4))
-              ax.bar(sids, [w if w is not None else 0 for w in waves], color=CYAN)
-              ax.set_ylabel("Wave height (m)")
-              ax.set_title(f"NDBC Wave Height - {date}")
-              ax.tick_params(axis="x", rotation=45)
-              ax.grid(True, axis="y", alpha=0.35)
-              save(fig, "ndbc-marine-samples.png")
-
-          counts = anomaly.get("counts") or {}
-          if counts:
-              labels = ["alert", "watch", "info"]
-              vals = [counts.get(k, 0) for k in labels]
-              fig, ax = plt.subplots(figsize=(6, 4))
-              ax.bar(labels, vals, color=[RED, ORANGE, YELLOW])
-              ax.set_title(f"Anomaly Flags - {date} total={counts.get('total', sum(vals))}")
-              ax.grid(True, axis="y", alpha=0.35)
-              save(fig, "anomaly-severity.png")
-
-          clim_ok = [c for c in (climate.get("cities") or []) if c.get("ok")]
-          if clim_ok:
-              fig, ax = plt.subplots(figsize=(10, 4.5))
-              labels = [c.get("id") for c in clim_ok]
-              x = np.arange(len(labels))
-              ax.bar(x - 0.2, [c.get("temperature_max_c") for c in clim_ok], width=0.4, color=ORANGE, label="Tmax")
-              ax.bar(x + 0.2, [c.get("temperature_min_c") for c in clim_ok], width=0.4, color=CYAN, label="Tmin")
-              ax.set_xticks(x)
-              ax.set_xticklabels(labels, rotation=45, ha="right")
-              ax.set_ylabel("C")
-              ax.legend()
-              ax.grid(True, axis="y", alpha=0.35)
-              ax.set_title(f"Research Cities Daily Tmin Tmax - {climate.get('date', date)}")
-              save(fig, "research-cities-tminmax.png")
-
-          def esc(s):
-              return str(s).replace('"', "'").replace("[", "(").replace("]", ")")[:36]
-
-          md = []
-          md.append(f"# UOGW Charts - {date}")
-          md.append("")
-          md.append("Generated from data in this repository. View on GitHub — no external webpage.")
-          md.append("")
-          md.append(f"_Generated at {now} UTC · Midwest Stratospheric Data Systems_")
-          md.append("")
-          md.append("## PNG charts")
-          md.append("")
-          for title, fn in [
-              ("Global city temperatures", "global-city-temperatures.png"),
-              ("City temperature map", "global-city-temp-map.png"),
-              ("Casey hourly temperature", "casey-hourly-temperature.png"),
-              ("NDBC marine samples", "ndbc-marine-samples.png"),
-              ("Anomaly severity", "anomaly-severity.png"),
-              ("Research cities Tmin/Tmax", "research-cities-tminmax.png"),
-          ]:
-              md.append(f"### {title}")
-              md.append("")
-              md.append(f"![{title}](./{fn})")
-              md.append("")
-
-          if counts:
-              md.append("## Anomaly severity (Mermaid)")
-              md.append("")
-              md.append("```mermaid")
-              md.append("pie showData")
-              md.append(f"  title Anomaly flags {date}")
-              for k in ("alert", "watch", "info"):
-                  md.append(f"  \"{k}\" : {int(counts.get(k, 0))}")
-              md.append("```")
-              md.append("")
-
-          if city_rows:
-              sample = city_rows[-12:] if len(city_rows) > 12 else city_rows
-              md.append("## City temperatures (Mermaid xychart)")
-              md.append("")
-              md.append("```mermaid")
-              md.append("xychart-beta")
-              md.append(f"  title \"City temperatures C - {date}\"")
-              labels = ", ".join('"' + esc(r[0].split(",")[0]) + '"' for r in sample)
-              md.append(f"  x-axis [{labels}]")
-              md.append("  y-axis \"Temp C\"")
-              vals = ", ".join(str(round(r[1], 1)) for r in sample)
-              md.append(f"  bar [{vals}]")
-              md.append("```")
-              md.append("")
-
-          if cob and len(cob) >= 4:
-              step = max(1, len(cob) // 12)
-              pts = cob[::step][:12]
-              md.append("## Casey hourly (Mermaid xychart)")
-              md.append("")
-              md.append("```mermaid")
-              md.append("xychart-beta")
-              md.append("  title \"Casey IL hourly C\"")
-              xl = ", ".join('"' + str((o.get("time") or "")[-5:]) + '"' for o in pts)
-              md.append(f"  x-axis [{xl}]")
-              md.append("  y-axis \"Temp C\"")
-              yv = ", ".join(
-                  str(round(o.get("temperature_c"), 1))
-                  if isinstance(o.get("temperature_c"), (int, float))
-                  else "0"
-                  for o in pts
-              )
-              md.append(f"  line [{yv}]")
-              md.append("```")
-              md.append("")
-
-          md.append("## Snapshot table")
-          md.append("")
-          md.append("| Metric | Value |")
-          md.append("|--------|-------|")
-          md.append(f"| Date UTC | {date} |")
-          md.append(f"| Cities OK | {len(city_rows)} |")
-          if city_rows:
-              md.append(f"| City T min/max C | {city_rows[0][1]} / {city_rows[-1][1]} |")
-          md.append(f"| Anomaly total | {counts.get('total', 'n/a')} |")
-          md.append(f"| Casey hours | {len(cob) or 'n/a'} |")
-          md.append(f"| NDBC samples | {len(ndbc_obs) or 'n/a'} |")
-          md.append("")
-          md.append("Data sources: `data/latest/*.json` in this repo.")
-          md.append("")
-
-          md_text = "\n".join(md) + "\n"
-          for d in out_dirs:
-              with open(os.path.join(d, "CHARTS.md"), "w") as f:
-                  f.write(md_text)
-              written.append(os.path.join(d, "CHARTS.md"))
-
-          index_lines = [
-              "# UOGW Visuals (GitHub-native)",
-              "",
-              "No external webpage. Open the markdown file below on GitHub.",
-              "",
-              "## Latest charts",
-              "",
-              "**[latest/CHARTS.md](./latest/CHARTS.md)** (images + Mermaid)",
-              "",
-              "### Quick embeds",
-              "",
-              "![Global city temperatures](./latest/global-city-temperatures.png)",
-              "",
-              "![Casey hourly](./latest/casey-hourly-temperature.png)",
-              "",
-              "![Anomaly severity](./latest/anomaly-severity.png)",
-              "",
-              f"Dated folder: [`{date}/`](./{date}/)",
-              "",
-              "Automation: `charts-daily.yml` (11:00 UTC).",
-              "",
-          ]
-          with open("visuals/README.md", "w") as f:
-              f.write("\n".join(index_lines))
-
-          manifest = {
-              "schema": "uogw.visuals_manifest.v2",
-              "date_utc": date,
-              "generated_at_utc": now,
-              "charts_md": "visuals/latest/CHARTS.md",
-              "curator": "Midwest Stratospheric Data Systems",
-          }
-          for p in [
-              f"visuals/{date}/manifest.json",
-              "visuals/latest/manifest.json",
-              f"data/entries/{date}/visuals-manifest.json",
-              "data/latest/visuals-manifest.json",
-          ]:
-              os.makedirs(os.path.dirname(p), exist_ok=True)
-              with open(p, "w") as f:
-                  json.dump(manifest, f, indent=2)
-
-          with open("status/charts.json", "w") as f:
-              json.dump(
-                  {
-                      "source": "uogw-charts",
-                      "ok": True,
-                      "date": date,
-                      "markdown": "visuals/latest/CHARTS.md",
-                      "generated_at_utc": now,
-                  },
-                  f,
-                  indent=2,
-              )
-          print("wrote", len(written), "artifacts")
-          PY
-
-      - name: Commit visuals
+      - name: Commit chart artifacts
         run: |
           set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
           git add visuals data/entries data/latest status || true
-          git rm -f visuals/dashboard.html 2>/dev/null || true
           if git diff --staged --quiet; then
-            echo "No changes"
+            echo "No chart changes"
             exit 0
           fi
-          git commit -m "data(visuals): GitHub markdown charts $(date -u +%Y-%m-%d)"
+          git commit -m "data(visuals): automated charts $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3 4 5; do
             git fetch origin main
             git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
             if git push origin HEAD:main; then
+              echo "Charts pushed"
               exit 0
             fi
             sleep $((i * 3))
