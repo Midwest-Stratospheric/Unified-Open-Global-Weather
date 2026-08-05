@@ -8,35 +8,50 @@
 [![Daily data](https://img.shields.io/badge/daily-data%2Fentries-success)](./data/entries/)
 [![Anomaly detection](https://img.shields.io/badge/analytics-anomaly%20detection-orange)](./data/latest/anomaly-report.json)
 [![Satellite index](https://img.shields.io/badge/satellite-radiance%20index-purple)](./data/latest/satellite-radiance-index.json)
-[![Visuals](https://img.shields.io/badge/visuals-GitHub%20markdown-00d4ff)](./visuals/latest/CHARTS.md)
+[![Visuals](https://img.shields.io/badge/visuals-in%20README-00d4ff)](./visuals/latest/)
 [![Wiki](https://img.shields.io/badge/wiki-docs%2F-0a1628)](./docs/Home.md)
 
 > **Mission:** Deliver a practical, versioned, multi-layer open atmospheric package every day — surface, marine, upper-air indexes, anomaly screens, satellite radiance discovery, and MSDS near-space flight data — so researchers, educators, and builders can work from one coherent commons.
 
 **Start here for analysis:** [`data/latest/science-package.json`](./data/latest/science-package.json) · [`data/latest/research-summary.json`](./data/latest/research-summary.json)
 
-**Visuals (GitHub markdown):** [`visuals/latest/CHARTS.md`](./visuals/latest/CHARTS.md)
+**Graphs:** embedded below in this README · [`visuals/latest/CHARTS.md`](./visuals/latest/CHARTS.md)
 
 ---
 
 ## Built-in graphs and charts
 
-Charts are generated **from repository data** every day and shown as **GitHub markdown** (embedded PNGs + Mermaid). No external webpage.
+All graphs below render **in this README** when you open the repo on GitHub. Generated daily from `data/latest/` (no external page).
 
-| Chart | Latest image |
-|-------|----------------|
-| Global city temperatures | [`visuals/latest/global-city-temperatures.png`](./visuals/latest/global-city-temperatures.png) |
-| City temperature map | [`visuals/latest/global-city-temp-map.png`](./visuals/latest/global-city-temp-map.png) |
-| Casey hourly temperature | [`visuals/latest/casey-hourly-temperature.png`](./visuals/latest/casey-hourly-temperature.png) |
-| NDBC marine samples | [`visuals/latest/ndbc-marine-samples.png`](./visuals/latest/ndbc-marine-samples.png) |
-| Anomaly severity | [`visuals/latest/anomaly-severity.png`](./visuals/latest/anomaly-severity.png) |
-| Research cities Tmin/Tmax | [`visuals/latest/research-cities-tminmax.png`](./visuals/latest/research-cities-tminmax.png) |
+### Global city temperatures
 
-![Daily summary](./visuals/latest/global-city-temperatures.png)
+![Global city temperatures](./visuals/latest/global-city-temperatures.png)
 
-Open **[`visuals/latest/CHARTS.md`](./visuals/latest/CHARTS.md)** on GitHub to view graphs.
+### City temperature map
 
-Workflow: `charts-daily.yml` at **11:00 UTC**. Docs: [`docs/VISUALS.md`](./docs/VISUALS.md).
+![City temperature map](./visuals/latest/global-city-temp-map.png)
+
+### Casey, IL hourly temperature
+
+![Casey hourly temperature](./visuals/latest/casey-hourly-temperature.png)
+
+### NDBC marine samples
+
+![NDBC marine samples](./visuals/latest/ndbc-marine-samples.png)
+
+### Anomaly severity
+
+![Anomaly severity](./visuals/latest/anomaly-severity.png)
+
+### Research cities daily Tmin / Tmax
+
+![Research cities Tmin/Tmax](./visuals/latest/research-cities-tminmax.png)
+
+### Daily summary card
+
+![Daily summary card](./visuals/latest/daily-summary-card.png)
+
+Full chart log + Mermaid: [`visuals/latest/CHARTS.md`](./visuals/latest/CHARTS.md) · Workflow: `charts-daily.yml` (11:00 UTC)
 
 ---
 
@@ -54,7 +69,7 @@ Most open weather repos stop at a static list of links. UOGW is different becaus
 | Rolling baseline | 7-day observational context |
 | Satellite radiance index | GOES/JPSS/COSMIC/MERRA-2 open path map |
 | FAIR + citation bundle | Reusable daily metadata |
-| Built-in charts | PNG + Mermaid charts in GitHub markdown |
+| Built-in charts | All graphs embedded in this README |
 | First-party flight layer | MSDS X2Griffon near-space profiles as flown |
 
 **We fly instruments.** HAB profiles enter the same commons as public indexes — not a private vault.
@@ -91,8 +106,8 @@ data/
   entries/YYYY-MM-DD/     # Daily research folder
   latest/                 # Stable paths for notebooks
 visuals/
-  latest/CHARTS.md        # GitHub-native chart gallery
-  latest/*.png            # Chart images
+  latest/*.png            # Chart images (also shown in README)
+  latest/CHARTS.md        # Chart log + Mermaid
 layers/
 docs/
 catalog/catalog.json
@@ -107,11 +122,13 @@ Base: `https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Glob
 
 | Doc | Link |
 |-----|------|
-| Charts (view on GitHub) | [`visuals/latest/CHARTS.md`](./visuals/latest/CHARTS.md) |
+| Charts log | [`visuals/latest/CHARTS.md`](./visuals/latest/CHARTS.md) |
 | Visuals guide | [`docs/VISUALS.md`](./docs/VISUALS.md) |
 | Anomaly methods | [`docs/ANOMALY_METHODS.md`](./docs/ANOMALY_METHODS.md) |
 | Data dictionary | [`docs/DATA_DICTIONARY.md`](./docs/DATA_DICTIONARY.md) |
 | Project wiki | [`docs/Home.md`](./docs/Home.md) |
+| Health / alert PRs | [`docs/OPS_HEALTH.md`](./docs/OPS_HEALTH.md) |
+| Rollback | [`docs/ROLLBACK.md`](./docs/ROLLBACK.md) |
 
 ---
 
@@ -134,4 +151,4 @@ NASA GLOBE: **GO-4VW9B** · Ham: **KE9CFY**
 
 ---
 
-*Open atmosphere. Daily packages. Charts in GitHub markdown. Midwest-made flight data for everyone.*
+*Open atmosphere. Daily packages. Graphs in the README. Midwest-made flight data for everyone.*
