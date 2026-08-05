@@ -1,0 +1,299 @@
+# Generate graphs/charts from UOGW data and commit into visuals/
+name: Charts Daily
+
+on:
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-charts
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  charts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install matplotlib
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install matplotlib numpy
+
+      - name: Render charts from repo data
+        run: |
+          set -e
+          DATE=$(date -u +%Y-%m-%d)
+          mkdir -p visuals/${DATE} visuals/latest data/entries/${DATE} status
+          python3 << 'PY'
+          import json, os, math
+          from datetime import datetime, timezone
+
+          import matplotlib
+          matplotlib.use("Agg")
+          import matplotlib.pyplot as plt
+          import numpy as np
+
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+          def load(p):
+              if not os.path.exists(p):
+                  return None
+              try:
+                  return json.load(open(p))
+              except Exception:
+                  return None
+
+          cities = load("data/latest/global-cities.json") or load("layers/ground/samples/cities-latest.json") or {}
+          ndbc = load("data/latest/ndbc-realtime.json") or {}
+          casey = load("data/latest/casey-hourly.json") or load("layers/ground/casey/latest.json") or {}
+          anomaly = load("data/latest/anomaly-report.json") or {}
+          research = load("data/latest/research-summary.json") or {}
+          climate = load("data/latest/daily-climate.json") or {}
+
+          out_dirs = [f"visuals/{date}", "visuals/latest"]
+          written = []
+
+          def save(fig, name):
+              for d in out_dirs:
+                  os.makedirs(d, exist_ok=True)
+                  path = os.path.join(d, name)
+                  fig.savefig(path, dpi=140, bbox_inches="tight", facecolor=fig.get_facecolor())
+                  written.append(path)
+              plt.close(fig)
+
+          # Style
+          plt.rcParams.update({
+              "font.size": 10,
+              "axes.facecolor": "#0a1628",
+              "figure.facecolor": "#0a1628",
+              "axes.edgecolor": "#00d4ff",
+              "axes.labelcolor": "#e8f4ff",
+              "xtick.color": "#b8c9d9",
+              "ytick.color": "#b8c9d9",
+              "text.color": "#e8f4ff",
+              "grid.color": "#1a3050",
+              "legend.facecolor": "#0f2038",
+              "legend.edgecolor": "#00d4ff",
+          })
+          CYAN = "#00d4ff"
+          ORANGE = "#ff9f43"
+          GREEN = "#2ed573"
+          RED = "#ff6b6b"
+          YELLOW = "#feca57"
+
+          # ---- 1) Global city temperatures ----
+          city_rows = []
+          for c in cities.get("cities") or []:
+              if not c.get("ok"):
+                  continue
+              obs = c.get("observation") or {}
+              t = obs.get("temperature_c")
+              if t is None and isinstance(c.get("current"), dict):
+                  t = c["current"].get("temperature_2m")
+              if t is None:
+                  continue
+              city_rows.append((c.get("name") or c.get("id"), float(t), c.get("lat"), c.get("lon"), c.get("country")))
+          city_rows.sort(key=lambda x: x[1])
+
+          if city_rows:
+              fig, ax = plt.subplots(figsize=(10, max(4, 0.28 * len(city_rows))))
+              names = [r[0] for r in city_rows]
+              temps = [r[1] for r in city_rows]
+              colors = [RED if t >= 35 else ORANGE if t >= 30 else CYAN if t >= 0 else "#74b9ff" for t in temps]
+              ax.barh(names, temps, color=colors)
+              ax.set_xlabel("Temperature (°C)")
+              ax.set_title(f"UOGW Global City Temperatures — {date}")
+              ax.grid(True, axis="x", alpha=0.4)
+              save(fig, "global-city-temperatures.png")
+
+              # map-like scatter
+              fig, ax = plt.subplots(figsize=(11, 5.5))
+              lons = [r[3] for r in city_rows]
+              lats = [r[2] for r in city_rows]
+              ts = [r[1] for r in city_rows]
+              sc = ax.scatter(lons, lats, c=ts, cmap="coolwarm", s=60, edgecolors="white", linewidths=0.4)
+              cb = plt.colorbar(sc, ax=ax, fraction=0.03)
+              cb.set_label("°C")
+              ax.set_xlabel("Longitude")
+              ax.set_ylabel("Latitude")
+              ax.set_title(f"UOGW City Temperature Map — {date}")
+              ax.set_xlim(-180, 180)
+              ax.set_ylim(-60, 75)
+              ax.grid(True, alpha=0.35)
+              save(fig, "global-city-temp-map.png")
+
+          # ---- 2) Casey hourly ----
+          cob = casey.get("observations") or []
+          if not cob and isinstance(casey.get("hourly"), dict):
+              times = casey["hourly"].get("time") or []
+              temps = casey["hourly"].get("temperature_2m") or []
+              cob = [{"time": t, "temperature_c": temps[i] if i < len(temps) else None} for i, t in enumerate(times)]
+          if cob:
+              times = [o.get("time", "")[-5:] for o in cob]
+              vals = [o.get("temperature_c") for o in cob]
+              rhs = [o.get("relative_humidity_pct") for o in cob]
+              fig, ax1 = plt.subplots(figsize=(11, 4.2))
+              ax1.plot(times, vals, color=CYAN, marker="o", markersize=3, label="Temp °C")
+              ax1.set_ylabel("Temperature (°C)", color=CYAN)
+              ax1.set_xlabel("Local time")
+              ax1.set_title(f"Casey, IL Hourly Temperature — {casey.get('date', date)}")
+              if any(v is not None for v in rhs):
+                  ax2 = ax1.twinx()
+                  ax2.plot(times, rhs, color=GREEN, alpha=0.7, linestyle="--", label="RH %")
+                  ax2.set_ylabel("RH %", color=GREEN)
+              ax1.grid(True, alpha=0.35)
+              if len(times) > 12:
+                  ax1.set_xticks(range(0, len(times), max(1, len(times)//12)))
+                  ax1.set_xticklabels([times[i] for i in range(0, len(times), max(1, len(times)//12))], rotation=45, ha="right")
+              save(fig, "casey-hourly-temperature.png")
+
+          # ---- 3) NDBC marine ----
+          ndbc_obs = ndbc.get("observations") or {}
+          if ndbc_obs:
+              sids, waves, wtemps, atemps = [], [], [], []
+              for sid, block in ndbc_obs.items():
+                  lo = block.get("latest_observation") or {}
+                  sids.append(sid)
+                  waves.append(lo.get("wave_height_m"))
+                  wtemps.append(lo.get("water_temp_c"))
+                  atemps.append(lo.get("air_temp_c"))
+              fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+              x = np.arange(len(sids))
+              wvals = [w if w is not None else 0 for w in waves]
+              axes[0].bar(x, wvals, color=CYAN)
+              axes[0].set_xticks(x)
+              axes[0].set_xticklabels(sids, rotation=45, ha="right")
+              axes[0].set_ylabel("Wave height (m)")
+              axes[0].set_title("NDBC Wave Height")
+              axes[0].grid(True, axis="y", alpha=0.35)
+              axes[1].plot(x, [v if v is not None else math.nan for v in wtemps], "o-", color=CYAN, label="Water")
+              axes[1].plot(x, [v if v is not None else math.nan for v in atemps], "s--", color=ORANGE, label="Air")
+              axes[1].set_xticks(x)
+              axes[1].set_xticklabels(sids, rotation=45, ha="right")
+              axes[1].set_ylabel("Temperature (°C)")
+              axes[1].set_title("NDBC Water / Air Temp")
+              axes[1].legend()
+              axes[1].grid(True, alpha=0.35)
+              fig.suptitle(f"UOGW Marine Samples — {date}", color="#e8f4ff")
+              fig.tight_layout()
+              save(fig, "ndbc-marine-samples.png")
+
+          # ---- 4) Anomaly severity ----
+          counts = anomaly.get("counts") or {}
+          if counts:
+              labels = ["alert", "watch", "info"]
+              vals = [counts.get(k, 0) for k in labels]
+              colors = [RED, ORANGE, YELLOW]
+              fig, ax = plt.subplots(figsize=(6, 4))
+              ax.bar(labels, vals, color=colors)
+              ax.set_ylabel("Count")
+              ax.set_title(f"UOGW Anomaly Flags — {date} (total={counts.get('total', sum(vals))})")
+              ax.grid(True, axis="y", alpha=0.35)
+              for i, v in enumerate(vals):
+                  ax.text(i, v + 0.05, str(v), ha="center", color="#e8f4ff")
+              save(fig, "anomaly-severity.png")
+
+          # ---- 5) Daily climate research cities ----
+          clim = climate.get("cities") or []
+          clim_ok = [c for c in clim if c.get("ok")]
+          if clim_ok:
+              fig, ax = plt.subplots(figsize=(10, 4.5))
+              labels = [c.get("id") for c in clim_ok]
+              tmax = [c.get("temperature_max_c") for c in clim_ok]
+              tmin = [c.get("temperature_min_c") for c in clim_ok]
+              x = np.arange(len(labels))
+              ax.bar(x - 0.2, tmax, width=0.4, color=ORANGE, label="Tmax")
+              ax.bar(x + 0.2, tmin, width=0.4, color=CYAN, label="Tmin")
+              ax.set_xticks(x)
+              ax.set_xticklabels(labels, rotation=45, ha="right")
+              ax.set_ylabel("°C")
+              ax.set_title(f"Research Cities Daily Tmin/Tmax — {climate.get('date', date)}")
+              ax.legend()
+              ax.grid(True, axis="y", alpha=0.35)
+              save(fig, "research-cities-tminmax.png")
+
+          # ---- 6) Summary dashboard tile ----
+          fig, ax = plt.subplots(figsize=(10, 5))
+          ax.axis("off")
+          idx = (research.get("indexes") or {})
+          obs = (research.get("observations_today") or {})
+          derived = (research.get("derived_surface_stats") or {})
+          gtemp = (derived.get("global_city_temperature_c") or {})
+          lines = [
+              "UOGW Daily Visual Summary",
+              f"Date (UTC): {date}",
+              "",
+              f"Catalog datasets: {((research.get('catalog') or {}).get('dataset_count'))}",
+              f"IGRA stations: {idx.get('igra_stations')}   NDBC stations: {idx.get('ndbc_stations')}",
+              f"GHCN stations: {idx.get('ghcn_stations')}   Global cities OK: {obs.get('global_cities_ok')}",
+              f"NDBC realtime samples: {obs.get('ndbc_realtime_stations')}   Casey hours: {obs.get('casey_hourly_count')}",
+              "",
+              f"Global city T mean/min/max: {gtemp.get('mean')} / {gtemp.get('min')} / {gtemp.get('max')} °C",
+              f"Anomaly total: {(anomaly.get('counts') or {}).get('total')}",
+              "",
+              "Midwest Stratospheric Data Systems — open atmospheric commons",
+          ]
+          y = 0.92
+          for i, line in enumerate(lines):
+              weight = "bold" if i == 0 else "normal"
+              size = 16 if i == 0 else 11
+              color = CYAN if i == 0 else "#e8f4ff"
+              ax.text(0.05, y, line, transform=ax.transAxes, fontsize=size, fontweight=weight, color=color, family="monospace")
+              y -= 0.07
+          save(fig, "daily-summary-card.png")
+
+          # Manifest
+          manifest = {
+              "schema": "uogw.visuals_manifest.v1",
+              "date_utc": date,
+              "generated_at_utc": now,
+              "charts": [
+                  "global-city-temperatures.png",
+                  "global-city-temp-map.png",
+                  "casey-hourly-temperature.png",
+                  "ndbc-marine-samples.png",
+                  "anomaly-severity.png",
+                  "research-cities-tminmax.png",
+                  "daily-summary-card.png",
+              ],
+              "written": written,
+              "curator": "Midwest Stratospheric Data Systems",
+          }
+          for p in [f"visuals/{date}/manifest.json", "visuals/latest/manifest.json",
+                    f"data/entries/{date}/visuals-manifest.json", "data/latest/visuals-manifest.json"]:
+              os.makedirs(os.path.dirname(p), exist_ok=True)
+              with open(p, "w") as f:
+                  json.dump(manifest, f, indent=2)
+
+          with open("status/charts.json", "w") as f:
+              json.dump({"source": "uogw-charts", "ok": True, "date": date,
+                         "chart_count": len(written), "generated_at_utc": now},
+                        f, indent=2)
+          print("charts written", len(written))
+          for w in written:
+              print(" ", w)
+          PY
+
+      - name: Commit visuals
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add visuals data/entries data/latest status || true
+          if git diff --staged --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "data(visuals): daily charts from repo observations $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then echo "Pushed OK"; exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1
