@@ -2,7 +2,7 @@
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-08-05T16:13:22Z UTC · Midwest Stratospheric Data Systems_
+_Generated at 2026-08-05T16:14:43Z UTC · Midwest Stratospheric Data Systems_
 
 ## PNG charts
 
@@ -39,8 +39,8 @@ _Generated at 2026-08-05T16:13:22Z UTC · Midwest Stratospheric Data Systems_
 ```mermaid
 pie showData
   title Anomaly flags 2026-08-05
-  "alert" : 0
-  "watch" : 0
+  "alert" : 1
+  "watch" : 2
   "info" : 0
 ```
 
@@ -61,7 +61,7 @@ xychart-beta
 | Date UTC | 2026-08-05 |
 | Cities OK | 32 |
 | City T min/max °F | 49.3 / 106.0 |
-| Anomaly total | 0 |
+| Anomaly total | 3 |
 | Casey hours | 24 |
 | NDBC samples | 7 |
 | Research climate cities | 10 |
