@@ -1,147 +1,126 @@
 # Unified Open Global Weather (UOGW)
 
-**An open atmospheric data commons — curated by [Midwest Stratospheric Data Systems](https://www.midwestsds.com)**
+**An open atmospheric data commons for research — curated by [Midwest Stratospheric Data Systems](https://www.midwestsds.com)**
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightblue.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Data Hub](https://img.shields.io/badge/Data%20Hub-midwestsds.com-00d4ff)](https://www.midwestsds.com/portal.html)
 [![Catalog](https://img.shields.io/badge/catalog-25%2B%20datasets-0a1628)](./catalog/catalog.json)
-[![Automations](https://img.shields.io/badge/automations-GitHub%20Actions-success)](./.github/workflows/)
-[![Coverage](https://img.shields.io/badge/coverage-global%20%2B%20foreign-blue)](./layers/ground/international/)
+[![Daily data](https://img.shields.io/badge/daily-data%2Fentries-success)](./data/entries/)
+[![Anomaly detection](https://img.shields.io/badge/analytics-anomaly%20detection-orange)](./data/latest/anomaly-report.json)
+[![Satellite index](https://img.shields.io/badge/satellite-radiance%20index-purple)](./data/latest/satellite-radiance-index.json)
 [![Wiki](https://img.shields.io/badge/wiki-docs%2F-0a1628)](./docs/Home.md)
 
-> **Mission:** Build one of the most complete *open, multi-layer, versioned* discovery layers for global ground, marine, upper-air, stratospheric, satellite, and near-space atmospheric observations — with independent automation, full attribution, international sources, and a public Data Hub.
+> **Mission:** Deliver a practical, versioned, multi-layer open atmospheric package every day — surface, marine, upper-air indexes, anomaly screens, satellite radiance discovery, and MSDS near-space flight data — so researchers, educators, and builders can work from one coherent commons.
 
-**Project wiki:** [`docs/Home.md`](./docs/Home.md) — catalog, data types, layers, international coverage, automations, API/status, citation.
-
----
-
-## Why UOGW is different
-
-Most weather portals are **single-agency** or **model-only**. UOGW is a **commons** spanning six layers, US and foreign authorities, and first-party near-space flight data.
-
-**We fly instruments.** That is rare among open-data curators. When X2Griffon recovers, profiles enter the same commons as IGRA and NDBC — not a private vault.
-
-### Independence
-
-Automations run on **GitHub Actions** inside this repository. They do **not** depend on the midwestsds.com web host being up. If the website is offline, indexes and MSDS ground files still update.
+**Start here for analysis:** [`data/latest/science-package.json`](./data/latest/science-package.json) · [`data/latest/research-summary.json`](./data/latest/research-summary.json)
 
 ---
 
-## Comprehensive data list
+## Why this contributes to science
 
-### By layer
+Most open weather repos stop at a static list of links. UOGW is different because it **commits real observation payloads every day**, rolls them into a **research summary**, screens **anomalies**, indexes **open satellite radiance paths**, and publishes **FAIR metadata** with a **data dictionary** — while remaining honest that agencies are still the system of record.
 
-| Layer | Data types | What UOGW provides |
-|-------|------------|--------------------|
-| **Ground** | Surface temperature, humidity, precip, wind, pressure, citizen science | Station indexes, daily city samples (30+ global cities), Casey IL archive, source registry |
-| **Marine** | Buoy observations, ocean profiles, tides, ship reports | NDBC station indexes + sample obs, links to Argo / ICOADS / CO-OPS |
-| **Upper-air** | Radiosonde soundings, pilot balloons, reference networks | IGRA station + Y2D file indexes (~2,900 stations), links to GRUAN / CUON / UW |
-| **Stratosphere** | Ozone, water vapor, QBO winds | Catalog links to SWOOSH, WOUDC, SHADOZ, QBO products |
-| **Satellite** | Imagery products, reanalysis, radio occultation | Catalog links to GOES open, MERRA-2, COSMIC, Copernicus/ECMWF |
-| **Flight** | High-altitude balloon vertical profiles | MSDS X2Griffon packages (first-party near-space) |
+| Capability | What researchers get |
+|------------|----------------------|
+| Daily science package | Combined observations + summary in one JSON |
+| Global city samples | 30+ international surface observations |
+| Marine realtime | Parsed NDBC buoy observations |
+| Upper-air discovery | IGRA station + Y2D indexes with stats |
+| Anomaly detection | Threshold + z-score screens (research only) |
+| Rolling baseline | 7-day observational context |
+| Satellite radiance index | GOES/JPSS/COSMIC/MERRA-2 open path map |
+| FAIR + citation bundle | Reusable daily metadata |
+| First-party flight layer | MSDS X2Griffon near-space profiles as flown |
 
-### Machine-readable catalog entries (`catalog/catalog.json`)
-
-| ID | Layer | Title | Status |
-|----|-------|-------|--------|
-| `msds-ground-casey` | ground | Casey, Illinois Ground Weather (MSDS) | active daily |
-| `msds-globe-site` | ground | NASA GLOBE — MSDS Site 422147 | active |
-| `msds-flights` | flight | X2Griffon / MSDS High-Altitude Flight Packages | active / expanding |
-| `noaa-igra` | upper-air | NOAA Integrated Global Radiosonde Archive (IGRA) | active daily index |
-| `copernicus-cuon` | upper-air | Copernicus Comprehensive Upper-air Observation Network | catalog |
-| `gruan` | upper-air | GRUAN Reference Upper-Air Network | catalog |
-| `uwyo-soundings` | upper-air | University of Wyoming Atmospheric Soundings | catalog |
-| `noaa-ghcnd` | ground | NOAA Global Historical Climatology Network daily (GHCNd) | active daily index |
-| `iem-asos` | ground | Iowa Environmental Mesonet ASOS/METAR Archive | catalog |
-| `open-meteo` | ground | Open-Meteo Open Weather API | active daily samples |
-| `nasa-power` | ground | NASA POWER Agroclimatology / Meteorology | catalog |
-| `cwop` | ground | Citizen Weather Observer Program (CWOP) | catalog |
-| `ndbc-buoys` | marine | NOAA National Data Buoy Center (NDBC) | active daily index |
-| `argo` | marine | Argo Global Ocean Profiling Float Array | catalog |
-| `icoads` | marine | International Comprehensive Ocean-Atmosphere Data Set | catalog |
-| `noaa-tides` | marine | NOAA CO-OPS Water Levels / Tide Gauges | catalog |
-| `swoosh` | stratospheric | NASA SWOOSH Stratospheric Water and Ozone | catalog |
-| `qbo` | stratospheric | Quasi-Biennial Oscillation (tropical stratospheric winds) | catalog |
-| `woudc-ozone` | stratospheric | WOUDC Ozone Sonde / Total Ozone Network | catalog |
-| `shadoz` | stratospheric | SHADOZ Southern Hemisphere Additional Ozonesondes | catalog |
-| `merra2` | satellite | NASA MERRA-2 Reanalysis (open products) | catalog |
-| `goes-open` | satellite | NOAA GOES Open Data (ABI / products) | catalog |
-| `cosmic-ro` | satellite | COSMIC / GNSS Radio Occultation | catalog |
-| `arm` | ground | DOE Atmospheric Radiation Measurement (ARM) | catalog |
-| `ecmwf-open` | satellite | ECMWF / Copernicus Open Datasets (selected) | catalog |
-
-**Status key**
-- **active daily** — GitHub Action writes fresh files into `layers/` every day  
-- **active** — live or regularly used in the Data Hub  
-- **catalog** — fully described in the machine catalog with authority URLs; bulk data stays at the source  
+**We fly instruments.** HAB profiles enter the same commons as public indexes — not a private vault.
 
 ---
 
-## Data types (what variables mean)
+## Daily automation (UTC)
 
-| Type | Typical variables | Units (common) | Layers |
-|------|-------------------|----------------|--------|
-| **Surface meteorology** | temperature_2m, relative_humidity_2m, precipitation, wind_speed_10m, wind_direction_10m, pressure_msl | °C, %, mm, m/s, °, hPa | ground |
-| **Station inventory** | station id, name, lat, lon, country/elevation | degrees, m | ground, upper-air, marine |
-| **Sounding / profile** | pressure levels, geopotential height, temp, dewpoint, wind u/v | hPa, m, °C, m/s | upper-air, flight |
-| **Marine** | wave height, water temp, air temp, wind, pressure | m, °C, m/s, hPa | marine |
-| **Ozone / stratospheric** | total ozone, ozone profile, water vapor mixing ratio | DU, ppmv | stratospheric |
-| **Satellite / RO** | brightness temperature, refractivity, bending angle | K, N-units | satellite |
-| **Reanalysis** | gridded T, q, wind, height on model levels | various | satellite / model |
-| **Status / health** | ok, generated_at_utc, counts, error | ISO-8601 timestamps | status/ |
+| Time | Workflow | Output |
+|------|----------|--------|
+| 01:15 | MSDS Ground Daily | Casey hourly observations |
+| 05:00 | Global Samples Daily | Worldwide city observations |
+| 05:30 | International Indexes | GHCN + foreign sources |
+| 06:30 | IGRA Index Daily | Upper-air research entry |
+| 07:45 | NDBC Marine Daily | Buoy realtime observations |
+| 08:00 | Catalog Rebuild | Status rollup |
+| 09:00 | Daily Research Package | Science package + summary + climate |
+| 09:15 | Rolling Baseline | 7-day baseline |
+| 09:30 | Anomaly Detection | Anomaly report |
+| 09:45 | FAIR Metadata | FAIR + citation bundle |
+| 10:00 | Satellite Radiance | Open radiance product index |
 
-Daily **city samples** use Open-Meteo current conditions (CC BY 4.0). Always cite Open-Meteo and underlying NWP sources when republishing.
+All jobs also support **Actions → Run workflow**.
+
+Independence: automations run on GitHub Actions inside this repository. They do **not** require midwestsds.com to be online.
 
 ---
 
-## International & foreign coverage
+## Where the data lives
 
-UOGW is not US-only. Indexes and samples intentionally include foreign and international networks.
+```
+data/
+  entries/YYYY-MM-DD/     # Immutable-ish daily research folder
+  latest/                 # Stable paths for notebooks & pipelines
+layers/                   # Layered indexes + samples
+docs/                     # Wiki, data dictionary, science contributing guide
+catalog/catalog.json      # Machine catalog
+sources/registry.json     # US + foreign authorities
+```
 
-### Daily worldwide city samples (`layers/ground/samples/`)
+### Stable analysis URLs
 
-Surface snapshots for **30+ cities** across:
+```text
+.../data/latest/science-package.json
+.../data/latest/research-summary.json
+.../data/latest/global-cities.json
+.../data/latest/ndbc-realtime.json
+.../data/latest/casey-hourly.json
+.../data/latest/anomaly-report.json
+.../data/latest/rolling-baseline.json
+.../data/latest/satellite-radiance-index.json
+.../data/latest/fair-metadata.json
+```
 
-| Region | Examples |
-|--------|----------|
-| North America | Casey IL, Chicago, Houston, Toronto, Mexico City, Honolulu, Anchorage |
-| South America | São Paulo, Buenos Aires, Lima |
-| Europe | London, Paris, Berlin, Madrid, Rome, Oslo, Stockholm, Reykjavik, Moscow, Istanbul |
-| Africa | Cairo, Nairobi, Johannesburg, Lagos |
-| Middle East | Dubai |
-| Asia | Mumbai, Beijing, Tokyo, Seoul, Singapore, Bangkok, Jakarta |
-| Oceania | Sydney, Auckland |
+Base: `https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/`
 
-### Global station index — GHCN (`layers/ground/ghcn/`)
+---
 
-NOAA **GHCNd** station inventory is global (US + foreign). UOGW stores daily **counts by country**, top-country summaries, and sample stations — with a pointer to the full NOAA list for complete inventory.
+## Polished science components
 
-### Foreign / international open authorities (`layers/ground/international/`)
+### 1) Automated anomaly detection
+Research-oriented screening (not official warnings):
+- Absolute thresholds (extreme heat/cold, low pressure, high wind, high waves)
+- Optional **z-scores** vs the 7-day rolling baseline
+- Written daily to `data/latest/anomaly-report.json`
 
-Curated registry includes (non-exhaustive):
+### 2) Satellite radiance integration (discovery layer)
+Full radiance archives are multi-TB and belong on AWS/NOAA/NASA. UOGW publishes a **daily open radiance index** for GOES ABI L1b, JPSS VIIRS paths, COSMIC RO, and MERRA-2 entry points — so multi-layer studies can start from one map.
 
-| Source | Country / scope |
-|--------|-----------------|
-| Deutscher Wetterdienst (DWD) Open Data | Germany / Europe |
-| MET Norway / Yr | Norway / Nordic / API |
-| Environment and Climate Change Canada | Canada |
-| Bureau of Meteorology | Australia |
-| Japan Meteorological Agency | Japan |
-| Météo-France Open Data | France |
-| KNMI | Netherlands |
-| SMHI | Sweden |
-| UK Met Office | United Kingdom |
-| India Meteorological Department | India |
-| China Meteorological Administration | China |
-| South African Weather Service | South Africa |
-| INMET | Brazil |
-| WMO OSCAR | Global observing systems |
-| WOUDC | Global ozone |
-| Argo | Global ocean |
-| Copernicus Climate Data Store | EU / global |
-| Open-Meteo | Global |
+### 3) Three additional polish components
+| Component | Path | Role |
+|-----------|------|------|
+| **Rolling baseline** | `data/latest/rolling-baseline.json` | 7-day observational means/std for context & z-scores |
+| **FAIR metadata + citation** | `data/latest/fair-metadata.json`, `citation-bundle.json` | Findable, accessible, interoperable, reusable daily package |
+| **Data dictionary** | `docs/data-dictionary.json`, `docs/DATA_DICTIONARY.md` | Variable definitions, units, product roles |
 
-Full machine list: [`sources/registry.json`](./sources/registry.json).
+---
+
+## Layers at a glance
+
+| Layer | UOGW provides |
+|-------|----------------|
+| **Ground** | Casey archive, global city obs, GHCN index, foreign registry |
+| **Marine** | NDBC station index + parsed realtime samples |
+| **Upper-air** | IGRA station + Y2D indexes |
+| **Stratosphere** | Catalog links (SWOOSH, WOUDC, SHADOZ, QBO) |
+| **Satellite** | Open radiance / product discovery index |
+| **Flight** | MSDS X2Griffon packages |
+| **Analytics** | Anomalies, baselines, research summaries |
+
+Full dataset table: see prior catalog section in git history or [`catalog/catalog.json`](./catalog/catalog.json).
 
 ---
 
@@ -149,72 +128,24 @@ Full machine list: [`sources/registry.json`](./sources/registry.json).
 
 | We do | We do not |
 |-------|-----------|
-| Index 25+ major open global sources | Claim ownership of NOAA/NASA/ECMWF/DWD observations |
-| Snapshot station lists & directory indexes daily | Host multi-TB bulk archives |
-| Publish Midwest HAB + Casey ground fast | Require API keys for basic public use |
-| Include foreign met services in the registry | Mirror every national archive in full |
-| Keep full citation chains | Pretend one small org replaces NCEI or WMO |
-| Version everything in Git | Guarantee second-by-second global completeness |
-
-Agencies remain the **system of record**. UOGW is the **open discovery + MSDS contribution pipeline**.
+| Commit daily observation payloads + research summaries | Claim to be the global system of record |
+| Screen anomalies for research context | Issue official public weather warnings |
+| Index open satellite radiance product families | Host full GOES/JPSS radiance archives in git |
+| Publish FAIR metadata and a data dictionary | Hide upstream licenses or provenance |
+| Include foreign open authorities | Mirror every national archive in bulk |
 
 ---
 
-## Quick links
+## Documentation
 
-| Resource | URL |
-|----------|-----|
-| **This repository** | https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather |
-| **Project wiki** | [`docs/Home.md`](./docs/Home.md) |
-| **Data Hub** | https://www.midwestsds.com/portal.html |
-| **API catalog** | https://midwestsds.com/data/v1/catalog.json |
-| **MSDS flight & ground data** | https://github.com/Midwest-Stratospheric/msds-data |
-| **IGDR (upper-air)** | https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository |
-| **Machine catalog** | [`catalog/catalog.json`](./catalog/catalog.json) |
-| **Source registry** | [`sources/registry.json`](./sources/registry.json) |
-| **Live status** | [`status/last_update.json`](./status/last_update.json) |
-| **International sources** | [`layers/ground/international/sources-latest.json`](./layers/ground/international/sources-latest.json) |
-| **Global city samples** | [`layers/ground/samples/cities-latest.json`](./layers/ground/samples/cities-latest.json) |
-
----
-
-## Repository layout
-
-```
-├── catalog/catalog.json          # Master machine-readable dataset list
-├── sources/registry.json         # US + foreign authority registry
-├── docs/                         # Project wiki
-├── layers/
-│   ├── ground/
-│   │   ├── casey/                # MSDS local ground
-│   │   ├── samples/              # Worldwide city surface samples
-│   │   ├── ghcn/                 # GHCNd global station index
-│   │   └── international/        # Foreign open-source registry snapshots
-│   ├── marine/ndbc/
-│   ├── upper-air/igra/
-│   ├── stratospheric/
-│   ├── satellite/
-│   └── flight/
-├── snapshots/YYYY-MM-DD/
-├── status/                       # Per-source health + last_update rollup
-├── .github/workflows/
-└── docs/
-```
-
----
-
-## Automations (independent)
-
-| Workflow | Schedule | Output |
-|----------|----------|--------|
-| `msds-ground-daily.yml` | Daily | Casey ground JSON → msds-data + UOGW `layers/ground/casey/` |
-| `igra-index-daily.yml` | Daily | IGRA station + Y2D index → `layers/upper-air/igra/` |
-| `ndbc-marine-daily.yml` | Daily | NDBC station table → `layers/marine/ndbc/` |
-| `global-samples-daily.yml` | Daily | 30+ worldwide city surface samples → `layers/ground/samples/` |
-| `international-indexes-daily.yml` | Daily | GHCN country index + foreign source registry → `layers/ground/ghcn/` + `international/` |
-| `catalog-rebuild.yml` | Daily + on data push | `status/last_update.json` rollup |
-
-Optional secret: `MSDS_DATA_TOKEN` (PAT with write access to `msds-data`) for cross-repo ground commits.
+| Doc | Link |
+|-----|------|
+| Project wiki home | [`docs/Home.md`](./docs/Home.md) |
+| Data dictionary | [`docs/DATA_DICTIONARY.md`](./docs/DATA_DICTIONARY.md) |
+| Science contributing guide | [`docs/CONTRIBUTING_SCIENCE.md`](./docs/CONTRIBUTING_SCIENCE.md) |
+| Actual data README | [`data/README.md`](./data/README.md) |
+| Machine catalog | [`catalog/catalog.json`](./catalog/catalog.json) |
+| Source registry | [`sources/registry.json`](./sources/registry.json) |
 
 ---
 
@@ -222,7 +153,7 @@ Optional secret: `MSDS_DATA_TOKEN` (PAT with write access to `msds-data`) for cr
 
 > Midwest Stratospheric Data Systems (2026). Unified Open Global Weather (UOGW). https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather
 
-Always also cite original providers (IGRA, Open-Meteo, GLOBE, NDBC, DWD, JMA, etc.).
+Always also cite upstream providers (Open-Meteo, NOAA NDBC, NOAA NCEI, NASA, etc.). Daily packages include a `citation-bundle.json`.
 
 ---
 
@@ -233,8 +164,8 @@ Casey, Illinois, USA
 launchcontrol@midwestsds.com  
 https://www.midwestsds.com  
 
-NASA GLOBE: **GO-4VW9B** · Ham context: **KE9CFY**
+NASA GLOBE: **GO-4VW9B** · Ham: **KE9CFY**
 
 ---
 
-*Open atmosphere. Open archives. Midwest-made flight data for everyone.*
+*Open atmosphere. Daily packages. Research-ready. Midwest-made flight data for everyone.*

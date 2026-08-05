@@ -1,0 +1,207 @@
+# Automated anomaly detection on daily UOGW observations
+name: Anomaly Detection Daily
+
+on:
+  schedule:
+    - cron: "30 9 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-anomaly
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect surface and marine anomalies
+        run: |
+          set -e
+          DATE=$(date -u +%Y-%m-%d)
+          mkdir -p data/entries/${DATE} data/latest layers/analytics status snapshots/${DATE}
+          python3 << 'PY'
+          import json, os, math, statistics
+          from datetime import datetime, timezone
+
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+          def load(p):
+              if not os.path.exists(p):
+                  return None
+              try:
+                  return json.load(open(p))
+              except Exception:
+                  return None
+
+          cities = load("data/latest/global-cities.json") or load("layers/ground/samples/cities-latest.json") or {}
+          ndbc = load("data/latest/ndbc-realtime.json") or {}
+          casey = load("data/latest/casey-hourly.json") or {}
+          climate = load("data/latest/daily-climate.json") or {}
+          baseline = load("data/latest/rolling-baseline.json") or {}
+
+          anomalies = []
+
+          def flag(kind, severity, subject, metric, value, threshold, detail):
+              anomalies.append({
+                  "kind": kind,
+                  "severity": severity,  # info | watch | alert
+                  "subject": subject,
+                  "metric": metric,
+                  "value": value,
+                  "threshold": threshold,
+                  "detail": detail,
+              })
+
+          # --- Absolute physical thresholds (research-oriented, not NWS warnings) ---
+          for c in cities.get("cities") or []:
+              if not c.get("ok"):
+                  continue
+              obs = c.get("observation") or {}
+              t = obs.get("temperature_c")
+              rh = obs.get("relative_humidity_pct")
+              p = obs.get("pressure_msl_hpa")
+              w = obs.get("wind_speed_ms")
+              name = c.get("name") or c.get("id")
+              if t is not None and t >= 40:
+                  flag("surface_heat", "alert", name, "temperature_c", t, 40, "Extreme heat threshold")
+              elif t is not None and t >= 35:
+                  flag("surface_heat", "watch", name, "temperature_c", t, 35, "High heat")
+              if t is not None and t <= -30:
+                  flag("surface_cold", "alert", name, "temperature_c", t, -30, "Extreme cold threshold")
+              elif t is not None and t <= -20:
+                  flag("surface_cold", "watch", name, "temperature_c", t, -20, "Severe cold")
+              if p is not None and p <= 980:
+                  flag("low_pressure", "watch", name, "pressure_msl_hpa", p, 980, "Very low MSL pressure")
+              if p is not None and p >= 1040:
+                  flag("high_pressure", "info", name, "pressure_msl_hpa", p, 1040, "Very high MSL pressure")
+              if w is not None and w >= 25:
+                  flag("high_wind", "alert", name, "wind_speed_ms", w, 25, "Gale-force class wind speed")
+              elif w is not None and w >= 15:
+                  flag("high_wind", "watch", name, "wind_speed_ms", w, 15, "Strong wind")
+              if rh is not None and rh <= 10 and t is not None and t >= 25:
+                  flag("dry_hot", "info", name, "relative_humidity_pct", rh, 10, "Hot and very dry")
+
+          # --- Baseline deviation (if rolling baseline exists) ---
+          city_base = (baseline.get("cities") or {})
+          for c in cities.get("cities") or []:
+              if not c.get("ok"):
+                  continue
+              cid = c.get("id")
+              obs = c.get("observation") or {}
+              t = obs.get("temperature_c")
+              b = city_base.get(cid) or {}
+              mean_t = b.get("temperature_c_mean")
+              std_t = b.get("temperature_c_std")
+              if t is None or mean_t is None or not std_t or std_t < 0.1:
+                  continue
+              z = (t - mean_t) / std_t
+              if abs(z) >= 2.5:
+                  flag("temp_zscore", "alert" if abs(z) >= 3 else "watch", c.get("name") or cid,
+                       "temperature_c_zscore", round(z, 2), 2.5,
+                       f"T={t}C vs baseline mean {mean_t}C (std {std_t})")
+
+          # --- Marine ---
+          for sid, block in (ndbc.get("observations") or {}).items():
+              lo = block.get("latest_observation") or {}
+              wh = lo.get("wave_height_m")
+              if wh is not None and wh >= 6:
+                  flag("high_waves", "alert", f"NDBC {sid}", "wave_height_m", wh, 6, "Very high significant wave height")
+              elif wh is not None and wh >= 4:
+                  flag("high_waves", "watch", f"NDBC {sid}", "wave_height_m", wh, 4, "High waves")
+              wt = lo.get("water_temp_c")
+              if wt is not None and wt >= 30:
+                  flag("warm_water", "info", f"NDBC {sid}", "water_temp_c", wt, 30, "Very warm SST sample")
+
+          # --- Casey diurnal range ---
+          casey_obs = casey.get("observations") or []
+          cts = [o.get("temperature_c") for o in casey_obs if isinstance(o.get("temperature_c"), (int, float))]
+          if len(cts) >= 6:
+              tr = max(cts) - min(cts)
+              if tr >= 20:
+                  flag("large_diurnal_range", "watch", "Casey, IL", "diurnal_range_c", round(tr, 2), 20,
+                       "Large daily temperature swing at MSDS site")
+
+          by_sev = {"alert": 0, "watch": 0, "info": 0}
+          for a in anomalies:
+              by_sev[a["severity"]] = by_sev.get(a["severity"], 0) + 1
+
+          report = {
+              "schema": "uogw.anomaly_report.v1",
+              "date_utc": date,
+              "generated_at_utc": now,
+              "curator": "Midwest Stratospheric Data Systems",
+              "method": "Absolute research thresholds + optional rolling z-score vs baseline",
+              "counts": {"total": len(anomalies), **by_sev},
+              "anomalies": anomalies,
+              "inputs": {
+                  "global_cities": bool(cities),
+                  "ndbc": bool(ndbc),
+                  "casey": bool(casey),
+                  "baseline": bool(baseline),
+              },
+              "disclaimer": "Research screening only — not an official weather warning service.",
+          }
+
+          for p in [
+              f"data/entries/{date}/anomaly-report.json",
+              "data/latest/anomaly-report.json",
+              f"layers/analytics/anomalies-{date}.json",
+              "layers/analytics/anomalies-latest.json",
+              f"snapshots/{date}/anomaly-report.json",
+          ]:
+              os.makedirs(os.path.dirname(p), exist_ok=True)
+              with open(p, "w") as f:
+                  json.dump(report, f, indent=2)
+
+          sp = f"data/entries/{date}/summary.json"
+          summary = load(sp) or {"date": date, "entries": {}}
+          summary.setdefault("entries", {})
+          summary["entries"]["anomaly-report"] = {
+              "ok": True,
+              "total": len(anomalies),
+              "alerts": by_sev.get("alert", 0),
+              "watches": by_sev.get("watch", 0),
+              "file": f"data/entries/{date}/anomaly-report.json",
+          }
+          with open(sp, "w") as f:
+              json.dump(summary, f, indent=2)
+          with open("data/latest/summary.json", "w") as f:
+              json.dump(summary, f, indent=2)
+
+          with open("status/anomaly.json", "w") as f:
+              json.dump({
+                  "source": "uogw-anomaly-detection",
+                  "ok": True,
+                  "date": date,
+                  "total": len(anomalies),
+                  "alerts": by_sev.get("alert", 0),
+                  "data_entry": f"data/entries/{date}/anomaly-report.json",
+                  "generated_at_utc": now,
+              }, f, indent=2)
+          print("anomalies", len(anomalies), by_sev)
+          PY
+
+      - name: Commit anomaly report
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add data/entries data/latest layers/analytics snapshots status || true
+          if git diff --staged --quiet; then exit 0; fi
+          N=$(python3 -c "import json; print(json.load(open('status/anomaly.json')).get('total',0))" 2>/dev/null || echo 0)
+          git commit -m "data(anomaly): ${N} screened events $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1

@@ -1,0 +1,28 @@
+{
+  "schema": "uogw.data_dictionary.v1",
+  "title": "UOGW Data Dictionary",
+  "curator": "Midwest Stratospheric Data Systems",
+  "updated": "2026-08-05",
+  "variables": [
+    {"id": "temperature_c", "name": "Air temperature", "units": "degC", "layers": ["ground", "marine", "flight"], "description": "Near-surface or reported air temperature in Celsius."},
+    {"id": "relative_humidity_pct", "name": "Relative humidity", "units": "%", "layers": ["ground"], "description": "Relative humidity at observation height."},
+    {"id": "precipitation_mm", "name": "Precipitation", "units": "mm", "layers": ["ground"], "description": "Liquid-equivalent precipitation amount over the stated interval."},
+    {"id": "pressure_msl_hpa", "name": "Mean sea-level pressure", "units": "hPa", "layers": ["ground", "marine"], "description": "Atmospheric pressure reduced to mean sea level."},
+    {"id": "wind_speed_ms", "name": "Wind speed", "units": "m/s", "layers": ["ground", "marine", "flight"], "description": "Horizontal wind speed."},
+    {"id": "wind_direction_deg", "name": "Wind direction", "units": "degree", "layers": ["ground", "marine"], "description": "Meteorological wind direction (from which the wind blows)."},
+    {"id": "wave_height_m", "name": "Significant wave height", "units": "m", "layers": ["marine"], "description": "NDBC significant wave height when reported."},
+    {"id": "water_temp_c", "name": "Water temperature", "units": "degC", "layers": ["marine"], "description": "Sea surface or bulk water temperature from buoy sensors."},
+    {"id": "et0_mm", "name": "Reference evapotranspiration (FAO-56)", "units": "mm", "layers": ["ground"], "description": "Daily ET0 from Open-Meteo daily climate block."},
+    {"id": "shortwave_radiation_mj_m2", "name": "Shortwave radiation sum", "units": "MJ/m^2", "layers": ["ground"], "description": "Daily integrated shortwave radiation."},
+    {"id": "temperature_c_zscore", "name": "Temperature z-score", "units": "1", "layers": ["analytics"], "description": "(T - baseline_mean) / baseline_std over the rolling window."},
+    {"id": "station_count", "name": "Station count", "units": "1", "layers": ["index"], "description": "Number of stations in a discovery index (IGRA, NDBC, GHCN)."}
+  ],
+  "products": [
+    {"path": "data/latest/science-package.json", "role": "Primary daily research package"},
+    {"path": "data/latest/research-summary.json", "role": "Generalized multi-source summary"},
+    {"path": "data/latest/anomaly-report.json", "role": "Automated anomaly screening"},
+    {"path": "data/latest/rolling-baseline.json", "role": "7-day observational baseline"},
+    {"path": "data/latest/satellite-radiance-index.json", "role": "Open satellite radiance discovery index"},
+    {"path": "data/latest/fair-metadata.json", "role": "FAIR-aligned daily metadata"}
+  ]
+}

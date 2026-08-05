@@ -1,0 +1,125 @@
+# Component 1: 7-day rolling observational baseline for anomaly z-scores and research context
+name: Rolling Baseline Daily
+
+on:
+  schedule:
+    - cron: "15 9 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-baseline
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute rolling baselines from recent city samples
+        run: |
+          set -e
+          DATE=$(date -u +%Y-%m-%d)
+          mkdir -p data/entries/${DATE} data/latest layers/analytics status
+          python3 << 'PY'
+          import json, os, glob, statistics
+          from datetime import datetime, timezone
+
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+          files = sorted(glob.glob("layers/ground/samples/cities-*.json"))
+          files = [f for f in files if not f.endswith("cities-latest.json")][-7:]
+
+          series = {}  # id -> lists
+          for fp in files:
+              try:
+                  doc = json.load(open(fp))
+              except Exception:
+                  continue
+              for c in doc.get("cities") or []:
+                  if not c.get("ok"):
+                      continue
+                  cid = c.get("id")
+                  obs = c.get("observation") or c.get("current") or {}
+                  t = obs.get("temperature_c", obs.get("temperature_2m"))
+                  p = obs.get("pressure_msl_hpa", obs.get("pressure_msl"))
+                  w = obs.get("wind_speed_ms", obs.get("wind_speed_10m"))
+                  series.setdefault(cid, {"t": [], "p": [], "w": [], "name": c.get("name"), "country": c.get("country")})
+                  if isinstance(t, (int, float)):
+                      series[cid]["t"].append(t)
+                  if isinstance(p, (int, float)):
+                      series[cid]["p"].append(p)
+                  if isinstance(w, (int, float)):
+                      series[cid]["w"].append(w)
+
+          cities_out = {}
+          for cid, s in series.items():
+              def stats(vals):
+                  if len(vals) < 2:
+                      return {"n": len(vals), "mean": vals[0] if vals else None, "std": None, "min": vals[0] if vals else None, "max": vals[0] if vals else None}
+                  return {
+                      "n": len(vals),
+                      "mean": round(statistics.mean(vals), 3),
+                      "std": round(statistics.pstdev(vals), 3),
+                      "min": min(vals),
+                      "max": max(vals),
+                  }
+              cities_out[cid] = {
+                  "name": s["name"],
+                  "country": s["country"],
+                  "temperature_c_mean": stats(s["t"]).get("mean"),
+                  "temperature_c_std": stats(s["t"]).get("std"),
+                  "temperature_c": stats(s["t"]),
+                  "pressure_msl_hpa": stats(s["p"]),
+                  "wind_speed_ms": stats(s["w"]),
+              }
+
+          doc = {
+              "schema": "uogw.rolling_baseline.v1",
+              "date_utc": date,
+              "generated_at_utc": now,
+              "window_days": 7,
+              "source_files": files,
+              "city_count": len(cities_out),
+              "cities": cities_out,
+              "curator": "Midwest Stratospheric Data Systems",
+              "note": "Rolling observational baseline for research context and anomaly z-scores. Not a formal climate normal.",
+          }
+
+          for p in [
+              f"data/entries/{date}/rolling-baseline.json",
+              "data/latest/rolling-baseline.json",
+              f"layers/analytics/baseline-{date}.json",
+              "layers/analytics/baseline-latest.json",
+          ]:
+              os.makedirs(os.path.dirname(p), exist_ok=True)
+              with open(p, "w") as f:
+                  json.dump(doc, f, indent=2)
+
+          with open("status/baseline.json", "w") as f:
+              json.dump({"source": "uogw-rolling-baseline", "ok": True, "city_count": len(cities_out),
+                         "data_entry": f"data/entries/{date}/rolling-baseline.json", "generated_at_utc": now}, f, indent=2)
+          print("baseline cities", len(cities_out), "from files", len(files))
+          PY
+
+      - name: Commit baseline
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add data/entries data/latest layers/analytics status || true
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "data(baseline): 7-day rolling observational baseline $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1

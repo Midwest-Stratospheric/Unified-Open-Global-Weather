@@ -1,0 +1,203 @@
+# Satellite radiance / product discovery index (open GOES + pointers)
+# Does not host multi-TB radiance archives — indexes open access paths for research
+name: Satellite Radiance Daily
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-satellite
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  satellite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build open satellite radiance / product index
+        run: |
+          set -e
+          DATE=$(date -u +%Y-%m-%d)
+          mkdir -p layers/satellite data/entries/${DATE} data/latest status snapshots/${DATE}
+          python3 << 'PY'
+          import json, os, urllib.request
+          from datetime import datetime, timezone
+
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          ua = {"User-Agent": "Midwest-Stratospheric/UOGW-satellite"}
+
+          def head_ok(url):
+              try:
+                  req = urllib.request.Request(url, method="HEAD", headers=ua)
+                  with urllib.request.urlopen(req, timeout=30) as resp:
+                      return resp.status, dict(resp.headers)
+              except Exception as e:
+                  return None, {"error": str(e)[:200]}
+
+          # Open radiance / imagery product families (discovery, not bulk host)
+          products = [
+              {
+                  "id": "goes16-abi-l1b-radf",
+                  "name": "GOES-16 ABI L1b Full Disk Radiances",
+                  "platform": "GOES-16",
+                  "sensor": "ABI",
+                  "level": "L1b",
+                  "domain": "radiance",
+                  "access": "AWS Open Data",
+                  "registry": "https://registry.opendata.aws/noaa-goes/",
+                  "s3_prefix": "s3://noaa-goes16/ABI-L1b-RadF/",
+                  "docs": "https://www.goes-r.gov/products/baseline-radiances.html",
+              },
+              {
+                  "id": "goes18-abi-l1b-radf",
+                  "name": "GOES-18 ABI L1b Full Disk Radiances",
+                  "platform": "GOES-18",
+                  "sensor": "ABI",
+                  "level": "L1b",
+                  "domain": "radiance",
+                  "access": "AWS Open Data",
+                  "registry": "https://registry.opendata.aws/noaa-goes/",
+                  "s3_prefix": "s3://noaa-goes18/ABI-L1b-RadF/",
+                  "docs": "https://www.goes-r.gov/products/baseline-radiances.html",
+              },
+              {
+                  "id": "goes16-abi-l2-cmipf",
+                  "name": "GOES-16 ABI L2 Cloud and Moisture Imagery Full Disk",
+                  "platform": "GOES-16",
+                  "sensor": "ABI",
+                  "level": "L2",
+                  "domain": "imagery",
+                  "access": "AWS Open Data",
+                  "s3_prefix": "s3://noaa-goes16/ABI-L2-CMIPF/",
+                  "registry": "https://registry.opendata.aws/noaa-goes/",
+              },
+              {
+                  "id": "jpss-viirs",
+                  "name": "JPSS VIIRS (radiance / SDR open paths)",
+                  "platform": "JPSS",
+                  "sensor": "VIIRS",
+                  "level": "SDR/L1",
+                  "domain": "radiance",
+                  "access": "NOAA / AWS Open Data",
+                  "registry": "https://registry.opendata.aws/noaa-jpss/",
+                  "docs": "https://www.nesdis.noaa.gov/about/our-satellites/current-satellites/joint-polar-satellite-system",
+              },
+              {
+                  "id": "cosmic-ro",
+                  "name": "COSMIC GNSS Radio Occultation",
+                  "platform": "COSMIC",
+                  "sensor": "GNSS-RO",
+                  "level": "retrieval",
+                  "domain": "occultation",
+                  "access": "UCAR open products",
+                  "registry": "https://www.cosmic.ucar.edu/",
+              },
+              {
+                  "id": "merra2",
+                  "name": "MERRA-2 reanalysis (satellite-assimilated fields)",
+                  "platform": "NASA GMAO",
+                  "sensor": "multi",
+                  "level": "reanalysis",
+                  "domain": "assimilated",
+                  "access": "NASA GES DISC / open subsets",
+                  "registry": "https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/",
+              },
+          ]
+
+          # Lightweight availability probes (HTTPS landing pages / registries)
+          probes = []
+          for url in [
+              "https://registry.opendata.aws/noaa-goes/",
+              "https://registry.opendata.aws/noaa-jpss/",
+              "https://www.ncei.noaa.gov/",
+          ]:
+              status, headers = head_ok(url)
+              probes.append({
+                  "url": url,
+                  "http_status": status,
+                  "ok": status is not None and status < 400,
+              })
+
+          doc = {
+              "schema": "uogw.satellite_radiance_index.v1",
+              "date_utc": date,
+              "generated_at_utc": now,
+              "curator": "Midwest Stratospheric Data Systems",
+              "data_kind": "index",
+              "note": "UOGW indexes open satellite radiance and related product families for research discovery. Full radiance archives remain on AWS/NOAA/NASA (multi-TB). Use this index to locate authoritative paths.",
+              "product_count": len(products),
+              "products": products,
+              "availability_probes": probes,
+              "research_guidance": [
+                  "Prefer ABI L1b RadF for calibrated radiances; CMIP for imagery.",
+                  "Do not commit large NetCDF/HDF granules into this git repo.",
+                  "Pair satellite indexes with UOGW surface/marine daily packages for multi-layer studies.",
+                  "Always cite NOAA/NASA/UCAR product DOIs or dataset landing pages.",
+              ],
+          }
+
+          for p in [
+              f"layers/satellite/radiance-index-{date}.json",
+              "layers/satellite/radiance-index-latest.json",
+              f"data/entries/{date}/satellite-radiance-index.json",
+              "data/latest/satellite-radiance-index.json",
+              f"snapshots/{date}/satellite-radiance-index.json",
+          ]:
+              os.makedirs(os.path.dirname(p), exist_ok=True)
+              with open(p, "w") as f:
+                  json.dump(doc, f, indent=2)
+
+          sp = f"data/entries/{date}/summary.json"
+          summary = {}
+          if os.path.exists(sp):
+              try:
+                  summary = json.load(open(sp))
+              except Exception:
+                  summary = {}
+          summary.setdefault("date", date)
+          summary.setdefault("entries", {})
+          summary["entries"]["satellite-radiance-index"] = {
+              "ok": True,
+              "product_count": len(products),
+              "file": f"data/entries/{date}/satellite-radiance-index.json",
+          }
+          with open(sp, "w") as f:
+              json.dump(summary, f, indent=2)
+          with open("data/latest/summary.json", "w") as f:
+              json.dump(summary, f, indent=2)
+
+          with open("status/satellite.json", "w") as f:
+              json.dump({
+                  "source": "uogw-satellite-radiance",
+                  "ok": True,
+                  "product_count": len(products),
+                  "data_entry": f"data/entries/{date}/satellite-radiance-index.json",
+                  "generated_at_utc": now,
+              }, f, indent=2)
+          print("satellite products indexed", len(products))
+          PY
+
+      - name: Commit satellite index
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add layers/satellite data/entries data/latest snapshots status || true
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "data(satellite): open radiance product index $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1

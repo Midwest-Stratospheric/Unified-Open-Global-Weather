@@ -1,0 +1,127 @@
+# Component 2: FAIR-aligned daily metadata + citation bundle
+name: FAIR Metadata Daily
+
+on:
+  schedule:
+    - cron: "45 9 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-fair
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  fair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Emit FAIR metadata and citation bundle
+        run: |
+          set -e
+          DATE=$(date -u +%Y-%m-%d)
+          mkdir -p data/entries/${DATE} data/latest status
+          python3 << 'PY'
+          import json, os, glob
+          from datetime import datetime, timezone
+
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+          entry_files = sorted(glob.glob(f"data/entries/{date}/*.json"))
+          entry_files = [p.replace('\\','/') for p in entry_files]
+
+          fair = {
+            "schema": "uogw.fair_metadata.v1",
+            "date_utc": date,
+            "generated_at_utc": now,
+            "findable": {
+              "title": f"UOGW Daily Atmospheric Package {date}",
+              "identifier_local": f"uogw:daily:{date}",
+              "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+              "catalog": "https://midwestsds.com/data/v1/catalog.json",
+              "keywords": ["atmosphere", "open data", "radiosonde index", "buoy", "surface weather", "anomaly detection", "satellite radiance index", "Midwest Stratospheric"],
+            },
+            "accessible": {
+              "format": "JSON",
+              "access_url": f"https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/entries/{date}/",
+              "latest_url": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/",
+              "license_curated": "CC BY 4.0",
+              "api_key_required": False,
+            },
+            "interoperable": {
+              "schemas": [
+                "uogw.research_summary.v1",
+                "uogw.science_package.v1",
+                "uogw.anomaly_report.v1",
+                "uogw.rolling_baseline.v1",
+                "uogw.satellite_radiance_index.v1",
+                "uogw.fair_metadata.v1"
+              ],
+              "data_dictionary": "docs/data-dictionary.json",
+              "variable_conventions": "SI-friendly units in observation objects; native source units retained in raw blocks where present",
+            },
+            "reusable": {
+              "citation": "Midwest Stratospheric Data Systems (2026). Unified Open Global Weather (UOGW) daily package. https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+              "attribution_required": [
+                "Open-Meteo (CC BY 4.0)",
+                "NOAA NDBC",
+                "NOAA NCEI IGRA / GHCNd",
+                "NOAA/NASA satellite product owners when using radiance indexes",
+                "Midwest Stratospheric Data Systems for curation and MSDS site series"
+              ],
+              "provenance": entry_files,
+              "limitations": [
+                "Not a replacement for agency systems of record",
+                "Anomaly flags are research screens, not official warnings",
+                "Satellite module indexes open paths; it does not host full radiance archives"
+              ],
+            },
+            "curator": "Midwest Stratospheric Data Systems",
+            "contact": "launchcontrol@midwestsds.com",
+          }
+
+          citation_bundle = {
+            "schema": "uogw.citation_bundle.v1",
+            "date_utc": date,
+            "generated_at_utc": now,
+            "primary_citation": fair["reusable"]["citation"],
+            "bibtex": "@misc{uogw2026,\n  title={Unified Open Global Weather (UOGW) daily package},\n  author={{Midwest Stratospheric Data Systems}},\n  year={2026},\n  howpublished={\\url{https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather}},\n  note={Daily multi-layer open atmospheric observations and indexes}\n}",
+            "upstream": fair["reusable"]["attribution_required"],
+          }
+
+          for p, doc in [
+            (f"data/entries/{date}/fair-metadata.json", fair),
+            ("data/latest/fair-metadata.json", fair),
+            (f"data/entries/{date}/citation-bundle.json", citation_bundle),
+            ("data/latest/citation-bundle.json", citation_bundle),
+          ]:
+              with open(p, "w") as f:
+                  json.dump(doc, f, indent=2)
+
+          with open("status/fair.json", "w") as f:
+              json.dump({"source": "uogw-fair-metadata", "ok": True, "date": date,
+                         "data_entry": f"data/entries/{date}/fair-metadata.json", "generated_at_utc": now}, f, indent=2)
+          print("FAIR metadata written", date)
+          PY
+
+      - name: Commit FAIR metadata
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add data/entries data/latest status || true
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "data(fair): daily FAIR metadata + citation bundle $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1
