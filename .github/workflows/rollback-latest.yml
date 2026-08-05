@@ -1,0 +1,174 @@
+name: Rollback data/latest
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Restore source"
+        required: true
+        default: "entry-date"
+        type: choice
+        options:
+          - entry-date
+          - rollback-point
+      entry_date:
+        description: "YYYY-MM-DD under data/entries (mode=entry-date)"
+        required: false
+        default: ""
+      rollback_point:
+        description: "Timestamp folder under snapshots/rollback-points (mode=rollback-point), or LATEST"
+        required: false
+        default: "LATEST"
+      confirm:
+        description: "Type ROLLBACK to confirm"
+        required: true
+        default: ""
+
+concurrency:
+  group: uogw-rollback
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate confirm
+        run: |
+          if [ "${{ inputs.confirm }}" != "ROLLBACK" ]; then
+            echo "Refusing to run: confirm must be exactly ROLLBACK"
+            exit 1
+          fi
+
+      - name: Snapshot current latest before overwrite
+        run: |
+          python3 scripts/heal_latest.py || true
+
+      - name: Restore data/latest
+        run: |
+          set -e
+          MODE="${{ inputs.mode }}"
+          mkdir -p data/latest
+          if [ "$MODE" = "entry-date" ]; then
+            DATE="${{ inputs.entry_date }}"
+            if [ -z "$DATE" ]; then
+              echo "entry_date required for entry-date mode"
+              exit 1
+            fi
+            SRC="data/entries/${DATE}"
+            if [ ! -d "$SRC" ]; then
+              echo "Missing $SRC"
+              exit 1
+            fi
+            echo "Restoring from $SRC"
+            # map known entry files into latest names
+            python3 <<'PY'
+          import os, shutil, json
+          from pathlib import Path
+          date = os.environ.get("DATE") or "${{ inputs.entry_date }}"
+          src = Path(f"data/entries/{date}")
+          latest = Path("data/latest")
+          latest.mkdir(parents=True, exist_ok=True)
+          mapping = {
+              "global-cities.json": "global-cities.json",
+              "casey-hourly.json": "casey-hourly.json",
+              "ndbc-realtime.json": "ndbc-realtime.json",
+              "research-summary.json": "research-summary.json",
+              "science-package.json": "science-package.json",
+              "anomaly-report.json": "anomaly-report.json",
+              "rolling-baseline.json": "rolling-baseline.json",
+              "satellite-radiance-index.json": "satellite-radiance-index.json",
+              "fair-metadata.json": "fair-metadata.json",
+              "citation-bundle.json": "citation-bundle.json",
+              "daily-climate.json": "daily-climate.json",
+              "summary.json": "summary.json",
+              "health-report.json": "health-report.json",
+          }
+          restored = []
+          for name, dest_name in mapping.items():
+              p = src / name
+              if p.exists():
+                  shutil.copy2(p, latest / dest_name)
+                  restored.append(dest_name)
+          meta = {
+              "restored_from": f"data/entries/{date}",
+              "files": restored,
+              "mode": "entry-date",
+          }
+          (latest / "_restored_from.json").write_text(json.dumps(meta, indent=2))
+          print(json.dumps(meta, indent=2))
+          if not restored:
+              raise SystemExit("No files restored from entry date")
+          PY
+          else
+            POINT="${{ inputs.rollback_point }}"
+            if [ "$POINT" = "LATEST" ] && [ -f snapshots/rollback-points/LATEST ]; then
+              POINT=$(cat snapshots/rollback-points/LATEST | tr -d '\n')
+            fi
+            SRC="snapshots/rollback-points/${POINT}"
+            if [ ! -d "$SRC" ]; then
+              echo "Missing $SRC"
+              exit 1
+            fi
+            echo "Restoring from $SRC"
+            cp -f "$SRC"/*.json data/latest/ 2>/dev/null || true
+            # remove meta from latest root noise optional
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+          point = Path("snapshots/rollback-points")
+          # write marker
+          meta = {"restored_from": "snapshots/rollback-points", "mode": "rollback-point"}
+          Path("data/latest/_restored_from.json").write_text(json.dumps(meta, indent=2))
+          print("restored rollback-point files", len(list(Path('data/latest').glob('*.json'))))
+          PY
+          fi
+
+      - name: Commit rollback
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add data/latest snapshots/rollback-points status || true
+          if git diff --staged --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "ops(rollback): restore data/latest (${{ inputs.mode }}) $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1
+
+      - name: Comment on health issue if open
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'UOGW health: critical data issue';
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'uogw-health',
+              per_page: 5,
+            });
+            const existing = issues.data.find(i => i.title === title);
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body: `Rollback workflow completed (mode=\`${{ inputs.mode }}\`). Review \`data/latest/_restored_from.json\` and re-run **Health Monitor**.`,
+              });
+            }
