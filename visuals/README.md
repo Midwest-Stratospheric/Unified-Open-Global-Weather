@@ -1,15 +1,19 @@
 # UOGW Visuals (GitHub-native)
 
-No external webpage. View charts as **GitHub markdown**.
+No external webpage. Open the markdown file below on GitHub.
 
-## Open this
+## Latest charts
 
-**[latest/CHARTS.md](./latest/CHARTS.md)** ← images + Mermaid charts
+**[latest/CHARTS.md](./latest/CHARTS.md)** (images + Mermaid)
 
-After the daily Charts workflow runs, that page shows:
+### Quick embeds
 
-- Embedded PNG graphs
-- Mermaid pie / xychart diagrams
-- Summary tables
+![Global city temperatures](./latest/global-city-temperatures.png)
 
-All generated from `data/latest/` in this repository.
+![Casey hourly](./latest/casey-hourly-temperature.png)
+
+![Anomaly severity](./latest/anomaly-severity.png)
+
+Dated folder: [`2026-08-05/`](./2026-08-05/)
+
+Automation: `charts-daily.yml` (11:00 UTC).
