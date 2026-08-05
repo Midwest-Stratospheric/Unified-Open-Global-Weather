@@ -1,22 +1,22 @@
-# UOGW Charts - 2026-08-05
+# UOGW Charts — 2026-08-05
 
-Generated automatically from repository data. View on GitHub.
+Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-08-05T06:03:17Z UTC · Midwest Stratospheric Data Systems_
+_Generated at 2026-08-05T06:05:55Z UTC · Midwest Stratospheric Data Systems_
 
 ## PNG charts
 
-### Global city temperatures
+### Global city temperatures (°F)
 
-![Global city temperatures](./global-city-temperatures.png)
+![Global city temperatures (°F)](./global-city-temperatures.png)
 
-### City temperature map
+### City temperature map (°F)
 
-![City temperature map](./global-city-temp-map.png)
+![City temperature map (°F)](./global-city-temp-map.png)
 
-### Casey hourly temperature
+### Casey hourly temperature (°F)
 
-![Casey hourly temperature](./casey-hourly-temperature.png)
+![Casey hourly temperature (°F)](./casey-hourly-temperature.png)
 
 ### NDBC marine samples
 
@@ -26,9 +26,9 @@ _Generated at 2026-08-05T06:03:17Z UTC · Midwest Stratospheric Data Systems_
 
 ![Anomaly severity](./anomaly-severity.png)
 
-### Research cities Tmin/Tmax
+### Research cities Tmin/Tmax (°F)
 
-![Research cities Tmin/Tmax](./research-cities-tminmax.png)
+![Research cities Tmin/Tmax (°F)](./research-cities-tminmax.png)
 
 ### Daily summary card
 
@@ -44,26 +44,27 @@ pie showData
   "info" : 0
 ```
 
-## City temperatures (Mermaid xychart)
+## City temperatures °F (Mermaid xychart)
 
 ```mermaid
 xychart-beta
-  title "City temperatures C - 2026-08-05"
+  title "City temperatures F - 2026-08-05"
   x-axis ["Jakarta", "Seoul", "Beijing", "Bangkok", "Berlin", "Casey", "Paris", "Rome", "Cairo", "Madrid", "Houston", "Dubai"]
-  y-axis "Temp C"
-  bar [26.3, 26.8, 27.5, 27.8, 28.9, 29.3, 30.1, 30.1, 30.7, 31.9, 35.0, 38.3]
+  y-axis "Temp F"
+  bar [79.3, 80.2, 81.5, 82.0, 84.0, 84.7, 86.2, 86.2, 87.3, 89.4, 95.0, 100.9]
 ```
 
-## Snapshot table
+## Snapshot table (°F)
 
 | Metric | Value |
 |--------|-------|
 | Date UTC | 2026-08-05 |
 | Cities OK | 32 |
-| City T min/max C | 5.6 / 38.3 |
+| City T min/max °F | 42.1 / 100.9 |
 | Anomaly total | 0 |
 | Casey hours | 24 |
 | NDBC samples | 7 |
+| Research climate cities | 10 |
 
-Also embedded in the repository [README](../../README.md).
+Source observation files remain in metric units for science interoperability; charts are °F for display.
 
