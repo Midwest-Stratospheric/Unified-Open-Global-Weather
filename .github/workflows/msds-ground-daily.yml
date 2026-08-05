@@ -47,7 +47,6 @@ jobs:
           now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
           hourly = om.get("hourly") or {}
           times = hourly.get("time") or []
-          # Flatten to observation list for easy consumption
           observations = []
           for i, t in enumerate(times):
               observations.append({
@@ -87,7 +86,6 @@ jobs:
             "meta": {"generator": "uogw/msds-ground-daily", "uogw": True}
           }
 
-          # UOGW layer paths
           os.makedirs("uogw/layers/ground/casey/daily", exist_ok=True)
           os.makedirs(f"uogw/data/entries/{date}", exist_ok=True)
           os.makedirs("uogw/data/latest", exist_ok=True)
@@ -103,7 +101,6 @@ jobs:
                   json.dump(out, f, indent=2)
               print("Wrote", path)
 
-          # Optional dual-write to msds-data
           if os.path.isdir("msds-data"):
               os.makedirs("msds-data/ground-weather/daily", exist_ok=True)
               with open(f"msds-data/ground-weather/daily/{date}.json", "w") as f:
@@ -162,12 +159,12 @@ jobs:
           done
           exit 1
 
-      - name: Commit msds-data (if token present)
-        if: ${{ secrets.MSDS_DATA_TOKEN != '' }}
-        working-directory: msds-data
+      - name: Commit msds-data (optional)
         continue-on-error: true
+        working-directory: msds-data
         run: |
           set -e
+          if [ ! -d .git ]; then echo "msds-data not checked out"; exit 0; fi
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
           git add ground-weather/daily || true
