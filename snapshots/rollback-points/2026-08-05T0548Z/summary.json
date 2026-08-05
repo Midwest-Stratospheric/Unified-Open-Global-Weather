@@ -1,0 +1,93 @@
+{
+  "date": "2026-08-05",
+  "generated_at_utc": "2026-08-05T05:42:43Z",
+  "entries": {
+    "ndbc-realtime": {
+      "ok": true,
+      "observation_count": 7,
+      "station_ids": [
+        "41001",
+        "46026",
+        "44025",
+        "46013",
+        "46042",
+        "41008",
+        "46029"
+      ],
+      "file": "data/entries/2026-08-05/ndbc-realtime.json"
+    },
+    "satellite-radiance-index": {
+      "ok": true,
+      "product_count": 6,
+      "file": "data/entries/2026-08-05/satellite-radiance-index.json"
+    },
+    "anomaly-report": {
+      "ok": true,
+      "total": 0,
+      "alerts": 0,
+      "watches": 0,
+      "file": "data/entries/2026-08-05/anomaly-report.json"
+    },
+    "research-summary": {
+      "ok": true,
+      "file": "data/entries/2026-08-05/research-summary.json",
+      "dataset_count": 25,
+      "global_cities_ok": 32,
+      "ndbc_realtime_stations": 7,
+      "casey_hourly_count": 24,
+      "daily_climate_cities": 10
+    },
+    "science-package": {
+      "ok": true,
+      "file": "data/entries/2026-08-05/science-package.json"
+    },
+    "daily-climate": {
+      "ok": true,
+      "observation_count": 10,
+      "file": "data/entries/2026-08-05/daily-climate.json"
+    }
+  },
+  "indexes": {
+    "igra_stations": 2931,
+    "igra_y2d_files": 801,
+    "ndbc_stations": 1936,
+    "ghcn_stations": 132501,
+    "ghcn_countries": 219,
+    "foreign_open_sources": 18,
+    "global_city_samples": 34,
+    "global_city_ok": 32
+  },
+  "derived_surface_stats": {
+    "global_city_temperature_c": {
+      "mean": 24.072,
+      "min": 5.6,
+      "max": 38.3
+    },
+    "global_city_humidity_pct": {
+      "mean": 63.219
+    },
+    "global_city_pressure_hpa": {
+      "mean": 1013.909
+    },
+    "global_city_wind_ms": {
+      "mean": 2.594
+    },
+    "casey_temperature_c": {
+      "min": 16.2,
+      "max": 29.4,
+      "mean": 23.108
+    },
+    "ndbc_wave_height_m": {
+      "mean": null,
+      "n": 0
+    },
+    "ndbc_water_temp_c": {
+      "mean": 17.92,
+      "n": 5
+    },
+    "ndbc_air_temp_c": {
+      "mean": 19.0,
+      "n": 5
+    }
+  }
+}

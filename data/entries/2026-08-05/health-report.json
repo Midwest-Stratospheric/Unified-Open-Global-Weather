@@ -1,14 +1,14 @@
 {
   "schema": "uogw.health_report.v1",
   "date_utc": "2026-08-05",
-  "generated_at_utc": "2026-08-05T05:42:40Z",
-  "ok": false,
-  "critical_fail": true,
+  "generated_at_utc": "2026-08-05T05:48:27Z",
+  "ok": true,
+  "critical_fail": false,
   "checks": [
     {
       "id": "global-cities",
       "status": "ok",
-      "path": "layers/ground/samples/cities-latest.json",
+      "path": "data/latest/global-cities.json",
       "reasons": [],
       "critical": true,
       "workflow": "global-samples-daily.yml"
@@ -31,21 +31,17 @@
     },
     {
       "id": "research-summary",
-      "status": "missing",
-      "path": null,
-      "reasons": [
-        "file not found"
-      ],
+      "status": "ok",
+      "path": "data/latest/research-summary.json",
+      "reasons": [],
       "critical": true,
       "workflow": "daily-research-package.yml"
     },
     {
       "id": "science-package",
-      "status": "missing",
-      "path": null,
-      "reasons": [
-        "file not found"
-      ],
+      "status": "ok",
+      "path": "data/latest/science-package.json",
+      "reasons": [],
       "critical": true,
       "workflow": "daily-research-package.yml"
     },
@@ -100,19 +96,17 @@
   ],
   "heal_actions": [
     {
-      "copied": "layers/ground/samples/cities-latest.json",
-      "to": "data/latest/global-cities.json"
+      "rollback_point": "2026-08-05T0548Z"
     }
   ],
-  "redispatch_workflows": [
-    "daily-research-package.yml"
-  ],
+  "redispatch_workflows": [],
   "summary": {
     "total": 11,
-    "ok": 9,
-    "missing": 2,
+    "ok": 11,
+    "missing": 0,
     "stale": 0,
     "invalid_json": 0
   },
+  "rollback_docs": "docs/ROLLBACK.md",
   "curator": "Midwest Stratospheric Data Systems"
 }
