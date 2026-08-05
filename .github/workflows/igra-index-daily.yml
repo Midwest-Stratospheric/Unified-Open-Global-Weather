@@ -1,4 +1,4 @@
-# Daily NOAA IGRA station + Y2D directory index (lightweight — not full soundings)
+# Daily NOAA IGRA upper-air index + compact research stats entry
 name: IGRA Index Daily
 
 on:
@@ -14,130 +14,181 @@ permissions:
   contents: write
 
 jobs:
-  igra-index:
+  igra:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Build IGRA indexes
+      - name: Build IGRA station + Y2D indexes
         run: |
           set -e
           DATE=$(date -u +%Y-%m-%d)
-          mkdir -p layers/upper-air/igra snapshots/${DATE} status
-          # Stable station list (text)
-          curl -fsSL -A "Midwest-Stratospheric/UOGW-igra" \
-            "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/doc/igra2-station-list.txt" \
-            -o /tmp/igra2-station-list.txt || true
-          # Optional Y2D HTML directory listing
-          curl -fsSL -A "Midwest-Stratospheric/UOGW-igra" \
-            "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/" \
-            -o /tmp/igra_y2d.html || true
-
+          mkdir -p layers/upper-air/igra data/entries/${DATE} data/latest status snapshots/${DATE}
           python3 << 'PY'
-          import re, json, os
+          import json, os, urllib.request, collections
           from datetime import datetime, timezone
 
           date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
           now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          ua = {"User-Agent": "Midwest-Stratospheric/UOGW-igra"}
 
           stations = []
-          station_path = "/tmp/igra2-station-list.txt"
-          if os.path.exists(station_path) and os.path.getsize(station_path) > 100:
-              with open(station_path, encoding="utf-8", errors="ignore") as f:
-                  for line in f:
-                      line = line.rstrip("\n")
-                      if not line or line.startswith("#"):
-                          continue
-                      # IGRA2 list: ID (11) LAT LON ELEV STATE NAME ...
-                      sid = line[0:11].strip()
-                      if not sid:
-                          continue
-                      try:
-                          lat = float(line[12:20].strip())
-                          lon = float(line[21:30].strip())
-                      except Exception:
-                          lat = lon = None
-                      elev = line[31:37].strip() if len(line) > 37 else ""
-                      state = line[38:40].strip() if len(line) > 40 else ""
-                      name = line[41:71].strip() if len(line) > 41 else ""
-                      stations.append({
-                          "id": sid,
-                          "latitude": lat,
-                          "longitude": lon,
-                          "elevation_m": elev or None,
-                          "state": state or None,
-                          "name": name or None,
-                      })
+          by_country = collections.Counter()
+          # Prefer stable station list file if present in repo, else fetch
+          local_list = "layers/upper-air/igra/station-list.txt"
+          text = None
+          if os.path.exists(local_list):
+              text = open(local_list, encoding="utf-8", errors="replace").read()
+          else:
+              urls = [
+                  "https://www.ncei.noaa.gov/pub/data/igra/igra2-station-list.txt",
+                  "https://www1.ncdc.noaa.gov/pub/data/igra/igra2-station-list.txt",
+              ]
+              for url in urls:
+                  try:
+                      with urllib.request.urlopen(urllib.request.Request(url, headers=ua), timeout=120) as resp:
+                          text = resp.read().decode("utf-8", errors="replace")
+                      break
+                  except Exception:
+                      continue
 
+          if text:
+              for line in text.splitlines():
+                  line = line.strip()
+                  if not line or line.startswith("#"):
+                      continue
+                  # IGRA2 fixed-ish width: ID lat lon elev state name ...
+                  parts = line.split()
+                  if len(parts) < 4:
+                      continue
+                  sid = parts[0]
+                  try:
+                      lat = float(parts[1])
+                      lon = float(parts[2])
+                  except ValueError:
+                      continue
+                  cc = sid[:2] if len(sid) >= 2 else "??"
+                  by_country[cc] += 1
+                  stations.append({"id": sid, "lat": lat, "lon": lon, "country_code": cc})
+
+          # Y2D file index (directory listing if available)
           y2d_files = []
-          html_path = "/tmp/igra_y2d.html"
-          if os.path.exists(html_path):
-              html = open(html_path, encoding="utf-8", errors="ignore").read()
-              zips = sorted(set(re.findall(r'href="([^"]+\.zip)"', html, flags=re.I)))
-              for z in zips:
-                  y2d_files.append({
-                      "file": z,
-                      "url": f"https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/{z}"
-                  })
+          y2d_url = "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/"
+          try:
+              with urllib.request.urlopen(urllib.request.Request(y2d_url, headers=ua), timeout=120) as resp:
+                  html = resp.read().decode("utf-8", errors="replace")
+              import re
+              y2d_files = sorted(set(re.findall(r'href="([A-Z0-9\-]+\.zip)"', html, flags=re.I)))
+          except Exception:
+              y2d_files = []
 
-          ok = len(stations) > 0 or len(y2d_files) > 0
-          station_doc = {
+          stations_doc = {
+              "source": "noaa-igra",
+              "layer": "upper-air",
+              "type": "igra-station-index",
+              "data_kind": "index",
               "generated_at_utc": now,
               "date": date,
-              "product": "IGRA2 station list index",
-              "authoritative": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive",
-              "station_list_url": "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/doc/igra2-station-list.txt",
-              "citation": "Durre et al. IGRA v2, NOAA NCEI",
               "station_count": len(stations),
-              "stations": stations,
-              "note": "Station inventory only. Full soundings remain at NCEI.",
-              "curator": "Midwest Stratospheric Data Systems / UOGW",
+              "country_count": len(by_country),
+              "countries_top30": [{"code": c, "stations": n} for c, n in by_country.most_common(30)],
+              "sample_stations": stations[:50],
+              "authority_url": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive",
+              "curator": "Midwest Stratospheric Data Systems",
           }
           y2d_doc = {
+              "source": "noaa-igra",
+              "layer": "upper-air",
+              "type": "igra-y2d-file-index",
+              "data_kind": "index",
               "generated_at_utc": now,
               "date": date,
-              "product": "IGRA data-y2d directory index",
-              "y2d_root": "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/",
               "file_count": len(y2d_files),
-              "files": y2d_files[:5000],
-              "note": "Index only. Full sounding files remain at NCEI.",
-              "curator": "Midwest Stratospheric Data Systems / UOGW",
+              "files_sample": y2d_files[:100],
+              "authority_url": y2d_url,
+              "curator": "Midwest Stratospheric Data Systems",
           }
 
-          def write(path, obj):
-              os.makedirs(os.path.dirname(path), exist_ok=True)
-              with open(path, "w") as f:
-                  json.dump(obj, f, indent=2)
-
-          write(f"layers/upper-air/igra/stations-{date}.json", station_doc)
-          write("layers/upper-air/igra/stations-latest.json", station_doc)
-          write(f"layers/upper-air/igra/y2d-index-{date}.json", y2d_doc)
-          write("layers/upper-air/igra/y2d-index-latest.json", y2d_doc)
-          write(f"snapshots/{date}/igra-stations.json", station_doc)
-          write(f"snapshots/{date}/igra-y2d-index.json", y2d_doc)
-
-          status = {
+          research_entry = {
               "source": "noaa-igra",
-              "ok": ok,
-              "station_count": len(stations),
-              "file_count": len(y2d_files),
+              "layer": "upper-air",
+              "type": "igra-daily-research-entry",
+              "data_kind": "index+stats",
               "generated_at_utc": now,
+              "date": date,
+              "station_count": len(stations),
+              "country_count": len(by_country),
+              "y2d_file_count": len(y2d_files),
+              "countries_top15": [{"code": c, "stations": n} for c, n in by_country.most_common(15)],
+              "hemisphere_hint": {
+                  "northern_stations": sum(1 for s in stations if s["lat"] >= 0),
+                  "southern_stations": sum(1 for s in stations if s["lat"] < 0),
+              },
+              "note": "IGRA full soundings remain at NOAA; UOGW publishes daily discovery indexes + summary stats for research navigation.",
+              "curator": "Midwest Stratospheric Data Systems",
           }
-          write("status/igra.json", status)
-          print("IGRA stations:", len(stations), "y2d files:", len(y2d_files), "ok:", ok)
-          if not ok:
-              raise SystemExit("IGRA fetch produced no stations and no Y2D files")
+
+          for p, doc in [
+              (f"layers/upper-air/igra/stations-{date}.json", stations_doc),
+              ("layers/upper-air/igra/stations-latest.json", stations_doc),
+              (f"layers/upper-air/igra/y2d-index-{date}.json", y2d_doc),
+              ("layers/upper-air/igra/y2d-index-latest.json", y2d_doc),
+              (f"data/entries/{date}/igra-index.json", research_entry),
+              ("data/latest/igra-index.json", research_entry),
+              (f"snapshots/{date}/igra-stations.json", stations_doc),
+          ]:
+              os.makedirs(os.path.dirname(p), exist_ok=True)
+              with open(p, "w") as f:
+                  json.dump(doc, f, indent=2)
+
+          sp = f"data/entries/{date}/summary.json"
+          summary = {}
+          if os.path.exists(sp):
+              try:
+                  summary = json.load(open(sp))
+              except Exception:
+                  summary = {}
+          summary.setdefault("date", date)
+          summary.setdefault("generated_at_utc", now)
+          summary.setdefault("entries", {})
+          summary["entries"]["igra-index"] = {
+              "ok": len(stations) > 0,
+              "station_count": len(stations),
+              "y2d_file_count": len(y2d_files),
+              "file": f"data/entries/{date}/igra-index.json",
+          }
+          with open(sp, "w") as f:
+              json.dump(summary, f, indent=2)
+          with open("data/latest/summary.json", "w") as f:
+              json.dump(summary, f, indent=2)
+
+          with open("status/igra.json", "w") as f:
+              json.dump({
+                  "source": "noaa-igra",
+                  "ok": len(stations) > 0,
+                  "station_count": len(stations),
+                  "file_count": len(y2d_files),
+                  "data_entry": f"data/entries/{date}/igra-index.json",
+                  "generated_at_utc": now,
+              }, f, indent=2)
+          print("IGRA stations", len(stations), "y2d", len(y2d_files))
           PY
 
-      - name: Commit
+      - name: Commit IGRA data entry
         run: |
+          set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
-          git pull --rebase origin main || true
-          git add layers/upper-air/igra snapshots status || true
-          if git diff --staged --quiet; then
-            echo "No changes"
-          else
-            git commit -m "chore(igra): daily station + Y2D index $(date -u +%Y-%m-%d)"
-            git push
-          fi
+          git add layers/upper-air/igra data/entries data/latest snapshots status || true
+          if git diff --staged --quiet; then echo "No changes"; exit 0; fi
+          ST=$(python3 -c "import json; print(json.load(open('status/igra.json')).get('station_count',0))" 2>/dev/null || echo 0)
+          git commit -m "data(igra): ${ST} station index + research entry $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then echo "Pushed OK"; exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1
