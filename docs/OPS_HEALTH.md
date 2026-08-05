@@ -1,44 +1,29 @@
-# UOGW Operations — Health Monitor
+# UOGW Operations — Health Monitor & Alert PRs
 
 ## Purpose
 
-Automatically **check** that daily data products exist and are fresh, **self-heal** missing `data/latest` pointers when a layer copy exists, **re-dispatch** failed/stale workflows, and **open a GitHub Issue** if critical data is still missing.
+1. **Check** daily products (present, valid, not stale)  
+2. **Self-heal** `data/latest` pointers  
+3. **Re-dispatch** broken producers  
+4. **Log failures as a Pull Request** on branch `ops/uogw-health-alert`  
+5. **Clear** that PR automatically when health recovers  
 
-## Workflow
+## Alert PR lifecycle
 
-- File: `.github/workflows/health-monitor.yml`
-- Schedule: **12:00 UTC** and **18:00 UTC** daily (+ manual run)
-- Permissions: `contents`, `actions`, `issues`
+| State | What happens |
+|-------|----------------|
+| Critical failure detected | Push branch `ops/uogw-health-alert` with `ops/HEALTH_ALERT.md` + `ops/health-report.json`. Open PR **UOGW health alert — critical data issue** (or comment on existing open PR). |
+| Still failing on later runs | Force-update branch + comment with fresh report (PR stays open = logged history). |
+| All critical checks OK | Comment **Recovered** and **close** the PR automatically. |
 
-## Checks
+Do **not** merge the alert PR unless you intentionally want the alert log on `main`. Closing is the normal clear path.
 
-| ID | Critical | Max age | Re-dispatch |
-|----|----------|---------|-------------|
-| global-cities | yes | 36h | global-samples-daily.yml |
-| casey-hourly | yes | 48h | msds-ground-daily.yml |
-| ndbc-realtime | yes | 36h | ndbc-marine-daily.yml |
-| research-summary | yes | 36h | daily-research-package.yml |
-| science-package | yes | 36h | daily-research-package.yml |
-| anomaly-report | no | 36h | anomaly-detection-daily.yml |
-| rolling-baseline | no | 48h | rolling-baseline-daily.yml |
-| satellite-index | no | 48h | satellite-radiance-daily.yml |
-| fair-metadata | no | 48h | fair-metadata-daily.yml |
-| charts-markdown | no | 48h | charts-daily.yml |
-| catalog | yes | — | — |
+## Schedule
 
-## Intervention order
+- `health-monitor.yml`: **12:00** and **18:00 UTC** (+ manual)  
 
-1. **Self-heal** — copy `layers/.../latest` → `data/latest/...` when the latest pointer is missing  
-2. **Commit** health report + healed files  
-3. **Re-dispatch** workflows for missing/stale products  
-4. **Issue** — open/update label `uogw-health` on critical failure; auto-close when healthy  
+## Related
 
-## Reports
-
-- `data/latest/health-report.json`
-- `status/health.json`
-- `data/entries/YYYY-MM-DD/health-report.json`
-
-## Manual run
-
-Actions → **Health Monitor** → Run workflow.
+- Rollback procedures: [`docs/ROLLBACK.md`](./ROLLBACK.md)  
+- Heal script: `scripts/heal_latest.py`  
+- Status: `data/latest/health-report.json`, `status/health.json`, `status/heal.json`  

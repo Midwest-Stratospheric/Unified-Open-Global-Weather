@@ -14,6 +14,7 @@ permissions:
   contents: write
   actions: write
   issues: write
+  pull-requests: write
 
 jobs:
   health:
@@ -33,7 +34,7 @@ jobs:
         run: |
           set -e
           python3 <<'PY'
-          import json, os
+          import json
           from datetime import datetime, timezone
           from pathlib import Path
 
@@ -50,23 +51,23 @@ jobs:
               try:
                   return json.loads(path.read_text())
               except Exception:
-                  return False  # invalid json
+                  return False
 
           def age_hours(doc):
               if not isinstance(doc, dict):
                   return None
-              for k in ("generated_at_utc", "fetched_at_utc", "retrieved_at_utc", "date_utc"):
+              for k in ("generated_at_utc", "fetched_at_utc", "retrieved_at_utc", "date_utc", "date"):
                   v = doc.get(k)
                   if not v and isinstance(doc.get("source"), dict):
                       v = doc["source"].get("retrieved_at_utc") or doc["source"].get(k)
                   if not v:
                       continue
                   try:
-                      # date-only
-                      if len(str(v)) == 10 and str(v)[4] == "-":
-                          t = datetime.fromisoformat(str(v) + "T00:00:00+00:00")
+                      vs = str(v)
+                      if len(vs) == 10 and vs[4] == "-":
+                          t = datetime.fromisoformat(vs + "T12:00:00+00:00")
                       else:
-                          t = datetime.fromisoformat(str(v).replace("Z", "+00:00"))
+                          t = datetime.fromisoformat(vs.replace("Z", "+00:00"))
                       return (now - t).total_seconds() / 3600.0
                   except Exception:
                       continue
@@ -149,9 +150,11 @@ jobs:
                   "stale": sum(1 for r in results if r["status"] == "stale"),
                   "invalid_json": sum(1 for r in results if r["status"] == "invalid_json"),
               },
+              "alert_pr_branch": "ops/uogw-health-alert",
               "rollback_docs": "docs/ROLLBACK.md",
               "curator": "Midwest Stratospheric Data Systems",
           }
+
           Path(f"data/entries/{date}").mkdir(parents=True, exist_ok=True)
           Path("data/latest").mkdir(parents=True, exist_ok=True)
           Path("status").mkdir(parents=True, exist_ok=True)
@@ -160,31 +163,77 @@ jobs:
               "data/latest/health-report.json",
               "status/health.json",
           ]:
-              Path(p).write_text(json.dumps(report, indent=2))
+              Path(p).write_text(json.dumps(report, indent=2) + "\n")
+
           Path("/tmp/health_report.json").write_text(json.dumps(report, indent=2))
           Path("/tmp/redispatch.txt").write_text("\n".join(redispatches) + ("\n" if redispatches else ""))
+
+          # Markdown log for the alert PR body/files
+          failed = [c for c in results if c["status"] != "ok"]
+          lines = [
+              f"# UOGW Health Alert — {date}",
+              "",
+              f"Generated: `{now_s}`",
+              f"Critical failure: **{critical_fail}**",
+              "",
+              "## Summary",
+              "```json",
+              json.dumps(report["summary"], indent=2),
+              "```",
+              "",
+              "## Checks",
+              "| ID | Status | Critical | Path | Reasons | Workflow |",
+              "|----|--------|----------|------|---------|----------|",
+          ]
+          for c in results:
+              lines.append(
+                  f"| {c['id']} | `{c['status']}` | {c['critical']} | `{c.get('path') or ''}` | {'; '.join(c.get('reasons') or []) or '—'} | `{c.get('workflow') or '—'}` |"
+              )
+          lines += [
+              "",
+              "## Re-dispatch queue",
+              "",
+          ]
+          if redispatches:
+              lines += [f"- `{w}`" for w in redispatches]
+          else:
+              lines.append("_none_")
+          lines += [
+              "",
+              "## Recovery",
+              "",
+              "This PR is opened automatically when critical health checks fail.",
+              "It is **closed automatically** when Health Monitor reports recovery.",
+              "",
+              "Manual steps if it does not clear:",
+              "1. Re-run **Health Monitor**",
+              "2. Follow [docs/ROLLBACK.md](../docs/ROLLBACK.md)",
+              "3. Actions → **Rollback data/latest** (confirm `ROLLBACK`) if needed",
+              "",
+          ]
+          Path("/tmp/HEALTH_ALERT.md").write_text("\n".join(lines) + "\n")
+
           print(json.dumps(report["summary"], indent=2))
           print("critical_fail", critical_fail)
-          print("redispatch", redispatches)
           if critical_fail:
               print("CRITICAL=true")
           else:
               print("CRITICAL=false")
           PY
-          if python3 -c "import json; import sys; sys.exit(0 if json.load(open('/tmp/health_report.json'))['critical_fail'] else 1)"; then
+          if python3 -c "import json,sys; sys.exit(0 if json.load(open('/tmp/health_report.json'))['critical_fail'] else 1)"; then
             echo "critical=true" >> "$GITHUB_OUTPUT"
           else
             echo "critical=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Commit healed files and health report
+      - name: Commit healed files and health report on main
         run: |
           set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
           git add data/latest data/entries status snapshots/rollback-points || true
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "No main-branch health commit"
             exit 0
           fi
           git commit -m "ops(health): self-heal + health report $(date -u +%Y-%m-%dT%H:%MZ)"
@@ -217,88 +266,100 @@ jobs:
             sleep 2
           done < /tmp/redispatch.txt
 
-      - name: Open or update health issue on critical failure
+      - name: Open or update health alert PR (log the failure)
         if: steps.check.outputs.critical == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const report = JSON.parse(fs.readFileSync('/tmp/health_report.json', 'utf8'));
-            const title = 'UOGW health: critical data issue';
-            const failed = report.checks.filter(c => c.status !== 'ok');
-            const body = [
-              '## Automated health monitor',
-              '',
-              `Generated: **${report.generated_at_utc}**`,
-              `Critical: **${report.critical_fail}**`,
-              '',
-              '### Summary',
-              '```json',
-              JSON.stringify(report.summary, null, 2),
-              '```',
-              '',
-              '### Failed checks',
-              ...failed.map(c => `- **${c.id}**: \`${c.status}\` ${(c.reasons||[]).join('; ')} · workflow=\`${c.workflow||'n/a'}\``),
-              '',
-              '### Heal actions',
-              '```json',
-              JSON.stringify(report.heal_actions || [], null, 2),
-              '```',
-              '',
-              '### Next steps',
-              '1. Wait for re-dispatched workflows',
-              '2. Re-run **Health Monitor**',
-              '3. If still broken, follow **[docs/ROLLBACK.md](docs/ROLLBACK.md)**',
-              '4. Optional: Actions → **Rollback data/latest** (confirm `ROLLBACK`)',
-            ].join('\n');
-            const issues = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              labels: 'uogw-health',
-              per_page: 10,
-            });
-            const existing = issues.data.find(i => i.title === title);
-            try {
-              await github.rest.issues.createLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                name: 'uogw-health',
-                color: 'FF6B6B',
-                description: 'Automated UOGW data health alerts',
-              });
-            } catch (e) {}
-            if (existing) {
-              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, body });
-            } else {
-              await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body, labels: ['uogw-health'] });
-            }
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          BRANCH="ops/uogw-health-alert"
+          git fetch origin main
+          git checkout -B "$BRANCH" origin/main
 
-      - name: Close health issue when recovered
+          mkdir -p ops
+          cp /tmp/HEALTH_ALERT.md ops/HEALTH_ALERT.md
+          cp /tmp/health_report.json ops/health-report.json
+          cp /tmp/health_report.json data/latest/health-report.json
+
+          git add ops/HEALTH_ALERT.md ops/health-report.json data/latest/health-report.json
+          if git diff --staged --quiet; then
+            echo "Alert files unchanged; still ensure PR exists"
+          else
+            git commit -m "ops(health-alert): log critical health failure $(date -u +%Y-%m-%dT%H:%MZ)"
+          fi
+          git push -u origin "$BRANCH" --force
+
+          # Find existing open PR for this branch
+          PR_JSON=$(curl -sS -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&head=${{ github.repository_owner }}:${BRANCH}")
+
+          PR_NUMBER=$(python3 -c "import json,sys; d=json.load(sys.stdin); print(d[0]['number'] if d else '')" <<< "$PR_JSON")
+          BODY=$(cat /tmp/HEALTH_ALERT.md)
+
+          if [ -n "$PR_NUMBER" ]; then
+            echo "Updating PR #$PR_NUMBER"
+            curl -sS -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments" \
+              -d "$(python3 -c "import json,sys; print(json.dumps({'body': sys.stdin.read()}))" <<< "$BODY")"
+          else
+            echo "Creating health alert PR"
+            curl -sS -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${{ github.repository }}/pulls" \
+              -d "$(python3 <<'PY'
+          import json
+          body = open('/tmp/HEALTH_ALERT.md').read()
+          print(json.dumps({
+            'title': 'UOGW health alert — critical data issue',
+            'head': 'ops/uogw-health-alert',
+            'base': 'main',
+            'body': body + '\n\n---\n_Automated alert PR. Do not merge unless you intend to keep the alert log on main; it will be closed automatically when healthy._',
+            'maintainer_can_modify': True,
+          }))
+          PY
+          )"
+          fi
+
+      - name: Clear health alert PR when recovered
         if: steps.check.outputs.critical != 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const title = 'UOGW health: critical data issue';
-            const issues = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              labels: 'uogw-health',
-              per_page: 10,
-            });
-            const existing = issues.data.find(i => i.title === title);
-            if (existing) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: existing.number,
-                body: 'Health monitor reports **recovered**. Closing automatically.',
-              });
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: existing.number,
-                state: 'closed',
-              });
-            }
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          BRANCH="ops/uogw-health-alert"
+          PR_JSON=$(curl -sS -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls?state=open&head=${{ github.repository_owner }}:${BRANCH}")
+
+          PR_NUMBER=$(python3 -c "import json,sys; d=json.load(sys.stdin); print(d[0]['number'] if d else '')" <<< "$PR_JSON")
+          if [ -z "$PR_NUMBER" ]; then
+            echo "No open health alert PR"
+            exit 0
+          fi
+
+          MSG="## Recovered\n\nHealth Monitor reports **no critical failures** at $(date -u +%Y-%m-%dT%H:%MZ).\n\nClosing this alert PR automatically. See \`data/latest/health-report.json\` on main."
+          curl -sS -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments" \
+            -d "$(python3 -c "import json,sys; print(json.dumps({'body': sys.stdin.read()}))" <<< "$MSG")"
+
+          curl -sS -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}" \
+            -d '{"state":"closed"}'
+
+          echo "Closed health alert PR #$PR_NUMBER"
