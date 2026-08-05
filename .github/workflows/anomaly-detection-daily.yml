@@ -1,4 +1,4 @@
-# Automated anomaly detection on daily UOGW observations
+# Automated anomaly detection — absolute thresholds + multi-method z-scores
 name: Anomaly Detection Daily
 
 on:
@@ -21,11 +21,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Detect surface and marine anomalies
+      - name: Detect anomalies (thresholds + z-score methods)
         run: |
           set -e
           DATE=$(date -u +%Y-%m-%d)
-          mkdir -p data/entries/${DATE} data/latest layers/analytics status snapshots/${DATE}
+          mkdir -p data/entries/${DATE} data/latest layers/analytics status snapshots/${DATE} analytics
           python3 << 'PY'
           import json, os, math, statistics
           from datetime import datetime, timezone
@@ -41,26 +41,104 @@ jobs:
               except Exception:
                   return None
 
+          # Load published threshold config if present
+          cfg = load("analytics/anomaly-thresholds.json") or {}
+          abs_cfg = cfg.get("absolute_thresholds") or {}
+
+          def thr(path, default):
+              cur = abs_cfg
+              for k in path.split("."):
+                  if not isinstance(cur, dict) or k not in cur:
+                      return default
+                  cur = cur[k]
+              return cur if isinstance(cur, (int, float)) else default
+
+          T_ALERT_HI = thr("temperature_c.alert_high", 40)
+          T_WATCH_HI = thr("temperature_c.watch_high", 35)
+          T_WATCH_LO = thr("temperature_c.watch_low", -20)
+          T_ALERT_LO = thr("temperature_c.alert_low", -30)
+          P_WATCH_LO = thr("pressure_msl_hpa.watch_low", 980)
+          P_INFO_HI = thr("pressure_msl_hpa.info_high", 1040)
+          W_WATCH = thr("wind_speed_ms.watch", 15)
+          W_ALERT = thr("wind_speed_ms.alert", 25)
+          RH_DRY = thr("dry_hot_compound.relative_humidity_pct_max", 10)
+          T_DRY = thr("dry_hot_compound.temperature_c_min", 25)
+          WV_WATCH = thr("wave_height_m.watch", 4)
+          WV_ALERT = thr("wave_height_m.alert", 6)
+          WT_INFO = thr("water_temp_c.info_high", 30)
+          DIURNAL = thr("casey_diurnal_range_c.watch", 20)
+
           cities = load("data/latest/global-cities.json") or load("layers/ground/samples/cities-latest.json") or {}
           ndbc = load("data/latest/ndbc-realtime.json") or {}
           casey = load("data/latest/casey-hourly.json") or {}
-          climate = load("data/latest/daily-climate.json") or {}
           baseline = load("data/latest/rolling-baseline.json") or {}
 
           anomalies = []
+          z_details = []
 
-          def flag(kind, severity, subject, metric, value, threshold, detail):
-              anomalies.append({
+          def flag(kind, severity, subject, metric, value, threshold, detail, extra=None):
+              row = {
                   "kind": kind,
-                  "severity": severity,  # info | watch | alert
+                  "severity": severity,
                   "subject": subject,
                   "metric": metric,
                   "value": value,
                   "threshold": threshold,
                   "detail": detail,
-              })
+              }
+              if extra:
+                  row["extra"] = extra
+              anomalies.append(row)
 
-          # --- Absolute physical thresholds (research-oriented, not NWS warnings) ---
+          def zscore_bundle(x, values):
+              """Explore multiple z-score normalization methods."""
+              vals = [v for v in values if isinstance(v, (int, float))]
+              out = {
+                  "n": len(vals),
+                  "x": x,
+                  "z_pop": None,
+                  "z_sample": None,
+                  "z_mad": None,
+                  "s_range": None,
+                  "percentile": None,
+                  "mean": None,
+                  "median": None,
+                  "pstdev": None,
+                  "sample_stdev": None,
+                  "mad": None,
+              }
+              if x is None or len(vals) < 2:
+                  return out
+              mean = statistics.mean(vals)
+              med = statistics.median(vals)
+              try:
+                  pst = statistics.pstdev(vals)
+              except Exception:
+                  pst = 0.0
+              try:
+                  sst = statistics.stdev(vals) if len(vals) >= 2 else 0.0
+              except Exception:
+                  sst = 0.0
+              mad = statistics.median([abs(v - med) for v in vals])
+              out.update({"mean": round(mean, 4), "median": round(med, 4),
+                          "pstdev": round(pst, 4), "sample_stdev": round(sst, 4),
+                          "mad": round(mad, 4) if mad is not None else None})
+              if pst and pst > 1e-6:
+                  out["z_pop"] = round((x - mean) / pst, 4)
+              if sst and sst > 1e-6:
+                  out["z_sample"] = round((x - mean) / sst, 4)
+              if mad and mad > 1e-6:
+                  out["z_mad"] = round(0.6745 * (x - med) / mad, 4)
+              span = max(vals) - min(vals)
+              out["s_range"] = round((x - mean) / (span + 1e-6), 4)
+              # percentile rank among baseline + today
+              ranked = sorted(vals + [x])
+              # mid-rank percentile
+              k = sum(1 for v in ranked if v < x) + 0.5 * sum(1 for v in ranked if v == x)
+              out["percentile"] = round(100.0 * k / len(ranked), 2)
+              return out
+
+          # --- Absolute surface thresholds with explicit example-driven cutoffs ---
           for c in cities.get("cities") or []:
               if not c.get("ok"):
                   continue
@@ -70,84 +148,161 @@ jobs:
               p = obs.get("pressure_msl_hpa")
               w = obs.get("wind_speed_ms")
               name = c.get("name") or c.get("id")
-              if t is not None and t >= 40:
-                  flag("surface_heat", "alert", name, "temperature_c", t, 40, "Extreme heat threshold")
-              elif t is not None and t >= 35:
-                  flag("surface_heat", "watch", name, "temperature_c", t, 35, "High heat")
-              if t is not None and t <= -30:
-                  flag("surface_cold", "alert", name, "temperature_c", t, -30, "Extreme cold threshold")
-              elif t is not None and t <= -20:
-                  flag("surface_cold", "watch", name, "temperature_c", t, -20, "Severe cold")
-              if p is not None and p <= 980:
-                  flag("low_pressure", "watch", name, "pressure_msl_hpa", p, 980, "Very low MSL pressure")
-              if p is not None and p >= 1040:
-                  flag("high_pressure", "info", name, "pressure_msl_hpa", p, 1040, "Very high MSL pressure")
-              if w is not None and w >= 25:
-                  flag("high_wind", "alert", name, "wind_speed_ms", w, 25, "Gale-force class wind speed")
-              elif w is not None and w >= 15:
-                  flag("high_wind", "watch", name, "wind_speed_ms", w, 15, "Strong wind")
-              if rh is not None and rh <= 10 and t is not None and t >= 25:
-                  flag("dry_hot", "info", name, "relative_humidity_pct", rh, 10, "Hot and very dry")
+              cid = c.get("id")
 
-          # --- Baseline deviation (if rolling baseline exists) ---
-          city_base = (baseline.get("cities") or {})
+              if t is not None and t >= T_ALERT_HI:
+                  flag("surface_heat", "alert", name, "temperature_c", t, T_ALERT_HI,
+                       f"Extreme heat: T>={T_ALERT_HI}C (example: desert heat 42C)")
+              elif t is not None and t >= T_WATCH_HI:
+                  flag("surface_heat", "watch", name, "temperature_c", t, T_WATCH_HI,
+                       f"High heat: T>={T_WATCH_HI}C (example: 36.2C mid-latitude hot day)")
+              if t is not None and t <= T_ALERT_LO:
+                  flag("surface_cold", "alert", name, "temperature_c", t, T_ALERT_LO,
+                       f"Extreme cold: T<={T_ALERT_LO}C")
+              elif t is not None and t <= T_WATCH_LO:
+                  flag("surface_cold", "watch", name, "temperature_c", t, T_WATCH_LO,
+                       f"Severe cold: T<={T_WATCH_LO}C")
+              if p is not None and p <= P_WATCH_LO:
+                  flag("low_pressure", "watch", name, "pressure_msl_hpa", p, P_WATCH_LO,
+                       f"Very low MSLP <= {P_WATCH_LO} hPa (example: 972 hPa deep low)")
+              if p is not None and p >= P_INFO_HI:
+                  flag("high_pressure", "info", name, "pressure_msl_hpa", p, P_INFO_HI,
+                       f"Very high MSLP >= {P_INFO_HI} hPa")
+              if w is not None and w >= W_ALERT:
+                  flag("high_wind", "alert", name, "wind_speed_ms", w, W_ALERT,
+                       f"Gale-class wind >= {W_ALERT} m/s")
+              elif w is not None and w >= W_WATCH:
+                  flag("high_wind", "watch", name, "wind_speed_ms", w, W_WATCH,
+                       f"Strong wind >= {W_WATCH} m/s (example: 16.8 m/s)")
+              if rh is not None and t is not None and t >= T_DRY and rh <= RH_DRY:
+                  flag("dry_hot", "info", name, "relative_humidity_pct", rh, RH_DRY,
+                       f"Hot and very dry: T>={T_DRY}C and RH<={RH_DRY}%")
+
+              # Multi-method z-scores vs rolling baseline temperature series
+              b = (baseline.get("cities") or {}).get(cid) or {}
+              # Prefer explicit series if present; else reconstruct from mean/std only limited
+              hist_t = []
+              tstats = b.get("temperature_c") or {}
+              # rolling-baseline stores stats; also try sample files for richer series
+              if t is not None:
+                  # Build pseudo-window from min/mean/max when full series absent
+                  if isinstance(tstats, dict) and tstats.get("n"):
+                      # use mean ± std synthetic only for method demo when n known — better load files
+                      pass
+
+          # Reload recent city files for true series (better z-score input)
+          import glob
+          hist_by_id = {}
+          for fp in sorted(glob.glob("layers/ground/samples/cities-*.json")):
+              if fp.endswith("cities-latest.json"):
+                  continue
+              try:
+                  doc = json.load(open(fp))
+              except Exception:
+                  continue
+              for c in doc.get("cities") or []:
+                  if not c.get("ok"):
+                      continue
+                  cid = c.get("id")
+                  obs = c.get("observation") or c.get("current") or {}
+                  tv = obs.get("temperature_c", obs.get("temperature_2m"))
+                  if isinstance(tv, (int, float)):
+                      hist_by_id.setdefault(cid, []).append(tv)
+          # keep last 7 points per city
+          for cid in list(hist_by_id.keys()):
+              hist_by_id[cid] = hist_by_id[cid][-7:]
+
           for c in cities.get("cities") or []:
               if not c.get("ok"):
                   continue
               cid = c.get("id")
+              name = c.get("name") or cid
               obs = c.get("observation") or {}
               t = obs.get("temperature_c")
-              b = city_base.get(cid) or {}
-              mean_t = b.get("temperature_c_mean")
-              std_t = b.get("temperature_c_std")
-              if t is None or mean_t is None or not std_t or std_t < 0.1:
-                  continue
-              z = (t - mean_t) / std_t
-              if abs(z) >= 2.5:
-                  flag("temp_zscore", "alert" if abs(z) >= 3 else "watch", c.get("name") or cid,
-                       "temperature_c_zscore", round(z, 2), 2.5,
-                       f"T={t}C vs baseline mean {mean_t}C (std {std_t})")
+              hist = hist_by_id.get(cid) or []
+              zb = zscore_bundle(t, hist)
+              z_details.append({"id": cid, "name": name, "methods": zb})
 
-          # --- Marine ---
+              zpop = zb.get("z_pop")
+              zmad = zb.get("z_mad")
+              if zpop is not None and abs(zpop) >= 3.0:
+                  flag("temp_zscore_pop", "alert", name, "z_pop", zpop, 3.0,
+                       f"Population z-score |z|>=3 (T={t}C, mean={zb.get('mean')}, pstdev={zb.get('pstdev')})",
+                       extra={"methods": zb})
+              elif zpop is not None and abs(zpop) >= 2.5:
+                  flag("temp_zscore_pop", "watch", name, "z_pop", zpop, 2.5,
+                       f"Population z-score |z|>=2.5 (T={t}C)",
+                       extra={"methods": zb})
+              if zmad is not None and abs(zmad) >= 5.0:
+                  flag("temp_zscore_mad", "alert", name, "z_mad", zmad, 5.0,
+                       f"Robust MAD z-score |z|>=5 (outlier-resistant)",
+                       extra={"methods": zb})
+              elif zmad is not None and abs(zmad) >= 3.5:
+                  flag("temp_zscore_mad", "watch", name, "z_mad", zmad, 3.5,
+                       f"Robust MAD z-score |z|>=3.5",
+                       extra={"methods": zb})
+
+          # Marine
           for sid, block in (ndbc.get("observations") or {}).items():
               lo = block.get("latest_observation") or {}
               wh = lo.get("wave_height_m")
-              if wh is not None and wh >= 6:
-                  flag("high_waves", "alert", f"NDBC {sid}", "wave_height_m", wh, 6, "Very high significant wave height")
-              elif wh is not None and wh >= 4:
-                  flag("high_waves", "watch", f"NDBC {sid}", "wave_height_m", wh, 4, "High waves")
+              if wh is not None and wh >= WV_ALERT:
+                  flag("high_waves", "alert", f"NDBC {sid}", "wave_height_m", wh, WV_ALERT,
+                       f"Very high waves >= {WV_ALERT}m (example: 7.2m)")
+              elif wh is not None and wh >= WV_WATCH:
+                  flag("high_waves", "watch", f"NDBC {sid}", "wave_height_m", wh, WV_WATCH,
+                       f"High waves >= {WV_WATCH}m (example: 4.7m)")
               wt = lo.get("water_temp_c")
-              if wt is not None and wt >= 30:
-                  flag("warm_water", "info", f"NDBC {sid}", "water_temp_c", wt, 30, "Very warm SST sample")
+              if wt is not None and wt >= WT_INFO:
+                  flag("warm_water", "info", f"NDBC {sid}", "water_temp_c", wt, WT_INFO,
+                       f"Very warm water sample >= {WT_INFO}C")
 
-          # --- Casey diurnal range ---
+          # Casey diurnal
           casey_obs = casey.get("observations") or []
           cts = [o.get("temperature_c") for o in casey_obs if isinstance(o.get("temperature_c"), (int, float))]
           if len(cts) >= 6:
               tr = max(cts) - min(cts)
-              if tr >= 20:
-                  flag("large_diurnal_range", "watch", "Casey, IL", "diurnal_range_c", round(tr, 2), 20,
-                       "Large daily temperature swing at MSDS site")
+              if tr >= DIURNAL:
+                  flag("large_diurnal_range", "watch", "Casey, IL", "diurnal_range_c", round(tr, 2), DIURNAL,
+                       f"Diurnal range >= {DIURNAL}C (example: -2C to 19C => 21C)")
 
           by_sev = {"alert": 0, "watch": 0, "info": 0}
           for a in anomalies:
               by_sev[a["severity"]] = by_sev.get(a["severity"], 0) + 1
 
           report = {
-              "schema": "uogw.anomaly_report.v1",
+              "schema": "uogw.anomaly_report.v2",
               "date_utc": date,
               "generated_at_utc": now,
               "curator": "Midwest Stratospheric Data Systems",
-              "method": "Absolute research thresholds + optional rolling z-score vs baseline",
+              "disclaimer": "Research screening only — not an official weather warning service.",
+              "methods": {
+                  "absolute_thresholds": {
+                      "temperature_c": {"alert_high": T_ALERT_HI, "watch_high": T_WATCH_HI, "watch_low": T_WATCH_LO, "alert_low": T_ALERT_LO},
+                      "pressure_msl_hpa": {"watch_low": P_WATCH_LO, "info_high": P_INFO_HI},
+                      "wind_speed_ms": {"watch": W_WATCH, "alert": W_ALERT},
+                      "wave_height_m": {"watch": WV_WATCH, "alert": WV_ALERT},
+                      "docs": "docs/ANOMALY_METHODS.md",
+                      "config": "analytics/anomaly-thresholds.json",
+                  },
+                  "zscore_normalization": {
+                      "z_pop": "(x-mean)/pstdev — primary trigger at |z|>=2.5 watch, |z|>=3 alert",
+                      "z_sample": "(x-mean)/sample_stdev — reported for comparison",
+                      "z_mad": "0.6745*(x-median)/MAD — robust; watch 3.5 / alert 5.0",
+                      "s_range": "(x-mean)/(max-min+eps) — diagnostic",
+                      "percentile": "empirical rank percent in baseline+today",
+                  },
+                  "examples_doc": "docs/ANOMALY_METHODS.md",
+              },
               "counts": {"total": len(anomalies), **by_sev},
               "anomalies": anomalies,
+              "zscore_by_city": z_details,
               "inputs": {
                   "global_cities": bool(cities),
                   "ndbc": bool(ndbc),
                   "casey": bool(casey),
-                  "baseline": bool(baseline),
+                  "baseline_files_used": len(hist_by_id),
               },
-              "disclaimer": "Research screening only — not an official weather warning service.",
           }
 
           for p in [
@@ -180,13 +335,14 @@ jobs:
               json.dump({
                   "source": "uogw-anomaly-detection",
                   "ok": True,
+                  "schema": "uogw.anomaly_report.v2",
                   "date": date,
                   "total": len(anomalies),
                   "alerts": by_sev.get("alert", 0),
                   "data_entry": f"data/entries/{date}/anomaly-report.json",
                   "generated_at_utc": now,
               }, f, indent=2)
-          print("anomalies", len(anomalies), by_sev)
+          print("anomalies", len(anomalies), by_sev, "z_cities", len(z_details))
           PY
 
       - name: Commit anomaly report
@@ -194,10 +350,10 @@ jobs:
           set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
-          git add data/entries data/latest layers/analytics snapshots status || true
+          git add data/entries data/latest layers/analytics snapshots status analytics docs || true
           if git diff --staged --quiet; then exit 0; fi
           N=$(python3 -c "import json; print(json.load(open('status/anomaly.json')).get('total',0))" 2>/dev/null || echo 0)
-          git commit -m "data(anomaly): ${N} screened events $(date -u +%Y-%m-%d)"
+          git commit -m "data(anomaly): ${N} events w/ multi-method z-scores $(date -u +%Y-%m-%d)"
           for i in 1 2 3 4 5; do
             git fetch origin main
             git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }

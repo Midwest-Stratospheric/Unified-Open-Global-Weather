@@ -1,0 +1,109 @@
+{
+  "schema": "uogw.anomaly_thresholds.v1",
+  "updated": "2026-08-05",
+  "curator": "Midwest Stratospheric Data Systems",
+  "disclaimer": "Research screening thresholds only — not official warning criteria.",
+  "absolute_thresholds": {
+    "temperature_c": {
+      "alert_high": 40,
+      "watch_high": 35,
+      "watch_low": -20,
+      "alert_low": -30,
+      "examples": [
+        {"case": "Hot mid-latitude afternoon", "value": 36.2, "fires": "watch_high"},
+        {"case": "Extreme desert heat", "value": 42.0, "fires": "alert_high"},
+        {"case": "Severe continental cold", "value": -22.0, "fires": "watch_low"},
+        {"case": "Extreme arctic cold", "value": -33.0, "fires": "alert_low"}
+      ]
+    },
+    "pressure_msl_hpa": {
+      "watch_low": 980,
+      "info_high": 1040,
+      "examples": [
+        {"case": "Deep low near Iceland", "value": 972.4, "fires": "watch_low"},
+        {"case": "Strong winter high", "value": 1045.0, "fires": "info_high"}
+      ]
+    },
+    "wind_speed_ms": {
+      "watch": 15,
+      "alert": 25,
+      "examples": [
+        {"case": "Strong gradient wind", "value": 16.8, "fires": "watch"},
+        {"case": "Gale-class sample", "value": 27.5, "fires": "alert"}
+      ]
+    },
+    "dry_hot_compound": {
+      "temperature_c_min": 25,
+      "relative_humidity_pct_max": 10,
+      "severity": "info",
+      "examples": [
+        {"case": "Hot dry desert air", "temperature_c": 31, "relative_humidity_pct": 8, "fires": "info"}
+      ]
+    },
+    "wave_height_m": {
+      "watch": 4,
+      "alert": 6,
+      "examples": [
+        {"case": "Rough Atlantic buoy", "value": 4.7, "fires": "watch"},
+        {"case": "Very high seas", "value": 7.2, "fires": "alert"}
+      ]
+    },
+    "water_temp_c": {
+      "info_high": 30,
+      "examples": [
+        {"case": "Warm Gulf sample", "value": 31.5, "fires": "info_high"}
+      ]
+    },
+    "casey_diurnal_range_c": {
+      "watch": 20,
+      "examples": [
+        {"case": "Clear-sky large swing", "min": -2, "max": 19, "range": 21, "fires": "watch"}
+      ]
+    }
+  },
+  "zscore_methods": {
+    "population": {
+      "id": "z_pop",
+      "formula": "(x - mean) / pstdev",
+      "watch_abs": 2.5,
+      "alert_abs": 3.0,
+      "primary_trigger": true
+    },
+    "sample": {
+      "id": "z_sample",
+      "formula": "(x - mean) / sample_stdev",
+      "watch_abs": 2.5,
+      "alert_abs": 3.0,
+      "primary_trigger": false
+    },
+    "modified_mad": {
+      "id": "z_mad",
+      "formula": "0.6745 * (x - median) / MAD",
+      "watch_abs": 3.5,
+      "alert_abs": 5.0,
+      "primary_trigger": false,
+      "notes": "Iglewicz-Hoaglin robust style; better when baseline window contains outliers"
+    },
+    "range_normalized": {
+      "id": "s_range",
+      "formula": "(x - mean) / (max - min + eps)",
+      "primary_trigger": false,
+      "notes": "Diagnostic only"
+    },
+    "percentile_rank": {
+      "id": "percentile",
+      "formula": "empirical rank percent among baseline + today",
+      "primary_trigger": false
+    }
+  },
+  "worked_example": {
+    "baseline_temperature_c": [22.0, 23.5, 21.0, 24.0, 22.5, 23.0, 22.0],
+    "today_temperature_c": 29.0,
+    "approx": {
+      "mean": 22.57,
+      "z_pop": 6.7,
+      "z_sample": 6.2,
+      "z_mad": 4.4
+    }
+  }
+}
