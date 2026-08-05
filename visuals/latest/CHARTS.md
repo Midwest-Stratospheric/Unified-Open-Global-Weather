@@ -1,8 +1,8 @@
 # UOGW Charts - 2026-08-05
 
-Generated from data in this repository. View on GitHub — no external webpage.
+Generated automatically from repository data. View on GitHub.
 
-_Generated at 2026-08-05T05:38:44Z UTC · Midwest Stratospheric Data Systems_
+_Generated at 2026-08-05T06:03:17Z UTC · Midwest Stratospheric Data Systems_
 
 ## PNG charts
 
@@ -30,6 +30,10 @@ _Generated at 2026-08-05T05:38:44Z UTC · Midwest Stratospheric Data Systems_
 
 ![Research cities Tmin/Tmax](./research-cities-tminmax.png)
 
+### Daily summary card
+
+![Daily summary card](./daily-summary-card.png)
+
 ## Anomaly severity (Mermaid)
 
 ```mermaid
@@ -50,16 +54,6 @@ xychart-beta
   bar [26.3, 26.8, 27.5, 27.8, 28.9, 29.3, 30.1, 30.1, 30.7, 31.9, 35.0, 38.3]
 ```
 
-## Casey hourly (Mermaid xychart)
-
-```mermaid
-xychart-beta
-  title "Casey IL hourly C"
-  x-axis ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"]
-  y-axis "Temp C"
-  line [19.4, 18.6, 17.5, 16.2, 20.8, 25.1, 27.4, 29.1, 29.3, 28.4, 24.0, 20.7]
-```
-
 ## Snapshot table
 
 | Metric | Value |
@@ -71,5 +65,5 @@ xychart-beta
 | Casey hours | 24 |
 | NDBC samples | 7 |
 
-Data sources: `data/latest/*.json` in this repo.
+Also embedded in the repository [README](../../README.md).
 

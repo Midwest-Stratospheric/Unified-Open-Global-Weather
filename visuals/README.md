@@ -1,19 +1,12 @@
-# UOGW Visuals (GitHub-native)
+# UOGW Visuals
 
-No external webpage. Open the markdown file below on GitHub.
+Charts are generated **automatically** by `charts-daily.yml`.
 
-## Latest charts
+- Schedule: 11:00 UTC daily
+- Also runs after key data workflows complete
+- Script: `scripts/generate_charts.py`
 
-**[latest/CHARTS.md](./latest/CHARTS.md)** (images + Mermaid)
-
-### Quick embeds
+**[latest/CHARTS.md](./latest/CHARTS.md)**
 
 ![Global city temperatures](./latest/global-city-temperatures.png)
 
-![Casey hourly](./latest/casey-hourly-temperature.png)
-
-![Anomaly severity](./latest/anomaly-severity.png)
-
-Dated folder: [`2026-08-05/`](./2026-08-05/)
-
-Automation: `charts-daily.yml` (11:00 UTC).
