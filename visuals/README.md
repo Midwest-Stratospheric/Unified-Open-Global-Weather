@@ -1,31 +1,15 @@
-# UOGW Visuals
+# UOGW Visuals (GitHub-native)
 
-Charts are **generated daily from data in this repository** (not external dashboards).
+No external webpage. View charts as **GitHub markdown**.
 
-## Latest charts
+## Open this
 
-| Chart | File |
-|-------|------|
-| Global city temperatures | [`latest/global-city-temperatures.png`](./latest/global-city-temperatures.png) |
-| City temperature map | [`latest/global-city-temp-map.png`](./latest/global-city-temp-map.png) |
-| Casey hourly temperature | [`latest/casey-hourly-temperature.png`](./latest/casey-hourly-temperature.png) |
-| NDBC marine samples | [`latest/ndbc-marine-samples.png`](./latest/ndbc-marine-samples.png) |
-| Anomaly severity | [`latest/anomaly-severity.png`](./latest/anomaly-severity.png) |
-| Research cities Tmin/Tmax | [`latest/research-cities-tminmax.png`](./latest/research-cities-tminmax.png) |
-| Daily summary card | [`latest/daily-summary-card.png`](./latest/daily-summary-card.png) |
+**[latest/CHARTS.md](./latest/CHARTS.md)** ← images + Mermaid charts
 
-## Interactive dashboard
+After the daily Charts workflow runs, that page shows:
 
-Open [`dashboard.html`](./dashboard.html) (best via GitHub Pages or local browser).
+- Embedded PNG graphs
+- Mermaid pie / xychart diagrams
+- Summary tables
 
-## Automation
-
-Workflow: `.github/workflows/charts-daily.yml` — runs **11:00 UTC** daily and on demand.
-
-Source data:
-- `data/latest/global-cities.json`
-- `data/latest/casey-hourly.json`
-- `data/latest/ndbc-realtime.json`
-- `data/latest/anomaly-report.json`
-- `data/latest/research-summary.json`
-- `data/latest/daily-climate.json`
+All generated from `data/latest/` in this repository.

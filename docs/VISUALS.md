@@ -1,30 +1,30 @@
-# UOGW Built-in Visuals
+# UOGW Visuals — GitHub-native only
 
-Visuals are generated **from data already in the repository**, then committed back under `visuals/`.
+Charts are meant to be viewed **inside GitHub**, not on an external site.
 
-## Chart set (daily)
+## How to view
 
-1. **Global city temperatures** — horizontal bar chart  
-2. **City temperature map** — lon/lat scatter colored by °C  
-3. **Casey hourly temperature** — line (+ RH when present)  
-4. **NDBC marine samples** — wave height + water/air temp  
-5. **Anomaly severity** — alert / watch / info counts  
-6. **Research cities Tmin/Tmax** — daily climate block  
-7. **Daily summary card** — text dashboard image  
+Open this file on GitHub:
 
-## Paths
+**[visuals/latest/CHARTS.md](../visuals/latest/CHARTS.md)**
 
-- Latest PNGs: `visuals/latest/`
-- Dated PNGs: `visuals/YYYY-MM-DD/`
-- Interactive HTML: `visuals/dashboard.html`
-- Manifest: `visuals/latest/manifest.json`
+It contains:
+
+1. **Markdown image embeds** — `![...](./file.png)` for PNG charts stored in the repo  
+2. **Mermaid charts** — pie + xychart blocks that GitHub renders in markdown  
+3. **Snapshot tables** — pure markdown tables  
+
+No CDN, no separate web app, no extra hosting.
+
+## Files
+
+| Path | Role |
+|------|------|
+| `visuals/latest/CHARTS.md` | Primary gallery (view on GitHub) |
+| `visuals/latest/*.png` | Chart images |
+| `visuals/YYYY-MM-DD/` | Dated snapshot |
+| `visuals/README.md` | Index |
 
 ## Automation
 
-`.github/workflows/charts-daily.yml` — **11:00 UTC** daily.
-
-Uses Python **matplotlib** on GitHub Actions. No external BI tool required.
-
-## Theme
-
-MSDS navy / cyan (`#0a1628` / `#00d4ff`) to match midwestsds.com.
+`charts-daily.yml` · daily **11:00 UTC** · writes markdown + PNGs from `data/latest/`.
