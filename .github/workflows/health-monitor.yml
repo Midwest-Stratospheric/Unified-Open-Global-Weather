@@ -23,214 +23,115 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check data health, self-heal, plan interventions
+      - name: Self-heal data/latest pointers
+        run: |
+          set -e
+          python3 scripts/heal_latest.py
+
+      - name: Evaluate health after heal
         id: check
         run: |
           set -e
           python3 <<'PY'
-          import json, os, shutil
-          from datetime import datetime, timezone, timedelta
+          import json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
 
           now = datetime.now(timezone.utc)
           now_s = now.strftime("%Y-%m-%dT%H:%M:%SZ")
           date = now.strftime("%Y-%m-%d")
-          os.makedirs(f"data/entries/{date}", exist_ok=True)
-          os.makedirs("data/latest", exist_ok=True)
-          os.makedirs("status", exist_ok=True)
 
           def load(p):
-              if not os.path.exists(p):
+              path = Path(p)
+              if not path.exists():
                   return None
+              if path.suffix == ".md":
+                  return {"_exists": True, "size": path.stat().st_size}
               try:
-                  with open(p) as f:
-                      return json.load(f)
+                  return json.loads(path.read_text())
               except Exception:
-                  return None
+                  return False  # invalid json
 
           def age_hours(doc):
               if not isinstance(doc, dict):
                   return None
-              for k in ("generated_at_utc", "fetched_at_utc", "retrieved_at_utc"):
+              for k in ("generated_at_utc", "fetched_at_utc", "retrieved_at_utc", "date_utc"):
                   v = doc.get(k)
                   if not v and isinstance(doc.get("source"), dict):
-                      v = doc["source"].get(k)
-                  if v:
-                      try:
-                          t = datetime.fromisoformat(v.replace("Z", "+00:00"))
-                          return (now - t).total_seconds() / 3600.0
-                      except Exception:
-                          pass
-              # nested cities
-              cities = doc.get("cities") or []
-              if cities and isinstance(cities[0], dict):
-                  v = cities[0].get("fetched_at_utc")
-                  if v:
-                      try:
-                          t = datetime.fromisoformat(v.replace("Z", "+00:00"))
-                          return (now - t).total_seconds() / 3600.0
-                      except Exception:
-                          pass
+                      v = doc["source"].get("retrieved_at_utc") or doc["source"].get(k)
+                  if not v:
+                      continue
+                  try:
+                      # date-only
+                      if len(str(v)) == 10 and str(v)[4] == "-":
+                          t = datetime.fromisoformat(str(v) + "T00:00:00+00:00")
+                      else:
+                          t = datetime.fromisoformat(str(v).replace("Z", "+00:00"))
+                      return (now - t).total_seconds() / 3600.0
+                  except Exception:
+                      continue
               return None
 
-          required = [
-              {
-                  "id": "global-cities",
-                  "paths": ["data/latest/global-cities.json", "layers/ground/samples/cities-latest.json"],
-                  "heal_from": "layers/ground/samples/cities-latest.json",
-                  "heal_to": ["data/latest/global-cities.json"],
-                  "max_age_h": 36,
-                  "workflow": "global-samples-daily.yml",
-                  "critical": True,
-              },
-              {
-                  "id": "casey-hourly",
-                  "paths": ["data/latest/casey-hourly.json", "layers/ground/casey/latest.json"],
-                  "heal_from": "layers/ground/casey/latest.json",
-                  "heal_to": ["data/latest/casey-hourly.json"],
-                  "max_age_h": 48,
-                  "workflow": "msds-ground-daily.yml",
-                  "critical": True,
-              },
-              {
-                  "id": "ndbc-realtime",
-                  "paths": ["data/latest/ndbc-realtime.json", "layers/marine/ndbc/realtime-latest.json"],
-                  "heal_from": "layers/marine/ndbc/realtime-latest.json",
-                  "heal_to": ["data/latest/ndbc-realtime.json"],
-                  "max_age_h": 36,
-                  "workflow": "ndbc-marine-daily.yml",
-                  "critical": True,
-              },
-              {
-                  "id": "research-summary",
-                  "paths": ["data/latest/research-summary.json", "layers/research/summary-latest.json"],
-                  "heal_from": "layers/research/summary-latest.json",
-                  "heal_to": ["data/latest/research-summary.json"],
-                  "max_age_h": 36,
-                  "workflow": "daily-research-package.yml",
-                  "critical": True,
-              },
-              {
-                  "id": "science-package",
-                  "paths": ["data/latest/science-package.json"],
-                  "heal_from": None,
-                  "heal_to": [],
-                  "max_age_h": 36,
-                  "workflow": "daily-research-package.yml",
-                  "critical": True,
-              },
-              {
-                  "id": "anomaly-report",
-                  "paths": ["data/latest/anomaly-report.json"],
-                  "max_age_h": 36,
-                  "workflow": "anomaly-detection-daily.yml",
-                  "critical": False,
-              },
-              {
-                  "id": "rolling-baseline",
-                  "paths": ["data/latest/rolling-baseline.json"],
-                  "max_age_h": 48,
-                  "workflow": "rolling-baseline-daily.yml",
-                  "critical": False,
-              },
-              {
-                  "id": "satellite-index",
-                  "paths": ["data/latest/satellite-radiance-index.json"],
-                  "max_age_h": 48,
-                  "workflow": "satellite-radiance-daily.yml",
-                  "critical": False,
-              },
-              {
-                  "id": "fair-metadata",
-                  "paths": ["data/latest/fair-metadata.json"],
-                  "max_age_h": 48,
-                  "workflow": "fair-metadata-daily.yml",
-                  "critical": False,
-              },
-              {
-                  "id": "charts-markdown",
-                  "paths": ["visuals/latest/CHARTS.md"],
-                  "max_age_h": 48,
-                  "workflow": "charts-daily.yml",
-                  "critical": False,
-                  "json": False,
-              },
-              {
-                  "id": "catalog",
-                  "paths": ["catalog/catalog.json"],
-                  "max_age_h": None,
-                  "workflow": None,
-                  "critical": True,
-              },
+          checks_spec = [
+              ("global-cities", ["data/latest/global-cities.json"], 36, "global-samples-daily.yml", True),
+              ("casey-hourly", ["data/latest/casey-hourly.json"], 48, "msds-ground-daily.yml", True),
+              ("ndbc-realtime", ["data/latest/ndbc-realtime.json"], 36, "ndbc-marine-daily.yml", True),
+              ("research-summary", ["data/latest/research-summary.json"], 36, "daily-research-package.yml", True),
+              ("science-package", ["data/latest/science-package.json"], 36, "daily-research-package.yml", True),
+              ("anomaly-report", ["data/latest/anomaly-report.json"], 36, "anomaly-detection-daily.yml", False),
+              ("rolling-baseline", ["data/latest/rolling-baseline.json"], 48, "rolling-baseline-daily.yml", False),
+              ("satellite-index", ["data/latest/satellite-radiance-index.json"], 48, "satellite-radiance-daily.yml", False),
+              ("fair-metadata", ["data/latest/fair-metadata.json"], 48, "fair-metadata-daily.yml", False),
+              ("charts-markdown", ["visuals/latest/CHARTS.md"], 48, "charts-daily.yml", False),
+              ("catalog", ["catalog/catalog.json"], None, None, True),
           ]
 
           results = []
-          heal_actions = []
           redispatches = []
           critical_fail = False
-
-          for item in required:
-              found_path = None
+          for cid, paths, max_age, workflow, critical in checks_spec:
+              found = None
               doc = None
-              is_json = item.get("json", True)
-              for p in item["paths"]:
-                  if not os.path.exists(p):
-                      continue
-                  found_path = p
-                  if is_json:
-                      doc = load(p)
-                      if doc is None and p.endswith(".json"):
-                          found_path = None
-                          continue
-                  break
-
-              # self-heal: copy alternate path into data/latest
-              if item.get("heal_from") and os.path.exists(item["heal_from"]):
-                  for dest in item.get("heal_to") or []:
-                      if not os.path.exists(dest):
-                          os.makedirs(os.path.dirname(dest), exist_ok=True)
-                          shutil.copy2(item["heal_from"], dest)
-                          heal_actions.append({"copied": item["heal_from"], "to": dest})
-                          if dest in item["paths"] or True:
-                              found_path = found_path or dest
-                              if is_json:
-                                  doc = load(dest)
-
               status = "ok"
               reasons = []
-              if not found_path:
+              for p in paths:
+                  doc = load(p)
+                  if doc is False:
+                      status = "invalid_json"
+                      found = p
+                      reasons.append("invalid JSON")
+                      break
+                  if doc is not None:
+                      found = p
+                      break
+              if found is None and status == "ok":
                   status = "missing"
                   reasons.append("file not found")
-              elif is_json and doc is None:
-                  status = "invalid_json"
-                  reasons.append("could not parse JSON")
-              else:
-                  hrs = age_hours(doc) if is_json else None
-                  max_age = item.get("max_age_h")
-                  if max_age is not None and hrs is not None and hrs > max_age:
+              elif status == "ok" and max_age is not None:
+                  hrs = age_hours(doc) if isinstance(doc, dict) else None
+                  if hrs is not None and hrs > max_age:
                       status = "stale"
                       reasons.append(f"age {hrs:.1f}h > {max_age}h")
-                  elif max_age is not None and is_json and hrs is None and item.get("critical"):
-                      # no timestamp but file exists — warn only
-                      reasons.append("no timestamp; presence ok")
-
-              if status != "ok" and item.get("workflow"):
-                  redispatches.append(item["workflow"])
-              if status in ("missing", "invalid_json") and item.get("critical"):
+              if status != "ok" and workflow:
+                  redispatches.append(workflow)
+              if status in ("missing", "invalid_json", "stale") and critical:
                   critical_fail = True
-              if status == "stale" and item.get("critical"):
-                  critical_fail = True
-
               results.append({
-                  "id": item["id"],
+                  "id": cid,
                   "status": status,
-                  "path": found_path,
+                  "path": found,
                   "reasons": reasons,
-                  "critical": item.get("critical", False),
-                  "workflow": item.get("workflow"),
+                  "critical": critical,
+                  "workflow": workflow,
               })
 
-          # de-dupe redispatches
           redispatches = sorted(set(redispatches))
+          heal = {}
+          if Path("status/heal.json").exists():
+              try:
+                  heal = json.loads(Path("status/heal.json").read_text())
+              except Exception:
+                  heal = {}
 
           report = {
               "schema": "uogw.health_report.v1",
@@ -239,7 +140,7 @@ jobs:
               "ok": not critical_fail,
               "critical_fail": critical_fail,
               "checks": results,
-              "heal_actions": heal_actions,
+              "heal_actions": heal.get("actions") or [],
               "redispatch_workflows": redispatches,
               "summary": {
                   "total": len(results),
@@ -248,49 +149,45 @@ jobs:
                   "stale": sum(1 for r in results if r["status"] == "stale"),
                   "invalid_json": sum(1 for r in results if r["status"] == "invalid_json"),
               },
+              "rollback_docs": "docs/ROLLBACK.md",
               "curator": "Midwest Stratospheric Data Systems",
           }
-
+          Path(f"data/entries/{date}").mkdir(parents=True, exist_ok=True)
+          Path("data/latest").mkdir(parents=True, exist_ok=True)
+          Path("status").mkdir(parents=True, exist_ok=True)
           for p in [
               f"data/entries/{date}/health-report.json",
               "data/latest/health-report.json",
               "status/health.json",
           ]:
-              with open(p, "w") as f:
-                  json.dump(report, f, indent=2)
-
-          # export for later steps
-          with open("/tmp/health_report.json", "w") as f:
-              json.dump(report, f, indent=2)
-          with open("/tmp/redispatch.txt", "w") as f:
-              f.write("\n".join(redispatches))
-
+              Path(p).write_text(json.dumps(report, indent=2))
+          Path("/tmp/health_report.json").write_text(json.dumps(report, indent=2))
+          Path("/tmp/redispatch.txt").write_text("\n".join(redispatches) + ("\n" if redispatches else ""))
           print(json.dumps(report["summary"], indent=2))
-          print("heal", heal_actions)
+          print("critical_fail", critical_fail)
           print("redispatch", redispatches)
           if critical_fail:
-              print("CRITICAL_FAIL=1")
+              print("CRITICAL=true")
           else:
-              print("CRITICAL_FAIL=0")
+              print("CRITICAL=false")
           PY
-          if grep -q 'CRITICAL_FAIL=1' <(python3 -c "import json;print('CRITICAL_FAIL=1' if json.load(open('/tmp/health_report.json'))['critical_fail'] else 'CRITICAL_FAIL=0')"); then
+          if python3 -c "import json; import sys; sys.exit(0 if json.load(open('/tmp/health_report.json'))['critical_fail'] else 1)"; then
             echo "critical=true" >> "$GITHUB_OUTPUT"
           else
             echo "critical=false" >> "$GITHUB_OUTPUT"
           fi
-          echo "redispatch_count=$(wc -l < /tmp/redispatch.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
 
-      - name: Commit health report and healed files
+      - name: Commit healed files and health report
         run: |
           set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
-          git add data/latest data/entries status || true
+          git add data/latest data/entries status snapshots/rollback-points || true
           if git diff --staged --quiet; then
-            echo "No health commit changes"
+            echo "No changes to commit"
             exit 0
           fi
-          git commit -m "ops(health): daily health report + self-heal $(date -u +%Y-%m-%d)"
+          git commit -m "ops(health): self-heal + health report $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3 4 5; do
             git fetch origin main
             git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
@@ -310,17 +207,17 @@ jobs:
           fi
           while IFS= read -r wf; do
             [ -z "$wf" ] && continue
-            echo "Dispatching $wf ..."
+            echo "Dispatching $wf"
             curl -sS -X POST \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer $GH_TOKEN" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               "https://api.github.com/repos/${{ github.repository }}/actions/workflows/${wf}/dispatches" \
-              -d '{"ref":"main"}' || echo "dispatch failed for $wf"
+              -d '{"ref":"main"}' || echo "dispatch failed: $wf"
             sleep 2
           done < /tmp/redispatch.txt
 
-      - name: Open or update GitHub Issue on critical failure
+      - name: Open or update health issue on critical failure
         if: steps.check.outputs.critical == 'true'
         uses: actions/github-script@v7
         with:
@@ -330,7 +227,7 @@ jobs:
             const title = 'UOGW health: critical data issue';
             const failed = report.checks.filter(c => c.status !== 'ok');
             const body = [
-              '## Automated health monitor report',
+              '## Automated health monitor',
               '',
               `Generated: **${report.generated_at_utc}**`,
               `Critical: **${report.critical_fail}**`,
@@ -340,21 +237,20 @@ jobs:
               JSON.stringify(report.summary, null, 2),
               '```',
               '',
-              '### Failed / stale checks',
-              ...failed.map(c => `- **${c.id}**: \`${c.status}\` ${ (c.reasons||[]).join('; ') } path=${c.path||'none'} workflow=${c.workflow||'n/a'}`),
+              '### Failed checks',
+              ...failed.map(c => `- **${c.id}**: \`${c.status}\` ${(c.reasons||[]).join('; ')} · workflow=\`${c.workflow||'n/a'}\``),
               '',
-              '### Self-heal actions',
+              '### Heal actions',
               '```json',
               JSON.stringify(report.heal_actions || [], null, 2),
               '```',
               '',
-              '### Re-dispatched workflows',
-              (report.redispatch_workflows || []).map(w => `- \`${w}\``).join('\n') || '_none_',
-              '',
-              'This issue was opened automatically by `health-monitor.yml`.',
-              'It will be closed automatically when the next health run is fully OK.',
+              '### Next steps',
+              '1. Wait for re-dispatched workflows',
+              '2. Re-run **Health Monitor**',
+              '3. If still broken, follow **[docs/ROLLBACK.md](docs/ROLLBACK.md)**',
+              '4. Optional: Actions → **Rollback data/latest** (confirm `ROLLBACK`)',
             ].join('\n');
-
             const issues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -363,33 +259,19 @@ jobs:
               per_page: 10,
             });
             const existing = issues.data.find(i => i.title === title);
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'uogw-health',
+                color: 'FF6B6B',
+                description: 'Automated UOGW data health alerts',
+              });
+            } catch (e) {}
             if (existing) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: existing.number,
-                body,
-              });
-              console.log('Updated issue', existing.number);
+              await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, body });
             } else {
-              // ensure label exists
-              try {
-                await github.rest.issues.createLabel({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  name: 'uogw-health',
-                  color: 'FF6B6B',
-                  description: 'Automated UOGW data health alerts',
-                });
-              } catch (e) {}
-              const created = await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title,
-                body,
-                labels: ['uogw-health'],
-              });
-              console.log('Opened issue', created.data.number);
+              await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body, labels: ['uogw-health'] });
             }
 
       - name: Close health issue when recovered
@@ -411,7 +293,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: existing.number,
-                body: 'Health monitor reports **recovered** (no critical failures). Closing automatically.',
+                body: 'Health monitor reports **recovered**. Closing automatically.',
               });
               await github.rest.issues.update({
                 owner: context.repo.owner,
@@ -419,7 +301,4 @@ jobs:
                 issue_number: existing.number,
                 state: 'closed',
               });
-              console.log('Closed issue', existing.number);
-            } else {
-              console.log('No open health issue');
             }
