@@ -1,27 +1,227 @@
 {
-  "generated_at_utc": "2026-08-04T18:36:47Z",
+  "generated_at_utc": "2026-08-05T15:51:10Z",
   "catalog_datasets": 25,
-  "layer_json_files": 10,
+  "layer_json_files": 31,
   "sources": {
+    "anomaly": {
+      "source": "uogw-anomaly-detection",
+      "ok": true,
+      "schema": "uogw.anomaly_report.v2",
+      "date": "2026-08-05",
+      "total": 0,
+      "alerts": 0,
+      "data_entry": "data/entries/2026-08-05/anomaly-report.json",
+      "generated_at_utc": "2026-08-05T05:25:03Z"
+    },
+    "baseline": {
+      "source": "uogw-rolling-baseline",
+      "ok": true,
+      "city_count": 32,
+      "data_entry": "data/entries/2026-08-05/rolling-baseline.json",
+      "generated_at_utc": "2026-08-05T05:18:02Z"
+    },
+    "charts": {
+      "source": "uogw-charts",
+      "ok": true,
+      "temperature_display_unit": "fahrenheit",
+      "research_cities_rows": 10,
+      "date": "2026-08-05",
+      "markdown": "visuals/latest/CHARTS.md",
+      "generated_at_utc": "2026-08-05T12:28:39Z"
+    },
+    "fair": {
+      "source": "uogw-fair-metadata",
+      "ok": true,
+      "date": "2026-08-05",
+      "data_entry": "data/entries/2026-08-05/fair-metadata.json",
+      "generated_at_utc": "2026-08-05T05:18:03Z"
+    },
     "global-samples": {
       "source": "open-meteo-samples",
       "ok": true,
-      "city_count": 6,
-      "ok_count": 6,
-      "generated_at_utc": "2026-08-04T17:28:58Z"
+      "city_count": 34,
+      "ok_count": 32,
+      "country_count": 30,
+      "countries": [
+        "AE",
+        "AR",
+        "AU",
+        "BR",
+        "CA",
+        "CN",
+        "DE",
+        "EG",
+        "ES",
+        "FR",
+        "GB",
+        "ID",
+        "IN",
+        "IS",
+        "IT",
+        "JP",
+        "KE",
+        "KR",
+        "MX",
+        "NG",
+        "NO",
+        "NZ",
+        "PE",
+        "RU",
+        "SE",
+        "SG",
+        "TH",
+        "TR",
+        "US",
+        "ZA"
+      ],
+      "data_entry": "data/entries/2026-08-05/global-cities.json",
+      "generated_at_utc": "2026-08-05T12:21:32Z"
+    },
+    "heal": {
+      "schema": "uogw.heal_actions.v1",
+      "generated_at_utc": "2026-08-05T05:54:21Z",
+      "actions": [
+        {
+          "rollback_point": "2026-08-05T0554Z"
+        }
+      ]
+    },
+    "health": {
+      "schema": "uogw.health_report.v1",
+      "date_utc": "2026-08-05",
+      "generated_at_utc": "2026-08-05T05:54:21Z",
+      "ok": true,
+      "critical_fail": false,
+      "checks": [
+        {
+          "id": "global-cities",
+          "status": "ok",
+          "path": "data/latest/global-cities.json",
+          "reasons": [],
+          "critical": true,
+          "workflow": "global-samples-daily.yml"
+        },
+        {
+          "id": "casey-hourly",
+          "status": "ok",
+          "path": "data/latest/casey-hourly.json",
+          "reasons": [],
+          "critical": true,
+          "workflow": "msds-ground-daily.yml"
+        },
+        {
+          "id": "ndbc-realtime",
+          "status": "ok",
+          "path": "data/latest/ndbc-realtime.json",
+          "reasons": [],
+          "critical": true,
+          "workflow": "ndbc-marine-daily.yml"
+        },
+        {
+          "id": "research-summary",
+          "status": "ok",
+          "path": "data/latest/research-summary.json",
+          "reasons": [],
+          "critical": true,
+          "workflow": "daily-research-package.yml"
+        },
+        {
+          "id": "science-package",
+          "status": "ok",
+          "path": "data/latest/science-package.json",
+          "reasons": [],
+          "critical": true,
+          "workflow": "daily-research-package.yml"
+        },
+        {
+          "id": "anomaly-report",
+          "status": "ok",
+          "path": "data/latest/anomaly-report.json",
+          "reasons": [],
+          "critical": false,
+          "workflow": "anomaly-detection-daily.yml"
+        },
+        {
+          "id": "rolling-baseline",
+          "status": "ok",
+          "path": "data/latest/rolling-baseline.json",
+          "reasons": [],
+          "critical": false,
+          "workflow": "rolling-baseline-daily.yml"
+        },
+        {
+          "id": "satellite-index",
+          "status": "ok",
+          "path": "data/latest/satellite-radiance-index.json",
+          "reasons": [],
+          "critical": false,
+          "workflow": "satellite-radiance-daily.yml"
+        },
+        {
+          "id": "fair-metadata",
+          "status": "ok",
+          "path": "data/latest/fair-metadata.json",
+          "reasons": [],
+          "critical": false,
+          "workflow": "fair-metadata-daily.yml"
+        },
+        {
+          "id": "charts-markdown",
+          "status": "ok",
+          "path": "visuals/latest/CHARTS.md",
+          "reasons": [],
+          "critical": false,
+          "workflow": "charts-daily.yml"
+        },
+        {
+          "id": "catalog",
+          "status": "ok",
+          "path": "catalog/catalog.json",
+          "reasons": [],
+          "critical": true,
+          "workflow": null
+        }
+      ],
+      "heal_actions": [
+        {
+          "rollback_point": "2026-08-05T0554Z"
+        }
+      ],
+      "redispatch_workflows": [],
+      "summary": {
+        "total": 11,
+        "ok": 11,
+        "missing": 0,
+        "stale": 0,
+        "invalid_json": 0
+      },
+      "alert_pr_branch": "ops/uogw-health-alert",
+      "rollback_docs": "docs/ROLLBACK.md",
+      "curator": "Midwest Stratospheric Data Systems"
     },
     "igra": {
       "source": "noaa-igra",
       "ok": true,
       "station_count": 2931,
-      "file_count": 801,
-      "generated_at_utc": "2026-08-04T17:28:49Z"
+      "file_count": 0,
+      "data_entry": "data/entries/2026-08-05/igra-index.json",
+      "generated_at_utc": "2026-08-05T13:04:43Z"
+    },
+    "international": {
+      "source": "international-indexes",
+      "ok": true,
+      "ghcn_station_count": 132501,
+      "ghcn_country_count": 219,
+      "foreign_source_count": 18,
+      "generated_at_utc": "2026-08-05T12:25:27Z"
     },
     "msds-ground": {
       "source": "msds-casey-ground",
       "ok": true,
-      "date": "2026-08-03",
-      "generated_at_utc": "2026-08-04T17:28:51Z"
+      "date": "2026-08-04",
+      "observation_count": 24,
+      "data_entry": "data/entries/2026-08-04/casey-hourly.json",
+      "generated_at_utc": "2026-08-05T12:28:06Z"
     },
     "ndbc": {
       "source": "ndbc",
@@ -31,9 +231,30 @@
         "41001",
         "46026",
         "44025",
-        "46013"
+        "42040",
+        "46013",
+        "46042",
+        "41008",
+        "46029"
       ],
-      "generated_at_utc": "2026-08-04T17:29:54Z"
+      "realtime_observation_count": 7,
+      "data_entry": "data/entries/2026-08-05/ndbc-realtime.json",
+      "generated_at_utc": "2026-08-05T15:50:28Z"
+    },
+    "research-package": {
+      "source": "uogw-research-package",
+      "ok": true,
+      "date": "2026-08-05",
+      "data_entry": "data/entries/2026-08-05/science-package.json",
+      "research_summary": "data/entries/2026-08-05/research-summary.json",
+      "generated_at_utc": "2026-08-05T05:42:43Z"
+    },
+    "satellite": {
+      "source": "uogw-satellite-radiance",
+      "ok": true,
+      "product_count": 6,
+      "data_entry": "data/entries/2026-08-05/satellite-radiance-index.json",
+      "generated_at_utc": "2026-08-05T05:18:10Z"
     }
   },
   "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
