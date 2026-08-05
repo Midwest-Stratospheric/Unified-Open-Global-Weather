@@ -2,7 +2,7 @@
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-08-05T06:05:55Z UTC · Midwest Stratospheric Data Systems_
+_Generated at 2026-08-05T12:24:15Z UTC · Midwest Stratospheric Data Systems_
 
 ## PNG charts
 
@@ -49,9 +49,9 @@ pie showData
 ```mermaid
 xychart-beta
   title "City temperatures F - 2026-08-05"
-  x-axis ["Jakarta", "Seoul", "Beijing", "Bangkok", "Berlin", "Casey", "Paris", "Rome", "Cairo", "Madrid", "Houston", "Dubai"]
+  x-axis ["Moscow", "Mumbai", "Jakarta", "Singapore", "Berlin", "Seoul", "Istanbul", "Madrid", "Beijing", "Rome", "Cairo", "Dubai"]
   y-axis "Temp F"
-  bar [79.3, 80.2, 81.5, 82.0, 84.0, 84.7, 86.2, 86.2, 87.3, 89.4, 95.0, 100.9]
+  bar [81.0, 82.0, 82.8, 82.9, 85.5, 86.0, 86.7, 90.3, 91.6, 96.3, 98.6, 106.0]
 ```
 
 ## Snapshot table (°F)
@@ -60,7 +60,7 @@ xychart-beta
 |--------|-------|
 | Date UTC | 2026-08-05 |
 | Cities OK | 32 |
-| City T min/max °F | 42.1 / 100.9 |
+| City T min/max °F | 49.3 / 106.0 |
 | Anomaly total | 0 |
 | Casey hours | 24 |
 | NDBC samples | 7 |
