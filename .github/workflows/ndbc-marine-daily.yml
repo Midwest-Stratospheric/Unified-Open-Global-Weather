@@ -1,4 +1,4 @@
-# Daily NOAA NDBC station inventory + sample realtime observations
+# Daily NOAA NDBC station inventory + REALTIME observations (parsed)
 name: NDBC Marine Daily
 
 on:
@@ -18,18 +18,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Fetch NDBC station table + sample obs
+      - name: Fetch NDBC stations + realtime observations
         run: |
           set -e
           DATE=$(date -u +%Y-%m-%d)
-          mkdir -p layers/marine/ndbc snapshots/${DATE} status
+          mkdir -p layers/marine/ndbc data/entries/${DATE} data/latest snapshots/${DATE} status
           curl -fsSL -A "Midwest-Stratospheric/UOGW-ndbc" \
             "https://www.ndbc.noaa.gov/data/stations/station_table.txt" \
             -o /tmp/station_table.txt
 
-          # Sample a few well-known stations for chartable snippets
-          for SID in 41001 46026 44025 42040 46013; do
+          for SID in 41001 46026 44025 42040 46013 46042 41008 46029; do
             curl -fsSL -A "Midwest-Stratospheric/UOGW-ndbc" \
               "https://www.ndbc.noaa.gov/data/realtime2/${SID}.txt" \
               -o /tmp/ndbc_${SID}.txt || true
@@ -41,9 +42,9 @@ jobs:
 
           date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
           now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
           stations = []
-          path = "/tmp/station_table.txt"
-          with open(path, encoding="utf-8", errors="ignore") as f:
+          with open("/tmp/station_table.txt", encoding="utf-8", errors="ignore") as f:
               for line in f:
                   line = line.strip()
                   if not line or line.startswith("#"):
@@ -57,61 +58,183 @@ jobs:
                       "type": parts[2] if len(parts) > 2 else None,
                       "hull": parts[3] if len(parts) > 3 else None,
                       "name": parts[4] if len(parts) > 4 else None,
-                      "realtime_txt": f"https://www.ndbc.noaa.gov/data/realtime2/{parts[0]}.txt"
+                      "realtime_txt": f"https://www.ndbc.noaa.gov/data/realtime2/{parts[0]}.txt",
                   })
 
-          samples = {}
-          for sid in ["41001", "46026", "44025", "42040", "46013"]:
-              p = f"/tmp/ndbc_{sid}.txt"
-              if not os.path.exists(p):
-                  continue
-              lines = open(p, encoding="utf-8", errors="ignore").read().splitlines()
-              # keep header + last ~24 data rows
-              data_lines = [ln for ln in lines if ln and not ln.startswith("#")]
-              samples[sid] = {
-                  "source": f"https://www.ndbc.noaa.gov/data/realtime2/{sid}.txt",
-                  "rows": data_lines[:2] + data_lines[-24:] if len(data_lines) > 26 else data_lines,
+          def parse_realtime(path, sid):
+              if not os.path.exists(path):
+                  return None
+              lines = open(path, encoding="utf-8", errors="ignore").read().splitlines()
+              if len(lines) < 3:
+                  return None
+              # NDBC realtime: line0 headers, line1 units, then data rows
+              headers = lines[0].split()
+              units = lines[1].split() if len(lines) > 1 else []
+              rows = []
+              for ln in lines[2:]:
+                  cols = ln.split()
+                  if len(cols) < 5:
+                      continue
+                  row = {}
+                  for i, h in enumerate(headers):
+                      if i < len(cols):
+                          row[h] = cols[i]
+                  rows.append(row)
+              # keep last 48 rows (~2 days of hourly-ish)
+              recent = rows[-48:] if len(rows) > 48 else rows
+              latest = recent[-1] if recent else {}
+              # Map common fields into clean observation
+              obs = {
+                  "station_id": sid,
+                  "time_utc": None,
+                  "wind_dir_deg": None,
+                  "wind_speed_ms": None,
+                  "gust_ms": None,
+                  "wave_height_m": None,
+                  "dom_wave_period_s": None,
+                  "pressure_hpa": None,
+                  "air_temp_c": None,
+                  "water_temp_c": None,
+              }
+              if latest:
+                  y = latest.get("#YY") or latest.get("YY")
+                  mo = latest.get("MM")
+                  dd = latest.get("DD")
+                  hh = latest.get("hh")
+                  mm = latest.get("mm")
+                  if y and mo and dd and hh is not None:
+                      obs["time_utc"] = f"{y}-{mo}-{dd}T{hh}:{mm or '00'}Z"
+                  def fnum(k):
+                      v = latest.get(k)
+                      if v is None or v in ("MM", "999", "99.0", "9999.0", "999.0"):
+                          return None
+                      try:
+                          return float(v)
+                      except Exception:
+                          return None
+                  # WDIR WSPD GST WVHT DPD APD MWD PRES ATMP WTMP
+                  obs["wind_dir_deg"] = fnum("WDIR")
+                  obs["wind_speed_ms"] = fnum("WSPD")
+                  obs["gust_ms"] = fnum("GST")
+                  obs["wave_height_m"] = fnum("WVHT")
+                  obs["dom_wave_period_s"] = fnum("DPD")
+                  obs["pressure_hpa"] = fnum("PRES")
+                  obs["air_temp_c"] = fnum("ATMP")
+                  obs["water_temp_c"] = fnum("WTMP")
+              return {
+                  "station_id": sid,
+                  "header": headers,
+                  "units": units,
+                  "latest_observation": obs,
+                  "recent_rows": recent,
+                  "row_count": len(recent),
+                  "source_url": f"https://www.ndbc.noaa.gov/data/realtime2/{sid}.txt",
               }
 
-          doc = {
+          sample_ids = ["41001", "46026", "44025", "42040", "46013", "46042", "41008", "46029"]
+          observations = {}
+          for sid in sample_ids:
+              parsed = parse_realtime(f"/tmp/ndbc_{sid}.txt", sid)
+              if parsed:
+                  observations[sid] = parsed
+
+          index_doc = {
               "generated_at_utc": now,
               "date": date,
-              "product": "NDBC station_table index",
+              "product": "NDBC station_table index + realtime observations",
+              "data_kind": "index+observations",
               "authoritative": "https://www.ndbc.noaa.gov/",
               "station_count": len(stations),
               "stations": stations,
-              "sample_realtime": samples,
-              "note": "Full observations remain at NDBC. Samples are for hub visualization.",
-              "curator": "Midwest Stratospheric Data Systems / UOGW",
+              "sample_station_ids": sample_ids,
+              "sample_observation_count": len(observations),
+              "note": "Full station list plus parsed realtime obs for sample buoys. Primary data at NDBC.",
+              "curator": "Midwest Stratospheric Data Systems",
           }
 
-          def write(path, obj):
-              os.makedirs(os.path.dirname(path), exist_ok=True)
-              with open(path, "w") as f:
-                  json.dump(obj, f, indent=2)
-
-          write(f"layers/marine/ndbc/stations-{date}.json", doc)
-          write("layers/marine/ndbc/stations-latest.json", doc)
-          write(f"snapshots/{date}/ndbc-stations.json", doc)
-          write("status/ndbc.json", {
-              "source": "ndbc",
-              "ok": True,
-              "station_count": len(stations),
-              "sample_stations": list(samples.keys()),
+          obs_doc = {
               "generated_at_utc": now,
-          })
-          print("stations", len(stations), "samples", list(samples.keys()))
+              "date": date,
+              "source": "noaa-ndbc",
+              "layer": "marine",
+              "type": "ndbc-realtime-observations",
+              "data_kind": "observations",
+              "station_ids": list(observations.keys()),
+              "observation_count": len(observations),
+              "observations": observations,
+              "curator": "Midwest Stratospheric Data Systems",
+              "license_note": "NOAA NDBC public data; cite NOAA NDBC",
+          }
+
+          for p in [
+              f"layers/marine/ndbc/stations-{date}.json",
+              "layers/marine/ndbc/stations-latest.json",
+              f"snapshots/{date}/ndbc-stations.json",
+          ]:
+              with open(p, "w") as f:
+                  json.dump(index_doc, f, indent=2)
+
+          for p in [
+              f"layers/marine/ndbc/realtime-{date}.json",
+              "layers/marine/ndbc/realtime-latest.json",
+              f"data/entries/{date}/ndbc-realtime.json",
+              "data/latest/ndbc-realtime.json",
+              f"snapshots/{date}/ndbc-realtime.json",
+          ]:
+              os.makedirs(os.path.dirname(p), exist_ok=True)
+              with open(p, "w") as f:
+                  json.dump(obs_doc, f, indent=2)
+
+          summary_path = f"data/entries/{date}/summary.json"
+          summary = {}
+          if os.path.exists(summary_path):
+              try:
+                  summary = json.load(open(summary_path))
+              except Exception:
+                  summary = {}
+          summary.setdefault("date", date)
+          summary.setdefault("generated_at_utc", now)
+          summary.setdefault("entries", {})
+          summary["entries"]["ndbc-realtime"] = {
+              "ok": len(observations) > 0,
+              "observation_count": len(observations),
+              "station_ids": list(observations.keys()),
+              "file": f"data/entries/{date}/ndbc-realtime.json",
+          }
+          with open(summary_path, "w") as f:
+              json.dump(summary, f, indent=2)
+          with open("data/latest/summary.json", "w") as f:
+              json.dump(summary, f, indent=2)
+
+          with open("status/ndbc.json", "w") as f:
+              json.dump({
+                  "source": "ndbc",
+                  "ok": True,
+                  "station_count": len(stations),
+                  "sample_stations": sample_ids,
+                  "realtime_observation_count": len(observations),
+                  "data_entry": f"data/entries/{date}/ndbc-realtime.json",
+                  "generated_at_utc": now,
+              }, f, indent=2)
+          print(f"DATA ENTRY: {len(observations)} buoy observations -> data/entries/{date}/ndbc-realtime.json")
           PY
 
-      - name: Commit
+      - name: Commit observations (retry on race)
         run: |
+          set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
-          git pull --rebase origin main || true
-          git add layers/marine/ndbc snapshots status || true
+          git add layers/marine/ndbc data/entries data/latest snapshots status || true
           if git diff --staged --quiet; then
             echo "No changes"
-          else
-            git commit -m "chore(ndbc): daily station index + samples $(date -u +%Y-%m-%d)"
-            git push
+            exit 0
           fi
+          OBS=$(python3 -c "import json; d=json.load(open('status/ndbc.json')); print(d.get('realtime_observation_count',0))" 2>/dev/null || echo 0)
+          git commit -m "data(ndbc): ${OBS} realtime buoy observations + station index $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then echo "Pushed OK"; exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1

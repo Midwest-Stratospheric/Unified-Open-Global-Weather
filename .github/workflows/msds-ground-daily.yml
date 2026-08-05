@@ -1,9 +1,9 @@
-# Daily Casey ground weather → msds-data + UOGW layers/ground
+# Daily Casey IL ground OBSERVATIONS (hourly + daily) — dual-write msds-data + UOGW data/entries
 name: MSDS Ground Daily
 
 on:
   schedule:
-    - cron: "15 1 * * *"
+    - cron: "15 6 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -14,30 +14,30 @@ permissions:
   contents: write
 
 jobs:
-  casey-daily:
+  ground:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout UOGW
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           path: uogw
+          fetch-depth: 0
 
-      - name: Checkout msds-data
+      - name: Checkout msds-data (optional)
+        continue-on-error: true
         uses: actions/checkout@v4
         with:
           repository: Midwest-Stratospheric/msds-data
-          token: ${{ secrets.MSDS_DATA_TOKEN || github.token }}
           path: msds-data
+          token: ${{ secrets.MSDS_DATA_TOKEN }}
+          fetch-depth: 0
 
-      - name: Fetch Open-Meteo archive for Casey
-        env:
-          LAT: "39.2992"
-          LON: "-87.9925"
+      - name: Fetch Casey hourly observations
         run: |
           set -e
-          DATE=$(date -u -d "yesterday" +%Y-%m-%d 2>/dev/null || date -u -v-1d +%Y-%m-%d)
-          echo "Building daily file for $DATE"
-          URL="https://archive-api.open-meteo.com/v1/archive?latitude=${LAT}&longitude=${LON}&start_date=${DATE}&end_date=${DATE}&hourly=temperature_2m,relative_humidity_2m,dewpoint_2m,precipitation,weathercode,pressure_msl,surface_pressure,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum,windspeed_10m_max&timezone=America%2FChicago&windspeed_unit=ms"
+          DATE=$(date -u -d yesterday +%Y-%m-%d 2>/dev/null || date -u -v-1d +%Y-%m-%d)
+          LAT=39.2992
+          LON=-87.9925
+          URL="https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&start_date=${DATE}&end_date=${DATE}&hourly=temperature_2m,relative_humidity_2m,dewpoint_2m,precipitation,weathercode,pressure_msl,surface_pressure,cloudcover,windspeed_10m,winddirection_10m,windgusts_10m&daily=temperature_2m_max,temperature_2m_min,temperature_2m_mean,precipitation_sum,windspeed_10m_max&timezone=America%2FChicago&windspeed_unit=ms"
           curl -fsSL -A "Midwest-Stratospheric/UOGW-msds-ground-daily" "$URL" -o /tmp/om.json
           python3 << 'PY'
           import json, os
@@ -45,6 +45,24 @@ jobs:
           date = os.popen("date -u -d yesterday +%Y-%m-%d 2>/dev/null || date -u -v-1d +%Y-%m-%d").read().strip()
           om = json.load(open("/tmp/om.json"))
           now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          hourly = om.get("hourly") or {}
+          times = hourly.get("time") or []
+          # Flatten to observation list for easy consumption
+          observations = []
+          for i, t in enumerate(times):
+              observations.append({
+                  "time": t,
+                  "temperature_c": (hourly.get("temperature_2m") or [None])[i] if i < len(hourly.get("temperature_2m") or []) else None,
+                  "relative_humidity_pct": (hourly.get("relative_humidity_2m") or [None])[i] if i < len(hourly.get("relative_humidity_2m") or []) else None,
+                  "dewpoint_c": (hourly.get("dewpoint_2m") or [None])[i] if i < len(hourly.get("dewpoint_2m") or []) else None,
+                  "precipitation_mm": (hourly.get("precipitation") or [None])[i] if i < len(hourly.get("precipitation") or []) else None,
+                  "weather_code": (hourly.get("weathercode") or [None])[i] if i < len(hourly.get("weathercode") or []) else None,
+                  "pressure_msl_hpa": (hourly.get("pressure_msl") or [None])[i] if i < len(hourly.get("pressure_msl") or []) else None,
+                  "cloudcover_pct": (hourly.get("cloudcover") or [None])[i] if i < len(hourly.get("cloudcover") or []) else None,
+                  "wind_speed_ms": (hourly.get("windspeed_10m") or [None])[i] if i < len(hourly.get("windspeed_10m") or []) else None,
+                  "wind_direction_deg": (hourly.get("winddirection_10m") or [None])[i] if i < len(hourly.get("winddirection_10m") or []) else None,
+                  "wind_gust_ms": (hourly.get("windgusts_10m") or [None])[i] if i < len(hourly.get("windgusts_10m") or []) else None,
+              })
           out = {
             "date": date,
             "site": {
@@ -61,54 +79,99 @@ jobs:
               "retrieved_at_utc": now,
               "curator": "Midwest Stratospheric Data Systems"
             },
-            "hourly": om.get("hourly", {}),
+            "data_kind": "observations",
+            "observation_count": len(observations),
+            "observations": observations,
+            "hourly": hourly,
             "daily": om.get("daily", {}),
             "meta": {"generator": "uogw/msds-ground-daily", "uogw": True}
           }
-          for base in ["msds-data/ground-weather/daily", "uogw/layers/ground/casey/daily"]:
-              os.makedirs(base, exist_ok=True)
-              path = f"{base}/{date}.json"
+
+          # UOGW layer paths
+          os.makedirs("uogw/layers/ground/casey/daily", exist_ok=True)
+          os.makedirs(f"uogw/data/entries/{date}", exist_ok=True)
+          os.makedirs("uogw/data/latest", exist_ok=True)
+          os.makedirs("uogw/status", exist_ok=True)
+
+          for path in [
+              f"uogw/layers/ground/casey/daily/{date}.json",
+              "uogw/layers/ground/casey/latest.json",
+              f"uogw/data/entries/{date}/casey-hourly.json",
+              "uogw/data/latest/casey-hourly.json",
+          ]:
               with open(path, "w") as f:
                   json.dump(out, f, indent=2)
               print("Wrote", path)
-          # latest pointer in UOGW
-          latest = "uogw/layers/ground/casey/latest.json"
-          with open(latest, "w") as f:
-              json.dump(out, f, indent=2)
-          status = {
-              "source": "msds-casey-ground",
-              "ok": True,
-              "date": date,
-              "generated_at_utc": now,
+
+          # Optional dual-write to msds-data
+          if os.path.isdir("msds-data"):
+              os.makedirs("msds-data/ground-weather/daily", exist_ok=True)
+              with open(f"msds-data/ground-weather/daily/{date}.json", "w") as f:
+                  json.dump(out, f, indent=2)
+
+          summary_path = f"uogw/data/entries/{date}/summary.json"
+          summary = {}
+          if os.path.exists(summary_path):
+              try:
+                  summary = json.load(open(summary_path))
+              except Exception:
+                  summary = {}
+          summary.setdefault("date", date)
+          summary.setdefault("generated_at_utc", now)
+          summary.setdefault("entries", {})
+          summary["entries"]["casey-hourly"] = {
+              "ok": len(observations) > 0,
+              "observation_count": len(observations),
+              "file": f"data/entries/{date}/casey-hourly.json",
           }
-          os.makedirs("uogw/status", exist_ok=True)
+          with open(summary_path, "w") as f:
+              json.dump(summary, f, indent=2)
+          with open("uogw/data/latest/summary.json", "w") as f:
+              json.dump(summary, f, indent=2)
+
           with open("uogw/status/msds-ground.json", "w") as f:
-              json.dump(status, f, indent=2)
+              json.dump({
+                  "source": "msds-casey-ground",
+                  "ok": True,
+                  "date": date,
+                  "observation_count": len(observations),
+                  "data_entry": f"data/entries/{date}/casey-hourly.json",
+                  "generated_at_utc": now,
+              }, f, indent=2)
+          print(f"DATA ENTRY: {len(observations)} hourly obs -> data/entries/{date}/casey-hourly.json")
           PY
 
-      - name: Commit UOGW ground index
+      - name: Commit UOGW data entry
         working-directory: uogw
         run: |
+          set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
-          git pull --rebase origin main || true
-          git add layers/ground status || true
+          git add layers/ground/casey data/entries data/latest status || true
           if git diff --staged --quiet; then
-            echo "No UOGW changes"
-          else
-            git commit -m "chore(ground): Casey daily $(date -u +%Y-%m-%d)"
-            git push
+            echo "No changes"
+            exit 0
           fi
+          OBS=$(python3 -c "import json; d=json.load(open('status/msds-ground.json')); print(d.get('observation_count',0))" 2>/dev/null || echo 0)
+          git commit -m "data(casey): ${OBS} hourly ground observations $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then echo "Pushed OK"; exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1
 
-      - name: Commit msds-data
+      - name: Commit msds-data (if token present)
+        if: ${{ secrets.MSDS_DATA_TOKEN != '' }}
         working-directory: msds-data
+        continue-on-error: true
         run: |
-          git config user.name "msds-bot"
+          set -e
+          git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
           git add ground-weather/daily || true
-          if git diff --staged --quiet; then
-            echo "No msds-data changes"
-          else
-            git commit -m "chore(ground): daily Casey weather $(date -u +%Y-%m-%d)"
-            git push
-          fi
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "data(casey): daily ground observations $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main || true
+          git push origin HEAD:main || true
