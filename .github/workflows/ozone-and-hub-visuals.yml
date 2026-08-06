@@ -1,0 +1,50 @@
+name: Ozone & Hub Visual Snapshots
+
+on:
+  schedule:
+    - cron: "20 * * * *"
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Science Analytics Daily
+      - NDBC Marine Daily
+      - MSDS Ground Daily
+    types:
+      - completed
+
+concurrency:
+  group: uogw-ozone-hub-visuals
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  snapshots:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install matplotlib --quiet
+      - run: python3 scripts/ozone_health_snapshot.py
+      - run: python3 scripts/hub_visual_snapshots.py
+      - name: Commit
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add data/entries data/latest visuals status || true
+          if git diff --staged --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "data: ozone health + hub visual snapshots $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 2))
+          done
+          exit 1
