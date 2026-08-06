@@ -29,7 +29,6 @@ def load(p: Path):
 
 
 def city_temp_c(c: dict):
-    """Extract temperature °C from either observation or current schema."""
     obs = c.get("observation") or {}
     t = obs.get("temperature_c")
     if t is not None:
@@ -38,8 +37,7 @@ def city_temp_c(c: dict):
     t = cur.get("temperature_2m")
     if t is not None:
         return t
-    t = cur.get("temperature_c")
-    return t
+    return cur.get("temperature_c")
 
 
 def main() -> int:
@@ -90,7 +88,6 @@ def main() -> int:
     )
     CYAN, ORANGE, RED, YELLOW = "#00d4ff", "#ff9f43", "#ff6b6b", "#feca57"
 
-    # ---- City rows in °F ----
     city_rows = []
     for c in cities.get("cities") or []:
         if not c.get("ok"):
@@ -99,20 +96,14 @@ def main() -> int:
         t_f = c_to_f(t_c)
         if t_f is None:
             continue
-        city_rows.append(
-            (c.get("name") or c.get("id"), t_f, c.get("lat"), c.get("lon"), t_c)
-        )
+        city_rows.append((c.get("name") or c.get("id"), t_f, c.get("lat"), c.get("lon"), t_c))
     city_rows.sort(key=lambda x: x[1])
 
     if city_rows:
         fig, ax = plt.subplots(figsize=(10, max(4, 0.28 * len(city_rows))))
         names = [r[0] for r in city_rows]
         temps_f = [r[1] for r in city_rows]
-        # Color thresholds in °F: 95°F≈35°C, 86°F≈30°C
-        colors = [
-            RED if t >= 95 else ORANGE if t >= 86 else CYAN if t >= 32 else "#74b9ff"
-            for t in temps_f
-        ]
+        colors = [RED if t >= 95 else ORANGE if t >= 86 else CYAN if t >= 32 else "#74b9ff" for t in temps_f]
         ax.barh(names, temps_f, color=colors)
         ax.set_xlabel("Temperature (°F)")
         ax.set_title(f"UOGW Global City Temperatures (°F) — {date}")
@@ -120,15 +111,7 @@ def main() -> int:
         save(fig, "global-city-temperatures.png")
 
         fig, ax = plt.subplots(figsize=(11, 5.5))
-        sc = ax.scatter(
-            [r[3] for r in city_rows],
-            [r[2] for r in city_rows],
-            c=[r[1] for r in city_rows],
-            cmap="coolwarm",
-            s=60,
-            edgecolors="white",
-            linewidths=0.4,
-        )
+        sc = ax.scatter([r[3] for r in city_rows], [r[2] for r in city_rows], c=[r[1] for r in city_rows], cmap="coolwarm", s=60, edgecolors="white", linewidths=0.4)
         cb = plt.colorbar(sc, ax=ax, fraction=0.03)
         cb.set_label("°F")
         ax.set_xlabel("Longitude")
@@ -139,15 +122,11 @@ def main() -> int:
         ax.grid(True, alpha=0.35)
         save(fig, "global-city-temp-map.png")
 
-    # ---- Casey hourly °F ----
     cob = casey.get("observations") or []
     if not cob and isinstance(casey.get("hourly"), dict):
         times = casey["hourly"].get("time") or []
         temps = casey["hourly"].get("temperature_2m") or []
-        cob = [
-            {"time": t, "temperature_c": temps[i] if i < len(temps) else None}
-            for i, t in enumerate(times)
-        ]
+        cob = [{"time": t, "temperature_c": temps[i] if i < len(temps) else None} for i, t in enumerate(times)]
     if cob:
         times = [str(o.get("time", ""))[-5:] for o in cob]
         vals_f = [c_to_f(o.get("temperature_c")) for o in cob]
@@ -160,24 +139,15 @@ def main() -> int:
         if len(times) > 12:
             step = max(1, len(times) // 12)
             ax1.set_xticks(list(range(0, len(times), step)))
-            ax1.set_xticklabels(
-                [times[i] for i in range(0, len(times), step)], rotation=45, ha="right"
-            )
+            ax1.set_xticklabels([times[i] for i in range(0, len(times), step)], rotation=45, ha="right")
         save(fig, "casey-hourly-temperature.png")
 
-    # ---- NDBC (wave height stays meters; water/air temp in °F if we plot them) ----
     ndbc_obs = ndbc.get("observations") or {}
     if ndbc_obs:
         sids = list(ndbc_obs.keys())
         waves = [(ndbc_obs[s].get("latest_observation") or {}).get("wave_height_m") for s in sids]
-        wtemps_f = [
-            c_to_f((ndbc_obs[s].get("latest_observation") or {}).get("water_temp_c"))
-            for s in sids
-        ]
-        atemps_f = [
-            c_to_f((ndbc_obs[s].get("latest_observation") or {}).get("air_temp_c"))
-            for s in sids
-        ]
+        wtemps_f = [c_to_f((ndbc_obs[s].get("latest_observation") or {}).get("water_temp_c")) for s in sids]
+        atemps_f = [c_to_f((ndbc_obs[s].get("latest_observation") or {}).get("air_temp_c")) for s in sids]
         fig, axes = plt.subplots(1, 2, figsize=(11, 4))
         x = np.arange(len(sids))
         axes[0].bar(x, [w if w is not None else 0 for w in waves], color=CYAN)
@@ -198,7 +168,25 @@ def main() -> int:
         fig.tight_layout()
         save(fig, "ndbc-marine-samples.png")
 
-    # ---- Anomaly severity (counts only) ----
+    hum_rows = []
+    for c in cities.get("cities") or []:
+        if not c.get("ok"):
+            continue
+        obs = c.get("observation") or {}
+        cur = c.get("current") or {}
+        h = obs.get("relative_humidity_pct", cur.get("relative_humidity_2m"))
+        if not isinstance(h, (int, float)):
+            continue
+        hum_rows.append((c.get("name") or c.get("id"), float(h)))
+    hum_rows.sort(key=lambda x: x[1])
+    if hum_rows:
+        fig, ax = plt.subplots(figsize=(10, max(4, 0.28 * len(hum_rows))))
+        ax.barh([r[0] for r in hum_rows], [r[1] for r in hum_rows], color=CYAN)
+        ax.set_xlabel("Relative humidity (%)")
+        ax.set_title(f"UOGW Global City Relative Humidity — {date}")
+        ax.grid(True, axis="x", alpha=0.4)
+        save(fig, "global-city-humidity.png")
+
     counts = anomaly.get("counts") or {}
     if counts:
         labels = ["alert", "watch", "info"]
@@ -209,7 +197,6 @@ def main() -> int:
         ax.grid(True, axis="y", alpha=0.35)
         save(fig, "anomaly-severity.png")
 
-    # ---- Research cities Tmin/Tmax °F (fixed source resolution) ----
     clim_rows = []
     for c in climate.get("cities") or []:
         if not c.get("ok"):
@@ -218,36 +205,17 @@ def main() -> int:
         tmin = c_to_f(c.get("temperature_min_c"))
         if tmax is None and tmin is None:
             continue
-        clim_rows.append(
-            {
-                "id": c.get("id") or c.get("name") or "?",
-                "tmax_f": tmax,
-                "tmin_f": tmin,
-            }
-        )
-
-    # Fallback: science-package daily climate block
+        clim_rows.append({"id": c.get("id") or c.get("name") or "?", "tmax_f": tmax, "tmin_f": tmin})
     if not clim_rows:
         for c in science.get("daily_climate_research_cities") or []:
-            if isinstance(c, dict) and c.get("ok") is False:
-                continue
-            if not isinstance(c, dict):
+            if not isinstance(c, dict) or c.get("ok") is False:
                 continue
             tmax = c_to_f(c.get("temperature_max_c") or c.get("tmax_c"))
             tmin = c_to_f(c.get("temperature_min_c") or c.get("tmin_c"))
             if tmax is None and tmin is None:
                 continue
-            clim_rows.append(
-                {
-                    "id": c.get("id") or c.get("name") or "?",
-                    "tmax_f": tmax,
-                    "tmin_f": tmin,
-                }
-            )
-
-    # Fallback: derive crude daily range from city sample list (same value for min/max marker)
+            clim_rows.append({"id": c.get("id") or c.get("name") or "?", "tmax_f": tmax, "tmin_f": tmin})
     if not clim_rows and city_rows:
-        # Use a subset of named cities as research set
         for name, tf, _lat, _lon, _tc in city_rows[-10:]:
             clim_rows.append({"id": str(name).split(",")[0][:12], "tmax_f": tf, "tmin_f": tf})
 
@@ -255,62 +223,37 @@ def main() -> int:
         fig, ax = plt.subplots(figsize=(10, 4.5))
         labels = [r["id"] for r in clim_rows]
         x = np.arange(len(labels))
-        tmaxs = [r["tmax_f"] if r["tmax_f"] is not None else 0 for r in clim_rows]
-        tmins = [r["tmin_f"] if r["tmin_f"] is not None else 0 for r in clim_rows]
-        ax.bar(x - 0.2, tmaxs, width=0.4, color=ORANGE, label="Tmax °F")
-        ax.bar(x + 0.2, tmins, width=0.4, color=CYAN, label="Tmin °F")
+        ax.bar(x - 0.2, [r["tmax_f"] or 0 for r in clim_rows], width=0.4, color=ORANGE, label="Tmax °F")
+        ax.bar(x + 0.2, [r["tmin_f"] or 0 for r in clim_rows], width=0.4, color=CYAN, label="Tmin °F")
         ax.set_xticks(x)
         ax.set_xticklabels(labels, rotation=45, ha="right")
         ax.set_ylabel("Temperature (°F)")
         ax.legend()
         ax.grid(True, axis="y", alpha=0.35)
-        src_date = climate.get("date") or science.get("date_utc") or date
-        ax.set_title(f"Research Cities Daily Tmin / Tmax (°F) — {src_date}")
+        ax.set_title(f"Research Cities Daily Tmin / Tmax (°F) — {climate.get('date') or science.get('date_utc') or date}")
         save(fig, "research-cities-tminmax.png")
     else:
-        # Always emit a placeholder so README image is not broken
         fig, ax = plt.subplots(figsize=(8, 3))
         ax.axis("off")
-        ax.text(
-            0.5,
-            0.5,
-            "Research cities Tmin/Tmax unavailable\n(no daily-climate data yet)",
-            ha="center",
-            va="center",
-            color="#e8f4ff",
-            fontsize=12,
-        )
-        ax.set_title("Research Cities Daily Tmin / Tmax (°F)")
+        ax.text(0.5, 0.5, "Research cities Tmin/Tmax unavailable", ha="center", va="center", color="#e8f4ff")
         save(fig, "research-cities-tminmax.png")
 
-    # ---- Summary card °F ----
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.axis("off")
-    tmin_f = city_rows[0][1] if city_rows else "n/a"
-    tmax_f = city_rows[-1][1] if city_rows else "n/a"
     lines = [
         "UOGW Daily Visual Summary (°F)",
         f"Date (UTC): {date}",
         f"Cities plotted: {len(city_rows)}",
-        f"City T min/max: {tmin_f} / {tmax_f} °F",
+        f"City T min/max: {(city_rows[0][1] if city_rows else 'n/a')} / {(city_rows[-1][1] if city_rows else 'n/a')} °F",
         f"Casey hours: {len(cob)}",
         f"NDBC stations: {len(ndbc_obs)}",
-        f"Research climate cities: {len(clim_rows)}",
+        f"Humidity cities: {len(hum_rows)}",
         f"Anomaly total: {(counts or {}).get('total', 'n/a')}",
         "Midwest Stratospheric Data Systems",
     ]
     y = 0.92
     for i, line in enumerate(lines):
-        ax.text(
-            0.05,
-            y,
-            line,
-            transform=ax.transAxes,
-            fontsize=15 if i == 0 else 11,
-            fontweight="bold" if i == 0 else "normal",
-            color=CYAN if i == 0 else "#e8f4ff",
-            family="monospace",
-        )
+        ax.text(0.05, y, line, transform=ax.transAxes, fontsize=15 if i == 0 else 11, fontweight="bold" if i == 0 else "normal", color=CYAN if i == 0 else "#e8f4ff", family="monospace")
         y -= 0.09
     save(fig, "daily-summary-card.png")
 
@@ -332,58 +275,55 @@ def main() -> int:
         ("City temperature map (°F)", "global-city-temp-map.png"),
         ("Casey hourly temperature (°F)", "casey-hourly-temperature.png"),
         ("NDBC marine samples", "ndbc-marine-samples.png"),
+        ("Global city relative humidity (%)", "global-city-humidity.png"),
         ("Anomaly severity", "anomaly-severity.png"),
         ("Research cities Tmin/Tmax (°F)", "research-cities-tminmax.png"),
         ("Daily summary card", "daily-summary-card.png"),
     ]:
         md += [f"### {title}", "", f"![{title}](./{fn})", ""]
+        if fn == "anomaly-severity.png":
+            a = counts.get("alert", 0) if counts else 0
+            w = counts.get("watch", 0) if counts else 0
+            info = counts.get("info", 0) if counts else 0
+            tot = counts.get("total", 0) if counts else 0
+            md += [
+                "#### Anomaly detection guide (what this graph means)",
+                "",
+                "UOGW counts **research flags** for the daily sample set — **not** National Weather Service warnings.",
+                "",
+                "| Severity | Meaning |",
+                "|----------|---------|",
+                "| **Alert** | Strong outlier vs thresholds or baseline (extreme heat/cold, |z| >= 3, very high waves). |",
+                "| **Watch** | Elevated interest — heat/cold, wind, low pressure, or |z| >= 2.5 vs the 7-day baseline. |",
+                "| **Info** | Lower urgency (hot + very dry, strong high, warm water sample). |",
+                "",
+                "**How flags are made:** (1) absolute thresholds in `analytics/anomaly-thresholds.json`, "
+                "(2) z-scores vs rolling baseline (population z primary; MAD z also reported), "
+                "(3) site rules such as large Casey diurnal range.",
+                "",
+                f"Today: **alert {a}** · **watch {w}** · **info {info}** · total **{tot}**",
+                "",
+                "Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · "
+                "short guide: [ANOMALY_GUIDE.md](../ANOMALY_GUIDE.md) · "
+                "data: [anomaly-report.json](../../data/latest/anomaly-report.json)",
+                "",
+            ]
 
     if counts:
-        md += [
-            "## Anomaly severity (Mermaid)",
-            "",
-            "```mermaid",
-            "pie showData",
-            f"  title Anomaly flags {date}",
-        ]
+        md += ["## Anomaly severity (Mermaid)", "", "```mermaid", "pie showData", f"  title Anomaly flags {date}"]
         for k in ("alert", "watch", "info"):
             md.append(f'  "{k}" : {int(counts.get(k, 0))}')
         md += ["```", ""]
 
-    if city_rows:
-        sample = city_rows[-12:] if len(city_rows) > 12 else city_rows
-        labels = ", ".join('"' + esc(r[0].split(",")[0]) + '"' for r in sample)
-        vals = ", ".join(str(r[1]) for r in sample)
-        md += [
-            "## City temperatures °F (Mermaid xychart)",
-            "",
-            "```mermaid",
-            "xychart-beta",
-            f'  title "City temperatures F - {date}"',
-            f"  x-axis [{labels}]",
-            '  y-axis "Temp F"',
-            f"  bar [{vals}]",
-            "```",
-            "",
-        ]
-
-    md += [
-        "## Snapshot table (°F)",
-        "",
-        "| Metric | Value |",
-        "|--------|-------|",
-        f"| Date UTC | {date} |",
-        f"| Cities OK | {len(city_rows)} |",
-    ]
+    md += ["## Snapshot table (°F)", "", "| Metric | Value |", "|--------|-------|", f"| Date UTC | {date} |", f"| Cities OK | {len(city_rows)} |"]
     if city_rows:
         md.append(f"| City T min/max °F | {city_rows[0][1]} / {city_rows[-1][1]} |")
     md += [
         f"| Anomaly total | {counts.get('total', 'n/a') if counts else 'n/a'} |",
         f"| Casey hours | {len(cob) or 'n/a'} |",
         f"| NDBC samples | {len(ndbc_obs) or 'n/a'} |",
-        f"| Research climate cities | {len(clim_rows)} |",
         "",
-        "Source observation files remain in metric units for science interoperability; charts are °F for display.",
+        "Source observation files remain metric; charts are °F for display.",
         "",
     ]
 
@@ -394,21 +334,10 @@ def main() -> int:
         written.append(str(d / "CHARTS.md"))
 
     Path("visuals/README.md").write_text(
-        "\n".join(
-            [
-                "# UOGW Visuals",
-                "",
-                "Charts auto-generated in **Fahrenheit (°F)**.",
-                "",
-                "**[latest/CHARTS.md](./latest/CHARTS.md)**",
-                "",
-                "![Global city temperatures](./latest/global-city-temperatures.png)",
-                "",
-                "![Research cities Tmin/Tmax](./latest/research-cities-tminmax.png)",
-                "",
-            ]
-        )
-        + "\n"
+        "# UOGW Visuals\n\nCharts auto-generated in **Fahrenheit (°F)**.\n\n"
+        "**[latest/CHARTS.md](./latest/CHARTS.md)** · **[ANOMALY_GUIDE.md](./ANOMALY_GUIDE.md)**\n\n"
+        "![Global city temperatures](./latest/global-city-temperatures.png)\n\n"
+        "![Anomaly severity](./latest/anomaly-severity.png)\n"
     )
 
     manifest = {
@@ -417,8 +346,8 @@ def main() -> int:
         "generated_at_utc": now,
         "temperature_display_unit": "fahrenheit",
         "charts_md": "visuals/latest/CHARTS.md",
+        "anomaly_guide": "visuals/ANOMALY_GUIDE.md",
         "png_count": sum(1 for w in written if w.endswith(".png")),
-        "research_cities_rows": len(clim_rows),
         "automated": True,
         "curator": "Midwest Stratospheric Data Systems",
     }
@@ -438,18 +367,27 @@ def main() -> int:
                 "source": "uogw-charts",
                 "ok": True,
                 "temperature_display_unit": "fahrenheit",
-                "research_cities_rows": len(clim_rows),
                 "date": date,
                 "markdown": "visuals/latest/CHARTS.md",
+                "anomaly_guide": "visuals/ANOMALY_GUIDE.md",
                 "generated_at_utc": now,
             },
             indent=2,
         )
         + "\n"
     )
-    print(
-        f"charts written={len(written)} cities={len(city_rows)} climate_rows={len(clim_rows)} unit=F"
-    )
+
+    try:
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("hub_bundle", Path("scripts/hub_bundle.py"))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        mod.main()
+    except Exception as e:
+        print("hub_bundle skip", e)
+
+    print(f"charts written={len(written)} cities={len(city_rows)} climate_rows={len(clim_rows)} unit=F")
     return 0
 
 
