@@ -1,0 +1,55 @@
+name: Science Analytics Daily
+
+on:
+  schedule:
+    - cron: "45 9 * * *"
+    - cron: "15 12 * * *"
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Daily Research Package
+      - Anomaly Detection Daily
+      - Global Samples Daily
+      - Charts Daily
+    types:
+      - completed
+
+concurrency:
+  group: uogw-science-analytics
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  analytics:
+    if: >
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build science analytics
+        run: python3 scripts/science_analytics.py
+
+      - name: Commit analytics
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add data/entries data/latest layers/analytics snapshots status || true
+          if git diff --staged --quiet; then
+            echo "No analytics changes"
+            exit 0
+          fi
+          git commit -m "data(analytics): science analytics package $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1
