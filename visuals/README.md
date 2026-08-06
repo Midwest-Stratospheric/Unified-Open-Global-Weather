@@ -2,9 +2,8 @@
 
 Charts auto-generated in **Fahrenheit (°F)**.
 
-**[latest/CHARTS.md](./latest/CHARTS.md)**
+**[latest/CHARTS.md](./latest/CHARTS.md)** · **[ANOMALY_GUIDE.md](./ANOMALY_GUIDE.md)**
 
 ![Global city temperatures](./latest/global-city-temperatures.png)
 
-![Research cities Tmin/Tmax](./latest/research-cities-tminmax.png)
-
+![Anomaly severity](./latest/anomaly-severity.png)
