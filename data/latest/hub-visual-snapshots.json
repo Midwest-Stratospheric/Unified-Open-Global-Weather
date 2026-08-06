@@ -2,24 +2,24 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-08-06",
-  "generated_at_utc": "2026-08-06T04:26:52Z",
+  "generated_at_utc": "2026-08-06T12:28:07Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
       "n": 32,
-      "min": 49.3,
-      "max": 106.0,
-      "mean": 76.069,
-      "median": 78.95,
-      "pstdev": 13.532
+      "min": 40.6,
+      "max": 102.2,
+      "mean": 74.769,
+      "median": 76.0,
+      "pstdev": 14.224
     },
     "global_rh": {
       "n": 32,
       "min": 14.0,
-      "max": 96.0,
-      "mean": 65.25,
-      "median": 71.0,
-      "pstdev": 24.514
+      "max": 97.0,
+      "mean": 66.0,
+      "median": 77.5,
+      "pstdev": 24.891
     },
     "casey_temp_f": {
       "n": 24,
@@ -32,37 +32,37 @@
     "heat_index_flags": [
       {
         "name": "Dubai, AE",
-        "temperature_f": 106.0,
-        "relative_humidity_pct": 35,
-        "heat_index_f": 118.6,
+        "temperature_f": 102.2,
+        "relative_humidity_pct": 48,
+        "heat_index_f": 122.6,
         "level": "danger"
       },
       {
         "name": "Beijing, CN",
-        "temperature_f": 91.6,
-        "relative_humidity_pct": 57,
-        "heat_index_f": 101.7,
+        "temperature_f": 95.2,
+        "relative_humidity_pct": 50,
+        "heat_index_f": 105.7,
+        "level": "danger"
+      },
+      {
+        "name": "Seoul, KR",
+        "temperature_f": 84.9,
+        "relative_humidity_pct": 79,
+        "heat_index_f": 96.1,
         "level": "extreme_caution"
       },
       {
         "name": "Cairo, EG",
-        "temperature_f": 98.6,
-        "relative_humidity_pct": 30,
-        "heat_index_f": 100.0,
+        "temperature_f": 99.9,
+        "relative_humidity_pct": 16,
+        "heat_index_f": 96.0,
         "level": "extreme_caution"
       },
       {
-        "name": "Seoul, KR",
-        "temperature_f": 86.0,
-        "relative_humidity_pct": 79,
-        "heat_index_f": 99.3,
-        "level": "extreme_caution"
-      },
-      {
-        "name": "Rome, IT",
-        "temperature_f": 96.3,
-        "relative_humidity_pct": 33,
-        "heat_index_f": 97.7,
+        "name": "Madrid, ES",
+        "temperature_f": 95.5,
+        "relative_humidity_pct": 23,
+        "heat_index_f": 92.8,
         "level": "extreme_caution"
       }
     ],
@@ -70,20 +70,20 @@
       "hottest": {
         "name": "Dubai, AE",
         "id": "dubai_ae",
-        "temperature_c": 41.1,
-        "temperature_f": 106.0,
+        "temperature_c": 39.0,
+        "temperature_f": 102.2,
         "lat": 25.2048,
         "lon": 55.2708,
         "country": "AE"
       },
       "coldest": {
-        "name": "Sydney, AU",
-        "id": "sydney_au",
-        "temperature_c": 9.6,
-        "temperature_f": 49.3,
-        "lat": -33.8688,
-        "lon": 151.2093,
-        "country": "AU"
+        "name": "Auckland, NZ",
+        "id": "auckland_nz",
+        "temperature_c": 4.8,
+        "temperature_f": 40.6,
+        "lat": -36.8509,
+        "lon": 174.7645,
+        "country": "NZ"
       }
     }
   },
