@@ -2,7 +2,7 @@
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-08-06T02:57:24Z UTC · Midwest Stratospheric Data Systems_
+_Generated at 2026-08-06T03:03:40Z UTC · Midwest Stratospheric Data Systems_
 
 ## PNG charts
 
@@ -10,25 +10,37 @@ _Generated at 2026-08-06T02:57:24Z UTC · Midwest Stratospheric Data Systems_
 
 ![Global city temperatures (°F)](./global-city-temperatures.png)
 
+*Horizontal bar chart of current surface air temperature for each successful global city sample. Bars sorted cold→hot; warmer colors mark heat (≥86°F / ≥95°F).*
+
 ### City temperature map (°F)
 
 ![City temperature map (°F)](./global-city-temp-map.png)
+
+*Scatter map of city samples by longitude/latitude, colored by temperature (°F). Shows geographic pattern of the daily open sample set.*
 
 ### Casey hourly temperature (°F)
 
 ![Casey hourly temperature (°F)](./casey-hourly-temperature.png)
 
+*24-hour temperature trace for Casey, Illinois (MSDS home site). Useful for diurnal range and local extremes that feed anomaly rules.*
+
 ### NDBC marine samples
 
 ![NDBC marine samples](./ndbc-marine-samples.png)
+
+*NOAA NDBC buoy sample panel: wave height (meters) plus water and air temperature (°F) for stations in today's marine pull.*
 
 ### Global city relative humidity (%)
 
 ![Global city relative humidity (%)](./global-city-humidity.png)
 
+*Relative humidity (%) for the global city sample network. Dry+hot combinations can contribute to compound research flags.*
+
 ### Anomaly severity
 
 ![Anomaly severity](./anomaly-severity.png)
+
+*Count of UOGW research anomaly flags by severity (alert / watch / info). Not an NWS warning product.*
 
 #### Anomaly detection guide (what this graph means)
 
@@ -40,19 +52,21 @@ UOGW counts **research flags** for the daily sample set — **not** National Wea
 | **Watch** | Elevated interest — heat/cold, wind, low pressure, or |z| >= 2.5 vs the 7-day baseline. |
 | **Info** | Lower urgency (hot + very dry, strong high, warm water sample). |
 
-**How flags are made:** (1) absolute thresholds in `analytics/anomaly-thresholds.json`, (2) z-scores vs rolling baseline (population z primary; MAD z also reported), (3) site rules such as large Casey diurnal range.
-
 Today: **alert 1** · **watch 2** · **info 0** · total **3**
 
-Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · short guide: [ANOMALY_GUIDE.md](../ANOMALY_GUIDE.md) · data: [anomaly-report.json](../../data/latest/anomaly-report.json)
+Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMALY_GUIDE.md](../ANOMALY_GUIDE.md) · [CHART_DESCRIPTIONS.md](../CHART_DESCRIPTIONS.md)
 
 ### Research cities Tmin/Tmax (°F)
 
 ![Research cities Tmin/Tmax (°F)](./research-cities-tminmax.png)
 
+*Daily minimum and maximum temperatures for the research climate city set. Compares day-range width across selected locations.*
+
 ### Daily summary card
 
 ![Daily summary card](./daily-summary-card.png)
+
+*One-page snapshot of today's visual package: city count, temperature span, Casey hours, NDBC samples, and anomaly total.*
 
 ## Anomaly severity (Mermaid)
 
@@ -72,8 +86,4 @@ pie showData
 | Cities OK | 32 |
 | City T min/max °F | 49.3 / 106.0 |
 | Anomaly total | 3 |
-| Casey hours | 24 |
-| NDBC samples | 7 |
-
-Source observation files remain metric; charts are °F for display.
 
