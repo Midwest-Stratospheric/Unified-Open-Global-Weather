@@ -257,9 +257,6 @@ def main() -> int:
         y -= 0.09
     save(fig, "daily-summary-card.png")
 
-    def esc(s):
-        return str(s).replace('"', "'").replace("[", "(").replace("]", ")")[:36]
-
     md = [
         f"# UOGW Charts — {date}",
         "",
@@ -270,17 +267,26 @@ def main() -> int:
         "## PNG charts",
         "",
     ]
-    for title, fn in [
-        ("Global city temperatures (°F)", "global-city-temperatures.png"),
-        ("City temperature map (°F)", "global-city-temp-map.png"),
-        ("Casey hourly temperature (°F)", "casey-hourly-temperature.png"),
-        ("NDBC marine samples", "ndbc-marine-samples.png"),
-        ("Global city relative humidity (%)", "global-city-humidity.png"),
-        ("Anomaly severity", "anomaly-severity.png"),
-        ("Research cities Tmin/Tmax (°F)", "research-cities-tminmax.png"),
-        ("Daily summary card", "daily-summary-card.png"),
-    ]:
-        md += [f"### {title}", "", f"![{title}](./{fn})", ""]
+    chart_specs = [
+        ("Global city temperatures (°F)", "global-city-temperatures.png",
+         "Horizontal bar chart of current surface air temperature for each successful global city sample. Bars sorted cold→hot; warmer colors mark heat (≥86°F / ≥95°F)."),
+        ("City temperature map (°F)", "global-city-temp-map.png",
+         "Scatter map of city samples by longitude/latitude, colored by temperature (°F). Shows geographic pattern of the daily open sample set."),
+        ("Casey hourly temperature (°F)", "casey-hourly-temperature.png",
+         "24-hour temperature trace for Casey, Illinois (MSDS home site). Useful for diurnal range and local extremes that feed anomaly rules."),
+        ("NDBC marine samples", "ndbc-marine-samples.png",
+         "NOAA NDBC buoy sample panel: wave height (meters) plus water and air temperature (°F) for stations in today's marine pull."),
+        ("Global city relative humidity (%)", "global-city-humidity.png",
+         "Relative humidity (%) for the global city sample network. Dry+hot combinations can contribute to compound research flags."),
+        ("Anomaly severity", "anomaly-severity.png",
+         "Count of UOGW research anomaly flags by severity (alert / watch / info). Not an NWS warning product."),
+        ("Research cities Tmin/Tmax (°F)", "research-cities-tminmax.png",
+         "Daily minimum and maximum temperatures for the research climate city set. Compares day-range width across selected locations."),
+        ("Daily summary card", "daily-summary-card.png",
+         "One-page snapshot of today's visual package: city count, temperature span, Casey hours, NDBC samples, and anomaly total."),
+    ]
+    for title, fn, desc in chart_specs:
+        md += [f"### {title}", "", f"![{title}](./{fn})", "", f"*{desc}*", ""]
         if fn == "anomaly-severity.png":
             a = counts.get("alert", 0) if counts else 0
             w = counts.get("watch", 0) if counts else 0
@@ -297,15 +303,10 @@ def main() -> int:
                 "| **Watch** | Elevated interest — heat/cold, wind, low pressure, or |z| >= 2.5 vs the 7-day baseline. |",
                 "| **Info** | Lower urgency (hot + very dry, strong high, warm water sample). |",
                 "",
-                "**How flags are made:** (1) absolute thresholds in `analytics/anomaly-thresholds.json`, "
-                "(2) z-scores vs rolling baseline (population z primary; MAD z also reported), "
-                "(3) site rules such as large Casey diurnal range.",
-                "",
                 f"Today: **alert {a}** · **watch {w}** · **info {info}** · total **{tot}**",
                 "",
                 "Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · "
-                "short guide: [ANOMALY_GUIDE.md](../ANOMALY_GUIDE.md) · "
-                "data: [anomaly-report.json](../../data/latest/anomaly-report.json)",
+                "[ANOMALY_GUIDE.md](../ANOMALY_GUIDE.md) · [CHART_DESCRIPTIONS.md](../CHART_DESCRIPTIONS.md)",
                 "",
             ]
 
@@ -318,14 +319,7 @@ def main() -> int:
     md += ["## Snapshot table (°F)", "", "| Metric | Value |", "|--------|-------|", f"| Date UTC | {date} |", f"| Cities OK | {len(city_rows)} |"]
     if city_rows:
         md.append(f"| City T min/max °F | {city_rows[0][1]} / {city_rows[-1][1]} |")
-    md += [
-        f"| Anomaly total | {counts.get('total', 'n/a') if counts else 'n/a'} |",
-        f"| Casey hours | {len(cob) or 'n/a'} |",
-        f"| NDBC samples | {len(ndbc_obs) or 'n/a'} |",
-        "",
-        "Source observation files remain metric; charts are °F for display.",
-        "",
-    ]
+    md += [f"| Anomaly total | {counts.get('total', 'n/a') if counts else 'n/a'} |", ""]
 
     md_text = "\n".join(md) + "\n"
     for d in out_dirs:
@@ -334,23 +328,9 @@ def main() -> int:
         written.append(str(d / "CHARTS.md"))
 
     Path("visuals/README.md").write_text(
-        "# UOGW Visuals\n\nCharts auto-generated in **Fahrenheit (°F)**.\n\n"
-        "**[latest/CHARTS.md](./latest/CHARTS.md)** · **[ANOMALY_GUIDE.md](./ANOMALY_GUIDE.md)**\n\n"
-        "![Global city temperatures](./latest/global-city-temperatures.png)\n\n"
-        "![Anomaly severity](./latest/anomaly-severity.png)\n"
+        "# UOGW Visuals\n\n**[latest/CHARTS.md](./latest/CHARTS.md)** · **[CHART_DESCRIPTIONS.md](./CHART_DESCRIPTIONS.md)** · **[ANOMALY_GUIDE.md](./ANOMALY_GUIDE.md)**\n"
     )
 
-    manifest = {
-        "schema": "uogw.visuals_manifest.v2",
-        "date_utc": date,
-        "generated_at_utc": now,
-        "temperature_display_unit": "fahrenheit",
-        "charts_md": "visuals/latest/CHARTS.md",
-        "anomaly_guide": "visuals/ANOMALY_GUIDE.md",
-        "png_count": sum(1 for w in written if w.endswith(".png")),
-        "automated": True,
-        "curator": "Midwest Stratospheric Data Systems",
-    }
     for p in [
         Path(f"visuals/{date}/manifest.json"),
         Path("visuals/latest/manifest.json"),
@@ -358,28 +338,13 @@ def main() -> int:
         Path("data/latest/visuals-manifest.json"),
     ]:
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(json.dumps(manifest, indent=2) + "\n")
+        p.write_text(json.dumps({"schema": "uogw.visuals_manifest.v2", "date_utc": date, "generated_at_utc": now, "temperature_display_unit": "fahrenheit", "charts_md": "visuals/latest/CHARTS.md", "automated": True}, indent=2) + "\n")
 
     Path("status").mkdir(parents=True, exist_ok=True)
-    Path("status/charts.json").write_text(
-        json.dumps(
-            {
-                "source": "uogw-charts",
-                "ok": True,
-                "temperature_display_unit": "fahrenheit",
-                "date": date,
-                "markdown": "visuals/latest/CHARTS.md",
-                "anomaly_guide": "visuals/ANOMALY_GUIDE.md",
-                "generated_at_utc": now,
-            },
-            indent=2,
-        )
-        + "\n"
-    )
+    Path("status/charts.json").write_text(json.dumps({"source": "uogw-charts", "ok": True, "date": date, "generated_at_utc": now}, indent=2) + "\n")
 
     try:
         import importlib.util
-
         spec = importlib.util.spec_from_file_location("hub_bundle", Path("scripts/hub_bundle.py"))
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
