@@ -1,0 +1,37 @@
+name: Illinois Radiosonde Count
+
+on:
+  schedule:
+    - cron: "15 * * * *"
+    - cron: "45 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-il-radiosonde
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Illinois radiosonde count
+        run: python3 scripts/illinois_radiosonde_count.py
+      - name: Commit
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add data/entries data/latest layers/upper-air status || true
+          if git diff --staged --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "data(upper-air): Illinois radiosonde 3-day count $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 2))
+          done
+          exit 1
