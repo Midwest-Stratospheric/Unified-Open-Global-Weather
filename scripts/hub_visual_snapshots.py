@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -40,8 +41,7 @@ def main() -> int:
     casey = load("data/latest/casey-hourly.json") or {}
     cities = load("data/latest/global-cities.json") or {}
 
-    # 1) Heat & humidity snapshot
-    surface = (analytics.get("surface") or {})
+    surface = analytics.get("surface") or {}
     heat = {
         "title": "Heat & humidity snapshot",
         "global_temp_f": ((surface.get("global_city_temperature") or {}).get("fahrenheit") or {}),
@@ -51,7 +51,6 @@ def main() -> int:
         "extremes": analytics.get("extremes") or {},
     }
 
-    # 2) Marine snapshot
     obs = ndbc.get("observations") or {}
     marine_rows = []
     for sid, block in list(obs.items())[:8]:
@@ -61,16 +60,9 @@ def main() -> int:
             "wave_height_m": lo.get("wave_height_m"),
             "water_temp_f": c_to_f(lo.get("water_temp_c")),
             "air_temp_f": c_to_f(lo.get("air_temp_c")),
-            "wind_speed": lo.get("wind_speed_ms"),
         })
-    marine = {
-        "title": "Marine NDBC snapshot",
-        "station_count": len(obs),
-        "rows": marine_rows,
-        "wave_stats": ((analytics.get("marine") or {}).get("wave_height_m") or {}),
-    }
+    marine = {"title": "Marine NDBC snapshot", "station_count": len(obs), "rows": marine_rows}
 
-    # 3) Casey local series snapshot
     cob = casey.get("observations") or []
     temps_f = [c_to_f(o.get("temperature_c")) for o in cob if o.get("temperature_c") is not None]
     casey_snap = {
@@ -81,16 +73,12 @@ def main() -> int:
         "temp_f_max": max(temps_f) if temps_f else None,
         "temp_f_mean": round(sum(temps_f) / len(temps_f), 1) if temps_f else None,
         "hourly": [
-            {
-                "time": o.get("time"),
-                "temperature_f": c_to_f(o.get("temperature_c")),
-                "humidity": o.get("relative_humidity_pct"),
-            }
+            {"time": o.get("time"), "temperature_f": c_to_f(o.get("temperature_c")), "humidity": o.get("relative_humidity_pct")}
             for o in cob[-12:]
         ],
     }
 
-    # Charts
+    Path("visuals/latest").mkdir(parents=True, exist_ok=True)
     try:
         import matplotlib
 
@@ -101,19 +89,20 @@ def main() -> int:
             ax.set_facecolor("#0a1628")
             ax.tick_params(colors="#b8c9d9")
             ax.grid(True, alpha=0.25, color="#1a3050")
-            for s in ax.spines.values():
-                s.set_color("#00d4ff")
 
-        # Heat: simple bar of hottest cities from analytics extremes or cities file
         city_list = [c for c in (cities.get("cities") or []) if c.get("ok")]
         rows = []
+        press_rows = []
         for c in city_list:
             obs_c = c.get("observation") or {}
             cur = c.get("current") or {}
             t = obs_c.get("temperature_c", cur.get("temperature_2m", cur.get("temperature_c")))
-            if t is None:
-                continue
-            rows.append((c.get("name") or c.get("id"), c_to_f(t)))
+            if t is not None:
+                rows.append((c.get("name") or c.get("id"), c_to_f(t)))
+            p = obs_c.get("pressure_msl_hpa", cur.get("pressure_msl"))
+            w = obs_c.get("wind_speed_ms", cur.get("wind_speed_10m"))
+            if p is not None:
+                press_rows.append((c.get("name") or c.get("id"), p, w))
         rows.sort(key=lambda x: x[1], reverse=True)
         top = rows[:12]
         if top:
@@ -124,21 +113,33 @@ def main() -> int:
             ax.set_xlabel("°F", color="#e8f4ff")
             ax.set_title(f"Warmest sample cities (°F) — {date}", color="#e8f4ff")
             fig.tight_layout()
-            Path("visuals/latest").mkdir(parents=True, exist_ok=True)
-            fig.savefig("visuals/latest/hub-heat-cities.png", dpi=130, bbox_inches="tight", facecolor=fig.get_facecolor())
+            for name in ("hub-heat-cities.png", "heat-humidity-cities.png"):
+                fig.savefig(f"visuals/latest/{name}", dpi=130, bbox_inches="tight", facecolor=fig.get_facecolor())
+            plt.close(fig)
+
+        if press_rows:
+            press_rows.sort(key=lambda x: x[1])
+            sample = press_rows[:12]
+            fig, ax = plt.subplots(figsize=(9, 4))
+            fig.patch.set_facecolor("#0a1628")
+            style(ax)
+            ax.barh([r[0] for r in reversed(sample)], [r[1] for r in reversed(sample)], color="#38bdf8")
+            ax.set_xlabel("hPa", color="#e8f4ff")
+            ax.set_title(f"Sample city MSLP (hPa) — {date}", color="#e8f4ff")
+            fig.tight_layout()
+            fig.savefig("visuals/latest/pressure-wind-sample.png", dpi=130, bbox_inches="tight", facecolor=fig.get_facecolor())
             plt.close(fig)
 
         if marine_rows:
             fig, ax = plt.subplots(figsize=(9, 3.8))
             fig.patch.set_facecolor("#0a1628")
             style(ax)
-            labels = [r["station"] for r in marine_rows]
-            waves = [r["wave_height_m"] or 0 for r in marine_rows]
-            ax.bar(labels, waves, color="#00d4ff")
+            ax.bar([r["station"] for r in marine_rows], [r["wave_height_m"] or 0 for r in marine_rows], color="#00d4ff")
             ax.set_ylabel("Wave height (m)", color="#e8f4ff")
             ax.set_title(f"NDBC sample wave heights — {date}", color="#e8f4ff")
             fig.tight_layout()
-            fig.savefig("visuals/latest/hub-marine-waves.png", dpi=130, bbox_inches="tight", facecolor=fig.get_facecolor())
+            for name in ("hub-marine-waves.png",):
+                fig.savefig(f"visuals/latest/{name}", dpi=130, bbox_inches="tight", facecolor=fig.get_facecolor())
             plt.close(fig)
 
         if casey_snap["hourly"]:
@@ -149,8 +150,6 @@ def main() -> int:
             ax.plot(range(len(hs)), [h["temperature_f"] for h in hs], color="#00d4ff", marker="o", markersize=3)
             ax.set_ylabel("°F", color="#e8f4ff")
             ax.set_title(f"Casey recent hourly temperature (°F) — {date}", color="#e8f4ff")
-            ax.set_xticks(range(len(hs)))
-            ax.set_xticklabels([str(h.get("time") or "")[-5:] for h in hs], rotation=45, ha="right")
             fig.tight_layout()
             fig.savefig("visuals/latest/hub-casey-recent.png", dpi=130, bbox_inches="tight", facecolor=fig.get_facecolor())
             plt.close(fig)
@@ -167,6 +166,7 @@ def main() -> int:
         "casey": casey_snap,
         "charts": {
             "heat": "visuals/latest/hub-heat-cities.png",
+            "pressure": "visuals/latest/pressure-wind-sample.png",
             "marine": "visuals/latest/hub-marine-waves.png",
             "casey": "visuals/latest/hub-casey-recent.png",
         },
@@ -177,7 +177,7 @@ def main() -> int:
     ]:
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(json.dumps(payload, indent=2) + "\n")
-    print(json.dumps({"ok": True, "marine_stations": len(marine_rows), "casey_hours": len(cob)}, indent=2))
+    print(json.dumps({"ok": True}, indent=2))
     return 0
 
 
