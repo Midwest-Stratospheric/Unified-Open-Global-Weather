@@ -2,7 +2,7 @@
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-08-07T05:32:56Z UTC · Midwest Stratospheric Data Systems_
+_Generated at 2026-08-07T08:39:05Z UTC · Midwest Stratospheric Data Systems_
 
 ## PNG charts
 
@@ -84,6 +84,6 @@ pie showData
 |--------|-------|
 | Date UTC | 2026-08-07 |
 | Cities OK | 32 |
-| City T min/max °F | 40.6 / 102.2 |
+| City T min/max °F | 42.6 / 104.5 |
 | Anomaly total | 5 |
 
