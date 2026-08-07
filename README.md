@@ -101,4 +101,4 @@ Always cite upstream providers (Open-Meteo, NOAA NDBC, NOAA NCEI, NASA, etc.).
 
 ---
 
-**Midwest Stratospheric Data Systems** · Casey, Illinois · launchcontrol@midwestsds.com · NASA GLOBE **GO-4VW9B** · Ham **KE9CFY**
+**Midwest Stratospheric Data Systems** (a limited partnership under Aerostratospheric, an Illinois nonprofit corporation) · Casey, Illinois · launchcontrol@midwestsds.com · NASA GLOBE **GO-4VW9B** · Ham **KE9CFY**

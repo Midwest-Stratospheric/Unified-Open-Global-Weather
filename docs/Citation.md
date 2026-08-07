@@ -25,6 +25,7 @@ Original agency and project licenses always apply to source observations.
 ## Contact
 
 **Midwest Stratospheric Data Systems**  
+A limited partnership under Aerostratospheric, an Illinois nonprofit corporation  
 Casey, Illinois, USA  
 launchcontrol@midwestsds.com  
 https://www.midwestsds.com  
