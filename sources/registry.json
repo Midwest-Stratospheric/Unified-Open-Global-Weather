@@ -1,7 +1,8 @@
 {
   "registry_id": "uogw-sources",
-  "updated": "2026-08-04",
+  "updated": "2026-08-07",
   "curator": "Midwest Stratospheric Data Systems",
+  "curator_note": "Midwest Stratospheric Data Systems is a limited partnership under Aerostratospheric, an Illinois nonprofit corporation.",
   "note": "Authoritative and open weather sources indexed by UOGW. Includes US agencies and major foreign / international networks.",
   "sources": [
     {"id": "noaa-igra", "name": "NOAA Integrated Global Radiosonde Archive", "org": "NOAA NCEI", "domains": ["upper-air"], "cadence": "daily", "authority_url": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive", "uogw_role": "daily station index snapshot", "automation": "igra-index-daily.yml", "coverage": "global"},
@@ -34,6 +35,6 @@
     {"id": "inmet-brazil", "name": "INMET Brazil", "org": "INMET", "country": "BR", "domains": ["ground"], "authority_url": "https://portal.inmet.gov.br/", "coverage": "Brazil"},
     {"id": "wmo-oscar", "name": "WMO OSCAR", "org": "WMO", "country": "INT", "domains": ["ground", "upper-air", "satellite"], "authority_url": "https://oscar.wmo.int/", "coverage": "global"},
     {"id": "copernicus-cds", "name": "Copernicus Climate Data Store", "org": "Copernicus / EU", "country": "EU", "domains": ["reanalysis", "satellite"], "authority_url": "https://cds.climate.copernicus.eu/", "coverage": "global"},
-    {"id": "msds", "name": "Midwest Stratospheric Data Systems", "org": "MSDS", "domains": ["ground", "flight", "stratospheric"], "authority_url": "https://www.midwestsds.com/", "automation": "msds-ground-daily.yml", "coverage": "Illinois-Midwest-nearspace"}
+    {"id": "msds", "name": "Midwest Stratospheric Data Systems", "org": "MSDS", "org_note": "Limited partnership under Aerostratospheric, an Illinois nonprofit corporation", "domains": ["ground", "flight", "stratospheric"], "authority_url": "https://www.midwestsds.com/", "automation": "msds-ground-daily.yml", "coverage": "Illinois-Midwest-nearspace"}
   ]
 }
