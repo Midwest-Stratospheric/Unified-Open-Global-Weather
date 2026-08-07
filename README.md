@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./aero.svg" alt="Aerostratospheric" width="280"/>
+</p>
+
 # Unified Open Global Weather (UOGW)
 
 **An open atmospheric data commons for research — curated by [Midwest Stratospheric Data Systems](https://www.midwestsds.com)**
@@ -102,3 +106,7 @@ Always cite upstream providers (Open-Meteo, NOAA NDBC, NOAA NCEI, NASA, etc.).
 ---
 
 **Midwest Stratospheric Data Systems** (a limited partnership under Aerostratospheric, an Illinois nonprofit corporation) · Casey, Illinois · launchcontrol@midwestsds.com · NASA GLOBE **GO-4VW9B** · Ham **KE9CFY**
+
+<p align="center">
+  <img src="./aero.svg" alt="Aerostratospheric" width="220"/>
+</p>
