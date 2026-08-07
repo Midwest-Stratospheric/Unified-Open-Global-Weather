@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-07",
-  "generated_at_utc": "2026-08-07T11:35:15Z",
+  "generated_at_utc": "2026-08-07T11:58:29Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 5,
+    "anomaly_events": 3,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -206,69 +206,51 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 5,
-      "alert": 0,
-      "watch": 5,
+      "total": 3,
+      "alert": 2,
+      "watch": 1,
       "info": 0
     },
     "top": [
       {
         "kind": "surface_heat",
+        "severity": "alert",
+        "subject": "Dubai, AE",
+        "metric": "temperature_c",
+        "value": 40.3,
+        "threshold": 40,
+        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
+      },
+      {
+        "kind": "surface_heat",
         "severity": "watch",
-        "subject": "Madrid, ES",
+        "subject": "Seoul, KR",
         "metric": "temperature_c",
         "value": 35.3,
         "threshold": 35,
         "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
       },
       {
-        "kind": "surface_heat",
-        "severity": "watch",
-        "subject": "Cairo, EG",
-        "metric": "temperature_c",
-        "value": 37.7,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
-      },
-      {
-        "kind": "surface_heat",
-        "severity": "watch",
-        "subject": "Dubai, AE",
-        "metric": "temperature_c",
-        "value": 39.0,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
-      },
-      {
-        "kind": "surface_heat",
-        "severity": "watch",
-        "subject": "Beijing, CN",
-        "metric": "temperature_c",
-        "value": 35.1,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
-      },
-      {
         "kind": "temp_zscore_mad",
-        "severity": "watch",
-        "subject": "Madrid, ES",
+        "severity": "alert",
+        "subject": "Buenos Aires, AR",
         "metric": "z_mad",
-        "value": 3.9121,
-        "threshold": 3.5,
-        "detail": "Robust MAD z-score |z|>=3.5",
+        "value": -9.8477,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
         "extra": {
           "methods": {
-            "n": 3,
-            "x": 35.3,
-            "z_pop": 1.401,
-            "z_sample": 1.1439,
-            "z_mad": 3.9121,
-            "s_range": 0.6176,
-            "percentile": 75.0,
-            "mean": 33.2,
-            "median": 32.4,
-            "pstdev": 1.4989,
-            "sample_stdev": 1.8358,
+            "n": 4,
+            "x": 5.9,
+            "z_pop": -1.7219,
+            "z_sample": -1.4912,
+            "z_mad": -9.8477,
+            "s_range": -0.7006,
+            "percentile": 20.0,
+            "mean": 11.575,
+            "median": 13.2,
+            "pstdev": 3.2957,
+            "sample_stdev": 3.8056,
             "mad": 0.5
           }
         }
@@ -298,8 +280,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "5",
-      "detail": "alert 0 \u00b7 watch 5 \u00b7 info 0"
+      "value": "3",
+      "detail": "alert 2 \u00b7 watch 1 \u00b7 info 0"
     },
     {
       "id": "heat_index",
