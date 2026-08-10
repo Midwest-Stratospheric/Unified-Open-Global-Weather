@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-10",
-  "generated_at_utc": "2026-08-10T11:38:08Z",
+  "generated_at_utc": "2026-08-10T12:02:43Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 3,
+    "anomaly_events": 4,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -212,68 +212,61 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 3,
+      "total": 4,
       "alert": 1,
-      "watch": 2,
+      "watch": 3,
       "info": 0
     },
     "top": [
       {
         "kind": "surface_heat",
+        "severity": "watch",
+        "subject": "Rome, IT",
+        "metric": "temperature_c",
+        "value": 35.3,
+        "threshold": 35,
+        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+      },
+      {
+        "kind": "surface_heat",
+        "severity": "watch",
+        "subject": "Cairo, EG",
+        "metric": "temperature_c",
+        "value": 36.7,
+        "threshold": 35,
+        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+      },
+      {
+        "kind": "surface_heat",
         "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 43.7,
+        "value": 41.2,
         "threshold": 40,
         "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
       },
       {
         "kind": "temp_zscore_mad",
         "severity": "watch",
-        "subject": "Berlin, DE",
+        "subject": "Sao Paulo, BR",
         "metric": "z_mad",
-        "value": -4.2219,
+        "value": -3.7772,
         "threshold": 3.5,
         "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
-            "n": 4,
-            "x": 19.5,
-            "z_pop": -1.6801,
-            "z_sample": -1.455,
-            "z_mad": -4.2219,
-            "s_range": -0.6642,
-            "percentile": 20.0,
-            "mean": 26.275,
-            "median": 27.95,
-            "pstdev": 4.0326,
-            "sample_stdev": 4.6564,
-            "mad": 1.35
-          }
-        }
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "watch",
-        "subject": "Reykjavik, IS",
-        "metric": "z_mad",
-        "value": -4.1032,
-        "threshold": 3.5,
-        "detail": "Robust MAD z-score |z|>=3.5",
-        "extra": {
-          "methods": {
-            "n": 6,
-            "x": 8.3,
-            "z_pop": -1.5062,
-            "z_sample": -1.375,
-            "z_mad": -4.1032,
-            "s_range": -0.6136,
-            "percentile": 14.29,
-            "mean": 11.0,
-            "median": 11.95,
-            "pstdev": 1.7926,
-            "sample_stdev": 1.9637,
-            "mad": 0.6
+            "n": 7,
+            "x": 14.5,
+            "z_pop": -1.5774,
+            "z_sample": -1.4604,
+            "z_mad": -3.7772,
+            "s_range": -0.474,
+            "percentile": 12.5,
+            "mean": 19.7143,
+            "median": 20.1,
+            "pstdev": 3.3056,
+            "sample_stdev": 3.5704,
+            "mad": 1.0
           }
         }
       }
@@ -302,8 +295,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "3",
-      "detail": "alert 1 \u00b7 watch 2 \u00b7 info 0"
+      "value": "4",
+      "detail": "alert 1 \u00b7 watch 3 \u00b7 info 0"
     },
     {
       "id": "heat_index",
