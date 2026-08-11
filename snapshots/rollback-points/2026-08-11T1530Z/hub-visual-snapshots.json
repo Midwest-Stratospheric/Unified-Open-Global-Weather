@@ -1,0 +1,214 @@
+{
+  "schema": "uogw.hub_visual_snapshots.v1",
+  "ok": true,
+  "date_utc": "2026-08-11",
+  "generated_at_utc": "2026-08-11T14:46:19Z",
+  "heat": {
+    "title": "Heat & humidity snapshot",
+    "global_temp_f": {
+      "n": 32,
+      "min": 35.6,
+      "max": 106.3,
+      "mean": 71.8,
+      "median": 72.0,
+      "pstdev": 15.261
+    },
+    "global_rh": {
+      "n": 32,
+      "min": 31.0,
+      "max": 100.0,
+      "mean": 68.406,
+      "median": 71.5,
+      "pstdev": 20.471
+    },
+    "casey_temp_f": {
+      "n": 24,
+      "min": 75.4,
+      "max": 88.7,
+      "mean": 81.596,
+      "median": 81.65,
+      "pstdev": 4.248
+    },
+    "heat_index_flags": [
+      {
+        "name": "Dubai, AE",
+        "temperature_f": 106.3,
+        "relative_humidity_pct": 31,
+        "heat_index_f": 115.2,
+        "level": "danger"
+      },
+      {
+        "name": "Beijing, CN",
+        "temperature_f": 91.0,
+        "relative_humidity_pct": 55,
+        "heat_index_f": 99.2,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Cairo, EG",
+        "temperature_f": 94.3,
+        "relative_humidity_pct": 40,
+        "heat_index_f": 97.7,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Singapore, SG",
+        "temperature_f": 88.5,
+        "relative_humidity_pct": 55,
+        "heat_index_f": 93.9,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Jakarta, ID",
+        "temperature_f": 89.1,
+        "relative_humidity_pct": 51,
+        "heat_index_f": 93.4,
+        "level": "extreme_caution"
+      }
+    ],
+    "extremes": {
+      "hottest": {
+        "name": "Dubai, AE",
+        "id": "dubai_ae",
+        "temperature_c": 41.3,
+        "temperature_f": 106.3,
+        "lat": 25.2048,
+        "lon": 55.2708,
+        "country": "AE"
+      },
+      "coldest": {
+        "name": "Johannesburg, ZA",
+        "id": "johannesburg_za",
+        "temperature_c": 2.0,
+        "temperature_f": 35.6,
+        "lat": -26.2041,
+        "lon": 28.0473,
+        "country": "ZA"
+      }
+    }
+  },
+  "marine": {
+    "title": "Marine NDBC snapshot",
+    "station_count": 7,
+    "rows": [
+      {
+        "station": "41001",
+        "wave_height_m": null,
+        "water_temp_f": 77.5,
+        "air_temp_f": 77.5
+      },
+      {
+        "station": "46026",
+        "wave_height_m": null,
+        "water_temp_f": 57.7,
+        "air_temp_f": null
+      },
+      {
+        "station": "44025",
+        "wave_height_m": 0.7,
+        "water_temp_f": 69.4,
+        "air_temp_f": null
+      },
+      {
+        "station": "46013",
+        "wave_height_m": null,
+        "water_temp_f": null,
+        "air_temp_f": 56.3
+      },
+      {
+        "station": "46042",
+        "wave_height_m": null,
+        "water_temp_f": 61.2,
+        "air_temp_f": 59.9
+      },
+      {
+        "station": "41008",
+        "wave_height_m": null,
+        "water_temp_f": null,
+        "air_temp_f": 81.9
+      },
+      {
+        "station": "46029",
+        "wave_height_m": null,
+        "water_temp_f": 57.6,
+        "air_temp_f": 56.8
+      }
+    ]
+  },
+  "casey": {
+    "title": "Casey local conditions",
+    "date": "2026-08-10",
+    "observation_count": 24,
+    "temp_f_min": 75.4,
+    "temp_f_max": 88.7,
+    "temp_f_mean": 81.6,
+    "hourly": [
+      {
+        "time": "2026-08-10T12:00",
+        "temperature_f": 86.9,
+        "humidity": 61
+      },
+      {
+        "time": "2026-08-10T13:00",
+        "temperature_f": 85.1,
+        "humidity": 77
+      },
+      {
+        "time": "2026-08-10T14:00",
+        "temperature_f": 85.5,
+        "humidity": 78
+      },
+      {
+        "time": "2026-08-10T15:00",
+        "temperature_f": 86.5,
+        "humidity": 74
+      },
+      {
+        "time": "2026-08-10T16:00",
+        "temperature_f": 88.2,
+        "humidity": 71
+      },
+      {
+        "time": "2026-08-10T17:00",
+        "temperature_f": 88.7,
+        "humidity": 69
+      },
+      {
+        "time": "2026-08-10T18:00",
+        "temperature_f": 86.9,
+        "humidity": 73
+      },
+      {
+        "time": "2026-08-10T19:00",
+        "temperature_f": 84.9,
+        "humidity": 80
+      },
+      {
+        "time": "2026-08-10T20:00",
+        "temperature_f": 82.0,
+        "humidity": 87
+      },
+      {
+        "time": "2026-08-10T21:00",
+        "temperature_f": 82.0,
+        "humidity": 82
+      },
+      {
+        "time": "2026-08-10T22:00",
+        "temperature_f": 81.3,
+        "humidity": 80
+      },
+      {
+        "time": "2026-08-10T23:00",
+        "temperature_f": 80.2,
+        "humidity": 86
+      }
+    ]
+  },
+  "charts": {
+    "heat": "visuals/latest/hub-heat-cities.png",
+    "pressure": "visuals/latest/pressure-wind-sample.png",
+    "marine": "visuals/latest/hub-marine-waves.png",
+    "casey": "visuals/latest/hub-casey-recent.png"
+  }
+}
