@@ -1,48 +1,48 @@
 {
-  "generated_at_utc": "2026-08-11T10:38:11Z",
+  "generated_at_utc": "2026-08-12T11:12:09Z",
   "catalog_datasets": 25,
-  "layer_json_files": 108,
+  "layer_json_files": 122,
   "sources": {
     "anomaly": {
       "source": "uogw-anomaly-detection",
       "ok": true,
       "schema": "uogw.anomaly_report.v2",
-      "date": "2026-08-10",
-      "total": 4,
-      "alerts": 1,
-      "data_entry": "data/entries/2026-08-10/anomaly-report.json",
-      "generated_at_utc": "2026-08-10T12:02:27Z"
+      "date": "2026-08-11",
+      "total": 2,
+      "alerts": 2,
+      "data_entry": "data/entries/2026-08-11/anomaly-report.json",
+      "generated_at_utc": "2026-08-11T11:56:57Z"
     },
     "baseline": {
       "source": "uogw-rolling-baseline",
       "ok": true,
       "city_count": 34,
-      "data_entry": "data/entries/2026-08-10/rolling-baseline.json",
-      "generated_at_utc": "2026-08-10T11:57:13Z"
+      "data_entry": "data/entries/2026-08-11/rolling-baseline.json",
+      "generated_at_utc": "2026-08-11T11:34:10Z"
     },
     "charts": {
       "source": "uogw-charts",
       "ok": true,
-      "date": "2026-08-11",
-      "generated_at_utc": "2026-08-11T10:37:31Z"
+      "date": "2026-08-12",
+      "generated_at_utc": "2026-08-12T11:11:25Z"
     },
     "component-snapshots": {
       "ok": true,
-      "date": "2026-08-11",
-      "generated_at_utc": "2026-08-11T10:37:27Z"
+      "date": "2026-08-12",
+      "generated_at_utc": "2026-08-12T11:11:09Z"
     },
     "fair": {
       "source": "uogw-fair-metadata",
       "ok": true,
-      "date": "2026-08-10",
-      "data_entry": "data/entries/2026-08-10/fair-metadata.json",
-      "generated_at_utc": "2026-08-10T12:05:14Z"
+      "date": "2026-08-11",
+      "data_entry": "data/entries/2026-08-11/fair-metadata.json",
+      "generated_at_utc": "2026-08-11T12:01:47Z"
     },
     "global-samples": {
       "source": "open-meteo-samples",
       "ok": true,
       "city_count": 34,
-      "ok_count": 32,
+      "ok_count": 33,
       "country_count": 30,
       "countries": [
         "AE",
@@ -76,22 +76,22 @@
         "US",
         "ZA"
       ],
-      "data_entry": "data/entries/2026-08-11/global-cities.json",
-      "generated_at_utc": "2026-08-11T08:16:56Z"
+      "data_entry": "data/entries/2026-08-12/global-cities.json",
+      "generated_at_utc": "2026-08-12T08:53:21Z"
     },
     "heal": {
       "schema": "uogw.heal_actions.v1",
-      "generated_at_utc": "2026-08-10T20:08:55Z",
+      "generated_at_utc": "2026-08-11T20:10:14Z",
       "actions": [
         {
-          "rollback_point": "2026-08-10T2008Z"
+          "rollback_point": "2026-08-11T2010Z"
         }
       ]
     },
     "health": {
       "schema": "uogw.health_report.v1",
-      "date_utc": "2026-08-10",
-      "generated_at_utc": "2026-08-10T20:08:56Z",
+      "date_utc": "2026-08-11",
+      "generated_at_utc": "2026-08-11T20:10:14Z",
       "ok": true,
       "critical_fail": false,
       "checks": [
@@ -186,7 +186,7 @@
       ],
       "heal_actions": [
         {
-          "rollback_point": "2026-08-10T2008Z"
+          "rollback_point": "2026-08-11T2010Z"
         }
       ],
       "redispatch_workflows": [],
@@ -203,21 +203,21 @@
     },
     "hub-endpoints": {
       "ok": true,
-      "date": "2026-08-11",
-      "generated_at_utc": "2026-08-11T10:37:34Z"
+      "date": "2026-08-12",
+      "generated_at_utc": "2026-08-12T11:11:27Z"
     },
     "igra": {
       "source": "noaa-igra",
       "ok": true,
       "station_count": 2931,
       "file_count": 0,
-      "data_entry": "data/entries/2026-08-11/igra-index.json",
-      "generated_at_utc": "2026-08-11T09:45:14Z"
+      "data_entry": "data/entries/2026-08-12/igra-index.json",
+      "generated_at_utc": "2026-08-12T10:34:27Z"
     },
     "illinois-radiosonde-count": {
       "ok": true,
-      "generated_at_utc": "2026-08-11T08:39:47Z",
-      "launches_3_days": 6,
+      "generated_at_utc": "2026-08-12T10:39:04Z",
+      "launches_3_days": 7,
       "devices_likely_aloft": 0
     },
     "international": {
@@ -226,15 +226,15 @@
       "ghcn_station_count": 132501,
       "ghcn_country_count": 219,
       "foreign_source_count": 18,
-      "generated_at_utc": "2026-08-11T08:38:00Z"
+      "generated_at_utc": "2026-08-12T09:43:35Z"
     },
     "msds-ground": {
       "source": "msds-casey-ground",
       "ok": true,
-      "date": "2026-08-10",
+      "date": "2026-08-11",
       "observation_count": 24,
-      "data_entry": "data/entries/2026-08-10/casey-hourly.json",
-      "generated_at_utc": "2026-08-11T09:43:52Z"
+      "data_entry": "data/entries/2026-08-11/casey-hourly.json",
+      "generated_at_utc": "2026-08-12T09:48:29Z"
     },
     "ndbc": {
       "source": "ndbc",
@@ -251,48 +251,48 @@
         "46029"
       ],
       "realtime_observation_count": 7,
-      "data_entry": "data/entries/2026-08-11/ndbc-realtime.json",
-      "generated_at_utc": "2026-08-11T10:37:04Z"
+      "data_entry": "data/entries/2026-08-12/ndbc-realtime.json",
+      "generated_at_utc": "2026-08-12T11:10:49Z"
     },
     "ozone-health": {
       "ok": true,
-      "date": "2026-08-11",
-      "generated_at_utc": "2026-08-11T09:45:05Z",
+      "date": "2026-08-12",
+      "generated_at_utc": "2026-08-12T09:49:47Z",
       "casey_band": "moderate"
     },
     "pre-tornado-clark": {
       "ok": true,
-      "date": "2026-08-11",
-      "generated_at_utc": "2026-08-11T08:38:59Z",
-      "score": 77,
+      "date": "2026-08-12",
+      "generated_at_utc": "2026-08-12T09:48:43Z",
+      "score": 69,
       "level": "high"
     },
     "research-package": {
       "source": "uogw-research-package",
       "ok": true,
-      "date": "2026-08-10",
-      "data_entry": "data/entries/2026-08-10/science-package.json",
-      "research_summary": "data/entries/2026-08-10/research-summary.json",
-      "generated_at_utc": "2026-08-10T11:37:16Z"
+      "date": "2026-08-11",
+      "data_entry": "data/entries/2026-08-11/science-package.json",
+      "research_summary": "data/entries/2026-08-11/research-summary.json",
+      "generated_at_utc": "2026-08-11T11:32:35Z"
     },
     "satellite": {
       "source": "uogw-satellite-radiance",
       "ok": true,
       "product_count": 6,
-      "data_entry": "data/entries/2026-08-10/satellite-radiance-index.json",
-      "generated_at_utc": "2026-08-10T12:11:26Z"
+      "data_entry": "data/entries/2026-08-11/satellite-radiance-index.json",
+      "generated_at_utc": "2026-08-11T12:29:35Z"
     },
     "science-analytics": {
       "source": "uogw-science-analytics",
       "ok": true,
-      "date": "2026-08-11",
-      "generated_at_utc": "2026-08-11T10:37:51Z",
-      "data_entry": "data/entries/2026-08-11/science-analytics.json",
+      "date": "2026-08-12",
+      "generated_at_utc": "2026-08-12T11:11:41Z",
+      "data_entry": "data/entries/2026-08-12/science-analytics.json",
       "highlight_count": 5
     },
     "space-gfs": {
       "ok": true,
-      "generated_at_utc": "2026-08-11T08:14:45Z",
+      "generated_at_utc": "2026-08-12T09:50:32Z",
       "space_ok": true,
       "gfs_ok": true,
       "nomads_ok": true
