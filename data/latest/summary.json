@@ -1,6 +1,6 @@
 {
   "date": "2026-08-12",
-  "generated_at_utc": "2026-08-12T11:11:41Z",
+  "generated_at_utc": "2026-08-12T11:34:48Z",
   "entries": {
     "global-cities": {
       "ok": true,
@@ -32,7 +32,68 @@
         "46029"
       ],
       "file": "data/entries/2026-08-12/ndbc-realtime.json"
+    },
+    "research-summary": {
+      "ok": true,
+      "file": "data/entries/2026-08-12/research-summary.json",
+      "dataset_count": 25,
+      "global_cities_ok": 33,
+      "ndbc_realtime_stations": 7,
+      "casey_hourly_count": 24,
+      "daily_climate_cities": 10
+    },
+    "science-package": {
+      "ok": true,
+      "file": "data/entries/2026-08-12/science-package.json"
+    },
+    "daily-climate": {
+      "ok": true,
+      "observation_count": 10,
+      "file": "data/entries/2026-08-12/daily-climate.json"
     }
   },
-  "curator": "Midwest Stratospheric Data Systems"
+  "curator": "Midwest Stratospheric Data Systems",
+  "indexes": {
+    "igra_stations": 2931,
+    "igra_y2d_files": 0,
+    "ndbc_stations": 1936,
+    "ghcn_stations": 132501,
+    "ghcn_countries": 219,
+    "foreign_open_sources": 18,
+    "global_city_samples": 34,
+    "global_city_ok": 33
+  },
+  "derived_surface_stats": {
+    "global_city_temperature_c": {
+      "mean": 22.297,
+      "min": 8.4,
+      "max": 38.9
+    },
+    "global_city_humidity_pct": {
+      "mean": 67.515
+    },
+    "global_city_pressure_hpa": {
+      "mean": 1014.997
+    },
+    "global_city_wind_ms": {
+      "mean": 2.704
+    },
+    "casey_temperature_c": {
+      "min": 21.3,
+      "max": 33.3,
+      "mean": 26.433
+    },
+    "ndbc_wave_height_m": {
+      "mean": null,
+      "n": 0
+    },
+    "ndbc_water_temp_c": {
+      "mean": 18.48,
+      "n": 5
+    },
+    "ndbc_air_temp_c": {
+      "mean": 19.52,
+      "n": 5
+    }
+  }
 }
