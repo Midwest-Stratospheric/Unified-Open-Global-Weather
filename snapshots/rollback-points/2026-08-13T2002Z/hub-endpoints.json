@@ -1,0 +1,42 @@
+{
+  "schema": "uogw.hub_endpoints.v1",
+  "date_utc": "2026-08-13",
+  "generated_at_utc": "2026-08-13T16:31:10Z",
+  "data_hub": "https://midwestsds.com/msds-data-hub.html",
+  "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+  "raw_base": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main",
+  "endpoints": {
+    "science_package": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/science-package.json",
+    "research_summary": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/research-summary.json",
+    "science_analytics": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/science-analytics.json",
+    "anomaly_report": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/anomaly-report.json",
+    "global_cities": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/global-cities.json",
+    "casey_hourly": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/casey-hourly.json",
+    "ndbc_realtime": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/ndbc-realtime.json",
+    "rolling_baseline": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/rolling-baseline.json",
+    "charts_status": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/status/charts.json",
+    "charts_markdown": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/visuals/latest/CHARTS.md",
+    "anomaly_methods": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/docs/ANOMALY_METHODS.md",
+    "catalog": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/catalog/catalog.json"
+  },
+  "charts": {
+    "base": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/visuals/latest/",
+    "files": [
+      "global-city-temperatures.png",
+      "global-city-temp-map.png",
+      "casey-hourly-temperature.png",
+      "research-cities-tminmax.png",
+      "ndbc-marine-samples.png",
+      "anomaly-severity.png",
+      "global-city-humidity.png",
+      "daily-summary-card.png"
+    ],
+    "temperature_display_unit": "fahrenheit"
+  },
+  "anomaly_guide": {
+    "alert": "Strong outlier vs thresholds or baseline (research only \u2014 not an NWS warning).",
+    "watch": "Elevated interest: heat/cold, wind, pressure, or |z| >= 2.5 vs recent baseline.",
+    "info": "Notable lower-urgency conditions (e.g. dry-hot, strong high, warm water).",
+    "methods_doc": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/docs/ANOMALY_METHODS.md"
+  }
+}
