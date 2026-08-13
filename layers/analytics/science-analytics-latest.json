@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-13",
-  "generated_at_utc": "2026-08-13T11:35:38Z",
+  "generated_at_utc": "2026-08-13T12:02:17Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 4,
+    "anomaly_events": 2,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -198,77 +198,43 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 4,
+      "total": 2,
       "alert": 1,
-      "watch": 3,
+      "watch": 1,
       "info": 0
     },
     "top": [
       {
         "kind": "surface_heat",
-        "severity": "watch",
-        "subject": "Cairo, EG",
-        "metric": "temperature_c",
-        "value": 36.3,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
-      },
-      {
-        "kind": "surface_heat",
-        "severity": "watch",
+        "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 38.9,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "alert",
-        "subject": "Beijing, CN",
-        "metric": "z_mad",
-        "value": -6.6326,
-        "threshold": 5.0,
-        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
-        "extra": {
-          "methods": {
-            "n": 7,
-            "x": 25.8,
-            "z_pop": -2.1582,
-            "z_sample": -1.9981,
-            "z_mad": -6.6326,
-            "s_range": -0.6037,
-            "percentile": 12.5,
-            "mean": 31.4143,
-            "median": 31.7,
-            "pstdev": 2.6013,
-            "sample_stdev": 2.8098,
-            "mad": 0.6
-          }
-        }
+        "value": 44.0,
+        "threshold": 40,
+        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
       },
       {
         "kind": "temp_zscore_mad",
         "severity": "watch",
-        "subject": "Bangkok, TH",
+        "subject": "Beijing, CN",
         "metric": "z_mad",
-        "value": -4.7215,
+        "value": -4.2718,
         "threshold": 3.5,
         "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 28.0,
-            "z_pop": -1.3921,
-            "z_sample": -1.2889,
-            "z_mad": -4.7215,
-            "s_range": -0.4422,
-            "percentile": 12.5,
-            "mean": 28.9286,
-            "median": 28.7,
-            "pstdev": 0.667,
-            "sample_stdev": 0.7204,
-            "mad": 0.1
+            "x": 27.9,
+            "z_pop": -1.0568,
+            "z_sample": -0.9784,
+            "z_mad": -4.2718,
+            "s_range": -0.3551,
+            "percentile": 25.0,
+            "mean": 30.3857,
+            "median": 31.7,
+            "pstdev": 2.3522,
+            "sample_stdev": 2.5406,
+            "mad": 0.6
           }
         }
       }
@@ -297,8 +263,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "4",
-      "detail": "alert 1 \u00b7 watch 3 \u00b7 info 0"
+      "value": "2",
+      "detail": "alert 1 \u00b7 watch 1 \u00b7 info 0"
     },
     {
       "id": "heat_index",
