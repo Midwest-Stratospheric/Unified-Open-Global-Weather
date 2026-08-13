@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-13",
-  "generated_at_utc": "2026-08-13T09:51:06Z",
+  "generated_at_utc": "2026-08-13T11:12:05Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -88,41 +88,47 @@
     }
   },
   "marine": {
-    "wave_height_m": null,
+    "wave_height_m": {
+      "n": 1,
+      "min": 2.2,
+      "max": 2.2,
+      "mean": 2.2,
+      "median": 2.2
+    },
     "water_temperature": {
       "celsius": {
-        "n": 5,
-        "min": 14.7,
-        "max": 25.3,
-        "mean": 18.48,
-        "median": 16.2,
-        "pstdev": 3.97
+        "n": 4,
+        "min": 14.2,
+        "max": 25.4,
+        "mean": 17.475,
+        "median": 15.15,
+        "pstdev": 4.622
       },
       "fahrenheit": {
-        "n": 5,
-        "min": 58.5,
-        "max": 77.5,
-        "mean": 65.28,
-        "median": 61.2,
-        "pstdev": 7.119
+        "n": 4,
+        "min": 57.6,
+        "max": 77.7,
+        "mean": 63.45,
+        "median": 59.25,
+        "pstdev": 8.31
       }
     },
     "air_temperature": {
       "celsius": {
         "n": 5,
-        "min": 13.7,
-        "max": 28.7,
-        "mean": 19.52,
-        "median": 15.2,
-        "pstdev": 6.36
+        "min": 12.8,
+        "max": 29.4,
+        "mean": 19.2,
+        "median": 14.8,
+        "pstdev": 7.021
       },
       "fahrenheit": {
         "n": 5,
-        "min": 56.7,
-        "max": 83.7,
-        "mean": 67.16,
-        "median": 59.4,
-        "pstdev": 11.461
+        "min": 55.0,
+        "max": 84.9,
+        "mean": 66.54,
+        "median": 58.6,
+        "pstdev": 12.637
       }
     }
   },
