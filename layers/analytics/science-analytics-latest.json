@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-14",
-  "generated_at_utc": "2026-08-14T11:31:24Z",
+  "generated_at_utc": "2026-08-14T11:58:07Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 2,
+    "anomaly_events": 1,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -185,9 +185,9 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 2,
+      "total": 1,
       "alert": 1,
-      "watch": 1,
+      "watch": 0,
       "info": 0
     },
     "top": [
@@ -196,34 +196,9 @@
         "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 44.0,
+        "value": 41.6,
         "threshold": 40,
         "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "watch",
-        "subject": "Beijing, CN",
-        "metric": "z_mad",
-        "value": -4.2718,
-        "threshold": 3.5,
-        "detail": "Robust MAD z-score |z|>=3.5",
-        "extra": {
-          "methods": {
-            "n": 7,
-            "x": 27.9,
-            "z_pop": -1.0568,
-            "z_sample": -0.9784,
-            "z_mad": -4.2718,
-            "s_range": -0.3551,
-            "percentile": 25.0,
-            "mean": 30.3857,
-            "median": 31.7,
-            "pstdev": 2.3522,
-            "sample_stdev": 2.5406,
-            "mad": 0.6
-          }
-        }
       }
     ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
@@ -250,8 +225,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "2",
-      "detail": "alert 1 \u00b7 watch 1 \u00b7 info 0"
+      "value": "1",
+      "detail": "alert 1 \u00b7 watch 0 \u00b7 info 0"
     },
     {
       "id": "heat_index",
