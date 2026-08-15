@@ -1,0 +1,366 @@
+{
+  "schema": "uogw.pre_tornado_clark.v1",
+  "ok": true,
+  "date_utc": "2026-08-15",
+  "generated_at_utc": "2026-08-15T17:59:28Z",
+  "site": {
+    "name": "Clark County, Illinois (Casey area)",
+    "county": "Clark",
+    "state": "IL",
+    "lat": 39.299,
+    "lon": -87.992,
+    "timezone": "America/Chicago"
+  },
+  "disclaimer": "RESEARCH SCREENING ONLY. This is NOT a National Weather Service watch, warning, or forecast. Tornadoes can occur with little notice. Always follow NWS, local emergency management, and NOAA Weather Radio.",
+  "probability_research": {
+    "score_0_to_100": 56,
+    "level": "watch",
+    "level_label": "Watch conditions",
+    "meaning": "Multiple research factors concurrent (instability, moisture, and/or wind/pressure signals). Monitor NWS/SPC products closely.",
+    "method": "Weighted composite of CAPE, lifted index, CIN, dewpoint moisture, wind gust proxy, and 3-hour pressure tendency from Open-Meteo near Casey, IL. Not calibrated storm probability."
+  },
+  "components": {
+    "cape": {
+      "points": 12,
+      "value": 590.0,
+      "note": "Moderate CAPE"
+    },
+    "lifted_index": {
+      "points": 8,
+      "value": -2.1,
+      "note": "Moderately unstable"
+    },
+    "cin": {
+      "points": 10,
+      "value": 5.0,
+      "note": "Little inhibition"
+    },
+    "moisture": {
+      "points": 15,
+      "value": 21.1,
+      "note": "Very moist boundary layer"
+    },
+    "wind": {
+      "points": 7,
+      "value": 15.8,
+      "note": "Moderate gusts"
+    },
+    "pressure_tendency": {
+      "points": 4,
+      "value": 0.0,
+      "note": "Slight fall/steady"
+    }
+  },
+  "observations": {
+    "cape_jkg": 590.0,
+    "cin_jkg": 5.0,
+    "lifted_index": -2.1,
+    "dewpoint_c": 21.1,
+    "dewpoint_f": 70.0,
+    "relative_humidity_pct": 69.0,
+    "wind_speed_kmh": 11.7,
+    "wind_gusts_kmh": 15.8,
+    "pressure_msl_hpa": 1017.5,
+    "pressure_tendency_3h_hpa": 0.0,
+    "temperature_c": 27.3,
+    "temperature_f": 81.1
+  },
+  "trend_hourly": [
+    {
+      "time": "2026-08-15T00:00",
+      "score": 35,
+      "level": "elevated",
+      "cape_jkg": 180.0,
+      "dewpoint_f": 70.3,
+      "pressure_msl_hpa": 1018.1
+    },
+    {
+      "time": "2026-08-15T01:00",
+      "score": 39,
+      "level": "elevated",
+      "cape_jkg": 420.0,
+      "dewpoint_f": 71.1,
+      "pressure_msl_hpa": 1018.0
+    },
+    {
+      "time": "2026-08-15T02:00",
+      "score": 45,
+      "level": "watch",
+      "cape_jkg": 540.0,
+      "dewpoint_f": 71.8,
+      "pressure_msl_hpa": 1017.8
+    },
+    {
+      "time": "2026-08-15T03:00",
+      "score": 57,
+      "level": "watch",
+      "cape_jkg": 1490.0,
+      "dewpoint_f": 72.7,
+      "pressure_msl_hpa": 1017.1
+    },
+    {
+      "time": "2026-08-15T04:00",
+      "score": 60,
+      "level": "watch",
+      "cape_jkg": 1410.0,
+      "dewpoint_f": 73.8,
+      "pressure_msl_hpa": 1017.3
+    },
+    {
+      "time": "2026-08-15T05:00",
+      "score": 57,
+      "level": "watch",
+      "cape_jkg": 1470.0,
+      "dewpoint_f": 74.1,
+      "pressure_msl_hpa": 1017.5
+    },
+    {
+      "time": "2026-08-15T06:00",
+      "score": 52,
+      "level": "watch",
+      "cape_jkg": 1470.0,
+      "dewpoint_f": 73.4,
+      "pressure_msl_hpa": 1017.4
+    },
+    {
+      "time": "2026-08-15T07:00",
+      "score": 50,
+      "level": "watch",
+      "cape_jkg": 1220.0,
+      "dewpoint_f": 73.6,
+      "pressure_msl_hpa": 1018.7
+    },
+    {
+      "time": "2026-08-15T08:00",
+      "score": 61,
+      "level": "watch",
+      "cape_jkg": 1060.0,
+      "dewpoint_f": 74.8,
+      "pressure_msl_hpa": 1019.4
+    },
+    {
+      "time": "2026-08-15T09:00",
+      "score": 49,
+      "level": "watch",
+      "cape_jkg": 850.0,
+      "dewpoint_f": 75.0,
+      "pressure_msl_hpa": 1019.6
+    },
+    {
+      "time": "2026-08-15T10:00",
+      "score": 49,
+      "level": "watch",
+      "cape_jkg": 710.0,
+      "dewpoint_f": 74.5,
+      "pressure_msl_hpa": 1019.6
+    },
+    {
+      "time": "2026-08-15T11:00",
+      "score": 48,
+      "level": "watch",
+      "cape_jkg": 710.0,
+      "dewpoint_f": 74.8,
+      "pressure_msl_hpa": 1019.3
+    },
+    {
+      "time": "2026-08-15T12:00",
+      "score": 56,
+      "level": "watch",
+      "cape_jkg": 510.0,
+      "dewpoint_f": 72.5,
+      "pressure_msl_hpa": 1019.6
+    },
+    {
+      "time": "2026-08-15T13:00",
+      "score": 50,
+      "level": "watch",
+      "cape_jkg": 630.0,
+      "dewpoint_f": 70.9,
+      "pressure_msl_hpa": 1017.0
+    },
+    {
+      "time": "2026-08-15T14:00",
+      "score": 56,
+      "level": "watch",
+      "cape_jkg": 790.0,
+      "dewpoint_f": 72.0,
+      "pressure_msl_hpa": 1017.3
+    },
+    {
+      "time": "2026-08-15T15:00",
+      "score": 59,
+      "level": "watch",
+      "cape_jkg": 940.0,
+      "dewpoint_f": 71.2,
+      "pressure_msl_hpa": 1016.8
+    },
+    {
+      "time": "2026-08-15T16:00",
+      "score": 50,
+      "level": "watch",
+      "cape_jkg": 950.0,
+      "dewpoint_f": 69.1,
+      "pressure_msl_hpa": 1016.5
+    },
+    {
+      "time": "2026-08-15T17:00",
+      "score": 68,
+      "level": "high",
+      "cape_jkg": 1520.0,
+      "dewpoint_f": 71.2,
+      "pressure_msl_hpa": 1016.2
+    },
+    {
+      "time": "2026-08-15T18:00",
+      "score": 71,
+      "level": "high",
+      "cape_jkg": 1780.0,
+      "dewpoint_f": 70.7,
+      "pressure_msl_hpa": 1016.2
+    },
+    {
+      "time": "2026-08-15T19:00",
+      "score": 69,
+      "level": "high",
+      "cape_jkg": 2470.0,
+      "dewpoint_f": 73.6,
+      "pressure_msl_hpa": 1016.0
+    },
+    {
+      "time": "2026-08-15T20:00",
+      "score": 66,
+      "level": "high",
+      "cape_jkg": 2690.0,
+      "dewpoint_f": 73.6,
+      "pressure_msl_hpa": 1016.0
+    },
+    {
+      "time": "2026-08-15T21:00",
+      "score": 63,
+      "level": "watch",
+      "cape_jkg": 2560.0,
+      "dewpoint_f": 74.1,
+      "pressure_msl_hpa": 1016.3
+    },
+    {
+      "time": "2026-08-15T22:00",
+      "score": 66,
+      "level": "high",
+      "cape_jkg": 2450.0,
+      "dewpoint_f": 73.8,
+      "pressure_msl_hpa": 1016.1
+    },
+    {
+      "time": "2026-08-15T23:00",
+      "score": 66,
+      "level": "high",
+      "cape_jkg": 2120.0,
+      "dewpoint_f": 73.2,
+      "pressure_msl_hpa": 1015.9
+    },
+    {
+      "time": "2026-08-16T00:00",
+      "score": 64,
+      "level": "watch",
+      "cape_jkg": 1780.0,
+      "dewpoint_f": 72.0,
+      "pressure_msl_hpa": 1015.7
+    },
+    {
+      "time": "2026-08-16T01:00",
+      "score": 63,
+      "level": "watch",
+      "cape_jkg": 1230.0,
+      "dewpoint_f": 70.3,
+      "pressure_msl_hpa": 1015.4
+    },
+    {
+      "time": "2026-08-16T02:00",
+      "score": 48,
+      "level": "watch",
+      "cape_jkg": 850.0,
+      "dewpoint_f": 68.9,
+      "pressure_msl_hpa": 1014.7
+    },
+    {
+      "time": "2026-08-16T03:00",
+      "score": 45,
+      "level": "watch",
+      "cape_jkg": 430.0,
+      "dewpoint_f": 67.5,
+      "pressure_msl_hpa": 1014.0
+    },
+    {
+      "time": "2026-08-16T04:00",
+      "score": 37,
+      "level": "elevated",
+      "cape_jkg": 170.0,
+      "dewpoint_f": 66.0,
+      "pressure_msl_hpa": 1013.6
+    },
+    {
+      "time": "2026-08-16T05:00",
+      "score": 34,
+      "level": "elevated",
+      "cape_jkg": 160.0,
+      "dewpoint_f": 64.6,
+      "pressure_msl_hpa": 1013.8
+    },
+    {
+      "time": "2026-08-16T06:00",
+      "score": 30,
+      "level": "elevated",
+      "cape_jkg": 160.0,
+      "dewpoint_f": 66.0,
+      "pressure_msl_hpa": 1013.2
+    },
+    {
+      "time": "2026-08-16T07:00",
+      "score": 35,
+      "level": "elevated",
+      "cape_jkg": 370.0,
+      "dewpoint_f": 67.3,
+      "pressure_msl_hpa": 1014.6
+    },
+    {
+      "time": "2026-08-16T08:00",
+      "score": 48,
+      "level": "watch",
+      "cape_jkg": 990.0,
+      "dewpoint_f": 71.1,
+      "pressure_msl_hpa": 1013.9
+    },
+    {
+      "time": "2026-08-16T09:00",
+      "score": 52,
+      "level": "watch",
+      "cape_jkg": 1190.0,
+      "dewpoint_f": 72.7,
+      "pressure_msl_hpa": 1014.0
+    },
+    {
+      "time": "2026-08-16T10:00",
+      "score": 52,
+      "level": "watch",
+      "cape_jkg": 1650.0,
+      "dewpoint_f": 74.3,
+      "pressure_msl_hpa": 1014.7
+    },
+    {
+      "time": "2026-08-16T11:00",
+      "score": 58,
+      "level": "watch",
+      "cape_jkg": 1630.0,
+      "dewpoint_f": 72.9,
+      "pressure_msl_hpa": 1015.2
+    }
+  ],
+  "chart": "visuals/latest/pre-tornado-clark-trend.png",
+  "hub": "https://midwestsds.com/msds-data-hub.html#pre-tornado",
+  "official_sources": [
+    "https://www.weather.gov/",
+    "https://www.spc.noaa.gov/",
+    "https://alerts.weather.gov/"
+  ],
+  "curator": "Midwest Stratospheric Data Systems"
+}
