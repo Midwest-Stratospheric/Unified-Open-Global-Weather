@@ -1,0 +1,78 @@
+{
+  "schema": "uogw.fair_metadata.v1",
+  "date_utc": "2026-08-17",
+  "generated_at_utc": "2026-08-17T10:59:41Z",
+  "findable": {
+    "title": "UOGW Daily Atmospheric Package 2026-08-17",
+    "identifier_local": "uogw:daily:2026-08-17",
+    "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+    "catalog": "https://midwestsds.com/data/v1/catalog.json",
+    "keywords": [
+      "atmosphere",
+      "open data",
+      "radiosonde index",
+      "buoy",
+      "surface weather",
+      "anomaly detection",
+      "satellite radiance index",
+      "Midwest Stratospheric"
+    ]
+  },
+  "accessible": {
+    "format": "JSON",
+    "access_url": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/entries/2026-08-17/",
+    "latest_url": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/data/latest/",
+    "license_curated": "CC BY 4.0",
+    "api_key_required": false
+  },
+  "interoperable": {
+    "schemas": [
+      "uogw.research_summary.v1",
+      "uogw.science_package.v1",
+      "uogw.anomaly_report.v1",
+      "uogw.rolling_baseline.v1",
+      "uogw.satellite_radiance_index.v1",
+      "uogw.fair_metadata.v1"
+    ],
+    "data_dictionary": "docs/data-dictionary.json",
+    "variable_conventions": "SI-friendly units in observation objects; native source units retained in raw blocks where present"
+  },
+  "reusable": {
+    "citation": "Midwest Stratospheric Data Systems (2026). Unified Open Global Weather (UOGW) daily package. https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+    "attribution_required": [
+      "Open-Meteo (CC BY 4.0)",
+      "NOAA NDBC",
+      "NOAA NCEI IGRA / GHCNd",
+      "NOAA/NASA satellite product owners when using radiance indexes",
+      "Midwest Stratospheric Data Systems for curation and MSDS site series"
+    ],
+    "provenance": [
+      "data/entries/2026-08-17/anomaly-report.json",
+      "data/entries/2026-08-17/daily-climate.json",
+      "data/entries/2026-08-17/global-cities.json",
+      "data/entries/2026-08-17/heat-humidity.json",
+      "data/entries/2026-08-17/hub-endpoints.json",
+      "data/entries/2026-08-17/hub-visual-snapshots.json",
+      "data/entries/2026-08-17/illinois-radiosonde-count.json",
+      "data/entries/2026-08-17/marine-snapshot.json",
+      "data/entries/2026-08-17/ndbc-realtime.json",
+      "data/entries/2026-08-17/ozone-health.json",
+      "data/entries/2026-08-17/pre-tornado-clark.json",
+      "data/entries/2026-08-17/pressure-wind.json",
+      "data/entries/2026-08-17/research-summary.json",
+      "data/entries/2026-08-17/rolling-baseline.json",
+      "data/entries/2026-08-17/science-analytics.json",
+      "data/entries/2026-08-17/science-package.json",
+      "data/entries/2026-08-17/space-gfs-snapshot.json",
+      "data/entries/2026-08-17/summary.json",
+      "data/entries/2026-08-17/visuals-manifest.json"
+    ],
+    "limitations": [
+      "Not a replacement for agency systems of record",
+      "Anomaly flags are research screens, not official warnings",
+      "Satellite module indexes open paths; it does not host full radiance archives"
+    ]
+  },
+  "curator": "Midwest Stratospheric Data Systems",
+  "contact": "launchcontrol@midwestsds.com"
+}
