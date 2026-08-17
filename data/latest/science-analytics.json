@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-17",
-  "generated_at_utc": "2026-08-17T10:18:23Z",
+  "generated_at_utc": "2026-08-17T10:57:17Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 2,
+    "anomaly_events": 1,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -184,45 +184,20 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 2,
+      "total": 1,
       "alert": 1,
-      "watch": 1,
+      "watch": 0,
       "info": 0
     },
     "top": [
       {
         "kind": "surface_heat",
-        "severity": "watch",
+        "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 37.6,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "alert",
-        "subject": "Nairobi, KE",
-        "metric": "z_mad",
-        "value": -5.4634,
-        "threshold": 5.0,
-        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
-        "extra": {
-          "methods": {
-            "n": 7,
-            "x": 15.8,
-            "z_pop": -1.6494,
-            "z_sample": -1.5271,
-            "z_mad": -5.4634,
-            "s_range": -0.6311,
-            "percentile": 12.5,
-            "mean": 21.5429,
-            "median": 23.9,
-            "pstdev": 3.4817,
-            "sample_stdev": 3.7607,
-            "mad": 1.0
-          }
-        }
+        "value": 40.6,
+        "threshold": 40,
+        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
       }
     ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
@@ -249,8 +224,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "2",
-      "detail": "alert 1 \u00b7 watch 1 \u00b7 info 0"
+      "value": "1",
+      "detail": "alert 1 \u00b7 watch 0 \u00b7 info 0"
     },
     {
       "id": "heat_index",
