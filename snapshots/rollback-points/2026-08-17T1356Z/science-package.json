@@ -1,0 +1,1432 @@
+{
+  "schema": "uogw.science_package.v1",
+  "date_utc": "2026-08-17",
+  "generated_at_utc": "2026-08-17T10:17:35Z",
+  "curator": "Midwest Stratospheric Data Systems",
+  "summary": {
+    "schema": "uogw.research_summary.v1",
+    "date_utc": "2026-08-17",
+    "generated_at_utc": "2026-08-17T10:17:35Z",
+    "curator": "Midwest Stratospheric Data Systems",
+    "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+    "data_hub": "https://www.midwestsds.com/portal.html",
+    "purpose": "Daily multi-layer atmospheric research package combining live observations, station indexes, and derived summaries for open science.",
+    "catalog": {
+      "dataset_count": 25,
+      "layers": [
+        "ground",
+        "marine",
+        "upper_air",
+        "stratospheric",
+        "satellite",
+        "flight"
+      ]
+    },
+    "indexes": {
+      "igra_stations": 2931,
+      "igra_y2d_files": 0,
+      "ndbc_stations": 1936,
+      "ghcn_stations": 132501,
+      "ghcn_countries": 219,
+      "foreign_open_sources": 18,
+      "global_city_samples": 34,
+      "global_city_ok": 32
+    },
+    "observations_today": {
+      "global_cities_ok": 32,
+      "ndbc_realtime_stations": 7,
+      "casey_hourly_count": 24,
+      "research_daily_climate_cities": 10
+    },
+    "derived_surface_stats": {
+      "global_city_temperature_c": {
+        "mean": 21.328,
+        "min": 9.9,
+        "max": 40.6
+      },
+      "global_city_humidity_pct": {
+        "mean": 74.875
+      },
+      "global_city_pressure_hpa": {
+        "mean": 1013.419
+      },
+      "global_city_wind_ms": {
+        "mean": 2.448
+      },
+      "casey_temperature_c": {
+        "min": 23.8,
+        "max": 30.6,
+        "mean": 26.179
+      },
+      "ndbc_wave_height_m": {
+        "mean": 1.1,
+        "n": 1
+      },
+      "ndbc_water_temp_c": {
+        "mean": 17.133,
+        "n": 3
+      },
+      "ndbc_air_temp_c": {
+        "mean": 18.54,
+        "n": 5
+      }
+    },
+    "files": {
+      "layer_json_count": 190,
+      "entry_files": [
+        "data/entries/2026-08-17/global-cities.json",
+        "data/entries/2026-08-17/heat-humidity.json",
+        "data/entries/2026-08-17/hub-endpoints.json",
+        "data/entries/2026-08-17/hub-visual-snapshots.json",
+        "data/entries/2026-08-17/illinois-radiosonde-count.json",
+        "data/entries/2026-08-17/marine-snapshot.json",
+        "data/entries/2026-08-17/ndbc-realtime.json",
+        "data/entries/2026-08-17/ozone-health.json",
+        "data/entries/2026-08-17/pre-tornado-clark.json",
+        "data/entries/2026-08-17/pressure-wind.json",
+        "data/entries/2026-08-17/science-analytics.json",
+        "data/entries/2026-08-17/space-gfs-snapshot.json",
+        "data/entries/2026-08-17/summary.json",
+        "data/entries/2026-08-17/visuals-manifest.json"
+      ]
+    },
+    "science_notes": [
+      "Surface city samples use Open-Meteo (CC BY 4.0); cite Open-Meteo and underlying NWP.",
+      "Marine realtime parsed from NOAA NDBC public text feeds; cite NOAA NDBC.",
+      "Casey hourly is MSDS-curated Open-Meteo extract for local Midwest validation / HAB support.",
+      "IGRA/GHCN/NDBC station counts are discovery indexes \u2014 full archives remain at agencies.",
+      "Daily climate block provides max/min/mean temp, precip, wind, radiation, ET0 for research cities.",
+      "This package is designed for open research, education, and cross-layer atmospheric analysis."
+    ],
+    "status_sources": {
+      "igra": {
+        "source": "noaa-igra",
+        "ok": true,
+        "station_count": 2931,
+        "file_count": 0,
+        "data_entry": "data/entries/2026-08-16/igra-index.json",
+        "generated_at_utc": "2026-08-16T07:53:20Z"
+      },
+      "ndbc": {
+        "source": "ndbc",
+        "ok": true,
+        "station_count": 1936,
+        "sample_stations": [
+          "41001",
+          "46026",
+          "44025",
+          "42040",
+          "46013",
+          "46042",
+          "41008",
+          "46029"
+        ],
+        "realtime_observation_count": 7,
+        "data_entry": "data/entries/2026-08-17/ndbc-realtime.json",
+        "generated_at_utc": "2026-08-17T10:01:30Z"
+      },
+      "global_samples": {
+        "source": "open-meteo-samples",
+        "ok": true,
+        "city_count": 34,
+        "ok_count": 32,
+        "country_count": 30,
+        "countries": [
+          "AE",
+          "AR",
+          "AU",
+          "BR",
+          "CA",
+          "CN",
+          "DE",
+          "EG",
+          "ES",
+          "FR",
+          "GB",
+          "ID",
+          "IN",
+          "IS",
+          "IT",
+          "JP",
+          "KE",
+          "KR",
+          "MX",
+          "NG",
+          "NO",
+          "NZ",
+          "PE",
+          "RU",
+          "SE",
+          "SG",
+          "TH",
+          "TR",
+          "US",
+          "ZA"
+        ],
+        "data_entry": "data/entries/2026-08-17/global-cities.json",
+        "generated_at_utc": "2026-08-17T06:04:28Z"
+      },
+      "msds_ground": {
+        "source": "msds-casey-ground",
+        "ok": true,
+        "date": "2026-08-16",
+        "observation_count": 24,
+        "data_entry": "data/entries/2026-08-16/casey-hourly.json",
+        "generated_at_utc": "2026-08-17T08:25:48Z"
+      },
+      "international": {
+        "source": "international-indexes",
+        "ok": true,
+        "ghcn_station_count": 132501,
+        "ghcn_country_count": 219,
+        "foreign_source_count": 18,
+        "generated_at_utc": "2026-08-17T08:03:39Z"
+      }
+    }
+  },
+  "daily_climate_research_cities": [
+    {
+      "id": "casey_il",
+      "lat": 39.2992,
+      "lon": -87.9925,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 30.6,
+      "temperature_min_c": 23.8,
+      "temperature_mean_c": 26.2,
+      "precipitation_mm": 0.4,
+      "wind_max_ms": 5.79,
+      "shortwave_radiation_mj_m2": 21.72,
+      "et0_mm": 4.2
+    },
+    {
+      "id": "chicago_il",
+      "lat": 41.8781,
+      "lon": -87.6298,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 28.1,
+      "temperature_min_c": 21.7,
+      "temperature_mean_c": 24.6,
+      "precipitation_mm": 1.8,
+      "wind_max_ms": 4.69,
+      "shortwave_radiation_mj_m2": 13.09,
+      "et0_mm": 2.72
+    },
+    {
+      "id": "london_uk",
+      "lat": 51.5074,
+      "lon": -0.1278,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 26.5,
+      "temperature_min_c": 18.3,
+      "temperature_mean_c": 22.4,
+      "precipitation_mm": 0.0,
+      "wind_max_ms": 3.7,
+      "shortwave_radiation_mj_m2": 14.08,
+      "et0_mm": 3.38
+    },
+    {
+      "id": "tokyo_jp",
+      "lat": 35.6762,
+      "lon": 139.6503,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 26.2,
+      "temperature_min_c": 21.7,
+      "temperature_mean_c": 23.8,
+      "precipitation_mm": 0.5,
+      "wind_max_ms": 1.39,
+      "shortwave_radiation_mj_m2": 7.67,
+      "et0_mm": 1.64
+    },
+    {
+      "id": "sydney_au",
+      "lat": -33.8688,
+      "lon": 151.2093,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 17.1,
+      "temperature_min_c": 10.9,
+      "temperature_mean_c": 13.8,
+      "precipitation_mm": 3.2,
+      "wind_max_ms": 4.14,
+      "shortwave_radiation_mj_m2": 13.24,
+      "et0_mm": 2.12
+    },
+    {
+      "id": "nairobi_ke",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 20.9,
+      "temperature_min_c": 15.0,
+      "temperature_mean_c": 17.9,
+      "precipitation_mm": 0.4,
+      "wind_max_ms": 2.78,
+      "shortwave_radiation_mj_m2": 9.0,
+      "et0_mm": 2.13
+    },
+    {
+      "id": "sao_paulo_br",
+      "lat": -23.5505,
+      "lon": -46.6333,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 26.3,
+      "temperature_min_c": 15.1,
+      "temperature_mean_c": 19.8,
+      "precipitation_mm": 0.0,
+      "wind_max_ms": 3.32,
+      "shortwave_radiation_mj_m2": 17.96,
+      "et0_mm": 3.41
+    },
+    {
+      "id": "berlin_de",
+      "lat": 52.52,
+      "lon": 13.405,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 23.5,
+      "temperature_min_c": 17.0,
+      "temperature_mean_c": 20.4,
+      "precipitation_mm": 7.7,
+      "wind_max_ms": 3.16,
+      "shortwave_radiation_mj_m2": 14.97,
+      "et0_mm": 2.97
+    },
+    {
+      "id": "mumbai_in",
+      "lat": 19.076,
+      "lon": 72.8777,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 29.7,
+      "temperature_min_c": 25.5,
+      "temperature_mean_c": 27.1,
+      "precipitation_mm": 11.3,
+      "wind_max_ms": 5.19,
+      "shortwave_radiation_mj_m2": 21.97,
+      "et0_mm": 4.44
+    },
+    {
+      "id": "reykjavik_is",
+      "lat": 64.1466,
+      "lon": -21.9426,
+      "date": "2026-08-16",
+      "ok": true,
+      "temperature_max_c": 14.2,
+      "temperature_min_c": 7.9,
+      "temperature_mean_c": 11.3,
+      "precipitation_mm": 0.0,
+      "wind_max_ms": 3.0,
+      "shortwave_radiation_mj_m2": 19.42,
+      "et0_mm": 2.53
+    }
+  ],
+  "global_city_observations": [
+    {
+      "id": "casey_il",
+      "name": "Casey, IL, US",
+      "country": "US",
+      "lat": 39.2992,
+      "lon": -87.9925,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T01:00",
+        "temperature_c": 23.3,
+        "relative_humidity_pct": 95,
+        "precipitation_mm": 0.2,
+        "weather_code": 53,
+        "wind_speed_ms": 1.52,
+        "wind_direction_deg": 157,
+        "pressure_msl_hpa": 1014.2
+      },
+      "current_raw": {
+        "time": "2026-08-17T01:00",
+        "interval": 900,
+        "temperature_2m": 23.3,
+        "relative_humidity_2m": 95,
+        "precipitation": 0.2,
+        "weather_code": 53,
+        "wind_speed_10m": 1.52,
+        "wind_direction_10m": 157,
+        "pressure_msl": 1014.2
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "chicago_il",
+      "name": "Chicago, IL, US",
+      "country": "US",
+      "lat": 41.8781,
+      "lon": -87.6298,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T01:00",
+        "temperature_c": 20.1,
+        "relative_humidity_pct": 86,
+        "precipitation_mm": 0.0,
+        "weather_code": 2,
+        "wind_speed_ms": 2.08,
+        "wind_direction_deg": 325,
+        "pressure_msl_hpa": 1013.2
+      },
+      "current_raw": {
+        "time": "2026-08-17T01:00",
+        "interval": 900,
+        "temperature_2m": 20.1,
+        "relative_humidity_2m": 86,
+        "precipitation": 0.0,
+        "weather_code": 2,
+        "wind_speed_10m": 2.08,
+        "wind_direction_10m": 325,
+        "pressure_msl": 1013.2
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "houston_tx",
+      "name": "Houston, TX, US",
+      "country": "US",
+      "lat": 29.7604,
+      "lon": -95.3698,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T01:00",
+        "temperature_c": 25.0,
+        "relative_humidity_pct": 77,
+        "precipitation_mm": 0.0,
+        "weather_code": 2,
+        "wind_speed_ms": 2.06,
+        "wind_direction_deg": 209,
+        "pressure_msl_hpa": 1018.8
+      },
+      "current_raw": {
+        "time": "2026-08-17T01:00",
+        "interval": 900,
+        "temperature_2m": 25.0,
+        "relative_humidity_2m": 77,
+        "precipitation": 0.0,
+        "weather_code": 2,
+        "wind_speed_10m": 2.06,
+        "wind_direction_10m": 209,
+        "pressure_msl": 1018.8
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "toronto_ca",
+      "name": "Toronto, CA",
+      "country": "CA",
+      "lat": 43.6532,
+      "lon": -79.3832,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T02:00",
+        "temperature_c": 20.1,
+        "relative_humidity_pct": 92,
+        "precipitation_mm": 0.0,
+        "weather_code": 1,
+        "wind_speed_ms": 1.51,
+        "wind_direction_deg": 278,
+        "pressure_msl_hpa": 1008.7
+      },
+      "current_raw": {
+        "time": "2026-08-17T02:00",
+        "interval": 900,
+        "temperature_2m": 20.1,
+        "relative_humidity_2m": 92,
+        "precipitation": 0.0,
+        "weather_code": 1,
+        "wind_speed_10m": 1.51,
+        "wind_direction_10m": 278,
+        "pressure_msl": 1008.7
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "mexico_city_mx",
+      "name": "Mexico City, MX",
+      "country": "MX",
+      "lat": 19.4326,
+      "lon": -99.1332,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T00:00",
+        "temperature_c": 15.1,
+        "relative_humidity_pct": 86,
+        "precipitation_mm": 0.0,
+        "weather_code": 0,
+        "wind_speed_ms": 2.16,
+        "wind_direction_deg": 304,
+        "pressure_msl_hpa": 1022.9
+      },
+      "current_raw": {
+        "time": "2026-08-17T00:00",
+        "interval": 900,
+        "temperature_2m": 15.1,
+        "relative_humidity_2m": 86,
+        "precipitation": 0.0,
+        "weather_code": 0,
+        "wind_speed_10m": 2.16,
+        "wind_direction_10m": 304,
+        "pressure_msl": 1022.9
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "sao_paulo_br",
+      "name": "Sao Paulo, BR",
+      "country": "BR",
+      "lat": -23.5505,
+      "lon": -46.6333,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T03:00",
+        "temperature_c": 16.5,
+        "relative_humidity_pct": 94,
+        "precipitation_mm": 0.0,
+        "weather_code": 1,
+        "wind_speed_ms": 1.96,
+        "wind_direction_deg": 75,
+        "pressure_msl_hpa": 1019.3
+      },
+      "current_raw": {
+        "time": "2026-08-17T03:00",
+        "interval": 900,
+        "temperature_2m": 16.5,
+        "relative_humidity_2m": 94,
+        "precipitation": 0.0,
+        "weather_code": 1,
+        "wind_speed_10m": 1.96,
+        "wind_direction_10m": 75,
+        "pressure_msl": 1019.3
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "buenos_aires_ar",
+      "name": "Buenos Aires, AR",
+      "country": "AR",
+      "lat": -34.6037,
+      "lon": -58.3816,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T03:00",
+        "temperature_c": 13.0,
+        "relative_humidity_pct": 92,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 3.46,
+        "wind_direction_deg": 162,
+        "pressure_msl_hpa": 1014.1
+      },
+      "current_raw": {
+        "time": "2026-08-17T03:00",
+        "interval": 900,
+        "temperature_2m": 13.0,
+        "relative_humidity_2m": 92,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 3.46,
+        "wind_direction_10m": 162,
+        "pressure_msl": 1014.1
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "lima_pe",
+      "name": "Lima, PE",
+      "country": "PE",
+      "lat": -12.0464,
+      "lon": -77.0428,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T01:00",
+        "temperature_c": 19.3,
+        "relative_humidity_pct": 80,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 3.55,
+        "wind_direction_deg": 129,
+        "pressure_msl_hpa": 1013.7
+      },
+      "current_raw": {
+        "time": "2026-08-17T01:00",
+        "interval": 900,
+        "temperature_2m": 19.3,
+        "relative_humidity_2m": 80,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 3.55,
+        "wind_direction_10m": 129,
+        "pressure_msl": 1013.7
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "london_uk",
+      "name": "London, UK",
+      "country": "GB",
+      "lat": 51.5074,
+      "lon": -0.1278,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T07:00",
+        "temperature_c": 19.6,
+        "relative_humidity_pct": 54,
+        "precipitation_mm": 0.0,
+        "weather_code": 2,
+        "wind_speed_ms": 2.2,
+        "wind_direction_deg": 308,
+        "pressure_msl_hpa": 1015.9
+      },
+      "current_raw": {
+        "time": "2026-08-17T07:00",
+        "interval": 900,
+        "temperature_2m": 19.6,
+        "relative_humidity_2m": 54,
+        "precipitation": 0.0,
+        "weather_code": 2,
+        "wind_speed_10m": 2.2,
+        "wind_direction_10m": 308,
+        "pressure_msl": 1015.9
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "paris_fr",
+      "name": "Paris, FR",
+      "country": "FR",
+      "lat": 48.8566,
+      "lon": 2.3522,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T08:00",
+        "temperature_c": 22.2,
+        "relative_humidity_pct": 60,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 1.79,
+        "wind_direction_deg": 333,
+        "pressure_msl_hpa": 1015.8
+      },
+      "current_raw": {
+        "time": "2026-08-17T08:00",
+        "interval": 900,
+        "temperature_2m": 22.2,
+        "relative_humidity_2m": 60,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 1.79,
+        "wind_direction_10m": 333,
+        "pressure_msl": 1015.8
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "berlin_de",
+      "name": "Berlin, DE",
+      "country": "DE",
+      "lat": 52.52,
+      "lon": 13.405,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T08:00",
+        "temperature_c": 17.7,
+        "relative_humidity_pct": 84,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 1.39,
+        "wind_direction_deg": 339,
+        "pressure_msl_hpa": 1012.0
+      },
+      "current_raw": {
+        "time": "2026-08-17T08:00",
+        "interval": 900,
+        "temperature_2m": 17.7,
+        "relative_humidity_2m": 84,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 1.39,
+        "wind_direction_10m": 339,
+        "pressure_msl": 1012.0
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "madrid_es",
+      "name": "Madrid, ES",
+      "country": "ES",
+      "lat": 40.4168,
+      "lon": -3.7038,
+      "ok": false,
+      "error": "<urlopen error _ssl.c:983: The handshake operation timed out>",
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "rome_it",
+      "name": "Rome, IT",
+      "country": "IT",
+      "lat": 41.9028,
+      "lon": 12.4964,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T08:00",
+        "temperature_c": 24.7,
+        "relative_humidity_pct": 77,
+        "precipitation_mm": 0.0,
+        "weather_code": 0,
+        "wind_speed_ms": 0.5,
+        "wind_direction_deg": 360,
+        "pressure_msl_hpa": 1013.6
+      },
+      "current_raw": {
+        "time": "2026-08-17T08:00",
+        "interval": 900,
+        "temperature_2m": 24.7,
+        "relative_humidity_2m": 77,
+        "precipitation": 0.0,
+        "weather_code": 0,
+        "wind_speed_10m": 0.5,
+        "wind_direction_10m": 360,
+        "pressure_msl": 1013.6
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "oslo_no",
+      "name": "Oslo, NO",
+      "country": "NO",
+      "lat": 59.9139,
+      "lon": 10.7522,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T08:00",
+        "temperature_c": 15.1,
+        "relative_humidity_pct": 81,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 4.5,
+        "wind_direction_deg": 42,
+        "pressure_msl_hpa": 1009.1
+      },
+      "current_raw": {
+        "time": "2026-08-17T08:00",
+        "interval": 900,
+        "temperature_2m": 15.1,
+        "relative_humidity_2m": 81,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 4.5,
+        "wind_direction_10m": 42,
+        "pressure_msl": 1009.1
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "stockholm_se",
+      "name": "Stockholm, SE",
+      "country": "SE",
+      "lat": 59.3293,
+      "lon": 18.0686,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T08:00",
+        "temperature_c": 14.4,
+        "relative_humidity_pct": 62,
+        "precipitation_mm": 0.0,
+        "weather_code": 0,
+        "wind_speed_ms": 3.1,
+        "wind_direction_deg": 340,
+        "pressure_msl_hpa": 1006.3
+      },
+      "current_raw": {
+        "time": "2026-08-17T08:00",
+        "interval": 900,
+        "temperature_2m": 14.4,
+        "relative_humidity_2m": 62,
+        "precipitation": 0.0,
+        "weather_code": 0,
+        "wind_speed_10m": 3.1,
+        "wind_direction_10m": 340,
+        "pressure_msl": 1006.3
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "reykjavik_is",
+      "name": "Reykjavik, IS",
+      "country": "IS",
+      "lat": 64.1466,
+      "lon": -21.9426,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T06:00",
+        "temperature_c": 9.9,
+        "relative_humidity_pct": 86,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 2.7,
+        "wind_direction_deg": 120,
+        "pressure_msl_hpa": 1015.0
+      },
+      "current_raw": {
+        "time": "2026-08-17T06:00",
+        "interval": 900,
+        "temperature_2m": 9.9,
+        "relative_humidity_2m": 86,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 2.7,
+        "wind_direction_10m": 120,
+        "pressure_msl": 1015.0
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "moscow_ru",
+      "name": "Moscow, RU",
+      "country": "RU",
+      "lat": 55.7558,
+      "lon": 37.6173,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T09:00",
+        "temperature_c": 18.1,
+        "relative_humidity_pct": 85,
+        "precipitation_mm": 0.1,
+        "weather_code": 61,
+        "wind_speed_ms": 2.3,
+        "wind_direction_deg": 236,
+        "pressure_msl_hpa": 1004.9
+      },
+      "current_raw": {
+        "time": "2026-08-17T09:00",
+        "interval": 900,
+        "temperature_2m": 18.1,
+        "relative_humidity_2m": 85,
+        "precipitation": 0.1,
+        "weather_code": 61,
+        "wind_speed_10m": 2.3,
+        "wind_direction_10m": 236,
+        "pressure_msl": 1004.9
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "istanbul_tr",
+      "name": "Istanbul, TR",
+      "country": "TR",
+      "lat": 41.0082,
+      "lon": 28.9784,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T09:00",
+        "temperature_c": 24.0,
+        "relative_humidity_pct": 66,
+        "precipitation_mm": 0.0,
+        "weather_code": 2,
+        "wind_speed_ms": 3.41,
+        "wind_direction_deg": 40,
+        "pressure_msl_hpa": 1012.9
+      },
+      "current_raw": {
+        "time": "2026-08-17T09:00",
+        "interval": 900,
+        "temperature_2m": 24.0,
+        "relative_humidity_2m": 66,
+        "precipitation": 0.0,
+        "weather_code": 2,
+        "wind_speed_10m": 3.41,
+        "wind_direction_10m": 40,
+        "pressure_msl": 1012.9
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "cairo_eg",
+      "name": "Cairo, EG",
+      "country": "EG",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T09:00",
+        "temperature_c": 26.3,
+        "relative_humidity_pct": 71,
+        "precipitation_mm": 0.0,
+        "weather_code": 1,
+        "wind_speed_ms": 1.36,
+        "wind_direction_deg": 343,
+        "pressure_msl_hpa": 1011.6
+      },
+      "current_raw": {
+        "time": "2026-08-17T09:00",
+        "interval": 900,
+        "temperature_2m": 26.3,
+        "relative_humidity_2m": 71,
+        "precipitation": 0.0,
+        "weather_code": 1,
+        "wind_speed_10m": 1.36,
+        "wind_direction_10m": 343,
+        "pressure_msl": 1011.6
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "nairobi_ke",
+      "name": "Nairobi, KE",
+      "country": "KE",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T09:00",
+        "temperature_c": 16.6,
+        "relative_humidity_pct": 73,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 0.79,
+        "wind_direction_deg": 162,
+        "pressure_msl_hpa": 1022.1
+      },
+      "current_raw": {
+        "time": "2026-08-17T09:00",
+        "interval": 900,
+        "temperature_2m": 16.6,
+        "relative_humidity_2m": 73,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 0.79,
+        "wind_direction_10m": 162,
+        "pressure_msl": 1022.1
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "johannesburg_za",
+      "name": "Johannesburg, ZA",
+      "country": "ZA",
+      "lat": -26.2041,
+      "lon": 28.0473,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T08:00",
+        "temperature_c": 10.2,
+        "relative_humidity_pct": 57,
+        "precipitation_mm": 0.0,
+        "weather_code": 0,
+        "wind_speed_ms": 1.51,
+        "wind_direction_deg": 172,
+        "pressure_msl_hpa": 1026.4
+      },
+      "current_raw": {
+        "time": "2026-08-17T08:00",
+        "interval": 900,
+        "temperature_2m": 10.2,
+        "relative_humidity_2m": 57,
+        "precipitation": 0.0,
+        "weather_code": 0,
+        "wind_speed_10m": 1.51,
+        "wind_direction_10m": 172,
+        "pressure_msl": 1026.4
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "lagos_ng",
+      "name": "Lagos, NG",
+      "country": "NG",
+      "lat": 6.5244,
+      "lon": 3.3792,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T07:00",
+        "temperature_c": 24.4,
+        "relative_humidity_pct": 92,
+        "precipitation_mm": 0.0,
+        "weather_code": 2,
+        "wind_speed_ms": 2.04,
+        "wind_direction_deg": 253,
+        "pressure_msl_hpa": 1013.9
+      },
+      "current_raw": {
+        "time": "2026-08-17T07:00",
+        "interval": 900,
+        "temperature_2m": 24.4,
+        "relative_humidity_2m": 92,
+        "precipitation": 0.0,
+        "weather_code": 2,
+        "wind_speed_10m": 2.04,
+        "wind_direction_10m": 253,
+        "pressure_msl": 1013.9
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "dubai_ae",
+      "name": "Dubai, AE",
+      "country": "AE",
+      "lat": 25.2048,
+      "lon": 55.2708,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T10:00",
+        "temperature_c": 40.6,
+        "relative_humidity_pct": 32,
+        "precipitation_mm": 0.0,
+        "weather_code": 0,
+        "wind_speed_ms": 0.91,
+        "wind_direction_deg": 6,
+        "pressure_msl_hpa": 998.6
+      },
+      "current_raw": {
+        "time": "2026-08-17T10:00",
+        "interval": 900,
+        "temperature_2m": 40.6,
+        "relative_humidity_2m": 32,
+        "precipitation": 0.0,
+        "weather_code": 0,
+        "wind_speed_10m": 0.91,
+        "wind_direction_10m": 6,
+        "pressure_msl": 998.6
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "mumbai_in",
+      "name": "Mumbai, IN",
+      "country": "IN",
+      "lat": 19.076,
+      "lon": 72.8777,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T11:30",
+        "temperature_c": 27.4,
+        "relative_humidity_pct": 81,
+        "precipitation_mm": 0.2,
+        "weather_code": 53,
+        "wind_speed_ms": 3.69,
+        "wind_direction_deg": 229,
+        "pressure_msl_hpa": 1010.8
+      },
+      "current_raw": {
+        "time": "2026-08-17T11:30",
+        "interval": 900,
+        "temperature_2m": 27.4,
+        "relative_humidity_2m": 81,
+        "precipitation": 0.2,
+        "weather_code": 53,
+        "wind_speed_10m": 3.69,
+        "wind_direction_10m": 229,
+        "pressure_msl": 1010.8
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "beijing_cn",
+      "name": "Beijing, CN",
+      "country": "CN",
+      "lat": 39.9042,
+      "lon": 116.4074,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T14:00",
+        "temperature_c": 31.2,
+        "relative_humidity_pct": 45,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 1.22,
+        "wind_direction_deg": 35,
+        "pressure_msl_hpa": 1007.2
+      },
+      "current_raw": {
+        "time": "2026-08-17T14:00",
+        "interval": 900,
+        "temperature_2m": 31.2,
+        "relative_humidity_2m": 45,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 1.22,
+        "wind_direction_10m": 35,
+        "pressure_msl": 1007.2
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "tokyo_jp",
+      "name": "Tokyo, JP",
+      "country": "JP",
+      "lat": 35.6762,
+      "lon": 139.6503,
+      "ok": false,
+      "error": "<urlopen error _ssl.c:983: The handshake operation timed out>",
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "seoul_kr",
+      "name": "Seoul, KR",
+      "country": "KR",
+      "lat": 37.5665,
+      "lon": 126.978,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T15:00",
+        "temperature_c": 27.1,
+        "relative_humidity_pct": 84,
+        "precipitation_mm": 0.2,
+        "weather_code": 53,
+        "wind_speed_ms": 0.58,
+        "wind_direction_deg": 211,
+        "pressure_msl_hpa": 1005.2
+      },
+      "current_raw": {
+        "time": "2026-08-17T15:00",
+        "interval": 900,
+        "temperature_2m": 27.1,
+        "relative_humidity_2m": 84,
+        "precipitation": 0.2,
+        "weather_code": 53,
+        "wind_speed_10m": 0.58,
+        "wind_direction_10m": 211,
+        "pressure_msl": 1005.2
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "singapore_sg",
+      "name": "Singapore, SG",
+      "country": "SG",
+      "lat": 1.3521,
+      "lon": 103.8198,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T14:00",
+        "temperature_c": 30.6,
+        "relative_humidity_pct": 68,
+        "precipitation_mm": 0.5,
+        "weather_code": 80,
+        "wind_speed_ms": 3.81,
+        "wind_direction_deg": 176,
+        "pressure_msl_hpa": 1012.3
+      },
+      "current_raw": {
+        "time": "2026-08-17T14:00",
+        "interval": 900,
+        "temperature_2m": 30.6,
+        "relative_humidity_2m": 68,
+        "precipitation": 0.5,
+        "weather_code": 80,
+        "wind_speed_10m": 3.81,
+        "wind_direction_10m": 176,
+        "pressure_msl": 1012.3
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "bangkok_th",
+      "name": "Bangkok, TH",
+      "country": "TH",
+      "lat": 13.7563,
+      "lon": 100.5018,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T13:00",
+        "temperature_c": 32.5,
+        "relative_humidity_pct": 63,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 2.63,
+        "wind_direction_deg": 213,
+        "pressure_msl_hpa": 1009.7
+      },
+      "current_raw": {
+        "time": "2026-08-17T13:00",
+        "interval": 900,
+        "temperature_2m": 32.5,
+        "relative_humidity_2m": 63,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 2.63,
+        "wind_direction_10m": 213,
+        "pressure_msl": 1009.7
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "jakarta_id",
+      "name": "Jakarta, ID",
+      "country": "ID",
+      "lat": -6.2088,
+      "lon": 106.8456,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T13:00",
+        "temperature_c": 33.1,
+        "relative_humidity_pct": 50,
+        "precipitation_mm": 0.0,
+        "weather_code": 1,
+        "wind_speed_ms": 2.7,
+        "wind_direction_deg": 360,
+        "pressure_msl_hpa": 1012.5
+      },
+      "current_raw": {
+        "time": "2026-08-17T13:00",
+        "interval": 900,
+        "temperature_2m": 33.1,
+        "relative_humidity_2m": 50,
+        "precipitation": 0.0,
+        "weather_code": 1,
+        "wind_speed_10m": 2.7,
+        "wind_direction_10m": 360,
+        "pressure_msl": 1012.5
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "sydney_au",
+      "name": "Sydney, AU",
+      "country": "AU",
+      "lat": -33.8688,
+      "lon": 151.2093,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T16:00",
+        "temperature_c": 15.7,
+        "relative_humidity_pct": 67,
+        "precipitation_mm": 0.0,
+        "weather_code": 3,
+        "wind_speed_ms": 3.34,
+        "wind_direction_deg": 125,
+        "pressure_msl_hpa": 1035.7
+      },
+      "current_raw": {
+        "time": "2026-08-17T16:00",
+        "interval": 900,
+        "temperature_2m": 15.7,
+        "relative_humidity_2m": 67,
+        "precipitation": 0.0,
+        "weather_code": 3,
+        "wind_speed_10m": 3.34,
+        "wind_direction_10m": 125,
+        "pressure_msl": 1035.7
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "auckland_nz",
+      "name": "Auckland, NZ",
+      "country": "NZ",
+      "lat": -36.8509,
+      "lon": 174.7645,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-17T18:00",
+        "temperature_c": 9.9,
+        "relative_humidity_pct": 62,
+        "precipitation_mm": 0.0,
+        "weather_code": 0,
+        "wind_speed_ms": 5.84,
+        "wind_direction_deg": 196,
+        "pressure_msl_hpa": 1020.1
+      },
+      "current_raw": {
+        "time": "2026-08-17T18:00",
+        "interval": 900,
+        "temperature_2m": 9.9,
+        "relative_humidity_2m": 62,
+        "precipitation": 0.0,
+        "weather_code": 0,
+        "wind_speed_10m": 5.84,
+        "wind_direction_10m": 196,
+        "pressure_msl": 1020.1
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "honolulu_us",
+      "name": "Honolulu, HI, US",
+      "country": "US",
+      "lat": 21.3069,
+      "lon": -157.8583,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-16T20:00",
+        "temperature_c": 24.1,
+        "relative_humidity_pct": 96,
+        "precipitation_mm": 0.3,
+        "weather_code": 55,
+        "wind_speed_ms": 4.52,
+        "wind_direction_deg": 125,
+        "pressure_msl_hpa": 1013.2
+      },
+      "current_raw": {
+        "time": "2026-08-16T20:00",
+        "interval": 900,
+        "temperature_2m": 24.1,
+        "relative_humidity_2m": 96,
+        "precipitation": 0.3,
+        "weather_code": 55,
+        "wind_speed_10m": 4.52,
+        "wind_direction_10m": 125,
+        "pressure_msl": 1013.2
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    },
+    {
+      "id": "anchorage_us",
+      "name": "Anchorage, AK, US",
+      "country": "US",
+      "lat": 61.2181,
+      "lon": -149.9003,
+      "ok": true,
+      "observation": {
+        "time": "2026-08-16T22:00",
+        "temperature_c": 14.7,
+        "relative_humidity_pct": 98,
+        "precipitation_mm": 0.2,
+        "weather_code": 53,
+        "wind_speed_ms": 3.21,
+        "wind_direction_deg": 275,
+        "pressure_msl_hpa": 999.7
+      },
+      "current_raw": {
+        "time": "2026-08-16T22:00",
+        "interval": 900,
+        "temperature_2m": 14.7,
+        "relative_humidity_2m": 98,
+        "precipitation": 0.2,
+        "weather_code": 53,
+        "wind_speed_10m": 3.21,
+        "wind_direction_10m": 275,
+        "pressure_msl": 999.7
+      },
+      "fetched_at_utc": "2026-08-17T06:04:28Z"
+    }
+  ],
+  "ndbc_latest_observations": {
+    "41001": {
+      "station_id": "41001",
+      "time_utc": "2026-07-03T00:00Z",
+      "wind_dir_deg": 110.0,
+      "wind_speed_ms": 4.0,
+      "gust_ms": 5.0,
+      "wave_height_m": null,
+      "dom_wave_period_s": null,
+      "pressure_hpa": 1019.3,
+      "air_temp_c": 24.9,
+      "water_temp_c": null
+    },
+    "46026": {
+      "station_id": "46026",
+      "time_utc": "2026-07-03T00:00Z",
+      "wind_dir_deg": 270.0,
+      "wind_speed_ms": 1.0,
+      "gust_ms": 3.0,
+      "wave_height_m": null,
+      "dom_wave_period_s": null,
+      "pressure_hpa": 1014.7,
+      "air_temp_c": null,
+      "water_temp_c": 14.2
+    },
+    "44025": {
+      "station_id": "44025",
+      "time_utc": "2026-07-03T00:10Z",
+      "wind_dir_deg": null,
+      "wind_speed_ms": null,
+      "gust_ms": null,
+      "wave_height_m": 1.1,
+      "dom_wave_period_s": 4.0,
+      "pressure_hpa": null,
+      "air_temp_c": null,
+      "water_temp_c": 22.0
+    },
+    "46013": {
+      "station_id": "46013",
+      "time_utc": "2026-07-03T00:00Z",
+      "wind_dir_deg": 310.0,
+      "wind_speed_ms": 3.0,
+      "gust_ms": 4.0,
+      "wave_height_m": null,
+      "dom_wave_period_s": null,
+      "pressure_hpa": 1014.9,
+      "air_temp_c": 11.6,
+      "water_temp_c": null
+    },
+    "46042": {
+      "station_id": "46042",
+      "time_utc": "2026-07-03T00:00Z",
+      "wind_dir_deg": 250.0,
+      "wind_speed_ms": 3.0,
+      "gust_ms": 4.0,
+      "wave_height_m": null,
+      "dom_wave_period_s": null,
+      "pressure_hpa": 1015.3,
+      "air_temp_c": 13.8,
+      "water_temp_c": 15.2
+    },
+    "41008": {
+      "station_id": "41008",
+      "time_utc": "2026-07-03T00:00Z",
+      "wind_dir_deg": null,
+      "wind_speed_ms": 5.0,
+      "gust_ms": 6.0,
+      "wave_height_m": null,
+      "dom_wave_period_s": null,
+      "pressure_hpa": 1017.8,
+      "air_temp_c": 28.1,
+      "water_temp_c": null
+    },
+    "46029": {
+      "station_id": "46029",
+      "time_utc": "2026-07-03T00:00Z",
+      "wind_dir_deg": 200.0,
+      "wind_speed_ms": 7.0,
+      "gust_ms": 8.0,
+      "wave_height_m": null,
+      "dom_wave_period_s": null,
+      "pressure_hpa": 1017.7,
+      "air_temp_c": 14.3,
+      "water_temp_c": null
+    }
+  },
+  "casey_site": {
+    "name": "Casey, Illinois",
+    "latitude": 39.2992,
+    "longitude": -87.9925,
+    "elevation_m": 200,
+    "timezone": "America/Chicago"
+  },
+  "casey_daily": {
+    "time": [
+      "2026-08-16"
+    ],
+    "temperature_2m_max": [
+      30.6
+    ],
+    "temperature_2m_min": [
+      23.8
+    ],
+    "temperature_2m_mean": [
+      26.2
+    ],
+    "precipitation_sum": [
+      0.4
+    ],
+    "windspeed_10m_max": [
+      5.79
+    ]
+  },
+  "casey_observation_count": 24,
+  "attribution": {
+    "open_meteo": "CC BY 4.0 \u2014 https://open-meteo.com/",
+    "ndbc": "NOAA National Data Buoy Center \u2014 https://www.ndbc.noaa.gov/",
+    "igra": "NOAA NCEI IGRA \u2014 https://www.ncei.noaa.gov/",
+    "ghcn": "NOAA NCEI GHCNd",
+    "msds": "Midwest Stratospheric Data Systems \u2014 https://www.midwestsds.com/"
+  }
+}
