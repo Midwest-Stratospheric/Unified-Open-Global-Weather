@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-18",
-  "generated_at_utc": "2026-08-18T10:03:30Z",
+  "generated_at_utc": "2026-08-18T10:55:34Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 1,
+    "anomaly_events": 4,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -198,9 +198,9 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 1,
-      "alert": 1,
-      "watch": 0,
+      "total": 4,
+      "alert": 2,
+      "watch": 2,
       "info": 0
     },
     "top": [
@@ -209,9 +209,84 @@
         "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 40.6,
+        "value": 41.1,
         "threshold": 40,
         "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Casey, IL, US",
+        "metric": "z_mad",
+        "value": -8.7685,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 19.2,
+            "z_pop": -2.0609,
+            "z_sample": -1.9081,
+            "z_mad": -8.7685,
+            "s_range": -0.586,
+            "percentile": 12.5,
+            "mean": 22.6571,
+            "median": 23.1,
+            "pstdev": 1.6775,
+            "sample_stdev": 1.8119,
+            "mad": 0.3
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "watch",
+        "subject": "Lima, PE",
+        "metric": "z_mad",
+        "value": -4.3843,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 18.0,
+            "z_pop": -2.202,
+            "z_sample": -2.0387,
+            "z_mad": -4.3843,
+            "s_range": -0.6391,
+            "percentile": 12.5,
+            "mean": 19.2143,
+            "median": 19.3,
+            "pstdev": 0.5514,
+            "sample_stdev": 0.5956,
+            "mad": 0.2
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "watch",
+        "subject": "Seoul, KR",
+        "metric": "z_mad",
+        "value": 4.3843,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 30.1,
+            "z_pop": 2.3066,
+            "z_sample": 2.1355,
+            "z_mad": 4.3843,
+            "s_range": 0.7101,
+            "percentile": 87.5,
+            "mean": 27.6857,
+            "median": 27.5,
+            "pstdev": 1.0467,
+            "sample_stdev": 1.1305,
+            "mad": 0.4
+          }
+        }
       }
     ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
@@ -238,8 +313,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "1",
-      "detail": "alert 1 \u00b7 watch 0 \u00b7 info 0"
+      "value": "4",
+      "detail": "alert 2 \u00b7 watch 2 \u00b7 info 0"
     },
     {
       "id": "heat_index",
