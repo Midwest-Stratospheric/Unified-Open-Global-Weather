@@ -2,7 +2,7 @@
   "schema": "uogw.pre_tornado_clark.v1",
   "ok": true,
   "date_utc": "2026-08-18",
-  "generated_at_utc": "2026-08-18T23:41:25Z",
+  "generated_at_utc": "2026-08-18T23:54:04Z",
   "site": {
     "name": "Clark County, Illinois (Casey area)",
     "county": "Clark",
@@ -13,7 +13,7 @@
   },
   "disclaimer": "RESEARCH SCREENING ONLY. This is NOT a National Weather Service watch, warning, or forecast. Tornadoes can occur with little notice. Always follow NWS, local emergency management, and NOAA Weather Radio.",
   "probability_research": {
-    "score_0_to_100": 28,
+    "score_0_to_100": 32,
     "level": "elevated",
     "level_label": "Elevated",
     "meaning": "Some instability/moisture/wind factors are rising. Stay weather-aware; this is not an official watch.",
@@ -22,7 +22,7 @@
   "components": {
     "cape": {
       "points": 2,
-      "value": 70.0,
+      "value": 110.0,
       "note": "Very low CAPE"
     },
     "lifted_index": {
@@ -37,13 +37,13 @@
     },
     "moisture": {
       "points": 12,
-      "value": 18.3,
+      "value": 18.2,
       "note": "Rich moisture"
     },
     "wind": {
-      "points": 3,
-      "value": 14.8,
-      "note": "Light wind/gusts"
+      "points": 7,
+      "value": 15.8,
+      "note": "Moderate gusts"
     },
     "pressure_tendency": {
       "points": 7,
@@ -52,18 +52,18 @@
     }
   },
   "observations": {
-    "cape_jkg": 70.0,
+    "cape_jkg": 110.0,
     "cin_jkg": 90.0,
     "lifted_index": 0.7,
-    "dewpoint_c": 18.3,
-    "dewpoint_f": 64.9,
-    "relative_humidity_pct": 61.0,
-    "wind_speed_kmh": 9.9,
-    "wind_gusts_kmh": 14.8,
-    "pressure_msl_hpa": 1014.2,
+    "dewpoint_c": 18.2,
+    "dewpoint_f": 64.8,
+    "relative_humidity_pct": 62.0,
+    "wind_speed_kmh": 9.4,
+    "wind_gusts_kmh": 15.8,
+    "pressure_msl_hpa": 1014.1,
     "pressure_tendency_3h_hpa": -1.6,
-    "temperature_c": 26.4,
-    "temperature_f": 79.5
+    "temperature_c": 26.0,
+    "temperature_f": 78.8
   },
   "trend_hourly": [
     {
@@ -335,15 +335,15 @@
       "score": 35,
       "level": "elevated",
       "cape_jkg": 320.0,
-      "dewpoint_f": 68.7,
+      "dewpoint_f": 68.4,
       "pressure_msl_hpa": 1014.5
     },
     {
       "time": "2026-08-19T10:00",
-      "score": 49,
+      "score": 50,
       "level": "watch",
       "cape_jkg": 560.0,
-      "dewpoint_f": 69.8,
+      "dewpoint_f": 69.4,
       "pressure_msl_hpa": 1014.1
     },
     {
@@ -351,7 +351,7 @@
       "score": 53,
       "level": "watch",
       "cape_jkg": 700.0,
-      "dewpoint_f": 68.5,
+      "dewpoint_f": 69.3,
       "pressure_msl_hpa": 1013.3
     }
   ],
