@@ -17,6 +17,9 @@ permissions:
 jobs:
   package:
     runs-on: ubuntu-latest
+    env:
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -326,3 +329,83 @@ jobs:
             sleep $((i * 3))
           done
           exit 1
+
+      - name: Prepare daily digest email
+        id: mail
+        run: |
+          DATE_UTC=$(date -u +%Y-%m-%d)
+          echo "date_utc=$DATE_UTC" >> "$GITHUB_OUTPUT"
+          python3 << 'PY'
+          import json, os
+          from datetime import datetime, timezone
+
+          def load(p):
+              try:
+                  with open(p) as f:
+                      return json.load(f)
+              except Exception:
+                  return {}
+
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          s = load("data/latest/research-summary.json")
+          a = load("data/latest/anomaly-report.json")
+          obs = s.get("observations_today") or {}
+          idx = s.get("indexes") or {}
+          der = s.get("derived_surface_stats") or {}
+          gtemp = der.get("global_city_temperature_c") or {}
+          casey = der.get("casey_temperature_c") or {}
+          counts = a.get("counts") or {}
+
+          lines = [
+              "Unified Open Global Weather (UOGW) — daily research package digest",
+              f"Generated (UTC): {now}",
+              f"Date: {date}",
+              "GitHub: https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+              "Data Hub: https://midwestsds.com/msds-data-hub.html",
+              "",
+              "────────────────────────────────────────",
+              "",
+              "OBSERVATIONS",
+              f"  Global cities OK:     {obs.get('global_cities_ok', '—')}",
+              f"  NDBC realtime:       {obs.get('ndbc_realtime_stations', '—')}",
+              f"  Casey hourly:        {obs.get('casey_hourly_count', '—')}",
+              f"  Climate cities OK:   {obs.get('research_daily_climate_cities', '—')}",
+              "",
+              "INDEXES",
+              f"  IGRA stations:       {idx.get('igra_stations', '—')}",
+              f"  NDBC stations:       {idx.get('ndbc_stations', '—')}",
+              f"  GHCN stations:       {idx.get('ghcn_stations', '—')}",
+              "",
+              "SURFACE (C)",
+              f"  Global city T:       min={gtemp.get('min')}  max={gtemp.get('max')}  mean={gtemp.get('mean')}",
+              f"  Casey T:             min={casey.get('min')}  max={casey.get('max')}  mean={casey.get('mean')}",
+              "",
+              "ANOMALIES (research only)",
+              f"  Alert={counts.get('alert', 0)}  Watch={counts.get('watch', 0)}  Info={counts.get('info', 0)}  Total={counts.get('total', 0)}",
+              "",
+              "────────────────────────────────────────",
+              "Open atmospheric data commons. Research screening — not an official warning product.",
+              "Midwest Stratospheric Data Systems · launchcontrol@midwestsds.com",
+          ]
+          with open("/tmp/uogw-daily-email.txt", "w") as f:
+              f.write("\n".join(lines) + "\n")
+          print("Email body written")
+          PY
+
+      - name: Email daily research digest
+        if: env.SMTP_PASSWORD != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.hostinger.com
+          server_port: 465
+          secure: true
+          username: ${{ env.SMTP_USERNAME }}
+          password: ${{ env.SMTP_PASSWORD }}
+          subject: UOGW Daily Digest — ${{ steps.mail.outputs.date_utc }}
+          to: launchcontrol@midwestsds.com
+          from: UOGW Automation <launchcontrol@midwestsds.com>
+          reply_to: launchcontrol@midwestsds.com
+          body: file:///tmp/uogw-daily-email.txt
+          content_type: text/plain
+          ignore_cert: false
