@@ -16,6 +16,9 @@ permissions:
 jobs:
   weekly-report:
     runs-on: ubuntu-latest
+    env:
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,3 +45,46 @@ jobs:
             sleep $((i * 3))
           done
           exit 1
+
+      - name: Prepare email body
+        id: mail
+        run: |
+          DATE_UTC=$(date -u +%Y-%m-%d)
+          WEEK=$(date -u +%G-W%V)
+          REPORT="reports/latest.md"
+          if [ ! -f "$REPORT" ]; then
+            REPORT=$(ls -1 reports/weekly/*-uogw-status.md 2>/dev/null | tail -1 || true)
+          fi
+          echo "date_utc=$DATE_UTC" >> "$GITHUB_OUTPUT"
+          echo "week=$WEEK" >> "$GITHUB_OUTPUT"
+          {
+            echo "Unified Open Global Weather (UOGW) — weekly status report"
+            echo "Generated (UTC): $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "Week: $WEEK"
+            echo "GitHub: https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/reports/latest.md"
+            echo ""
+            echo "────────────────────────────────────────"
+            echo ""
+            cat "$REPORT" 2>/dev/null || echo "(report file not found on this run)"
+            echo ""
+            echo "────────────────────────────────────────"
+            echo "Open atmospheric data commons. Research screening — not an official warning product."
+            echo "Midwest Stratospheric Data Systems · launchcontrol@midwestsds.com"
+          } > /tmp/uogw-email-body.txt
+
+      - name: Email weekly status report
+        if: env.SMTP_PASSWORD != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.hostinger.com
+          server_port: 465
+          secure: true
+          username: ${{ env.SMTP_USERNAME }}
+          password: ${{ env.SMTP_PASSWORD }}
+          subject: UOGW Weekly Status — ${{ steps.mail.outputs.week }}
+          to: launchcontrol@midwestsds.com
+          from: UOGW Automation <launchcontrol@midwestsds.com>
+          reply_to: launchcontrol@midwestsds.com
+          body: file:///tmp/uogw-email-body.txt
+          content_type: text/plain
+          ignore_cert: false
