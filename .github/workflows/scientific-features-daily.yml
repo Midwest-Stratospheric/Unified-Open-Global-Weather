@@ -1,0 +1,52 @@
+name: Daily Scientific Features
+
+# Runs after research package window so data/latest is populated.
+on:
+  schedule:
+    - cron: "30 9 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-scientific-features
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scientific:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate scientific features
+        run: |
+          set -e
+          python3 scripts/generate_scientific_features.py
+
+      - name: Commit scientific outputs
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add data/latest/scientific_scorecard_latest.json \
+                  data/latest/scientific_scorecard_previous.json \
+                  data/latest/change_detection_latest.json \
+                  data/latest/layer_coverage_latest.json \
+                  data/latest/fair_package_card_latest.json \
+                  data/latest/research-summary_previous.json \
+                  reports/scientific || true
+          if git diff --staged --quiet; then
+            echo "No scientific feature changes"
+            exit 0
+          fi
+          git commit -m "data(scientific): scorecard, change detection, coverage, FAIR $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1
