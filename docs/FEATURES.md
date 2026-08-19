@@ -19,7 +19,11 @@ See the full hub ↔ GitHub map in [HUB_FEATURES.md](./HUB_FEATURES.md).
 - Science analytics digest
 - Self-healing latest pointers (`heal_latest.py`)
 - Health-monitor PR automation
+- **Weekly status report** (`scripts/weekly_report.py` → `reports/weekly/`)
 
 ## Automations
 
 All under `.github/workflows/` — schedule + `workflow_dispatch`.
+
+- Daily data + analytics pipelines
+- **Weekly Status Report** — Mondays 10:00 UTC (`weekly-report.yml`)
