@@ -1,11 +1,25 @@
 name: Weekly UOGW Release
 
-# One pinned snapshot per ISO week: tag + Release with data/visuals zip + email notice.
+# Sequential releases: v1.1, v1.2, … v1.N then v2.1 on major bump.
+# Default weekly run bumps MINOR. Manual dispatch can bump major or set exact version.
 
 on:
   schedule:
     - cron: "0 12 * * 1"
   workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump (ignored if exact_version set)"
+        type: choice
+        options:
+          - minor
+          - major
+        default: minor
+      exact_version:
+        description: "Optional exact version without v prefix (e.g. 1.5 or 2.1). Leave empty to auto-bump."
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -25,42 +39,79 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Compute tag and package assets
+      - name: Resolve next semver tag
         id: meta
         run: |
           set -euo pipefail
-          WEEK=$(date -u +%G-W%V)
-          TAG="uogw-${WEEK}"
           DATE_UTC=$(date -u +%Y-%m-%d)
-          PKG="uogw-release-${WEEK}"
-          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-          echo "week=$WEEK" >> "$GITHUB_OUTPUT"
+          WEEK=$(date -u +%G-W%V)
           echo "date_utc=$DATE_UTC" >> "$GITHUB_OUTPUT"
+          echo "week=$WEEK" >> "$GITHUB_OUTPUT"
+
+          EXACT="${{ github.event.inputs.exact_version || '' }}"
+          BUMP="${{ github.event.inputs.bump || 'minor' }}"
+
+          LATEST=$(git tag -l 'v[0-9]*' --sort=-v:refname | head -n 1 || true)
+          if [ -z "$LATEST" ]; then
+            MAJOR=1
+            MINOR=0
+          else
+            CLEAN=${LATEST#v}
+            MAJOR=$(echo "$CLEAN" | cut -d. -f1)
+            MINOR=$(echo "$CLEAN" | cut -d. -f2)
+            MAJOR=${MAJOR:-1}
+            MINOR=${MINOR:-0}
+          fi
+
+          if [ -n "$EXACT" ]; then
+            VER="$EXACT"
+            VER=${VER#v}
+          elif [ "$BUMP" = "major" ]; then
+            MAJOR=$((MAJOR + 1))
+            MINOR=1
+            VER="${MAJOR}.${MINOR}"
+          else
+            MINOR=$((MINOR + 1))
+            VER="${MAJOR}.${MINOR}"
+          fi
+
+          TAG="v${VER}"
+          PKG="uogw-release-${VER}"
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "pkg=$PKG" >> "$GITHUB_OUTPUT"
 
           if git rev-parse "$TAG" >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "Next release: $TAG (previous: ${LATEST:-none})"
           fi
 
+      - name: Build comprehensive package
+        if: steps.meta.outputs.exists == 'false'
+        run: |
+          set -euo pipefail
+          PKG="${{ steps.meta.outputs.pkg }}"
+          TAG="${{ steps.meta.outputs.tag }}"
+          VER="${{ steps.meta.outputs.version }}"
+          WEEK="${{ steps.meta.outputs.week }}"
+
           mkdir -p "/tmp/${PKG}/reports" "/tmp/${PKG}/visuals" "/tmp/${PKG}/data-latest" "/tmp/${PKG}/status" "/tmp/${PKG}/docs"
-
           cp -a reports/. "/tmp/${PKG}/reports/" 2>/dev/null || true
-
           if [ -d visuals/latest ]; then cp -a visuals/latest/. "/tmp/${PKG}/visuals/"; fi
           if [ -f visuals/CHART_DESCRIPTIONS.md ]; then cp visuals/CHART_DESCRIPTIONS.md "/tmp/${PKG}/docs/"; fi
           if [ -f visuals/ANOMALY_GUIDE.md ]; then cp visuals/ANOMALY_GUIDE.md "/tmp/${PKG}/docs/"; fi
           if [ -f docs/DATA_PACKAGES.md ]; then cp docs/DATA_PACKAGES.md "/tmp/${PKG}/docs/"; fi
-
-          # Latest science / research packages (not full historical entries tree)
+          if [ -f docs/FEATURES.md ]; then cp docs/FEATURES.md "/tmp/${PKG}/docs/"; fi
           if [ -d data/latest ]; then cp -a data/latest/. "/tmp/${PKG}/data-latest/"; fi
           if [ -d status ]; then cp -a status/. "/tmp/${PKG}/status/" 2>/dev/null || true; fi
 
           {
-            echo "UOGW weekly release package"
+            echo "UOGW release package"
+            echo "version: ${VER}"
             echo "tag: ${TAG}"
-            echo "week: ${WEEK}"
+            echo "iso_week: ${WEEK}"
             echo "generated_utc: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "commit: $(git rev-parse HEAD)"
             echo ""
@@ -72,35 +123,36 @@ jobs:
           ls -lh "/tmp/${PKG}.zip"
 
           {
-            echo "## Unified Open Global Weather — weekly snapshot ${WEEK}"
+            echo "## Unified Open Global Weather ${TAG}"
             echo ""
-            echo "**Tag:** \"${TAG}\"  "
-            echo "**Date (UTC):** ${DATE_UTC}  "
+            echo "**Version:** ${VER}  "
+            echo "**Tag:** ${TAG}  "
+            echo "**ISO week:** ${WEEK}  "
+            echo "**Date (UTC):** ${{ steps.meta.outputs.date_utc }}  "
             echo "**Commit:** $(git rev-parse --short HEAD)"
             echo ""
-            echo "Attached: **${PKG}.zip** — weekly reports, °F charts/visuals, data/latest science packages, and status snapshots."
+            echo "Attached: **${PKG}.zip** — reports, °F charts/visuals, data/latest, status."
             echo ""
             echo "Open atmospheric data commons. Research screening — not an official warning product."
             echo ""
-            echo "### Online pointers"
+            echo "### Pointers"
             echo "- [Latest weekly report](https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/reports/latest.md)"
-            echo "- [Charts gallery](https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/visuals/latest)"
-            echo "- [Science package](https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/data/latest/science-package.json)"
+            echo "- [Charts](https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/visuals/latest)"
             echo ""
             echo "### Latest status report (excerpt)"
             echo ""
             if [ -f reports/latest.md ]; then head -n 100 reports/latest.md; else echo "_(no reports/latest.md)_"; fi
             echo ""
             echo "---"
-            echo "*Automated weekly release · Midwest Stratospheric Data Systems / UOGW*"
+            echo "*Automated release ${TAG} · Midwest Stratospheric Data Systems / UOGW*"
           } > /tmp/release-notes.md
 
-      - name: Create GitHub Release with assets
+      - name: Create GitHub Release
         if: steps.meta.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.meta.outputs.tag }}
-          name: UOGW weekly ${{ steps.meta.outputs.week }}
+          name: UOGW ${{ steps.meta.outputs.tag }}
           body_path: /tmp/release-notes.md
           draft: false
           prerelease: false
@@ -113,23 +165,18 @@ jobs:
       - name: Prepare release email
         if: steps.meta.outputs.exists == 'false'
         run: |
-          WEEK="${{ steps.meta.outputs.week }}"
-          TAG="${{ steps.meta.outputs.tag }}"
-          PKG="${{ steps.meta.outputs.pkg }}"
           {
-            echo "Unified Open Global Weather (UOGW) — weekly release published"
+            echo "Unified Open Global Weather (UOGW) — release published"
             echo ""
-            echo "Tag:    ${TAG}"
-            echo "Week:   ${WEEK}"
-            echo "Time:   $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "Version: ${{ steps.meta.outputs.version }}"
+            echo "Tag:     ${{ steps.meta.outputs.tag }}"
+            echo "Week:    ${{ steps.meta.outputs.week }}"
+            echo "Time:    $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo ""
-            echo "Release page:"
-            echo "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/releases/tag/${TAG}"
+            echo "Release:"
+            echo "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/releases/tag/${{ steps.meta.outputs.tag }}"
             echo ""
-            echo "Asset: ${PKG}.zip"
-            echo "  Includes: reports, °F charts/visuals, data/latest, status"
-            echo ""
-            echo "Data Hub: https://midwestsds.com/msds-data-hub.html"
+            echo "Asset: ${{ steps.meta.outputs.pkg }}.zip (reports, charts, data/latest, status)"
             echo ""
             echo "────────────────────────────────────────"
             echo "Open atmospheric data commons. Research screening — not an official warning product."
@@ -145,7 +192,7 @@ jobs:
           secure: true
           username: ${{ env.SMTP_USERNAME }}
           password: ${{ env.SMTP_PASSWORD }}
-          subject: UOGW Release ${{ steps.meta.outputs.tag }} published
+          subject: UOGW ${{ steps.meta.outputs.tag }} released
           to: launchcontrol@midwestsds.com
           from: UOGW Automation <launchcontrol@midwestsds.com>
           reply_to: launchcontrol@midwestsds.com
@@ -154,4 +201,4 @@ jobs:
 
       - name: Skip notice
         if: steps.meta.outputs.exists == 'true'
-        run: echo "Release ${{ steps.meta.outputs.tag }} already exists; no action."
+        run: echo "Tag ${{ steps.meta.outputs.tag }} already exists; no action."
