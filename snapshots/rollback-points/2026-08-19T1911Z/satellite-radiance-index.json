@@ -1,0 +1,100 @@
+{
+  "schema": "uogw.satellite_radiance_index.v1",
+  "date_utc": "2026-08-19",
+  "generated_at_utc": "2026-08-19T10:59:24Z",
+  "curator": "Midwest Stratospheric Data Systems",
+  "data_kind": "index",
+  "note": "UOGW indexes open satellite radiance and related product families for research discovery. Full radiance archives remain on AWS/NOAA/NASA (multi-TB). Use this index to locate authoritative paths.",
+  "product_count": 6,
+  "products": [
+    {
+      "id": "goes16-abi-l1b-radf",
+      "name": "GOES-16 ABI L1b Full Disk Radiances",
+      "platform": "GOES-16",
+      "sensor": "ABI",
+      "level": "L1b",
+      "domain": "radiance",
+      "access": "AWS Open Data",
+      "registry": "https://registry.opendata.aws/noaa-goes/",
+      "s3_prefix": "s3://noaa-goes16/ABI-L1b-RadF/",
+      "docs": "https://www.goes-r.gov/products/baseline-radiances.html"
+    },
+    {
+      "id": "goes18-abi-l1b-radf",
+      "name": "GOES-18 ABI L1b Full Disk Radiances",
+      "platform": "GOES-18",
+      "sensor": "ABI",
+      "level": "L1b",
+      "domain": "radiance",
+      "access": "AWS Open Data",
+      "registry": "https://registry.opendata.aws/noaa-goes/",
+      "s3_prefix": "s3://noaa-goes18/ABI-L1b-RadF/",
+      "docs": "https://www.goes-r.gov/products/baseline-radiances.html"
+    },
+    {
+      "id": "goes16-abi-l2-cmipf",
+      "name": "GOES-16 ABI L2 Cloud and Moisture Imagery Full Disk",
+      "platform": "GOES-16",
+      "sensor": "ABI",
+      "level": "L2",
+      "domain": "imagery",
+      "access": "AWS Open Data",
+      "s3_prefix": "s3://noaa-goes16/ABI-L2-CMIPF/",
+      "registry": "https://registry.opendata.aws/noaa-goes/"
+    },
+    {
+      "id": "jpss-viirs",
+      "name": "JPSS VIIRS (radiance / SDR open paths)",
+      "platform": "JPSS",
+      "sensor": "VIIRS",
+      "level": "SDR/L1",
+      "domain": "radiance",
+      "access": "NOAA / AWS Open Data",
+      "registry": "https://registry.opendata.aws/noaa-jpss/",
+      "docs": "https://www.nesdis.noaa.gov/about/our-satellites/current-satellites/joint-polar-satellite-system"
+    },
+    {
+      "id": "cosmic-ro",
+      "name": "COSMIC GNSS Radio Occultation",
+      "platform": "COSMIC",
+      "sensor": "GNSS-RO",
+      "level": "retrieval",
+      "domain": "occultation",
+      "access": "UCAR open products",
+      "registry": "https://www.cosmic.ucar.edu/"
+    },
+    {
+      "id": "merra2",
+      "name": "MERRA-2 reanalysis (satellite-assimilated fields)",
+      "platform": "NASA GMAO",
+      "sensor": "multi",
+      "level": "reanalysis",
+      "domain": "assimilated",
+      "access": "NASA GES DISC / open subsets",
+      "registry": "https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/"
+    }
+  ],
+  "availability_probes": [
+    {
+      "url": "https://registry.opendata.aws/noaa-goes/",
+      "http_status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://registry.opendata.aws/noaa-jpss/",
+      "http_status": 200,
+      "ok": true
+    },
+    {
+      "url": "https://www.ncei.noaa.gov/",
+      "http_status": 200,
+      "ok": true
+    }
+  ],
+  "research_guidance": [
+    "Prefer ABI L1b RadF for calibrated radiances; CMIP for imagery.",
+    "Do not commit large NetCDF/HDF granules into this git repo.",
+    "Pair satellite indexes with UOGW surface/marine daily packages for multi-layer studies.",
+    "Always cite NOAA/NASA/UCAR product DOIs or dataset landing pages."
+  ]
+}
