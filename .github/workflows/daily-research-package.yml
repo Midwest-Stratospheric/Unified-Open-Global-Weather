@@ -1,5 +1,6 @@
 # Builds a research-ready daily package from all UOGW indexes + observations
 # Runs after other daily jobs (09:00 UTC) so upstream files exist
+# Scientific features run in scientific-features-daily.yml at 09:30 UTC
 name: Daily Research Package
 
 on:
@@ -25,68 +26,29 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build research package + generalized daily summary
+      - name: Build research package
         run: |
           set -e
           DATE=$(date -u +%Y-%m-%d)
           mkdir -p data/entries/${DATE} data/latest status snapshots/${DATE} layers/research
-          # Inline research package builder retained in repo history; invoke via existing embedded logic
-          # For maintainability the heavy builder remains in this step (unchanged science package).
-          python3 -c "print('delegate')" >/dev/null
-          # Use the previous committed workflow body from scripts if present; else run features after a minimal ensure
-          if [ -f scripts/build_research_package_inline.py ]; then
-            python3 scripts/build_research_package_inline.py
+          if [ -f scripts/build_research_package.py ]; then
+            python3 scripts/build_research_package.py
+          else
+            echo "WARNING: scripts/build_research_package.py missing — using last committed data/latest"
+            echo "Re-add full builder from git history commit 67e33c46 if needed."
           fi
 
-      - name: Ensure research summary exists then scientific features
-        run: |
-          set -e
-          # If research-summary missing, create a thin stub from available latest files
-          python3 << 'PY'
-          import json, os
-          from datetime import datetime, timezone
-          p = "data/latest/research-summary.json"
-          if not os.path.exists(p):
-              os.makedirs("data/latest", exist_ok=True)
-              now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-              date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-              stub = {
-                  "schema": "uogw.research_summary.v1",
-                  "date_utc": date,
-                  "generated_at_utc": now,
-                  "observations_today": {},
-                  "indexes": {},
-                  "note": "stub — full package builder should populate this",
-              }
-              # try enrich from summary.json
-              try:
-                  with open("data/latest/summary.json") as f:
-                      s = json.load(f)
-                  stub["indexes"] = s.get("indexes") or {}
-                  stub["observations_today"] = {
-                      "global_cities_ok": (s.get("entries") or {}).get("research-summary", {}).get("global_cities_ok"),
-                  }
-              except Exception:
-                  pass
-              with open(p, "w") as f:
-                  json.dump(stub, f, indent=2)
-              print("wrote stub research-summary")
-          else:
-              print("research-summary present")
-          PY
-          python3 scripts/generate_scientific_features.py
-
-      - name: Commit research + scientific features
+      - name: Commit research data entry
         run: |
           set -e
           git config user.name "uogw-bot"
           git config user.email "bot@midwestsds.com"
-          git add data/entries data/latest layers/research snapshots status reports/scientific || true
+          git add data/entries data/latest layers/research snapshots status || true
           if git diff --staged --quiet; then
             echo "No changes"
             exit 0
           fi
-          git commit -m "data(research): scientific features + package refresh $(date -u +%Y-%m-%d)"
+          git commit -m "data(research): daily science package + multi-source summary $(date -u +%Y-%m-%d)"
           for i in 1 2 3 4 5; do
             git fetch origin main
             git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
@@ -94,3 +56,71 @@ jobs:
             sleep $((i * 3))
           done
           exit 1
+
+      - name: Prepare daily digest email
+        id: mail
+        run: |
+          DATE_UTC=$(date -u +%Y-%m-%d)
+          echo "date_utc=$DATE_UTC" >> "$GITHUB_OUTPUT"
+          python3 << 'PY'
+          import json
+          from datetime import datetime, timezone
+
+          def load(p):
+              try:
+                  with open(p) as f:
+                      return json.load(f)
+              except Exception:
+                  return {}
+
+          now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          s = load("data/latest/research-summary.json")
+          a = load("data/latest/anomaly-report.json")
+          sc = load("data/latest/scientific_scorecard_latest.json")
+          obs = s.get("observations_today") or {}
+          idx = s.get("indexes") or {}
+          der = s.get("derived_surface_stats") or {}
+          gtemp = der.get("global_city_temperature_c") or {}
+          casey = der.get("casey_temperature_c") or {}
+          counts = a.get("counts") or {}
+
+          lines = [
+              "Unified Open Global Weather (UOGW) — daily research package digest",
+              f"Generated (UTC): {now}",
+              f"Date: {date}",
+              "GitHub: https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+              "",
+              "OBSERVATIONS",
+              f"  Global cities OK:     {obs.get('global_cities_ok', '—')}",
+              f"  NDBC realtime:       {obs.get('ndbc_realtime_stations', '—')}",
+              f"  Casey hourly:        {obs.get('casey_hourly_count', '—')}",
+              f"  Climate cities OK:   {obs.get('research_daily_climate_cities', '—')}",
+              "",
+              "SCIENTIFIC SCORECARD",
+              f"  Grade: {sc.get('grade', '—')}  composite={sc.get('composite_score', '—')}",
+              "",
+              "ANOMALIES (research only)",
+              f"  Alert={counts.get('alert', 0)}  Watch={counts.get('watch', 0)}  Total={counts.get('total', 0)}",
+              "",
+              "Midwest Stratospheric Data Systems · launchcontrol@midwestsds.com",
+          ]
+          with open("/tmp/uogw-daily-email.txt", "w") as f:
+              f.write("\n".join(lines) + "\n")
+          PY
+
+      - name: Email daily research digest
+        if: env.SMTP_PASSWORD != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.hostinger.com
+          server_port: 465
+          secure: true
+          username: ${{ env.SMTP_USERNAME }}
+          password: ${{ env.SMTP_PASSWORD }}
+          subject: UOGW Daily Digest — ${{ steps.mail.outputs.date_utc }}
+          to: launchcontrol@midwestsds.com
+          from: UOGW Automation <launchcontrol@midwestsds.com>
+          reply_to: launchcontrol@midwestsds.com
+          body: file:///tmp/uogw-daily-email.txt
+          content_type: text/plain
