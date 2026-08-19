@@ -1,0 +1,87 @@
+name: Weekly UOGW Release
+
+# Practical cadence: one pinned, citable snapshot per ISO week.
+# Prefer running after the weekly status report (Monday 10:00 UTC).
+
+on:
+  schedule:
+    # Monday 12:00 UTC — after weekly-report (10:00) and daily package (09:00)
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uogw-weekly-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute tag and notes
+        id: meta
+        run: |
+          set -euo pipefail
+          WEEK=$(date -u +%G-W%V)
+          TAG="uogw-${WEEK}"
+          DATE_UTC=$(date -u +%Y-%m-%d)
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "week=$WEEK" >> "$GITHUB_OUTPUT"
+          echo "date_utc=$DATE_UTC" >> "$GITHUB_OUTPUT"
+
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Tag $TAG already exists — skipping create."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          {
+            echo "## Unified Open Global Weather — weekly snapshot ${WEEK}"
+            echo ""
+            echo "**Tag:** \"${TAG}\"  "
+            echo "**Date (UTC):** ${DATE_UTC}  "
+            echo "**Commit:** $(git rev-parse --short HEAD)"
+            echo ""
+            echo "Open multi-layer atmospheric commons. Research screening — not an official warning product."
+            echo ""
+            echo "### Pointers"
+            echo "- Latest weekly report: [reports/latest.md](https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/reports/latest.md)"
+            echo "- Science package: [data/latest/science-package.json](https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/data/latest/science-package.json)"
+            echo "- Research summary: [data/latest/research-summary.json](https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/data/latest/research-summary.json)"
+            echo "- Charts: [visuals/latest/](https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/visuals/latest)"
+            echo ""
+            echo "### Latest status report (excerpt)"
+            echo ""
+            if [ -f reports/latest.md ]; then
+              head -n 100 reports/latest.md
+            else
+              echo "_(reports/latest.md not present on this commit)_"
+            fi
+            echo ""
+            echo "---"
+            echo "*Automated weekly release · Midwest Stratospheric Data Systems / UOGW*"
+          } > /tmp/release-notes.md
+
+      - name: Create GitHub Release
+        if: steps.meta.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: UOGW weekly ${{ steps.meta.outputs.week }}
+          body_path: /tmp/release-notes.md
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Skip notice
+        if: steps.meta.outputs.exists == 'true'
+        run: echo "Release ${{ steps.meta.outputs.tag }} already exists; no action."
