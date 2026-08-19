@@ -1,0 +1,44 @@
+name: Weekly Status Report
+
+on:
+  schedule:
+    # Every Monday at 10:00 UTC
+    - cron: "0 10 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-weekly-report
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  weekly-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate weekly report
+        run: python3 scripts/weekly_report.py
+
+      - name: Commit report
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add reports/ || true
+          if git diff --staged --quiet; then
+            echo "No report changes"
+            exit 0
+          fi
+          git commit -m "reports: weekly UOGW status $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1
