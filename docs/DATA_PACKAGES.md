@@ -10,6 +10,7 @@ Overview of the **daily science and layer packages** produced by Unified Open Gl
 | `science-analytics.json` | Extremes, coverage, research flags |
 | `anomaly-report.json` | Multi-method anomaly screening (research only) |
 | `hub-endpoints.json` | Map of stable endpoints for the Data Hub |
+| `research-summary.json` | Compact multi-layer research snapshot |
 
 ## Layer packages (`layers/`)
 
@@ -34,13 +35,36 @@ Overview of the **daily science and layer packages** produced by Unified Open Gl
 | Path | Role |
 |------|------|
 | `reports/weekly/` | Weekly status reports (Actions) |
+| `reports/latest.md` | Pointer / latest weekly body |
 | `visuals/latest/` | °F chart PNGs + markdown gallery |
+
+## Email digests (Hostinger SMTP)
+
+After package builds, workflows can email digests to `launchcontrol@midwestsds.com`.
+
+| Workflow | Schedule | Subject pattern |
+|----------|----------|-----------------|
+| **Daily Research Package** | 09:00 UTC daily | `UOGW Daily Digest — YYYY-MM-DD` |
+| **Weekly Status Report** | Monday 10:00 UTC | `UOGW Weekly Status — YYYY-Www` |
+
+### Required secrets (this repository)
+
+Add under **Settings → Secrets and variables → Actions** on *this* repo (secrets are not shared from GIR unless you use org-level secrets):
+
+| Secret name | Value |
+|-------------|--------|
+| `SMTP_USERNAME` | `launchcontrol@midwestsds.com` |
+| `SMTP_PASSWORD` | Hostinger mailbox password |
+
+SMTP: `smtp.hostinger.com:465` (SSL). From/To: `launchcontrol@midwestsds.com`.
+
+If `SMTP_PASSWORD` is missing, ingest still runs; the email step is skipped.
 
 ## Related GIR package
 
 Hazard / geospatial open-tier briefing products (NWS, USGS, EONET, CISA KEV, etc.) live in the sibling repository:
 
-**[aerostratospheric-defense-gir](https://github.com/Midwest-Stratospheric/aerostratospheric-defense-gir)** — daily executive summaries under `reports/`.
+**[aerostratospheric-defense-gir](https://github.com/Midwest-Stratospheric/aerostratospheric-defense-gir)** — daily executive summaries under `reports/` (also email-enabled).
 
 ## How to consume
 
