@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-19",
-  "generated_at_utc": "2026-08-19T10:03:38Z",
+  "generated_at_utc": "2026-08-19T10:53:52Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 4,
+    "anomaly_events": 3,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -212,9 +212,9 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 4,
+      "total": 3,
       "alert": 2,
-      "watch": 2,
+      "watch": 1,
       "info": 0
     },
     "top": [
@@ -223,82 +223,57 @@
         "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 41.1,
+        "value": 40.7,
         "threshold": 40,
         "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
       },
       {
         "kind": "temp_zscore_mad",
-        "severity": "alert",
-        "subject": "Casey, IL, US",
+        "severity": "watch",
+        "subject": "Sao Paulo, BR",
         "metric": "z_mad",
-        "value": -8.7685,
-        "threshold": 5.0,
-        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "value": 4.7215,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 19.2,
-            "z_pop": -2.0609,
-            "z_sample": -1.9081,
-            "z_mad": -8.7685,
-            "s_range": -0.586,
-            "percentile": 12.5,
-            "mean": 22.6571,
-            "median": 23.1,
-            "pstdev": 1.6775,
-            "sample_stdev": 1.8119,
+            "x": 18.8,
+            "z_pop": 2.1111,
+            "z_sample": 1.9545,
+            "z_mad": 4.7215,
+            "s_range": 0.7143,
+            "percentile": 87.5,
+            "mean": 17.0143,
+            "median": 16.7,
+            "pstdev": 0.8459,
+            "sample_stdev": 0.9137,
             "mad": 0.3
           }
         }
       },
       {
         "kind": "temp_zscore_mad",
-        "severity": "watch",
+        "severity": "alert",
         "subject": "Lima, PE",
         "metric": "z_mad",
-        "value": -4.3843,
-        "threshold": 3.5,
-        "detail": "Robust MAD z-score |z|>=3.5",
+        "value": -5.6208,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 18.0,
-            "z_pop": -2.202,
-            "z_sample": -2.0387,
-            "z_mad": -4.3843,
-            "s_range": -0.6391,
+            "x": 16.8,
+            "z_pop": -2.0582,
+            "z_sample": -1.9055,
+            "z_mad": -5.6208,
+            "s_range": -0.6728,
             "percentile": 12.5,
-            "mean": 19.2143,
+            "mean": 18.8857,
             "median": 19.3,
-            "pstdev": 0.5514,
-            "sample_stdev": 0.5956,
-            "mad": 0.2
-          }
-        }
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "watch",
-        "subject": "Seoul, KR",
-        "metric": "z_mad",
-        "value": 4.3843,
-        "threshold": 3.5,
-        "detail": "Robust MAD z-score |z|>=3.5",
-        "extra": {
-          "methods": {
-            "n": 7,
-            "x": 30.1,
-            "z_pop": 2.3066,
-            "z_sample": 2.1355,
-            "z_mad": 4.3843,
-            "s_range": 0.7101,
-            "percentile": 87.5,
-            "mean": 27.6857,
-            "median": 27.5,
-            "pstdev": 1.0467,
-            "sample_stdev": 1.1305,
-            "mad": 0.4
+            "pstdev": 1.0134,
+            "sample_stdev": 1.0946,
+            "mad": 0.3
           }
         }
       }
@@ -327,8 +302,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "4",
-      "detail": "alert 2 \u00b7 watch 2 \u00b7 info 0"
+      "value": "3",
+      "detail": "alert 2 \u00b7 watch 1 \u00b7 info 0"
     },
     {
       "id": "heat_index",
