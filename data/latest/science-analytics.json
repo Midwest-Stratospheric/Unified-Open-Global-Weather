@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-20",
-  "generated_at_utc": "2026-08-20T10:06:19Z",
+  "generated_at_utc": "2026-08-20T10:58:25Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 3,
+    "anomaly_events": 4,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -198,43 +198,43 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 3,
-      "alert": 2,
-      "watch": 1,
+      "total": 4,
+      "alert": 1,
+      "watch": 3,
       "info": 0
     },
     "top": [
       {
         "kind": "surface_heat",
-        "severity": "alert",
+        "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 40.7,
-        "threshold": 40,
-        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
+        "value": 37.7,
+        "threshold": 35,
+        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
       },
       {
         "kind": "temp_zscore_mad",
         "severity": "watch",
         "subject": "Sao Paulo, BR",
         "metric": "z_mad",
-        "value": 4.7215,
+        "value": 3.7098,
         "threshold": 3.5,
         "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 18.8,
-            "z_pop": 2.1111,
-            "z_sample": 1.9545,
-            "z_mad": 4.7215,
-            "s_range": 0.7143,
+            "x": 18.9,
+            "z_pop": 1.4911,
+            "z_sample": 1.3805,
+            "z_mad": 3.7098,
+            "s_range": 0.6044,
             "percentile": 87.5,
-            "mean": 17.0143,
+            "mean": 17.3286,
             "median": 16.7,
-            "pstdev": 0.8459,
-            "sample_stdev": 0.9137,
-            "mad": 0.3
+            "pstdev": 1.0539,
+            "sample_stdev": 1.1383,
+            "mad": 0.4
           }
         }
       },
@@ -250,16 +250,41 @@
           "methods": {
             "n": 7,
             "x": 16.8,
-            "z_pop": -2.0582,
-            "z_sample": -1.9055,
+            "z_pop": -1.4379,
+            "z_sample": -1.3313,
             "z_mad": -5.6208,
-            "s_range": -0.6728,
-            "percentile": 12.5,
-            "mean": 18.8857,
+            "s_range": -0.5867,
+            "percentile": 18.75,
+            "mean": 18.4429,
             "median": 19.3,
-            "pstdev": 1.0134,
-            "sample_stdev": 1.0946,
+            "pstdev": 1.1425,
+            "sample_stdev": 1.234,
             "mad": 0.3
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "watch",
+        "subject": "Sydney, AU",
+        "metric": "z_mad",
+        "value": 4.8564,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 19.8,
+            "z_pop": 2.1842,
+            "z_sample": 2.0222,
+            "z_mad": 4.8564,
+            "s_range": 0.6217,
+            "percentile": 87.5,
+            "mean": 16.4429,
+            "median": 16.2,
+            "pstdev": 1.537,
+            "sample_stdev": 1.6602,
+            "mad": 0.5
           }
         }
       }
@@ -288,8 +313,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "3",
-      "detail": "alert 2 \u00b7 watch 1 \u00b7 info 0"
+      "value": "4",
+      "detail": "alert 1 \u00b7 watch 3 \u00b7 info 0"
     },
     {
       "id": "heat_index",
