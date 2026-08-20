@@ -2,7 +2,7 @@
   "schema": "uogw.pre_tornado_clark.v1",
   "ok": true,
   "date_utc": "2026-08-20",
-  "generated_at_utc": "2026-08-20T09:54:50Z",
+  "generated_at_utc": "2026-08-20T10:03:43Z",
   "site": {
     "name": "Clark County, Illinois (Casey area)",
     "county": "Clark",
@@ -13,7 +13,7 @@
   },
   "disclaimer": "RESEARCH SCREENING ONLY. This is NOT a National Weather Service watch, warning, or forecast. Tornadoes can occur with little notice. Always follow NWS, local emergency management, and NOAA Weather Radio.",
   "probability_research": {
-    "score_0_to_100": 30,
+    "score_0_to_100": 29,
     "level": "elevated",
     "level_label": "Elevated",
     "meaning": "Some instability/moisture/wind factors are rising. Stay weather-aware; this is not an official watch.",
@@ -22,48 +22,48 @@
   "components": {
     "cape": {
       "points": 2,
-      "value": 110.0,
+      "value": 90.0,
       "note": "Very low CAPE"
     },
     "lifted_index": {
       "points": 4,
-      "value": -0.8,
+      "value": 0.0,
       "note": "Marginal LI"
     },
     "cin": {
-      "points": 1,
-      "value": 109.0,
-      "note": "Strong inhibition"
+      "points": 3,
+      "value": 77.0,
+      "note": "Moderate inhibition"
     },
     "moisture": {
       "points": 12,
-      "value": 19.1,
+      "value": 19.0,
       "note": "Rich moisture"
     },
     "wind": {
       "points": 7,
-      "value": 16.2,
+      "value": 15.5,
       "note": "Moderate gusts"
     },
     "pressure_tendency": {
-      "points": 4,
-      "value": -0.4,
-      "note": "Slight fall/steady"
+      "points": 1,
+      "value": 0.5,
+      "note": "Rising pressure"
     }
   },
   "observations": {
-    "cape_jkg": 110.0,
-    "cin_jkg": 109.0,
-    "lifted_index": -0.8,
-    "dewpoint_c": 19.1,
-    "dewpoint_f": 66.4,
+    "cape_jkg": 90.0,
+    "cin_jkg": 77.0,
+    "lifted_index": 0.0,
+    "dewpoint_c": 19.0,
+    "dewpoint_f": 66.2,
     "relative_humidity_pct": 94.0,
-    "wind_speed_kmh": 8.8,
-    "wind_gusts_kmh": 16.2,
-    "pressure_msl_hpa": 1013.5,
-    "pressure_tendency_3h_hpa": -0.4,
-    "temperature_c": 20.1,
-    "temperature_f": 68.2
+    "wind_speed_kmh": 8.0,
+    "wind_gusts_kmh": 15.5,
+    "pressure_msl_hpa": 1013.6,
+    "pressure_tendency_3h_hpa": 0.5,
+    "temperature_c": 20.0,
+    "temperature_f": 68.0
   },
   "trend_hourly": [
     {
