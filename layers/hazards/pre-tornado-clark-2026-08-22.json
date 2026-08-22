@@ -2,7 +2,7 @@
   "schema": "uogw.pre_tornado_clark.v1",
   "ok": true,
   "date_utc": "2026-08-22",
-  "generated_at_utc": "2026-08-22T07:20:05Z",
+  "generated_at_utc": "2026-08-22T07:47:58Z",
   "site": {
     "name": "Clark County, Illinois (Casey area)",
     "county": "Clark",
@@ -13,17 +13,17 @@
   },
   "disclaimer": "RESEARCH SCREENING ONLY. This is NOT a National Weather Service watch, warning, or forecast. Tornadoes can occur with little notice. Always follow NWS, local emergency management, and NOAA Weather Radio.",
   "probability_research": {
-    "score_0_to_100": 25,
-    "level": "elevated",
-    "level_label": "Elevated",
-    "meaning": "Some instability/moisture/wind factors are rising. Stay weather-aware; this is not an official watch.",
+    "score_0_to_100": 21,
+    "level": "quiet",
+    "level_label": "Quiet",
+    "meaning": "Background conditions. No elevated pre-tornado research signals for Clark County in this automated screen.",
     "method": "Weighted composite of CAPE, lifted index, CIN, dewpoint moisture, wind gust proxy, and 3-hour pressure tendency from Open-Meteo near Casey, IL. Not calibrated storm probability."
   },
   "components": {
     "cape": {
-      "points": 6,
-      "value": 270.0,
-      "note": "Low CAPE"
+      "points": 2,
+      "value": 240.0,
+      "note": "Very low CAPE"
     },
     "lifted_index": {
       "points": 4,
@@ -37,12 +37,12 @@
     },
     "moisture": {
       "points": 9,
-      "value": 17.1,
+      "value": 17.2,
       "note": "Adequate moisture"
     },
     "wind": {
       "points": 3,
-      "value": 7.9,
+      "value": 13.3,
       "note": "Light wind/gusts"
     },
     "pressure_tendency": {
@@ -52,15 +52,15 @@
     }
   },
   "observations": {
-    "cape_jkg": 270.0,
+    "cape_jkg": 240.0,
     "cin_jkg": 210.0,
     "lifted_index": -1.5,
-    "dewpoint_c": 17.1,
-    "dewpoint_f": 62.8,
-    "relative_humidity_pct": 88.0,
-    "wind_speed_kmh": 7.7,
-    "wind_gusts_kmh": 7.9,
-    "pressure_msl_hpa": 1014.8,
+    "dewpoint_c": 17.2,
+    "dewpoint_f": 63.0,
+    "relative_humidity_pct": 89.0,
+    "wind_speed_kmh": 8.2,
+    "wind_gusts_kmh": 13.3,
+    "pressure_msl_hpa": 1014.3,
     "pressure_tendency_3h_hpa": null,
     "temperature_c": 19.1,
     "temperature_f": 66.4
