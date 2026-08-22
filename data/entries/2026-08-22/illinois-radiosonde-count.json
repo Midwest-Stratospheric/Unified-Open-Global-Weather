@@ -2,7 +2,7 @@
   "schema": "uogw.illinois_radiosonde_count.v1",
   "ok": true,
   "date_utc": "2026-08-22",
-  "generated_at_utc": "2026-08-22T11:56:08Z",
+  "generated_at_utc": "2026-08-22T13:21:18Z",
   "region": {
     "name": "Illinois",
     "focus": "NWS radiosonde / rawinsonde launches",
@@ -11,26 +11,28 @@
   },
   "window": {
     "hours": 72,
-    "start_utc": "2026-08-19T11:56:08Z",
-    "end_utc": "2026-08-22T11:56:08Z"
+    "start_utc": "2026-08-19T13:21:18Z",
+    "end_utc": "2026-08-22T13:21:18Z"
   },
   "counts": {
     "launches_3_days": 6,
-    "devices_likely_aloft": 0,
+    "devices_likely_aloft": 1,
     "aloft_window_hours": 2.0,
     "stations_reporting": 1
   },
-  "devices_likely_aloft": [],
-  "launches_3_days": [
+  "devices_likely_aloft": [
     {
       "station": "KILX",
       "name": "Lincoln, IL (ILX)",
-      "valid_utc": "2026-08-19T12:00:00Z",
+      "valid_utc": "2026-08-22T12:00:00Z",
       "release_time": null,
-      "sbcape_jkg": 584.36694,
-      "pwater_mm": 43.849606,
-      "shear_sfc_6km_smps": 21.771935
-    },
+      "sbcape_jkg": 6.6048098,
+      "pwater_mm": 29.977854,
+      "shear_sfc_6km_smps": 18.064493,
+      "estimated_age_hours": 1.36
+    }
+  ],
+  "launches_3_days": [
     {
       "station": "KILX",
       "name": "Lincoln, IL (ILX)",
@@ -75,6 +77,15 @@
       "sbcape_jkg": 945.68286,
       "pwater_mm": 30.692312,
       "shear_sfc_6km_smps": 18.466892
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-08-22T12:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 6.6048098,
+      "pwater_mm": 29.977854,
+      "shear_sfc_6km_smps": 18.064493
     }
   ],
   "stations": [
@@ -86,15 +97,6 @@
       "ok": true,
       "launches_3_days": 6,
       "launches": [
-        {
-          "station": "KILX",
-          "name": "Lincoln, IL (ILX)",
-          "valid_utc": "2026-08-19T12:00:00Z",
-          "release_time": null,
-          "sbcape_jkg": 584.36694,
-          "pwater_mm": 43.849606,
-          "shear_sfc_6km_smps": 21.771935
-        },
         {
           "station": "KILX",
           "name": "Lincoln, IL (ILX)",
@@ -139,6 +141,15 @@
           "sbcape_jkg": 945.68286,
           "pwater_mm": 30.692312,
           "shear_sfc_6km_smps": 18.466892
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-08-22T12:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 6.6048098,
+          "pwater_mm": 29.977854,
+          "shear_sfc_6km_smps": 18.064493
         }
       ]
     }
