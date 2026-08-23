@@ -1,0 +1,569 @@
+{
+  "schema": "uogw.space_gfs_snapshot.v1",
+  "ok": true,
+  "date_utc": "2026-08-23",
+  "generated_at_utc": "2026-08-23T17:55:59Z",
+  "data_vs_telemetry": {
+    "live_telemetry": "Serial/APRS/WSPR/GPS packets from an MSDS payload or a radiosonde while it is transmitting in flight.",
+    "near_real_time_products": "SWPC Kp and GOES X-rays update frequently from operational sensors \u2014 still not MSDS flight telemetry.",
+    "model_forecast": "NOAA GFS (and Open-Meteo GFS seamless) are predicted grids, not measured balloon or radiosonde paths.",
+    "archive_counts": "Illinois radiosonde 3-day counts come from public RAOB archives (launch schedule times), not live trackers on each balloon."
+  },
+  "space": {
+    "ok": true,
+    "source": "NOAA SWPC",
+    "data_class": "near_real_time_space_environment",
+    "not_telemetry": "These are space-environment monitors (ground/satellite instruments), not MSDS balloon payload telemetry and not radiosonde tracks.",
+    "kp_latest": {
+      "time_tag": "2026-08-23T17:50:00",
+      "kp_index": 0,
+      "estimated_kp": 0.33,
+      "kp": "0P"
+    },
+    "xray_latest": {
+      "time_tag": "2026-08-23T17:52:00Z",
+      "satellite": 18,
+      "flux": 8.896109875422553e-07,
+      "observed_flux": 9.194665153700043e-07,
+      "electron_correction": 2.9855510064180635e-08,
+      "electron_contaminaton": false,
+      "energy": "0.1-0.8nm"
+    },
+    "kp_series": [
+      {
+        "time": "2026-08-23T17:03:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:04:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:05:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:06:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:07:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:08:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:09:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:10:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:11:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:12:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:13:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:14:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:15:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:16:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:17:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:18:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:19:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:20:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:21:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:22:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:23:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:24:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:25:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:26:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:27:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:28:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:29:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:30:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:31:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:32:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:33:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:34:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:35:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:36:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:37:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:38:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:39:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:40:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:41:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:42:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:43:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:44:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:45:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:46:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:47:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:48:00",
+        "kp": 1
+      },
+      {
+        "time": "2026-08-23T17:49:00",
+        "kp": 0
+      },
+      {
+        "time": "2026-08-23T17:50:00",
+        "kp": 0
+      }
+    ],
+    "xray_series_tail": [
+      {
+        "time": "2026-08-23T17:38:00Z",
+        "flux": 4.1010981277622705e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:38:00Z",
+        "flux": 1.0832009138539433e-06,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:39:00Z",
+        "flux": 3.6175645590219574e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:39:00Z",
+        "flux": 1.0753720971479197e-06,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:40:00Z",
+        "flux": 3.5231355610676474e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:40:00Z",
+        "flux": 1.0637254490575287e-06,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:41:00Z",
+        "flux": 3.450504593160986e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:41:00Z",
+        "flux": 1.0458865062901168e-06,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:42:00Z",
+        "flux": 3.260706904484323e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:42:00Z",
+        "flux": 1.0282783478032798e-06,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:43:00Z",
+        "flux": 3.1972362535270804e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:43:00Z",
+        "flux": 1.0062418596135103e-06,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:44:00Z",
+        "flux": 3.0835401787498995e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:44:00Z",
+        "flux": 9.896506298900931e-07,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:45:00Z",
+        "flux": 2.6938430153222725e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:45:00Z",
+        "flux": 9.69822167462553e-07,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:46:00Z",
+        "flux": 2.4949535770701914e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:46:00Z",
+        "flux": 9.431738021703495e-07,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:47:00Z",
+        "flux": 2.4744684523625438e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:47:00Z",
+        "flux": 9.182429039356066e-07,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:48:00Z",
+        "flux": 2.1697463381542548e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:48:00Z",
+        "flux": 8.980421171145281e-07,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:49:00Z",
+        "flux": 2.3498415657741134e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:49:00Z",
+        "flux": 8.822406130093441e-07,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:50:00Z",
+        "flux": 2.0472288753126122e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:50:00Z",
+        "flux": 8.792146104497078e-07,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:51:00Z",
+        "flux": 2.5298902528447798e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:51:00Z",
+        "flux": 8.831590321278782e-07,
+        "energy": "0.1-0.8nm"
+      },
+      {
+        "time": "2026-08-23T17:52:00Z",
+        "flux": 2.5633569933347644e-08,
+        "energy": "0.05-0.4nm"
+      },
+      {
+        "time": "2026-08-23T17:52:00Z",
+        "flux": 8.896109875422553e-07,
+        "energy": "0.1-0.8nm"
+      }
+    ]
+  },
+  "gfs": {
+    "ok": true,
+    "model": "NOAA GFS (via Open-Meteo gfs_seamless)",
+    "data_class": "numerical_weather_prediction_model",
+    "not_telemetry": "GFS is a forecast model grid, not observations from a balloon, radiosonde, or live tracker.",
+    "site": {
+      "lat": 39.299,
+      "lon": -87.992,
+      "name": "Casey, IL"
+    },
+    "current": {
+      "time": "2026-08-23T12:45",
+      "interval": 900,
+      "temperature_2m": 25.8,
+      "relative_humidity_2m": 44,
+      "pressure_msl": 1016.7,
+      "wind_speed_10m": 16.3,
+      "wind_gusts_10m": 22.0,
+      "weather_code": 0
+    },
+    "hourly": {
+      "time": [
+        "2026-08-23T00:00",
+        "2026-08-23T01:00",
+        "2026-08-23T02:00",
+        "2026-08-23T03:00",
+        "2026-08-23T04:00",
+        "2026-08-23T05:00",
+        "2026-08-23T06:00",
+        "2026-08-23T07:00",
+        "2026-08-23T08:00",
+        "2026-08-23T09:00",
+        "2026-08-23T10:00",
+        "2026-08-23T11:00",
+        "2026-08-23T12:00",
+        "2026-08-23T13:00",
+        "2026-08-23T14:00",
+        "2026-08-23T15:00",
+        "2026-08-23T16:00",
+        "2026-08-23T17:00",
+        "2026-08-23T18:00",
+        "2026-08-23T19:00",
+        "2026-08-23T20:00",
+        "2026-08-23T21:00",
+        "2026-08-23T22:00",
+        "2026-08-23T23:00",
+        "2026-08-24T00:00",
+        "2026-08-24T01:00",
+        "2026-08-24T02:00",
+        "2026-08-24T03:00",
+        "2026-08-24T04:00",
+        "2026-08-24T05:00",
+        "2026-08-24T06:00",
+        "2026-08-24T07:00",
+        "2026-08-24T08:00",
+        "2026-08-24T09:00",
+        "2026-08-24T10:00",
+        "2026-08-24T11:00"
+      ],
+      "temperature_2m": [
+        18.2,
+        17.6,
+        17.0,
+        16.4,
+        15.8,
+        15.4,
+        15.1,
+        15.6,
+        18.0,
+        20.9,
+        22.9,
+        24.5,
+        25.4,
+        25.9,
+        26.3,
+        26.5,
+        26.3,
+        26.0,
+        24.9,
+        23.1,
+        20.9,
+        19.5,
+        18.4,
+        17.6,
+        16.9,
+        16.2,
+        15.8,
+        15.3,
+        14.9,
+        14.6,
+        14.8,
+        15.1,
+        17.6,
+        21.1,
+        23.3,
+        24.7
+      ],
+      "cape": [
+        190.0,
+        20.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        30.0,
+        70.0,
+        10.0,
+        0.0,
+        10.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pressure_msl": [
+        1016.1,
+        1016.3,
+        1016.2,
+        1016.2,
+        1016.3,
+        1016.5,
+        1016.8,
+        1017.2,
+        1017.5,
+        1017.1,
+        1016.8,
+        1017.5,
+        1016.9,
+        1016.6,
+        1015.6,
+        1015.7,
+        1015.2,
+        1015.5,
+        1015.5,
+        1015.5,
+        1016.1,
+        1016.5,
+        1016.8,
+        1016.7,
+        1016.7,
+        1016.7,
+        1016.6,
+        1016.5,
+        1016.9,
+        1017.3,
+        1016.9,
+        1017.5,
+        1017.7,
+        1017.7,
+        1017.9,
+        1018.2
+      ]
+    },
+    "upstream_noaa_nomads": "https://nomads.ncep.noaa.gov/"
+  },
+  "nomads": {
+    "ok": true,
+    "url": "https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/",
+    "filter_ui": "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl",
+    "note": "NCEP NOMADS serves full GFS GRIB2 cycles; Open-Meteo provides a convenient subset for hub charts.",
+    "data_class": "model_file_archive_distribution"
+  },
+  "charts": {
+    "kp": "visuals/latest/space-kp-index.png",
+    "xray": "visuals/latest/space-goes-xray.png",
+    "gfs_casey": "visuals/latest/gfs-casey-forecast.png"
+  },
+  "curator": "Midwest Stratospheric Data Systems",
+  "hub": "https://midwestsds.com/msds-data-hub.html#space-data"
+}
