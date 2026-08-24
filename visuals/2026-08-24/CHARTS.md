@@ -2,7 +2,7 @@
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-08-24T10:58:11Z UTC · Midwest Stratospheric Data Systems_
+_Generated at 2026-08-24T11:04:34Z UTC · Midwest Stratospheric Data Systems_
 
 ## PNG charts
 
@@ -52,7 +52,7 @@ UOGW counts **research flags** for the daily sample set — **not** National Wea
 | **Watch** | Elevated interest — heat/cold, wind, low pressure, or |z| >= 2.5 vs the 7-day baseline. |
 | **Info** | Lower urgency (hot + very dry, strong high, warm water sample). |
 
-Today: **alert 0** · **watch 1** · **info 0** · total **1**
+Today: **alert 1** · **watch 0** · **info 0** · total **1**
 
 Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMALY_GUIDE.md](../ANOMALY_GUIDE.md) · [CHART_DESCRIPTIONS.md](../CHART_DESCRIPTIONS.md)
 
@@ -73,8 +73,8 @@ Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMA
 ```mermaid
 pie showData
   title Anomaly flags 2026-08-24
-  "alert" : 0
-  "watch" : 1
+  "alert" : 1
+  "watch" : 0
   "info" : 0
 ```
 
