@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
-  "date_utc": "2026-08-23",
-  "generated_at_utc": "2026-08-23T14:03:04Z",
+  "date_utc": "2026-08-24",
+  "generated_at_utc": "2026-08-24T08:05:40Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -21,44 +21,44 @@
     "global_city_temperature": {
       "celsius": {
         "n": 32,
-        "min": 7.1,
-        "max": 37.7,
-        "mean": 20.55,
-        "median": 18.55,
-        "pstdev": 7.44
+        "min": 5.9,
+        "max": 32.9,
+        "mean": 20.744,
+        "median": 18.15,
+        "pstdev": 7.605
       },
       "fahrenheit": {
         "n": 32,
-        "min": 44.8,
-        "max": 99.9,
-        "mean": 68.997,
-        "median": 65.4,
-        "pstdev": 13.396
+        "min": 42.6,
+        "max": 91.2,
+        "mean": 69.331,
+        "median": 64.65,
+        "pstdev": 13.686
       }
     },
     "global_city_humidity_pct": {
       "n": 32,
-      "min": 32.0,
-      "max": 96.0,
-      "mean": 74.969,
-      "median": 78.5,
-      "pstdev": 14.865
+      "min": 46.0,
+      "max": 93.0,
+      "mean": 70.594,
+      "median": 74.5,
+      "pstdev": 14.363
     },
     "global_city_pressure_hpa": {
       "n": 32,
-      "min": 1002.5,
-      "max": 1025.8,
-      "mean": 1015.094,
-      "median": 1014.85,
-      "pstdev": 6.47
+      "min": 1004.5,
+      "max": 1030.8,
+      "mean": 1016.053,
+      "median": 1016.0,
+      "pstdev": 6.461
     },
     "global_city_wind_ms": {
       "n": 32,
-      "min": 0.41,
-      "max": 6.56,
-      "mean": 2.338,
-      "median": 1.995,
-      "pstdev": 1.498
+      "min": 0.66,
+      "max": 5.44,
+      "mean": 2.663,
+      "median": 2.535,
+      "pstdev": 1.233
     },
     "casey_temperature": {
       "celsius": {
@@ -128,19 +128,19 @@
   },
   "extremes": {
     "hottest": {
-      "name": "Dubai, AE",
-      "id": "dubai_ae",
-      "temperature_c": 37.7,
-      "temperature_f": 99.9,
-      "lat": 25.2048,
-      "lon": 55.2708,
-      "country": "AE"
+      "name": "Bangkok, TH",
+      "id": "bangkok_th",
+      "temperature_c": 32.9,
+      "temperature_f": 91.2,
+      "lat": 13.7563,
+      "lon": 100.5018,
+      "country": "TH"
     },
     "coldest": {
       "name": "Buenos Aires, AR",
       "id": "buenos_aires_ar",
-      "temperature_c": 7.1,
-      "temperature_f": 44.8,
+      "temperature_c": 5.9,
+      "temperature_f": 42.6,
       "lat": -34.6037,
       "lon": -58.3816,
       "country": "AR"
@@ -148,52 +148,59 @@
   },
   "heat_index_flags": [
     {
-      "name": "Dubai, AE",
-      "temperature_f": 99.9,
-      "relative_humidity_pct": 32,
-      "heat_index_f": 103.3,
-      "level": "extreme_caution"
-    },
-    {
-      "name": "Seoul, KR",
-      "temperature_f": 89.4,
-      "relative_humidity_pct": 62,
-      "heat_index_f": 99.4,
-      "level": "extreme_caution"
-    },
-    {
       "name": "Beijing, CN",
-      "temperature_f": 88.9,
-      "relative_humidity_pct": 62,
-      "heat_index_f": 98.2,
-      "level": "extreme_caution"
-    },
-    {
-      "name": "Jakarta, ID",
-      "temperature_f": 91.6,
-      "relative_humidity_pct": 47,
-      "heat_index_f": 96.2,
+      "temperature_f": 88.0,
+      "relative_humidity_pct": 67,
+      "heat_index_f": 98.6,
       "level": "extreme_caution"
     },
     {
       "name": "Bangkok, TH",
-      "temperature_f": 86.2,
-      "relative_humidity_pct": 70,
-      "heat_index_f": 95.6,
+      "temperature_f": 91.2,
+      "relative_humidity_pct": 53,
+      "heat_index_f": 98.5,
       "level": "extreme_caution"
     },
     {
-      "name": "Tokyo, JP",
-      "temperature_f": 85.5,
-      "relative_humidity_pct": 65,
-      "heat_index_f": 91.9,
+      "name": "Singapore, SG",
+      "temperature_f": 89.6,
+      "relative_humidity_pct": 55,
+      "heat_index_f": 96.2,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Seoul, KR",
+      "temperature_f": 86.5,
+      "relative_humidity_pct": 68,
+      "heat_index_f": 95.4,
       "level": "extreme_caution"
     },
     {
       "name": "Mumbai, IN",
-      "temperature_f": 82.8,
-      "relative_humidity_pct": 79,
-      "heat_index_f": 90.5,
+      "temperature_f": 84.4,
+      "relative_humidity_pct": 77,
+      "heat_index_f": 93.9,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Jakarta, ID",
+      "temperature_f": 90.1,
+      "relative_humidity_pct": 47,
+      "heat_index_f": 93.5,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Tokyo, JP",
+      "temperature_f": 84.7,
+      "relative_humidity_pct": 72,
+      "heat_index_f": 92.8,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Cairo, EG",
+      "temperature_f": 85.6,
+      "relative_humidity_pct": 59,
+      "heat_index_f": 90.0,
       "level": "extreme_caution"
     }
   ],
@@ -221,13 +228,13 @@
     {
       "id": "hottest_city",
       "label": "Hottest sample city",
-      "value": "99.9 \u00b0F",
-      "detail": "Dubai, AE"
+      "value": "91.2 \u00b0F",
+      "detail": "Bangkok, TH"
     },
     {
       "id": "coldest_city",
       "label": "Coldest sample city",
-      "value": "44.8 \u00b0F",
+      "value": "42.6 \u00b0F",
       "detail": "Buenos Aires, AR"
     },
     {
@@ -245,8 +252,8 @@
     {
       "id": "heat_index",
       "label": "Elevated heat index",
-      "value": "103.3 \u00b0F",
-      "detail": "Dubai, AE"
+      "value": "98.6 \u00b0F",
+      "detail": "Beijing, CN"
     }
   ],
   "inputs": {
