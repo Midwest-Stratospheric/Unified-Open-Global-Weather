@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-08-24",
-  "generated_at_utc": "2026-08-24T10:58:26Z",
+  "generated_at_utc": "2026-08-24T11:04:22Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -213,19 +213,35 @@
   "anomalies": {
     "counts": {
       "total": 1,
-      "alert": 0,
-      "watch": 1,
+      "alert": 1,
+      "watch": 0,
       "info": 0
     },
     "top": [
       {
-        "kind": "surface_heat",
-        "severity": "watch",
-        "subject": "Dubai, AE",
-        "metric": "temperature_c",
-        "value": 37.7,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Nairobi, KE",
+        "metric": "z_mad",
+        "value": 6.0705,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 22.6,
+            "z_pop": 2.2481,
+            "z_sample": 2.0814,
+            "z_mad": 6.0705,
+            "s_range": 0.7476,
+            "percentile": 87.5,
+            "mean": 18.1143,
+            "median": 17.2,
+            "pstdev": 1.9953,
+            "sample_stdev": 2.1552,
+            "mad": 0.6
+          }
+        }
       }
     ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
@@ -253,7 +269,7 @@
       "id": "anomalies",
       "label": "Anomaly flags",
       "value": "1",
-      "detail": "alert 0 \u00b7 watch 1 \u00b7 info 0"
+      "detail": "alert 1 \u00b7 watch 0 \u00b7 info 0"
     },
     {
       "id": "heat_index",
