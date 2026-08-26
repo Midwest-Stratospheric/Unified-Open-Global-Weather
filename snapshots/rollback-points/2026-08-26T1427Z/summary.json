@@ -1,0 +1,111 @@
+{
+  "date": "2026-08-26",
+  "generated_at_utc": "2026-08-26T12:00:51Z",
+  "entries": {
+    "global-cities": {
+      "ok": true,
+      "observation_count": 32,
+      "file": "data/entries/2026-08-26/global-cities.json"
+    },
+    "science-analytics": {
+      "ok": true,
+      "file": "data/entries/2026-08-26/science-analytics.json",
+      "highlights": 5,
+      "anomaly_total": 3
+    },
+    "igra-index": {
+      "ok": true,
+      "station_count": 2931,
+      "y2d_file_count": 0,
+      "file": "data/entries/2026-08-26/igra-index.json"
+    },
+    "ndbc-realtime": {
+      "ok": true,
+      "observation_count": 7,
+      "station_ids": [
+        "41001",
+        "46026",
+        "44025",
+        "46013",
+        "46042",
+        "41008",
+        "46029"
+      ],
+      "file": "data/entries/2026-08-26/ndbc-realtime.json"
+    },
+    "research-summary": {
+      "ok": true,
+      "file": "data/entries/2026-08-26/research-summary.json",
+      "dataset_count": 25,
+      "global_cities_ok": 32,
+      "ndbc_realtime_stations": 7,
+      "casey_hourly_count": 24,
+      "daily_climate_cities": 10
+    },
+    "science-package": {
+      "ok": true,
+      "file": "data/entries/2026-08-26/science-package.json"
+    },
+    "daily-climate": {
+      "ok": true,
+      "observation_count": 10,
+      "file": "data/entries/2026-08-26/daily-climate.json"
+    },
+    "anomaly-report": {
+      "ok": true,
+      "total": 3,
+      "alerts": 3,
+      "watches": 0,
+      "file": "data/entries/2026-08-26/anomaly-report.json"
+    },
+    "satellite-radiance-index": {
+      "ok": true,
+      "product_count": 6,
+      "file": "data/entries/2026-08-26/satellite-radiance-index.json"
+    }
+  },
+  "curator": "Midwest Stratospheric Data Systems",
+  "indexes": {
+    "igra_stations": 2931,
+    "igra_y2d_files": 0,
+    "ndbc_stations": 1936,
+    "ghcn_stations": 132501,
+    "ghcn_countries": 219,
+    "foreign_open_sources": 18,
+    "global_city_samples": 34,
+    "global_city_ok": 32
+  },
+  "derived_surface_stats": {
+    "global_city_temperature_c": {
+      "mean": 21.366,
+      "min": 8.1,
+      "max": 40.4
+    },
+    "global_city_humidity_pct": {
+      "mean": 73.156
+    },
+    "global_city_pressure_hpa": {
+      "mean": 1015.003
+    },
+    "global_city_wind_ms": {
+      "mean": 2.131
+    },
+    "casey_temperature_c": {
+      "min": 13.3,
+      "max": 27.5,
+      "mean": 20.05
+    },
+    "ndbc_wave_height_m": {
+      "mean": 0.9,
+      "n": 1
+    },
+    "ndbc_water_temp_c": {
+      "mean": 18.62,
+      "n": 5
+    },
+    "ndbc_air_temp_c": {
+      "mean": 19.34,
+      "n": 5
+    }
+  }
+}
