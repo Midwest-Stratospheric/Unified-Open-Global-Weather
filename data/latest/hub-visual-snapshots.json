@@ -2,24 +2,24 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-08-28",
-  "generated_at_utc": "2026-08-28T01:32:26Z",
+  "generated_at_utc": "2026-08-28T21:24:32Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
       "n": 32,
-      "min": 46.6,
-      "max": 104.7,
-      "mean": 70.453,
-      "median": 65.3,
-      "pstdev": 13.616
+      "min": 49.8,
+      "max": 89.8,
+      "mean": 70.431,
+      "median": 71.25,
+      "pstdev": 10.552
     },
     "global_rh": {
       "n": 32,
-      "min": 25.0,
-      "max": 96.0,
-      "mean": 73.156,
-      "median": 75.0,
-      "pstdev": 16.206
+      "min": 39.0,
+      "max": 98.0,
+      "mean": 71.375,
+      "median": 69.5,
+      "pstdev": 16.347
     },
     "casey_temp_f": {
       "n": 24,
@@ -31,38 +31,17 @@
     },
     "heat_index_flags": [
       {
-        "name": "Tokyo, JP",
-        "temperature_f": 92.3,
-        "relative_humidity_pct": 63,
-        "heat_index_f": 107.6,
-        "level": "danger"
-      },
-      {
         "name": "Dubai, AE",
-        "temperature_f": 104.7,
-        "relative_humidity_pct": 25,
-        "heat_index_f": 107.1,
-        "level": "danger"
-      },
-      {
-        "name": "Bangkok, TH",
-        "temperature_f": 89.4,
-        "relative_humidity_pct": 63,
-        "heat_index_f": 99.9,
+        "temperature_f": 89.8,
+        "relative_humidity_pct": 66,
+        "heat_index_f": 102.7,
         "level": "extreme_caution"
       },
       {
-        "name": "Jakarta, ID",
-        "temperature_f": 94.3,
-        "relative_humidity_pct": 40,
-        "heat_index_f": 97.7,
-        "level": "extreme_caution"
-      },
-      {
-        "name": "Singapore, SG",
-        "temperature_f": 85.1,
-        "relative_humidity_pct": 73,
-        "heat_index_f": 94.1,
+        "name": "Houston, TX, US",
+        "temperature_f": 83.3,
+        "relative_humidity_pct": 75,
+        "heat_index_f": 90.5,
         "level": "extreme_caution"
       }
     ],
@@ -70,8 +49,8 @@
       "hottest": {
         "name": "Dubai, AE",
         "id": "dubai_ae",
-        "temperature_c": 40.4,
-        "temperature_f": 104.7,
+        "temperature_c": 32.1,
+        "temperature_f": 89.8,
         "lat": 25.2048,
         "lon": 55.2708,
         "country": "AE"
@@ -79,8 +58,8 @@
       "coldest": {
         "name": "Reykjavik, IS",
         "id": "reykjavik_is",
-        "temperature_c": 8.1,
-        "temperature_f": 46.6,
+        "temperature_c": 9.9,
+        "temperature_f": 49.8,
         "lat": 64.1466,
         "lon": -21.9426,
         "country": "IS"
