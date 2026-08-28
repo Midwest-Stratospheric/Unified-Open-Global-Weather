@@ -1,7 +1,7 @@
 {
   "schema": "uogw.health_report.v1",
   "date_utc": "2026-08-28",
-  "generated_at_utc": "2026-08-28T21:49:58Z",
+  "generated_at_utc": "2026-08-28T21:59:06Z",
   "ok": false,
   "critical_fail": true,
   "checks": [
@@ -34,7 +34,7 @@
       "status": "stale",
       "path": "data/latest/research-summary.json",
       "reasons": [
-        "age 58.9h > 36h"
+        "age 59.1h > 36h"
       ],
       "critical": true,
       "workflow": "daily-research-package.yml"
@@ -44,7 +44,7 @@
       "status": "stale",
       "path": "data/latest/science-package.json",
       "reasons": [
-        "age 58.9h > 36h"
+        "age 59.1h > 36h"
       ],
       "critical": true,
       "workflow": "daily-research-package.yml"
@@ -100,7 +100,7 @@
   ],
   "heal_actions": [
     {
-      "rollback_point": "2026-08-28T2149Z"
+      "rollback_point": "2026-08-28T2159Z"
     }
   ],
   "redispatch_workflows": [
