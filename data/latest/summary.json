@@ -1,110 +1,18 @@
 {
-  "date": "2026-08-28",
+  "date": "2026-08-29",
+  "generated_at_utc": "2026-08-29T06:23:41Z",
   "entries": {
-    "anomaly-report": {
-      "ok": true,
-      "total": 14,
-      "alerts": 7,
-      "watches": 7,
-      "file": "data/entries/2026-08-28/anomaly-report.json"
-    },
     "global-cities": {
       "ok": true,
       "observation_count": 32,
-      "file": "data/entries/2026-08-28/global-cities.json"
+      "file": "data/entries/2026-08-29/global-cities.json"
     },
     "science-analytics": {
       "ok": true,
-      "file": "data/entries/2026-08-28/science-analytics.json",
+      "file": "data/entries/2026-08-29/science-analytics.json",
       "highlights": 5,
       "anomaly_total": 14
-    },
-    "ndbc-realtime": {
-      "ok": true,
-      "observation_count": 7,
-      "station_ids": [
-        "41001",
-        "46026",
-        "44025",
-        "46013",
-        "46042",
-        "41008",
-        "46029"
-      ],
-      "file": "data/entries/2026-08-28/ndbc-realtime.json"
-    },
-    "satellite-radiance-index": {
-      "ok": true,
-      "product_count": 6,
-      "file": "data/entries/2026-08-28/satellite-radiance-index.json"
-    },
-    "research-summary": {
-      "ok": true,
-      "file": "data/entries/2026-08-28/research-summary.json",
-      "dataset_count": 25,
-      "global_cities_ok": 32,
-      "ndbc_realtime_stations": 7,
-      "casey_hourly_count": 24,
-      "daily_climate_cities": 10
-    },
-    "science-package": {
-      "ok": true,
-      "file": "data/entries/2026-08-28/science-package.json"
-    },
-    "daily-climate": {
-      "ok": true,
-      "observation_count": 10,
-      "file": "data/entries/2026-08-28/daily-climate.json"
-    },
-    "casey-hourly": {
-      "ok": true,
-      "observation_count": 24,
-      "file": "data/entries/2026-08-28/casey-hourly.json"
     }
   },
-  "generated_at_utc": "2026-08-28T21:59:17Z",
-  "curator": "Midwest Stratospheric Data Systems",
-  "indexes": {
-    "igra_stations": 2931,
-    "igra_y2d_files": 0,
-    "ndbc_stations": 1936,
-    "ghcn_stations": 132501,
-    "ghcn_countries": 219,
-    "foreign_open_sources": 18,
-    "global_city_samples": 34,
-    "global_city_ok": 32
-  },
-  "derived_surface_stats": {
-    "global_city_temperature_c": {
-      "mean": 21.353,
-      "min": 9.9,
-      "max": 32.1
-    },
-    "global_city_humidity_pct": {
-      "mean": 71.375
-    },
-    "global_city_pressure_hpa": {
-      "mean": 1013.781
-    },
-    "global_city_wind_ms": {
-      "mean": 2.651
-    },
-    "casey_temperature_c": {
-      "min": 16.7,
-      "max": 27.5,
-      "mean": 22.196
-    },
-    "ndbc_wave_height_m": {
-      "mean": 0.9,
-      "n": 1
-    },
-    "ndbc_water_temp_c": {
-      "mean": 18.92,
-      "n": 5
-    },
-    "ndbc_air_temp_c": {
-      "mean": 19.48,
-      "n": 5
-    }
-  }
+  "curator": "Midwest Stratospheric Data Systems"
 }
