@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-01",
-  "generated_at_utc": "2026-09-01T13:51:50Z",
+  "generated_at_utc": "2026-09-01T14:14:18Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 1,
+    "anomaly_events": 5,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -198,9 +198,9 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 1,
-      "alert": 0,
-      "watch": 1,
+      "total": 5,
+      "alert": 2,
+      "watch": 3,
       "info": 0
     },
     "top": [
@@ -209,9 +209,109 @@
         "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 36.3,
+        "value": 38.2,
         "threshold": 35,
         "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Madrid, ES",
+        "metric": "z_mad",
+        "value": 6.3234,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 25.0,
+            "z_pop": 2.2467,
+            "z_sample": 2.0801,
+            "z_mad": 6.3234,
+            "s_range": 0.6724,
+            "percentile": 87.5,
+            "mean": 18.3429,
+            "median": 17.5,
+            "pstdev": 2.963,
+            "sample_stdev": 3.2004,
+            "mad": 0.8
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "watch",
+        "subject": "Johannesburg, ZA",
+        "metric": "z_mad",
+        "value": 4.2718,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 23.0,
+            "z_pop": 2.1254,
+            "z_sample": 1.9677,
+            "z_mad": 4.2718,
+            "s_range": 0.6403,
+            "percentile": 87.5,
+            "mean": 13.9714,
+            "median": 13.5,
+            "pstdev": 4.2479,
+            "sample_stdev": 4.5883,
+            "mad": 1.5
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Lagos, NG",
+        "metric": "z_mad",
+        "value": 9.443,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 28.1,
+            "z_pop": 2.3608,
+            "z_sample": 2.1857,
+            "z_mad": 9.443,
+            "s_range": 0.7696,
+            "percentile": 87.5,
+            "mean": 25.7143,
+            "median": 25.3,
+            "pstdev": 1.0106,
+            "sample_stdev": 1.0915,
+            "mad": 0.2
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "watch",
+        "subject": "Anchorage, AK, US",
+        "metric": "z_mad",
+        "value": -4.4324,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 9.0,
+            "z_pop": -2.2046,
+            "z_sample": -2.0411,
+            "z_mad": -4.4324,
+            "s_range": -0.6581,
+            "percentile": 12.5,
+            "mean": 13.0143,
+            "median": 13.6,
+            "pstdev": 1.8209,
+            "sample_stdev": 1.9667,
+            "mad": 0.7
+          }
+        }
       }
     ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
@@ -238,8 +338,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "1",
-      "detail": "alert 0 \u00b7 watch 1 \u00b7 info 0"
+      "value": "5",
+      "detail": "alert 2 \u00b7 watch 3 \u00b7 info 0"
     },
     {
       "id": "heat_index",
