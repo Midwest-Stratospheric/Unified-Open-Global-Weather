@@ -1,0 +1,53 @@
+{
+  "layer": "flight",
+  "program": "Aerostratospheric",
+  "kind": "past-flight-capture",
+  "source": "xLiveFlights",
+  "source_repo": "https://github.com/Midwest-Stratospheric/xliveflights-data",
+  "layer_repo": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/flight",
+  "note": "Closed-flight metrics captured at end of tracker motion. Live feed on the page is separate and returns when the tracker moves again.",
+  "updated_at": "2026-09-01T03:20:00Z",
+  "count": 2,
+  "captures": [
+    {
+      "flight_id": "xlf-1788225473082",
+      "status": "closed",
+      "kind": "past-flight-data",
+      "start": "2026-09-01T01:17:53.081Z",
+      "end": "2026-09-01T02:09:59.000Z",
+      "duration_s": 3126,
+      "max_alt_ft": 662.7,
+      "max_speed_kt": 40.5,
+      "start_place": "10418 Illinois Route 16, Charleston, Coles County, Illinois 61938, United States",
+      "end_place": "15383 IL 49, Clark County, Illinois 62420, United States",
+      "start_lat": 39.48428901663671,
+      "start_lon": -88.26828429996968,
+      "end_lat": 39.37016423344612,
+      "end_lon": -87.98555636703968,
+      "battery_pct": 80,
+      "signal_pct": 93.24,
+      "end_reason": "tracker offline 60+ min",
+      "captured_at": "2026-09-01T02:09:59.000Z"
+    },
+    {
+      "flight_id": "xlf-1788215245939",
+      "status": "closed",
+      "kind": "past-flight-data",
+      "start": "2026-08-31T22:27:25.939204Z",
+      "end": "2026-08-31T23:13:51Z",
+      "duration_s": 2785,
+      "max_alt_ft": 692.3,
+      "max_speed_kt": 48.06,
+      "start_place": null,
+      "end_place": null,
+      "start_lat": null,
+      "start_lon": null,
+      "end_lat": null,
+      "end_lon": null,
+      "battery_pct": null,
+      "signal_pct": null,
+      "end_reason": "closed in archive",
+      "captured_at": "2026-08-31T23:13:51Z"
+    }
+  ]
+}

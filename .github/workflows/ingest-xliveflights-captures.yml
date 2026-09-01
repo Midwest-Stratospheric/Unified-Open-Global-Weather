@@ -1,0 +1,104 @@
+name: ingest xliveflights captures
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull closed flights into UOGW flight layer
+        run: |
+          python3 <<'PY'
+          import json, urllib.request, datetime, os
+          src = "https://raw.githubusercontent.com/Midwest-Stratospheric/xliveflights-data/main/flights.json"
+          req = urllib.request.Request(src, headers={"User-Agent": "uogw-flight-layer"})
+          try:
+              flights = json.load(urllib.request.urlopen(req, timeout=25))
+          except Exception as e:
+              print("source miss", e)
+              flights = {"flights": []}
+          now = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+          path = "layers/flight/xliveflights-captures.json"
+          catalog = {
+              "layer": "flight",
+              "program": "Aerostratospheric",
+              "kind": "past-flight-capture",
+              "source": "xLiveFlights",
+              "source_repo": "https://github.com/Midwest-Stratospheric/xliveflights-data",
+              "layer_repo": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/flight",
+              "note": "Closed-flight metrics captured at end of tracker motion. Live feed on the page is separate and returns when the tracker moves again.",
+              "updated_at": now,
+              "count": 0,
+              "captures": []
+          }
+          if os.path.exists(path):
+              try:
+                  catalog = json.load(open(path))
+              except Exception:
+                  pass
+          existing = {c.get("flight_id"): i for i, c in enumerate(catalog.get("captures") or [])}
+          changed = False
+          for f in flights.get("flights") or []:
+              if f.get("status") != "closed":
+                  continue
+              fid = f.get("flight_id")
+              if not fid:
+                  continue
+              sf = f.get("start_fix") or {}
+              ef = f.get("end_fix") or {}
+              start = f.get("start")
+              end = f.get("end")
+              dur = f.get("duration_s")
+              if dur is None and start and end:
+                  try:
+                      t0 = datetime.datetime.strptime(str(start)[:19].replace("Z",""), "%Y-%m-%dT%H:%M:%S")
+                      t1 = datetime.datetime.strptime(str(end)[:19].replace("Z",""), "%Y-%m-%dT%H:%M:%S")
+                      dur = int((t1 - t0).total_seconds())
+                  except Exception:
+                      dur = None
+              cap = {
+                  "flight_id": fid,
+                  "status": "closed",
+                  "kind": "past-flight-data",
+                  "start": start,
+                  "end": end,
+                  "duration_s": dur,
+                  "max_alt_ft": f.get("max_alt_ft"),
+                  "max_speed_kt": f.get("max_speed_kt"),
+                  "start_place": sf.get("address"),
+                  "end_place": ef.get("address"),
+                  "start_lat": sf.get("lat"),
+                  "start_lon": sf.get("lon"),
+                  "end_lat": ef.get("lat"),
+                  "end_lon": ef.get("lon"),
+                  "battery_pct": ef.get("battery_pct") if ef.get("battery_pct") is not None else sf.get("battery_pct"),
+                  "signal_pct": ef.get("signal_pct") if ef.get("signal_pct") is not None else sf.get("signal_pct"),
+                  "end_reason": f.get("end_reason") or "closed",
+                  "captured_at": end or now,
+              }
+              if fid in existing:
+                  catalog["captures"][existing[fid]] = cap
+              else:
+                  catalog["captures"].insert(0, cap)
+                  existing[fid] = 0
+              changed = True
+          catalog["updated_at"] = now
+          catalog["count"] = len(catalog.get("captures") or [])
+          catalog["captures"] = catalog.get("captures") or []
+          os.makedirs("layers/flight", exist_ok=True)
+          body = json.dumps(catalog, indent=2) + "\n"
+          open(path, "w").write(body)
+          open("layers/flight/xliveflights-captures-latest.json", "w").write(body)
+          print("captures", catalog["count"], "changed", changed)
+          PY
+      - name: Commit if changed
+        run: |
+          git config user.name "uogw-flight-layer"
+          git config user.email "launchcontrol@midwestsds.com"
+          git add layers/flight/xliveflights-captures.json layers/flight/xliveflights-captures-latest.json
+          git diff --cached --quiet || git commit -m "flight layer: capture closed xLiveFlights metrics"
+          git push
