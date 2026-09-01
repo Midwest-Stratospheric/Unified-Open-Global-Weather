@@ -6,8 +6,8 @@
   "source_repo": "https://github.com/Midwest-Stratospheric/xliveflights-data",
   "layer_repo": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/flight",
   "note": "Closed-flight metrics captured at end of tracker motion. Live feed on the page is separate and returns when the tracker moves again.",
-  "updated_at": "2026-09-01T14:01:09Z",
-  "count": 7,
+  "updated_at": "2026-09-01T20:47:20Z",
+  "count": 8,
   "captures": [
     {
       "flight_id": "xlf-1788231667904",
@@ -28,6 +28,26 @@
       "signal_pct": 79.92,
       "end_reason": "tracker offline 60+ min or quiet",
       "captured_at": "2026-09-01T05:01:27Z"
+    },
+    {
+      "flight_id": "xlf-1788235817180",
+      "status": "closed",
+      "kind": "past-flight-data",
+      "start": "2026-09-01T04:10:17.178Z",
+      "end": "2026-09-01T05:08:53.298Z",
+      "duration_s": 3516,
+      "max_alt_ft": -6558.4,
+      "max_speed_kt": 38.88,
+      "start_place": "15383 IL 49, Clark County, Illinois 62420, United States",
+      "end_place": "Launch site",
+      "start_lat": 39.37016423344612,
+      "start_lon": -87.98555636703968,
+      "end_lat": 39.296473532915115,
+      "end_lon": -87.98514488339424,
+      "battery_pct": 100,
+      "signal_pct": 79.92,
+      "end_reason": "closed",
+      "captured_at": "2026-09-01T05:08:53.298Z"
     },
     {
       "flight_id": "xlf-1788235817180",
@@ -90,26 +110,6 @@
       "captured_at": "2026-08-31T23:13:51Z"
     },
     {
-      "flight_id": "xlf-1788215245939",
-      "status": "closed",
-      "kind": "past-flight-data",
-      "start": "2026-08-31T22:27:25.939204Z",
-      "end": "2026-08-31T23:13:51Z",
-      "duration_s": 2785,
-      "max_alt_ft": 692.3,
-      "max_speed_kt": 48.06,
-      "start_place": null,
-      "end_place": null,
-      "start_lat": null,
-      "start_lon": null,
-      "end_lat": null,
-      "end_lon": null,
-      "battery_pct": null,
-      "signal_pct": null,
-      "end_reason": "closed",
-      "captured_at": "2026-08-31T23:13:51Z"
-    },
-    {
       "flight_id": "xlf-1788225473082",
       "status": "closed",
       "kind": "past-flight-data",
@@ -128,6 +128,26 @@
       "signal_pct": 93.24,
       "end_reason": "tracker offline 60+ min",
       "captured_at": "2026-09-01T02:09:59.000Z"
+    },
+    {
+      "flight_id": "xlf-1788215245939",
+      "status": "closed",
+      "kind": "past-flight-data",
+      "start": "2026-08-31T22:27:25.939204Z",
+      "end": "2026-08-31T23:13:51Z",
+      "duration_s": 2785,
+      "max_alt_ft": 692.3,
+      "max_speed_kt": 48.06,
+      "start_place": null,
+      "end_place": null,
+      "start_lat": null,
+      "start_lon": null,
+      "end_lat": null,
+      "end_lon": null,
+      "battery_pct": null,
+      "signal_pct": null,
+      "end_reason": "closed",
+      "captured_at": "2026-08-31T23:13:51Z"
     },
     {
       "flight_id": "xlf-1788215245939",
