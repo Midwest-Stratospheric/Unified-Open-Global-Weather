@@ -2,7 +2,7 @@
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-09-01T13:51:32Z UTC · Midwest Stratospheric Data Systems_
+_Generated at 2026-09-01T14:14:29Z UTC · Midwest Stratospheric Data Systems_
 
 ## PNG charts
 
@@ -52,7 +52,7 @@ UOGW counts **research flags** for the daily sample set — **not** National Wea
 | **Watch** | Elevated interest — heat/cold, wind, low pressure, or |z| >= 2.5 vs the 7-day baseline. |
 | **Info** | Lower urgency (hot + very dry, strong high, warm water sample). |
 
-Today: **alert 0** · **watch 1** · **info 0** · total **1**
+Today: **alert 2** · **watch 3** · **info 0** · total **5**
 
 Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMALY_GUIDE.md](../ANOMALY_GUIDE.md) · [CHART_DESCRIPTIONS.md](../CHART_DESCRIPTIONS.md)
 
@@ -73,8 +73,8 @@ Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMA
 ```mermaid
 pie showData
   title Anomaly flags 2026-09-01
-  "alert" : 0
-  "watch" : 1
+  "alert" : 2
+  "watch" : 3
   "info" : 0
 ```
 
@@ -85,5 +85,5 @@ pie showData
 | Date UTC | 2026-09-01 |
 | Cities OK | 34 |
 | City T min/max °F | 48.2 / 100.8 |
-| Anomaly total | 1 |
+| Anomaly total | 5 |
 
