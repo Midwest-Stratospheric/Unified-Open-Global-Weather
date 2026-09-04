@@ -1,0 +1,50 @@
+{
+  "schema": "uogw.illinois_radiosonde_count.v1",
+  "ok": true,
+  "date_utc": "2026-09-04",
+  "generated_at_utc": "2026-09-04T19:37:19Z",
+  "region": {
+    "name": "Illinois",
+    "focus": "NWS radiosonde / rawinsonde launches",
+    "primary_station": "KILX (Lincoln, IL)",
+    "note": "Illinois' operational NWS upper-air site is Lincoln (ILX). Synoptic launches are typically 00Z and 12Z daily."
+  },
+  "window": {
+    "hours": 72,
+    "start_utc": "2026-09-01T19:37:19Z",
+    "end_utc": "2026-09-04T19:37:19Z"
+  },
+  "counts": {
+    "launches_3_days": 0,
+    "devices_likely_aloft": 0,
+    "aloft_window_hours": 2.0,
+    "stations_reporting": 1
+  },
+  "devices_likely_aloft": [],
+  "launches_3_days": [],
+  "stations": [
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "ok": false,
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "state": "IL",
+      "role": "primary",
+      "ok": true,
+      "launches_3_days": 0,
+      "launches": []
+    }
+  ],
+  "source": {
+    "name": "Iowa Environmental Mesonet RAOB by year",
+    "url": "https://mesonet.agron.iastate.edu/api/1/raobs_by_year.json",
+    "attribution": "Iowa State University IEM"
+  },
+  "disclaimer": "Launch times are synoptic schedule timestamps from public RAOB archives. 'Devices likely aloft' is an estimate (flight within last 2 hours), not radar tracking of each balloon.",
+  "curator": "Midwest Stratospheric Data Systems",
+  "hub": "https://midwestsds.com/msds-data-hub.html#il-radiosondes"
+}
