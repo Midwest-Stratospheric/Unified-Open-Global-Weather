@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-05",
-  "generated_at_utc": "2026-09-05T12:16:41Z",
+  "generated_at_utc": "2026-09-05T12:54:09Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -185,35 +185,35 @@
     "top": [
       {
         "kind": "surface_heat",
-        "severity": "watch",
+        "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 38.5,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+        "value": 41.2,
+        "threshold": 40,
+        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
       },
       {
         "kind": "temp_zscore_mad",
-        "severity": "alert",
-        "subject": "Buenos Aires, AR",
+        "severity": "watch",
+        "subject": "Mexico City, MX",
         "metric": "z_mad",
-        "value": -6.0705,
-        "threshold": 5.0,
-        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "value": 4.047,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 8.1,
-            "z_pop": -2.0418,
-            "z_sample": -1.8904,
-            "z_mad": -6.0705,
-            "s_range": -0.6,
-            "percentile": 12.5,
-            "mean": 10.8,
-            "median": 10.8,
-            "pstdev": 1.3223,
-            "sample_stdev": 1.4283,
-            "mad": 0.3
+            "x": 15.3,
+            "z_pop": 1.651,
+            "z_sample": 1.5285,
+            "z_mad": 4.047,
+            "s_range": 0.5462,
+            "percentile": 87.5,
+            "mean": 14.3714,
+            "median": 14.1,
+            "pstdev": 0.5624,
+            "sample_stdev": 0.6075,
+            "mad": 0.2
           }
         }
       },
@@ -229,15 +229,15 @@
           "methods": {
             "n": 7,
             "x": 13.5,
-            "z_pop": -2.1468,
-            "z_sample": -1.9875,
+            "z_pop": -1.4821,
+            "z_sample": -1.3721,
             "z_mad": -4.2156,
-            "s_range": -0.6165,
-            "percentile": 12.5,
-            "mean": 15.8429,
+            "s_range": -0.5338,
+            "percentile": 18.75,
+            "mean": 15.5286,
             "median": 16.0,
-            "pstdev": 1.0913,
-            "sample_stdev": 1.1788,
+            "pstdev": 1.3687,
+            "sample_stdev": 1.4784,
             "mad": 0.4
           }
         }
