@@ -1,0 +1,32 @@
+name: Daily Hugging Face sync (UOGW)
+
+# Separate from GIR. Runs after the 09:00 UTC research package.
+on:
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: uogw-huggingface-daily
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Sync UOGW packages to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_REPO: aerostratospheric/uogw
+          HF_USER: aerostratospheric
+        run: |
+          chmod +x scripts/sync_to_huggingface.sh
+          bash scripts/sync_to_huggingface.sh
