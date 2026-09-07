@@ -1,0 +1,154 @@
+{
+  "schema": "uogw.illinois_radiosonde_count.v1",
+  "ok": true,
+  "date_utc": "2026-09-07",
+  "generated_at_utc": "2026-09-07T20:35:44Z",
+  "region": {
+    "name": "Illinois",
+    "focus": "NWS radiosonde / rawinsonde launches",
+    "primary_station": "KILX (Lincoln, IL)",
+    "note": "Illinois' operational NWS upper-air site is Lincoln (ILX). Synoptic launches are typically 00Z and 12Z daily."
+  },
+  "window": {
+    "hours": 72,
+    "start_utc": "2026-09-04T20:35:44Z",
+    "end_utc": "2026-09-07T20:35:44Z"
+  },
+  "counts": {
+    "launches_3_days": 6,
+    "devices_likely_aloft": 0,
+    "aloft_window_hours": 2.0,
+    "stations_reporting": 1
+  },
+  "devices_likely_aloft": [],
+  "launches_3_days": [
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-05T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 2603.6685,
+      "pwater_mm": 41.038807,
+      "shear_sfc_6km_smps": 8.143286
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-05T12:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 491.3394,
+      "pwater_mm": 44.53851,
+      "shear_sfc_6km_smps": 9.214252
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-06T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 5595.4565,
+      "pwater_mm": 44.122627,
+      "shear_sfc_6km_smps": 12.318999
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-06T12:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 381.25043,
+      "pwater_mm": 36.075485,
+      "shear_sfc_6km_smps": 7.9545383
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-07T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 59.16162,
+      "pwater_mm": 27.846643,
+      "shear_sfc_6km_smps": 12.855881
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-07T12:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.0,
+      "pwater_mm": 20.957705,
+      "shear_sfc_6km_smps": 5.3320537
+    }
+  ],
+  "stations": [
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "state": "IL",
+      "role": "primary",
+      "ok": true,
+      "launches_3_days": 6,
+      "launches": [
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-05T00:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 2603.6685,
+          "pwater_mm": 41.038807,
+          "shear_sfc_6km_smps": 8.143286
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-05T12:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 491.3394,
+          "pwater_mm": 44.53851,
+          "shear_sfc_6km_smps": 9.214252
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-06T00:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 5595.4565,
+          "pwater_mm": 44.122627,
+          "shear_sfc_6km_smps": 12.318999
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-06T12:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 381.25043,
+          "pwater_mm": 36.075485,
+          "shear_sfc_6km_smps": 7.9545383
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-07T00:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 59.16162,
+          "pwater_mm": 27.846643,
+          "shear_sfc_6km_smps": 12.855881
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-07T12:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 0.0,
+          "pwater_mm": 20.957705,
+          "shear_sfc_6km_smps": 5.3320537
+        }
+      ]
+    }
+  ],
+  "source": {
+    "name": "Iowa Environmental Mesonet RAOB by year",
+    "url": "https://mesonet.agron.iastate.edu/api/1/raobs_by_year.json",
+    "attribution": "Iowa State University IEM"
+  },
+  "disclaimer": "Launch times are synoptic schedule timestamps from public RAOB archives. 'Devices likely aloft' is an estimate (flight within last 2 hours), not radar tracking of each balloon.",
+  "curator": "Midwest Stratospheric Data Systems",
+  "hub": "https://midwestsds.com/msds-data-hub.html#il-radiosondes"
+}
