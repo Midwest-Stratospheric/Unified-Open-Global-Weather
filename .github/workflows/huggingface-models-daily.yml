@@ -1,0 +1,51 @@
+name: Daily Hugging Face model retrain (UOGW)
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_run:
+    workflows: ["Daily Hugging Face sync (UOGW)"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: uogw-huggingface-models-daily
+  cancel-in-progress: false
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout UOGW
+        uses: actions/checkout@v4
+        with:
+          path: uogw
+          fetch-depth: 1
+
+      - name: Checkout GIR anomaly archive
+        uses: actions/checkout@v4
+        with:
+          repository: Midwest-Stratospheric/aerostratospheric-defense-gir
+          path: gir
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install trainers
+        run: pip install --quiet scikit-learn joblib numpy huggingface_hub
+
+      - name: Retrain and push UOGW suite
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_REPO: aerostratospheric/uogw-scientific-suite
+          UOGW_ROOT: ${{ github.workspace }}/uogw
+          GIR_ROOT: ${{ github.workspace }}/gir
+          OUT_DIR: ${{ github.workspace }}/uogw-scientific-suite
+        run: python3 uogw/scripts/train_hf_models.py
