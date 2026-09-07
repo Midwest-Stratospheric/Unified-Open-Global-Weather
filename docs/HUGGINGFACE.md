@@ -1,13 +1,16 @@
 # Hugging Face daily mirror (UOGW)
 
-UOGW and GIR publish to **separate** Hugging Face datasets.
+UOGW and GIR publish to **separate** Hugging Face datasets and model suites.
 
-| Dataset | URL |
+| Artifact | URL |
 |---------|-----|
-| **UOGW** | https://huggingface.co/datasets/aerostratospheric/uogw |
-| GIR (sibling) | https://huggingface.co/datasets/aerostratospheric/gir |
+| **UOGW dataset** | https://huggingface.co/datasets/aerostratospheric/uogw |
+| **UOGW models** | https://huggingface.co/aerostratospheric/uogw-scientific-suite |
+| GIR dataset (sibling) | https://huggingface.co/datasets/aerostratospheric/gir |
+| GIR models (sibling) | https://huggingface.co/aerostratospheric/gir-open-tier-suite |
+| Hub card | https://huggingface.co/aerostratospheric/msds-open-models |
 
-## Automation
+## Data automation
 
 GitHub Action: [`.github/workflows/huggingface-daily.yml`](../.github/workflows/huggingface-daily.yml)
 
@@ -17,6 +20,18 @@ GitHub Action: [`.github/workflows/huggingface-daily.yml`](../.github/workflows/
 
 Synced paths: `data/latest/`, `catalog/`, `reports/`, text files under `visuals/`.
 PNG charts stay on GitHub (HF git rejects raw binaries without Xet).
+
+## Model automation (daily retrain)
+
+GitHub Action: [`.github/workflows/huggingface-models-daily.yml`](../.github/workflows/huggingface-models-daily.yml)
+
+- Schedule: **12:00 UTC daily**
+- Also runs after a successful *Daily Hugging Face sync (UOGW)*
+- Manual: Actions → *Daily Hugging Face model retrain (UOGW)* → Run workflow
+- Script: [`scripts/train_hf_models.py`](../scripts/train_hf_models.py)
+- Also checks out GIR so the anomaly head can use the historical UOGW screens archived there
+
+Pushes a new commit to `aerostratospheric/uogw-scientific-suite` (`metrics.json` records the train time).
 
 ## Required secret
 
