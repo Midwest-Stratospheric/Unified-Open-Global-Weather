@@ -1,0 +1,35 @@
+name: Daily Hugging Face sync (GIR via UOGW secrets)
+
+# GIR repo has no HF_TOKEN secret; UOGW does. Run the GIR mirror here.
+on:
+  schedule:
+    - cron: "35 19 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gir-huggingface-daily-from-uogw
+  cancel-in-progress: false
+
+jobs:
+  sync-gir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout GIR
+        uses: actions/checkout@v4
+        with:
+          repository: Midwest-Stratospheric/aerostratospheric-defense-gir
+          fetch-depth: 1
+
+      - name: Sync GIR packages to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_REPO: aerostratospheric/gir
+          HF_USER: aerostratospheric
+        run: |
+          test -n "${HF_TOKEN}" || { echo "HF_TOKEN missing on UOGW repo"; exit 1; }
+          chmod +x scripts/sync_to_huggingface.sh
+          bash scripts/sync_to_huggingface.sh
