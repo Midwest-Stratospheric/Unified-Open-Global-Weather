@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-10",
-  "generated_at_utc": "2026-09-10T13:16:13Z",
+  "generated_at_utc": "2026-09-10T13:44:16Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 5,
+    "anomaly_events": 3,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -177,118 +177,68 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 5,
-      "alert": 1,
-      "watch": 4,
+      "total": 3,
+      "alert": 2,
+      "watch": 1,
       "info": 0
     },
     "top": [
       {
         "kind": "surface_heat",
-        "severity": "watch",
+        "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 39.9,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+        "value": 40.1,
+        "threshold": 40,
+        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
       },
       {
         "kind": "temp_zscore_mad",
         "severity": "alert",
-        "subject": "Madrid, ES",
+        "subject": "Rome, IT",
         "metric": "z_mad",
-        "value": -10.2861,
+        "value": -5.1712,
         "threshold": 5.0,
         "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 21.7,
-            "z_pop": -2.3826,
-            "z_sample": -2.2058,
-            "z_mad": -10.2861,
-            "s_range": -0.7317,
+            "x": 24.9,
+            "z_pop": -2.3649,
+            "z_sample": -2.1895,
+            "z_mad": -5.1712,
+            "s_range": -0.772,
             "percentile": 12.5,
-            "mean": 27.1143,
-            "median": 27.8,
-            "pstdev": 2.2725,
-            "sample_stdev": 2.4545,
-            "mad": 0.4
+            "mean": 28.9143,
+            "median": 29.5,
+            "pstdev": 1.6974,
+            "sample_stdev": 1.8334,
+            "mad": 0.6
           }
         }
       },
       {
         "kind": "temp_zscore_mad",
         "severity": "watch",
-        "subject": "Seoul, KR",
+        "subject": "Stockholm, SE",
         "metric": "z_mad",
-        "value": -3.5224,
+        "value": -4.3168,
         "threshold": 3.5,
         "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 21.7,
-            "z_pop": -2.0729,
-            "z_sample": -1.9191,
-            "z_mad": -3.5224,
-            "s_range": -0.5946,
+            "x": 13.1,
+            "z_pop": -1.8265,
+            "z_sample": -1.691,
+            "z_mad": -4.3168,
+            "s_range": -0.6988,
             "percentile": 12.5,
-            "mean": 26.1,
-            "median": 26.4,
-            "pstdev": 2.1227,
-            "sample_stdev": 2.2927,
-            "mad": 0.9
-          }
-        }
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "watch",
-        "subject": "Jakarta, ID",
-        "metric": "z_mad",
-        "value": -4.047,
-        "threshold": 3.5,
-        "detail": "Robust MAD z-score |z|>=3.5",
-        "extra": {
-          "methods": {
-            "n": 7,
-            "x": 30.5,
-            "z_pop": -1.7877,
-            "z_sample": -1.6551,
-            "z_mad": -4.047,
-            "s_range": -0.5357,
-            "percentile": 12.5,
-            "mean": 31.5714,
-            "median": 31.7,
-            "pstdev": 0.5993,
-            "sample_stdev": 0.6473,
-            "mad": 0.2
-          }
-        }
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "watch",
-        "subject": "Anchorage, AK, US",
-        "metric": "z_mad",
-        "value": -4.2156,
-        "threshold": 3.5,
-        "detail": "Robust MAD z-score |z|>=3.5",
-        "extra": {
-          "methods": {
-            "n": 7,
-            "x": 10.0,
-            "z_pop": -0.6547,
-            "z_sample": -0.6061,
-            "z_mad": -4.2156,
-            "s_range": -0.2203,
-            "percentile": 25.0,
-            "mean": 11.3,
-            "median": 12.5,
-            "pstdev": 1.9857,
-            "sample_stdev": 2.1448,
-            "mad": 0.4
+            "mean": 15.6857,
+            "median": 16.3,
+            "pstdev": 1.4157,
+            "sample_stdev": 1.5291,
+            "mad": 0.5
           }
         }
       }
@@ -317,8 +267,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "5",
-      "detail": "alert 1 \u00b7 watch 4 \u00b7 info 0"
+      "value": "3",
+      "detail": "alert 2 \u00b7 watch 1 \u00b7 info 0"
     },
     {
       "id": "heat_index",
