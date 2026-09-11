@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-11",
-  "generated_at_utc": "2026-09-11T13:10:16Z",
+  "generated_at_utc": "2026-09-11T13:42:33Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 3,
+    "anomaly_events": 1,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -191,70 +191,20 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 3,
-      "alert": 2,
+      "total": 1,
+      "alert": 0,
       "watch": 1,
       "info": 0
     },
     "top": [
       {
         "kind": "surface_heat",
-        "severity": "alert",
+        "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 40.1,
-        "threshold": 40,
-        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "alert",
-        "subject": "Rome, IT",
-        "metric": "z_mad",
-        "value": -5.1712,
-        "threshold": 5.0,
-        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
-        "extra": {
-          "methods": {
-            "n": 7,
-            "x": 24.9,
-            "z_pop": -2.3649,
-            "z_sample": -2.1895,
-            "z_mad": -5.1712,
-            "s_range": -0.772,
-            "percentile": 12.5,
-            "mean": 28.9143,
-            "median": 29.5,
-            "pstdev": 1.6974,
-            "sample_stdev": 1.8334,
-            "mad": 0.6
-          }
-        }
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "watch",
-        "subject": "Stockholm, SE",
-        "metric": "z_mad",
-        "value": -4.3168,
-        "threshold": 3.5,
-        "detail": "Robust MAD z-score |z|>=3.5",
-        "extra": {
-          "methods": {
-            "n": 7,
-            "x": 13.1,
-            "z_pop": -1.8265,
-            "z_sample": -1.691,
-            "z_mad": -4.3168,
-            "s_range": -0.6988,
-            "percentile": 12.5,
-            "mean": 15.6857,
-            "median": 16.3,
-            "pstdev": 1.4157,
-            "sample_stdev": 1.5291,
-            "mad": 0.5
-          }
-        }
+        "value": 39.0,
+        "threshold": 35,
+        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
       }
     ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
@@ -281,8 +231,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "3",
-      "detail": "alert 2 \u00b7 watch 1 \u00b7 info 0"
+      "value": "1",
+      "detail": "alert 0 \u00b7 watch 1 \u00b7 info 0"
     },
     {
       "id": "heat_index",
