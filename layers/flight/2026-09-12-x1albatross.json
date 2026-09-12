@@ -1,0 +1,64 @@
+{
+  "dataset": "Aerostratospheric flight product",
+  "layer": "flight",
+  "status": "factual",
+  "quality": "final",
+  "license": "CC BY 4.0",
+  "attribution": "Aerostratospheric / Midwest Stratospheric Data Systems",
+  "id": "2026-09-12-x1albatross",
+  "title": "x1Albatross envelope check",
+  "platform": "x1Albatross simulated payload",
+  "vehicle": "100-gram latex balloon",
+  "date": "2026-09-12",
+  "notam": {
+    "id": "STL 09/223",
+    "location": "1H8",
+    "text": "!STL 09/223 1H8 AIRSPACE UNMANNED FREE BALLOON 1H8 SFC-FL590 EB 2609121700-2609121900 PRIVATE Test Launch of C/L Modular Advanced Data Acquisition Payload (MAD-AP) jet-stream payload",
+    "window_utc": ["2026-09-12T17:00:00Z", "2026-09-12T19:00:00Z"]
+  },
+  "times_utc": {
+    "launch": "2026-09-12T17:00:00Z",
+    "burst": "2026-09-12T17:54:00Z",
+    "landing": "2026-09-12T18:40:00Z",
+    "duration_min": 100
+  },
+  "launch": {
+    "name": "Casey, Illinois",
+    "site": "1H8",
+    "latitude": 39.2992,
+    "longitude": -87.9925
+  },
+  "landing": {
+    "name": "rural Vigo County, Indiana",
+    "latitude": 39.51,
+    "longitude": -87.335,
+    "range_mi": 38,
+    "bearing": "ENE"
+  },
+  "profile": {
+    "ascent_min": 54,
+    "descent_min": 46,
+    "burst_ft": 59000,
+    "burst_km": 18.0,
+    "climb_rate_ft_min": 1093,
+    "descent_rate_ft_min": 1283,
+    "ground_speed_mph": 22.8
+  },
+  "surface_observation": {
+    "station": "KMTO",
+    "station_name": "Coles County Memorial Airport",
+    "observed_at": "2026-09-12T19:53:00Z",
+    "temperature_f": 90,
+    "sky": "few clouds",
+    "humidity_pct": 38,
+    "wind": "W 8 mph",
+    "pressure_inhg": 29.87,
+    "day_high_f": 90,
+    "day_low_f": 70,
+    "precip_mm": 0.02,
+    "source": "NWS / Casey station"
+  },
+  "notes": "Factual UOGW flight-layer product. Trajectory and envelope check with a simulated x1Albatross payload.",
+  "canonical": "https://github.com/Midwest-Stratospheric/msds-data/blob/main/flights/2026-09-12-x1albatross.json",
+  "published_at": "2026-09-12T20:26:00Z"
+}
