@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-12",
-  "generated_at_utc": "2026-09-12T12:34:12Z",
+  "generated_at_utc": "2026-09-12T12:59:20Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -185,19 +185,19 @@
   "anomalies": {
     "counts": {
       "total": 1,
-      "alert": 0,
-      "watch": 1,
+      "alert": 1,
+      "watch": 0,
       "info": 0
     },
     "top": [
       {
         "kind": "surface_heat",
-        "severity": "watch",
+        "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 39.0,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+        "value": 43.0,
+        "threshold": 40,
+        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
       }
     ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
@@ -225,7 +225,7 @@
       "id": "anomalies",
       "label": "Anomaly flags",
       "value": "1",
-      "detail": "alert 0 \u00b7 watch 1 \u00b7 info 0"
+      "detail": "alert 1 \u00b7 watch 0 \u00b7 info 0"
     },
     {
       "id": "heat_index",
