@@ -1,0 +1,136 @@
+{
+  "schema": "uogw.illinois_radiosonde_count.v1",
+  "ok": true,
+  "date_utc": "2026-09-12",
+  "generated_at_utc": "2026-09-12T19:38:22Z",
+  "region": {
+    "name": "Illinois",
+    "focus": "NWS radiosonde / rawinsonde launches",
+    "primary_station": "KILX (Lincoln, IL)",
+    "note": "Illinois' operational NWS upper-air site is Lincoln (ILX). Synoptic launches are typically 00Z and 12Z daily."
+  },
+  "window": {
+    "hours": 72,
+    "start_utc": "2026-09-09T19:38:22Z",
+    "end_utc": "2026-09-12T19:38:22Z"
+  },
+  "counts": {
+    "launches_3_days": 5,
+    "devices_likely_aloft": 0,
+    "aloft_window_hours": 2.0,
+    "stations_reporting": 1
+  },
+  "devices_likely_aloft": [],
+  "launches_3_days": [
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-10T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.0,
+      "pwater_mm": 39.756718,
+      "shear_sfc_6km_smps": 20.644657
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-10T12:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.6169424,
+      "pwater_mm": 43.789352,
+      "shear_sfc_6km_smps": 15.524813
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-11T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 570.58746,
+      "pwater_mm": 38.613537,
+      "shear_sfc_6km_smps": 14.046614
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-11T12:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.0,
+      "pwater_mm": 26.774122,
+      "shear_sfc_6km_smps": 2.4441972
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-12T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 234.89317,
+      "pwater_mm": 29.092308,
+      "shear_sfc_6km_smps": 1.4082664
+    }
+  ],
+  "stations": [
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "state": "IL",
+      "role": "primary",
+      "ok": true,
+      "launches_3_days": 5,
+      "launches": [
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-10T00:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 0.0,
+          "pwater_mm": 39.756718,
+          "shear_sfc_6km_smps": 20.644657
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-10T12:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 0.6169424,
+          "pwater_mm": 43.789352,
+          "shear_sfc_6km_smps": 15.524813
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-11T00:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 570.58746,
+          "pwater_mm": 38.613537,
+          "shear_sfc_6km_smps": 14.046614
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-11T12:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 0.0,
+          "pwater_mm": 26.774122,
+          "shear_sfc_6km_smps": 2.4441972
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-12T00:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 234.89317,
+          "pwater_mm": 29.092308,
+          "shear_sfc_6km_smps": 1.4082664
+        }
+      ]
+    }
+  ],
+  "source": {
+    "name": "Iowa Environmental Mesonet RAOB by year",
+    "url": "https://mesonet.agron.iastate.edu/api/1/raobs_by_year.json",
+    "attribution": "Iowa State University IEM"
+  },
+  "disclaimer": "Launch times are synoptic schedule timestamps from public RAOB archives. 'Devices likely aloft' is an estimate (flight within last 2 hours), not radar tracking of each balloon.",
+  "curator": "Midwest Stratospheric Data Systems",
+  "hub": "https://midwestsds.com/msds-data-hub.html#il-radiosondes"
+}
