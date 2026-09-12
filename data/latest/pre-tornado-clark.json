@@ -2,7 +2,7 @@
   "schema": "uogw.pre_tornado_clark.v1",
   "ok": true,
   "date_utc": "2026-09-12",
-  "generated_at_utc": "2026-09-12T14:02:58Z",
+  "generated_at_utc": "2026-09-12T14:20:34Z",
   "site": {
     "name": "Clark County, Illinois (Casey area)",
     "county": "Clark",
@@ -13,7 +13,7 @@
   },
   "disclaimer": "RESEARCH SCREENING ONLY. This is NOT a National Weather Service watch, warning, or forecast. Tornadoes can occur with little notice. Always follow NWS, local emergency management, and NOAA Weather Radio.",
   "probability_research": {
-    "score_0_to_100": 47,
+    "score_0_to_100": 50,
     "level": "watch",
     "level_label": "Watch conditions",
     "meaning": "Multiple research factors concurrent (instability, moisture, and/or wind/pressure signals). Monitor NWS/SPC products closely.",
@@ -21,9 +21,9 @@
   },
   "components": {
     "cape": {
-      "points": 6,
-      "value": 460.0,
-      "note": "Low CAPE"
+      "points": 12,
+      "value": 500.0,
+      "note": "Moderate CAPE"
     },
     "lifted_index": {
       "points": 8,
@@ -36,13 +36,13 @@
       "note": "Little inhibition"
     },
     "moisture": {
-      "points": 15,
-      "value": 21.2,
-      "note": "Very moist boundary layer"
+      "points": 12,
+      "value": 20.9,
+      "note": "Rich moisture"
     },
     "wind": {
       "points": 7,
-      "value": 20.2,
+      "value": 23.8,
       "note": "Moderate gusts"
     },
     "pressure_tendency": {
@@ -52,18 +52,18 @@
     }
   },
   "observations": {
-    "cape_jkg": 460.0,
+    "cape_jkg": 500.0,
     "cin_jkg": 0.0,
     "lifted_index": -2.4,
-    "dewpoint_c": 21.2,
-    "dewpoint_f": 70.2,
-    "relative_humidity_pct": 90.0,
-    "wind_speed_kmh": 11.7,
-    "wind_gusts_kmh": 20.2,
-    "pressure_msl_hpa": 1012.6,
+    "dewpoint_c": 20.9,
+    "dewpoint_f": 69.6,
+    "relative_humidity_pct": 88.0,
+    "wind_speed_kmh": 12.0,
+    "wind_gusts_kmh": 23.8,
+    "pressure_msl_hpa": 1012.3,
     "pressure_tendency_3h_hpa": 1.6,
-    "temperature_c": 22.9,
-    "temperature_f": 73.2
+    "temperature_c": 23.0,
+    "temperature_f": 73.4
   },
   "trend_hourly": [
     {
