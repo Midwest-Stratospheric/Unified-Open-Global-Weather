@@ -2,7 +2,7 @@
   "schema": "uogw.pre_tornado_clark.v1",
   "ok": true,
   "date_utc": "2026-09-12",
-  "generated_at_utc": "2026-09-12T05:40:42Z",
+  "generated_at_utc": "2026-09-12T06:26:09Z",
   "site": {
     "name": "Clark County, Illinois (Casey area)",
     "county": "Clark",
@@ -13,36 +13,36 @@
   },
   "disclaimer": "RESEARCH SCREENING ONLY. This is NOT a National Weather Service watch, warning, or forecast. Tornadoes can occur with little notice. Always follow NWS, local emergency management, and NOAA Weather Radio.",
   "probability_research": {
-    "score_0_to_100": 47,
-    "level": "watch",
-    "level_label": "Watch conditions",
-    "meaning": "Multiple research factors concurrent (instability, moisture, and/or wind/pressure signals). Monitor NWS/SPC products closely.",
+    "score_0_to_100": 44,
+    "level": "elevated",
+    "level_label": "Elevated",
+    "meaning": "Some instability/moisture/wind factors are rising. Stay weather-aware; this is not an official watch.",
     "method": "Weighted composite of CAPE, lifted index, CIN, dewpoint moisture, wind gust proxy, and 3-hour pressure tendency from Open-Meteo near Casey, IL. Not calibrated storm probability."
   },
   "components": {
     "cape": {
       "points": 12,
-      "value": 760.0,
+      "value": 620.0,
       "note": "Moderate CAPE"
     },
     "lifted_index": {
       "points": 8,
-      "value": -2.6,
+      "value": -2.3,
       "note": "Moderately unstable"
     },
     "cin": {
-      "points": 6,
-      "value": 40.0,
-      "note": "Weak inhibition"
+      "points": 3,
+      "value": 54.0,
+      "note": "Moderate inhibition"
     },
     "moisture": {
       "points": 12,
-      "value": 20.4,
+      "value": 20.1,
       "note": "Rich moisture"
     },
     "wind": {
       "points": 7,
-      "value": 18.7,
+      "value": 21.6,
       "note": "Moderate gusts"
     },
     "pressure_tendency": {
@@ -52,18 +52,18 @@
     }
   },
   "observations": {
-    "cape_jkg": 760.0,
-    "cin_jkg": 40.0,
-    "lifted_index": -2.6,
-    "dewpoint_c": 20.4,
-    "dewpoint_f": 68.7,
-    "relative_humidity_pct": 92.0,
-    "wind_speed_kmh": 6.1,
-    "wind_gusts_kmh": 18.7,
-    "pressure_msl_hpa": 1011.0,
+    "cape_jkg": 620.0,
+    "cin_jkg": 54.0,
+    "lifted_index": -2.3,
+    "dewpoint_c": 20.1,
+    "dewpoint_f": 68.2,
+    "relative_humidity_pct": 91.0,
+    "wind_speed_kmh": 10.2,
+    "wind_gusts_kmh": 21.6,
+    "pressure_msl_hpa": 1010.3,
     "pressure_tendency_3h_hpa": null,
-    "temperature_c": 21.8,
-    "temperature_f": 71.2
+    "temperature_c": 21.6,
+    "temperature_f": 70.9
   },
   "trend_hourly": [
     {
