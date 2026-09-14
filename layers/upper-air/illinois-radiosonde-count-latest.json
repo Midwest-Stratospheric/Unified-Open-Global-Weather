@@ -2,7 +2,7 @@
   "schema": "uogw.illinois_radiosonde_count.v1",
   "ok": true,
   "date_utc": "2026-09-14",
-  "generated_at_utc": "2026-09-14T10:59:10Z",
+  "generated_at_utc": "2026-09-14T14:06:13Z",
   "region": {
     "name": "Illinois",
     "focus": "NWS radiosonde / rawinsonde launches",
@@ -11,8 +11,8 @@
   },
   "window": {
     "hours": 72,
-    "start_utc": "2026-09-11T10:59:10Z",
-    "end_utc": "2026-09-14T10:59:10Z"
+    "start_utc": "2026-09-11T14:06:13Z",
+    "end_utc": "2026-09-14T14:06:13Z"
   },
   "counts": {
     "launches_3_days": 5,
@@ -22,15 +22,6 @@
   },
   "devices_likely_aloft": [],
   "launches_3_days": [
-    {
-      "station": "KILX",
-      "name": "Lincoln, IL (ILX)",
-      "valid_utc": "2026-09-11T12:00:00Z",
-      "release_time": null,
-      "sbcape_jkg": 0.0,
-      "pwater_mm": 26.774122,
-      "shear_sfc_6km_smps": 2.4441972
-    },
     {
       "station": "KILX",
       "name": "Lincoln, IL (ILX)",
@@ -66,6 +57,15 @@
       "sbcape_jkg": 0.0,
       "pwater_mm": 33.84123,
       "shear_sfc_6km_smps": 23.10588
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-09-14T12:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.0,
+      "pwater_mm": 35.745388,
+      "shear_sfc_6km_smps": 16.41201
     }
   ],
   "stations": [
@@ -77,15 +77,6 @@
       "ok": true,
       "launches_3_days": 5,
       "launches": [
-        {
-          "station": "KILX",
-          "name": "Lincoln, IL (ILX)",
-          "valid_utc": "2026-09-11T12:00:00Z",
-          "release_time": null,
-          "sbcape_jkg": 0.0,
-          "pwater_mm": 26.774122,
-          "shear_sfc_6km_smps": 2.4441972
-        },
         {
           "station": "KILX",
           "name": "Lincoln, IL (ILX)",
@@ -121,6 +112,15 @@
           "sbcape_jkg": 0.0,
           "pwater_mm": 33.84123,
           "shear_sfc_6km_smps": 23.10588
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-09-14T12:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 0.0,
+          "pwater_mm": 35.745388,
+          "shear_sfc_6km_smps": 16.41201
         }
       ]
     }
