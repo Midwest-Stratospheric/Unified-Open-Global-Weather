@@ -1,0 +1,83 @@
+# Parse X-Sense email-export CSVs dropped into layers/ground/casey/xsense/raw/
+# GitHub Actions does the ingest. Grok only drops the raw attachment.
+name: Ingest X-Sense Ground
+
+on:
+  push:
+    paths:
+      - "layers/ground/casey/xsense/raw/**"
+      - "scripts/ingest_xsense_ground.py"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-xsense-ground
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout msds-data (optional dual-write)
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: Midwest-Stratospheric/msds-data
+          path: msds-data
+          token: ${{ secrets.MSDS_DATA_TOKEN }}
+          fetch-depth: 0
+
+      - name: Ingest raw X-Sense CSVs
+        run: |
+          set -e
+          python3 scripts/ingest_xsense_ground.py
+          if [ -d msds-data ]; then
+            mkdir -p msds-data/ground-weather/xsense
+            if [ -f layers/ground/casey/xsense/latest.json ]; then
+              DATE=$(python3 -c "import json; print(json.load(open('layers/ground/casey/xsense/latest.json'))['date'])")
+              cp "layers/ground/casey/xsense/${DATE}.json" "msds-data/ground-weather/xsense/${DATE}.json"
+              cp layers/ground/casey/xsense/latest.json msds-data/ground-weather/xsense/latest.json
+              echo "dual-wrote msds-data/ground-weather/xsense/${DATE}.json"
+            fi
+          fi
+
+      - name: Commit UOGW products
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add layers/ground/casey/xsense data/entries data/latest status || true
+          if git diff --staged --quiet; then
+            echo "No UOGW product changes"
+            exit 0
+          fi
+          DATE=$(python3 -c "import json,os; p='status/msds-xsense.json'; print(json.load(open(p)).get('date','') if os.path.exists(p) else '')" 2>/dev/null || true)
+          OBS=$(python3 -c "import json,os; p='status/msds-xsense.json'; print(json.load(open(p)).get('native_sample_count',0) if os.path.exists(p) else 0)" 2>/dev/null || echo 0)
+          git commit -m "data(casey-xsense): ${OBS} in-situ samples ${DATE}"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then echo "Pushed UOGW OK"; exit 0; fi
+            sleep $((i * 3))
+          done
+          exit 1
+
+      - name: Commit msds-data (optional)
+        continue-on-error: true
+        working-directory: msds-data
+        run: |
+          set -e
+          if [ ! -d .git ]; then echo "msds-data not checked out"; exit 0; fi
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add ground-weather/xsense || true
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "data(casey-xsense): in-situ ground observations"
+          git pull --rebase origin main || true
+          git push origin HEAD:main || true
