@@ -1,29 +1,18 @@
 {
   "date": "2026-09-13",
+  "data_kind": "internal_building_temperature_average",
+  "environment": "indoor",
+  "not_outdoor": true,
+  "building_average": {
+    "temperature_f": 74.77,
+    "temperature_c": 23.76,
+    "relative_humidity_pct": 48.8,
+    "sample_count": 1440
+  },
   "site": {
-    "name": "Casey, Illinois \u2014 MSDS ground station",
-    "latitude": 39.2992,
-    "longitude": -87.9925,
-    "elevation_m": 200,
-    "timezone": "America/Chicago",
-    "instrument": "X-Sense thermo-hygrometer"
+    "name": "Casey, Illinois \u2014 MSDS operations building",
+    "environment": "indoor",
+    "role": "internal building temperature average"
   },
-  "data_kind": "in_situ_observations",
-  "native_interval": "1min",
-  "product_interval": "hourly",
-  "observation_count": 24,
-  "native_sample_count": 1440,
-  "stats": {
-    "temperature_c_min": 22.72,
-    "temperature_c_max": 24.61,
-    "temperature_c_mean": 23.76,
-    "temperature_f_min": 72.9,
-    "temperature_f_max": 76.3,
-    "temperature_f_mean": 74.77,
-    "relative_humidity_pct_min": 43.6,
-    "relative_humidity_pct_max": 58.2,
-    "relative_humidity_pct_mean": 48.8
-  },
-  "product": "layers/ground/casey/xsense/2026-09-13.json",
-  "meta": {"generator": "uogw/ingest_xsense_ground.py", "uogw": true}
+  "product": "layers/ground/casey/xsense/2026-09-13.json"
 }
