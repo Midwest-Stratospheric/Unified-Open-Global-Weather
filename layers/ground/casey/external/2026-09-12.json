@@ -1,0 +1,46 @@
+{
+  "date": "2026-09-12",
+  "data_kind": "external_fixed_ground_station",
+  "environment": "outdoor",
+  "exposure": "external",
+  "not_flight": true,
+  "not_x1": true,
+  "not_indoor": true,
+  "site": {
+    "name": "Casey, Illinois — external surface station",
+    "launch_site_name": "Casey, Illinois",
+    "launch_site": "1H8",
+    "latitude": 39.2992,
+    "longitude": -87.9925,
+    "timezone": "America/Chicago"
+  },
+  "station": {
+    "id": "KMTO",
+    "name": "Coles County Memorial Airport",
+    "kind": "fixed ASOS / NWS surface station",
+    "source": "NWS / Casey station"
+  },
+  "observed_at": "2026-09-12T19:53:00Z",
+  "external": {
+    "temperature_f": 90,
+    "temperature_c": 32.22,
+    "humidity_pct": 38,
+    "sky": "few clouds",
+    "wind": "W 8 mph",
+    "pressure_inhg": 29.87,
+    "day_high_f": 90,
+    "day_low_f": 70,
+    "precip_mm": 0.02
+  },
+  "source": {
+    "provider": "NWS",
+    "station": "KMTO",
+    "kind": "fixed ground station surface observation",
+    "curator": "Midwest Stratospheric Data Systems"
+  },
+  "meta": {
+    "generator": "uogw/casey-external-ground",
+    "uogw": true,
+    "note": "External outdoor temperature only. Do not treat as x1 / flight-layer payload data."
+  }
+}
