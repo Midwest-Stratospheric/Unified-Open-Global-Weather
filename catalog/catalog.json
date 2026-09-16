@@ -15,14 +15,14 @@
   "attribution": "Midwest Stratospheric Data Systems (midwestsds.com) — always cite original data providers",
   "contact": "launchcontrol@midwestsds.com",
   "globe_registration": "GO-4VW9B",
-  "updated": "2026-08-07",
+  "updated": "2026-09-16",
   "related_repositories": {
     "uogw": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
     "msds_data": "https://github.com/Midwest-Stratospheric/msds-data",
     "igdr": "https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository"
   },
   "layer_summary": {
-    "ground": "Surface land stations, GLOBE, model-driven dailies",
+    "ground": "Surface land stations, GLOBE, model-driven dailies, Casey GMC-800 radiation",
     "marine": "Buoys, ships, Argo profiles, coastal",
     "upper_air": "Radiosondes, pilot balloons, GRUAN, CUON",
     "stratospheric": "QBO, ozone sondes, satellite strat products",
@@ -31,6 +31,7 @@
   },
   "datasets": [
     {"id": "msds-ground-casey", "layer": "ground", "title": "Casey, Illinois Ground Weather (MSDS)", "status": "active", "frequency": "daily", "access": {"pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/msds-data/main/ground-weather/daily/{YYYY-MM-DD}.json", "browse": "https://github.com/Midwest-Stratospheric/msds-data/tree/main/ground-weather/daily"}, "upstream": "Open-Meteo (CC BY 4.0)", "automation": "msds-ground-daily.yml"},
+    {"id": "msds-gmc800-casey", "layer": "ground", "title": "Casey, Illinois GMC-800 Fixed Radiation Station", "status": "active", "frequency": "event / history ingest", "station_type": "fixed_weather_and_radiation", "lat": 39.2974, "lon": -87.9818, "access": {"latest": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/ground/casey/gmc-800/latest.json", "station": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/ground/casey/gmc-800/station.json", "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/ground/casey/gmc-800", "igdr": "https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository/blob/main/stations/msds-gmc800-casey.json"}, "upstream": "GQ Electronics GMC-800 / Data Viewer 2.75"},
     {"id": "msds-globe-site", "layer": "ground", "title": "NASA GLOBE — MSDS Site 422147", "status": "active", "access": {"api": "https://api.globe.gov/search/v1/measurement/protocol/measureddate/", "site_id": "422147", "registration": "GO-4VW9B", "portal": "https://www.globe.gov/globe-data"}, "upstream": "NASA GLOBE Program"},
     {"id": "msds-flights", "layer": "flight", "title": "X2Griffon / MSDS High-Altitude Flight Packages", "status": "coming_soon", "first_expected": "2026-09-19", "access": {"repository": "https://github.com/Midwest-Stratospheric/msds-data/tree/main/flights", "planned_api": "/data/v1/flights"}},
     {"id": "noaa-igra", "layer": "upper-air", "title": "NOAA Integrated Global Radiosonde Archive (IGRA)", "status": "active", "frequency": "daily", "coverage": "global", "access": {"authoritative": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive", "y2d": "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/", "igdr": "https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository"}, "citation": "Durre et al. (2016) IGRA v2, NOAA NCEI, DOI:10.7289/V5X63K0Q", "automation": "igra-index-daily.yml"},
