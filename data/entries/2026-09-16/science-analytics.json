@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-16",
-  "generated_at_utc": "2026-09-16T13:58:39Z",
+  "generated_at_utc": "2026-09-16T14:16:36Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -195,32 +195,32 @@
         "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 38.0,
+        "value": 37.2,
         "threshold": 35,
         "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
       },
       {
         "kind": "temp_zscore_mad",
         "severity": "watch",
-        "subject": "Istanbul, TR",
+        "subject": "Madrid, ES",
         "metric": "z_mad",
-        "value": -3.9506,
+        "value": -3.6723,
         "threshold": 3.5,
         "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 21.9,
-            "z_pop": -1.7413,
-            "z_sample": -1.6122,
-            "z_mad": -3.9506,
-            "s_range": -0.631,
-            "percentile": 12.5,
-            "mean": 24.9286,
-            "median": 26.0,
-            "pstdev": 1.7392,
-            "sample_stdev": 1.8786,
-            "mad": 0.7
+            "x": 22.5,
+            "z_pop": -1.3718,
+            "z_sample": -1.2701,
+            "z_mad": -3.6723,
+            "s_range": -0.5,
+            "percentile": 25.0,
+            "mean": 26.2,
+            "median": 27.4,
+            "pstdev": 2.6971,
+            "sample_stdev": 2.9132,
+            "mad": 0.9
           }
         }
       }
