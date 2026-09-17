@@ -2,7 +2,7 @@
   "schema": "uogw.pre_tornado_clark.v1",
   "ok": true,
   "date_utc": "2026-09-17",
-  "generated_at_utc": "2026-09-17T01:19:32Z",
+  "generated_at_utc": "2026-09-17T01:40:11Z",
   "site": {
     "name": "Clark County, Illinois (Casey area)",
     "county": "Clark",
@@ -13,7 +13,7 @@
   },
   "disclaimer": "RESEARCH SCREENING ONLY. This is NOT a National Weather Service watch, warning, or forecast. Tornadoes can occur with little notice. Always follow NWS, local emergency management, and NOAA Weather Radio.",
   "probability_research": {
-    "score_0_to_100": 64,
+    "score_0_to_100": 54,
     "level": "watch",
     "level_label": "Watch conditions",
     "meaning": "Multiple research factors concurrent (instability, moisture, and/or wind/pressure signals). Monitor NWS/SPC products closely.",
@@ -21,9 +21,9 @@
   },
   "components": {
     "cape": {
-      "points": 26,
-      "value": 2020.0,
-      "note": "Very strong CAPE"
+      "points": 20,
+      "value": 1900.0,
+      "note": "Strong CAPE"
     },
     "lifted_index": {
       "points": 12,
@@ -41,9 +41,9 @@
       "note": "Very moist boundary layer"
     },
     "wind": {
-      "points": 7,
-      "value": 18.0,
-      "note": "Moderate gusts"
+      "points": 3,
+      "value": 10.1,
+      "note": "Light wind/gusts"
     },
     "pressure_tendency": {
       "points": 1,
@@ -52,18 +52,18 @@
     }
   },
   "observations": {
-    "cape_jkg": 2020.0,
+    "cape_jkg": 1900.0,
     "cin_jkg": 60.0,
     "lifted_index": -5.8,
     "dewpoint_c": 24.0,
     "dewpoint_f": 75.2,
-    "relative_humidity_pct": 87.0,
-    "wind_speed_kmh": 3.6,
-    "wind_gusts_kmh": 18.0,
-    "pressure_msl_hpa": 1022.4,
+    "relative_humidity_pct": 88.0,
+    "wind_speed_kmh": 2.2,
+    "wind_gusts_kmh": 10.1,
+    "pressure_msl_hpa": 1022.6,
     "pressure_tendency_3h_hpa": 0.4,
-    "temperature_c": 26.3,
-    "temperature_f": 79.3
+    "temperature_c": 26.2,
+    "temperature_f": 79.2
   },
   "trend_hourly": [
     {
