@@ -1,7 +1,7 @@
 {
-  "generated_at_utc": "2026-09-19T18:08:53Z",
+  "generated_at_utc": "2026-09-19T21:52:39Z",
   "catalog_datasets": 26,
-  "layer_json_files": 654,
+  "layer_json_files": 655,
   "sources": {
     "anomaly": {
       "source": "uogw-anomaly-detection",
@@ -29,7 +29,7 @@
     "component-snapshots": {
       "ok": true,
       "date": "2026-09-19",
-      "generated_at_utc": "2026-09-19T15:57:22Z"
+      "generated_at_utc": "2026-09-19T20:50:30Z"
     },
     "fair": {
       "source": "uogw-fair-metadata",
@@ -81,17 +81,17 @@
     },
     "heal": {
       "schema": "uogw.heal_actions.v1",
-      "generated_at_utc": "2026-09-19T15:15:14Z",
+      "generated_at_utc": "2026-09-19T19:39:46Z",
       "actions": [
         {
-          "rollback_point": "2026-09-19T1515Z"
+          "rollback_point": "2026-09-19T1939Z"
         }
       ]
     },
     "health": {
       "schema": "uogw.health_report.v1",
       "date_utc": "2026-09-19",
-      "generated_at_utc": "2026-09-19T15:15:14Z",
+      "generated_at_utc": "2026-09-19T19:39:46Z",
       "ok": true,
       "critical_fail": false,
       "checks": [
@@ -186,7 +186,7 @@
       ],
       "heal_actions": [
         {
-          "rollback_point": "2026-09-19T1515Z"
+          "rollback_point": "2026-09-19T1939Z"
         }
       ],
       "redispatch_workflows": [],
@@ -216,7 +216,7 @@
     },
     "illinois-radiosonde-count": {
       "ok": true,
-      "generated_at_utc": "2026-09-19T18:02:52Z",
+      "generated_at_utc": "2026-09-19T21:46:42Z",
       "launches_3_days": 6,
       "devices_likely_aloft": 0
     },
@@ -266,15 +266,15 @@
     "ozone-health": {
       "ok": true,
       "date": "2026-09-19",
-      "generated_at_utc": "2026-09-19T18:01:57Z",
+      "generated_at_utc": "2026-09-19T20:41:30Z",
       "casey_band": "unhealthy_sensitive"
     },
     "pre-tornado-clark": {
       "ok": true,
       "date": "2026-09-19",
-      "generated_at_utc": "2026-09-19T17:57:18Z",
-      "score": 63,
-      "level": "watch"
+      "generated_at_utc": "2026-09-19T20:57:31Z",
+      "score": 67,
+      "level": "high"
     },
     "research-package": {
       "source": "uogw-research-package",
@@ -301,7 +301,7 @@
     },
     "space-gfs": {
       "ok": true,
-      "generated_at_utc": "2026-09-19T18:06:48Z",
+      "generated_at_utc": "2026-09-19T20:50:05Z",
       "space_ok": true,
       "gfs_ok": true,
       "nomads_ok": true
