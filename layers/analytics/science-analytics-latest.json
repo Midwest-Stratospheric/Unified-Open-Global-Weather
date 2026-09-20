@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-20",
-  "generated_at_utc": "2026-09-20T13:23:53Z",
+  "generated_at_utc": "2026-09-20T13:39:20Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -192,42 +192,42 @@
   "anomalies": {
     "counts": {
       "total": 2,
-      "alert": 0,
-      "watch": 2,
+      "alert": 1,
+      "watch": 1,
       "info": 0
     },
     "top": [
       {
         "kind": "surface_heat",
-        "severity": "watch",
+        "severity": "alert",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 38.6,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+        "value": 42.2,
+        "threshold": 40,
+        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
       },
       {
         "kind": "temp_zscore_mad",
         "severity": "watch",
-        "subject": "Houston, TX, US",
+        "subject": "Dubai, AE",
         "metric": "z_mad",
-        "value": -3.8784,
+        "value": 4.7215,
         "threshold": 3.5,
         "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 23.9,
-            "z_pop": -1.9996,
-            "z_sample": -1.8513,
-            "z_mad": -3.8784,
-            "s_range": -0.6786,
-            "percentile": 12.5,
-            "mean": 25.8,
-            "median": 26.2,
-            "pstdev": 0.9502,
-            "sample_stdev": 1.0263,
-            "mad": 0.4
+            "x": 42.2,
+            "z_pop": 2.322,
+            "z_sample": 2.1498,
+            "z_mad": 4.7215,
+            "s_range": 0.7335,
+            "percentile": 87.5,
+            "mean": 38.3857,
+            "median": 38.0,
+            "pstdev": 1.6427,
+            "sample_stdev": 1.7743,
+            "mad": 0.6
           }
         }
       }
@@ -257,7 +257,7 @@
       "id": "anomalies",
       "label": "Anomaly flags",
       "value": "2",
-      "detail": "alert 0 \u00b7 watch 2 \u00b7 info 0"
+      "detail": "alert 1 \u00b7 watch 1 \u00b7 info 0"
     },
     {
       "id": "heat_index",
