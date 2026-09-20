@@ -23,7 +23,28 @@
     "bearing_deg": 93,
     "reporter": "xFall2"
   },
-  "profile": { "burst_ft": 90356, "ascent_min": 91, "descent_min": 66, "ascent_ft_s": 16.4, "descent_ft_s": 11.9 },
+  "profile": {
+    "burst_ft": 90356,
+    "ascent_min": 91,
+    "descent_min": 66,
+    "ascent_ft_s": 16.4,
+    "descent_ft_s": 11.9,
+    "isa_burst_c": -49.0,
+    "isa_burst_hpa": 17.01,
+    "isa_burst_inhg": 0.50
+  },
+  "surface_observation": {
+    "station": "KMTO",
+    "time_utc": "2026-09-19T18:53:00Z",
+    "temp_f": 88,
+    "dewpoint_f": 70,
+    "rh_pct": 52,
+    "pressure_inhg": 29.96,
+    "pressure_mb": 1014.6,
+    "wind": "SSW 8 kt",
+    "sky": "FEW080",
+    "metar": "KMTO 191853Z 17004KT 31/21 A2996"
+  },
   "batteries": {
     "outcome": "cold-weather dropout on multiple X2Griffon battery systems",
     "xfall2": "survived and reported landing",
@@ -31,5 +52,5 @@
   },
   "canonical": "https://github.com/Midwest-Stratospheric/msds-data/blob/main/flights/2026-09-19-x2griffon.json",
   "notes": "X2Griffon maiden. Cold weather failed multiple battery systems. xFall2 survived and reported landing.",
-  "published_at": "2026-09-19T21:50:00Z"
+  "published_at": "2026-09-20T14:53:00Z"
 }
