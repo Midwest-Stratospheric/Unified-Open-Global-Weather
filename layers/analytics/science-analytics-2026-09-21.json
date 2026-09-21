@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-21",
-  "generated_at_utc": "2026-09-21T15:34:33Z",
+  "generated_at_utc": "2026-09-21T15:58:23Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -192,35 +192,35 @@
     "top": [
       {
         "kind": "surface_heat",
-        "severity": "alert",
+        "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 42.2,
-        "threshold": 40,
-        "detail": "Extreme heat: T>=40C (example: desert heat 42C)"
+        "value": 38.8,
+        "threshold": 35,
+        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
       },
       {
         "kind": "temp_zscore_mad",
-        "severity": "watch",
-        "subject": "Dubai, AE",
+        "severity": "alert",
+        "subject": "Johannesburg, ZA",
         "metric": "z_mad",
-        "value": 4.7215,
-        "threshold": 3.5,
-        "detail": "Robust MAD z-score |z|>=3.5",
+        "value": 7.0823,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 42.2,
-            "z_pop": 2.322,
-            "z_sample": 2.1498,
-            "z_mad": 4.7215,
-            "s_range": 0.7335,
-            "percentile": 87.5,
-            "mean": 38.3857,
-            "median": 38.0,
-            "pstdev": 1.6427,
-            "sample_stdev": 1.7743,
-            "mad": 0.6
+            "x": 20.3,
+            "z_pop": 0.22,
+            "z_sample": 0.2037,
+            "z_mad": 7.0823,
+            "s_range": 0.0827,
+            "percentile": 62.5,
+            "mean": 19.8286,
+            "median": 18.2,
+            "pstdev": 2.1426,
+            "sample_stdev": 2.3142,
+            "mad": 0.2
           }
         }
       }
