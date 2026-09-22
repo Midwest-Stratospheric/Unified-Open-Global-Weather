@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-22",
-  "generated_at_utc": "2026-09-22T13:49:54Z",
+  "generated_at_utc": "2026-09-22T14:06:50Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 2,
+    "anomaly_events": 4,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -177,9 +177,9 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 2,
+      "total": 4,
       "alert": 1,
-      "watch": 1,
+      "watch": 3,
       "info": 0
     },
     "top": [
@@ -188,32 +188,82 @@
         "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 38.8,
+        "value": 36.8,
         "threshold": 35,
         "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
       },
       {
         "kind": "temp_zscore_mad",
-        "severity": "alert",
-        "subject": "Johannesburg, ZA",
+        "severity": "watch",
+        "subject": "Casey, IL, US",
         "metric": "z_mad",
-        "value": 7.0823,
+        "value": -4.9239,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 14.3,
+            "z_pop": -2.2663,
+            "z_sample": -2.0982,
+            "z_mad": -4.9239,
+            "s_range": -0.7415,
+            "percentile": 12.5,
+            "mean": 20.5286,
+            "median": 21.6,
+            "pstdev": 2.7484,
+            "sample_stdev": 2.9686,
+            "mad": 1.0
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "watch",
+        "subject": "Buenos Aires, AR",
+        "metric": "z_mad",
+        "value": -3.7579,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 6.0,
+            "z_pop": -1.4213,
+            "z_sample": -1.3159,
+            "z_mad": -3.7579,
+            "s_range": -0.5583,
+            "percentile": 25.0,
+            "mean": 11.4714,
+            "median": 13.8,
+            "pstdev": 3.8496,
+            "sample_stdev": 4.158,
+            "mad": 1.4
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Tokyo, JP",
+        "metric": "z_mad",
+        "value": 5.0587,
         "threshold": 5.0,
         "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 20.3,
-            "z_pop": 0.22,
-            "z_sample": 0.2037,
-            "z_mad": 7.0823,
-            "s_range": 0.0827,
-            "percentile": 62.5,
-            "mean": 19.8286,
-            "median": 18.2,
-            "pstdev": 2.1426,
-            "sample_stdev": 2.3142,
-            "mad": 0.2
+            "x": 26.1,
+            "z_pop": 2.2038,
+            "z_sample": 2.0403,
+            "z_mad": 5.0587,
+            "s_range": 0.6935,
+            "percentile": 87.5,
+            "mean": 22.2857,
+            "median": 21.6,
+            "pstdev": 1.7308,
+            "sample_stdev": 1.8694,
+            "mad": 0.6
           }
         }
       }
@@ -242,8 +292,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "2",
-      "detail": "alert 1 \u00b7 watch 1 \u00b7 info 0"
+      "value": "4",
+      "detail": "alert 1 \u00b7 watch 3 \u00b7 info 0"
     },
     {
       "id": "heat_index",
