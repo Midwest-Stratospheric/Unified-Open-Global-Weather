@@ -1,0 +1,56 @@
+{
+  "date": "2026-08-31",
+  "site": {
+    "name": "Casey, Illinois \u2014 MSDS ground station",
+    "latitude": 39.2992,
+    "longitude": -87.9925,
+    "elevation_m": 200,
+    "timezone": "America/Chicago",
+    "instrument": "X-Sense thermo-hygrometer"
+  },
+  "source": {
+    "provider": "X-Sense",
+    "kind": "in-situ ground station email export",
+    "email_from": "support@x-sense-iot.com",
+    "filename": "2026-08-31.csv",
+    "raw_file": "layers/ground/casey/xsense/raw/2026-08-31.csv",
+    "retrieved_at_utc": "2026-09-23T03:02:31Z",
+    "curator": "Midwest Stratospheric Data Systems"
+  },
+  "data_kind": "in_situ_observations",
+  "native_interval": "1min",
+  "product_interval": "hourly",
+  "observation_count": 1,
+  "native_sample_count": 1,
+  "stats": {
+    "temperature_c_min": 26.11,
+    "temperature_c_max": 26.11,
+    "temperature_c_mean": 26.11,
+    "temperature_f_min": 79.0,
+    "temperature_f_max": 79.0,
+    "temperature_f_mean": 79.0,
+    "relative_humidity_pct_min": 43.9,
+    "relative_humidity_pct_max": 43.9,
+    "relative_humidity_pct_mean": 43.9
+  },
+  "observations": [
+    {
+      "time": "2026-08-31T23:00:00",
+      "sample_count": 1,
+      "temperature_f": 79.0,
+      "temperature_c": 26.11,
+      "temperature_f_min": 79.0,
+      "temperature_f_max": 79.0,
+      "relative_humidity_pct": 43.9,
+      "relative_humidity_pct_min": 43.9,
+      "relative_humidity_pct_max": 43.9
+    }
+  ],
+  "meta": {
+    "generator": "uogw/ingest_xsense_ground.py",
+    "uogw": true,
+    "native_dates": [
+      "2026-08-31"
+    ]
+  }
+}
