@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-24",
-  "generated_at_utc": "2026-09-24T13:57:36Z",
+  "generated_at_utc": "2026-09-24T14:17:55Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 1,
+    "anomaly_events": 4,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -184,20 +184,63 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 1,
-      "alert": 0,
-      "watch": 1,
+      "total": 4,
+      "alert": 1,
+      "watch": 3,
       "info": 0
     },
     "top": [
+      {
+        "kind": "low_pressure",
+        "severity": "watch",
+        "subject": "Reykjavik, IS",
+        "metric": "pressure_msl_hpa",
+        "value": 979.0,
+        "threshold": 980,
+        "detail": "Very low MSLP <= 980 hPa (example: 972 hPa deep low)"
+      },
+      {
+        "kind": "high_wind",
+        "severity": "watch",
+        "subject": "Reykjavik, IS",
+        "metric": "wind_speed_ms",
+        "value": 16.5,
+        "threshold": 15,
+        "detail": "Strong wind >= 15 m/s (example: 16.8 m/s)"
+      },
       {
         "kind": "surface_heat",
         "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 38.3,
+        "value": 36.9,
         "threshold": 35,
         "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Beijing, CN",
+        "metric": "z_mad",
+        "value": -7.2268,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 20.8,
+            "z_pop": -2.1352,
+            "z_sample": -1.9768,
+            "z_mad": -7.2268,
+            "s_range": -0.6181,
+            "percentile": 12.5,
+            "mean": 27.2286,
+            "median": 28.3,
+            "pstdev": 3.0108,
+            "sample_stdev": 3.252,
+            "mad": 0.7
+          }
+        }
       }
     ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
@@ -224,8 +267,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "1",
-      "detail": "alert 0 \u00b7 watch 1 \u00b7 info 0"
+      "value": "4",
+      "detail": "alert 1 \u00b7 watch 3 \u00b7 info 0"
     },
     {
       "id": "heat_index",
