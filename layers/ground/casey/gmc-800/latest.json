@@ -1,8 +1,14 @@
 {
-  "date": "2026-09-16",
-  "window_start_local": "2026-09-15T12:40:00",
-  "window_end_local": "2026-09-16T09:40:00",
-  "window_hours": 21,
+  "date": "2026-09-25",
+  "window_start_local": "2026-09-16T10:01:00",
+  "window_end_local": "2026-09-25T07:52:00",
+  "window_hours": 214,
+  "prior_window": {
+    "date": "2026-09-16",
+    "window_start_local": "2026-09-15T12:40:00",
+    "window_end_local": "2026-09-16T09:40:00",
+    "note": "First ingest; this file is the continuation starting 2026-09-16 10:01 local"
+  },
   "site": {
     "id": "MSDS-GMC800-CASEY",
     "name": "Casey, Illinois — Aerostratospheric GMC-800 fixed radiation / weather station",
@@ -19,42 +25,31 @@
   "source": {
     "provider": "GQ Electronics LLC",
     "software": "GMC Data Viewer 2.75",
-    "export_csv": "20260916_09_40_54.csv",
-    "export_bin": "20260916_09_40_54.bin",
-    "retrieved_at_utc": "2026-09-16T14:40:54Z",
+    "export_csv": "20260925_07_47_18.csv",
+    "retrieved_at_utc": "2026-09-25T12:47:18Z",
     "curator": "Aerostratospheric"
   },
   "data_kind": "in_situ_surface_radiation",
   "native_interval": "1min",
-  "product_interval": "hourly",
-  "observation_count": 1233,
-  "hourly_count": 21,
+  "product_interval": "daily",
+  "observation_count": 12832,
+  "hourly_count": 214,
+  "daily_count": 10,
   "stats": {
-    "cpm": {"mean": 15.1249, "min": 5.0, "max": 34.0, "median": 15.0, "n": 1233},
-    "usv_h": {"mean": 0.0982, "min": 0.032, "max": 0.221, "median": 0.097, "n": 1233}
+    "cpm": {"mean": 15.1201, "min": 3.0, "max": 33.0, "median": 15.0, "n": 12832},
+    "usv_h": {"mean": 0.0982, "min": 0.02, "max": 0.214, "median": 0.097, "n": 12832}
   },
-  "hourly": [
-    {"time_local": "2026-09-15T13:00:00", "timezone": "America/Chicago", "cpm": {"mean": 14.9455, "min": 5.0, "max": 25.0, "median": 16.0, "n": 55}, "usv_h": {"mean": 0.0971, "min": 0.032, "max": 0.162, "median": 0.104, "n": 55}, "sample_count": 55},
-    {"time_local": "2026-09-15T14:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.1833, "min": 8.0, "max": 27.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.0986, "min": 0.052, "max": 0.176, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-15T15:00:00", "timezone": "America/Chicago", "cpm": {"mean": 14.7333, "min": 7.0, "max": 22.0, "median": 14.0, "n": 60}, "usv_h": {"mean": 0.0956, "min": 0.045, "max": 0.143, "median": 0.091, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-15T16:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.1333, "min": 7.0, "max": 22.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.0983, "min": 0.045, "max": 0.143, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-15T17:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.0333, "min": 8.0, "max": 23.0, "median": 14.0, "n": 60}, "usv_h": {"mean": 0.0977, "min": 0.052, "max": 0.149, "median": 0.091, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-15T18:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.5667, "min": 7.0, "max": 27.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.1012, "min": 0.045, "max": 0.176, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-15T19:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.5167, "min": 6.0, "max": 25.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.1007, "min": 0.039, "max": 0.162, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-15T20:00:00", "timezone": "America/Chicago", "cpm": {"mean": 14.9833, "min": 8.0, "max": 22.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.0973, "min": 0.052, "max": 0.143, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-15T21:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.1833, "min": 7.0, "max": 26.0, "median": 14.0, "n": 60}, "usv_h": {"mean": 0.0986, "min": 0.045, "max": 0.169, "median": 0.091, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-15T22:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.2167, "min": 5.0, "max": 27.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.0989, "min": 0.032, "max": 0.176, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-15T23:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.7, "min": 8.0, "max": 24.0, "median": 16.0, "n": 60}, "usv_h": {"mean": 0.102, "min": 0.052, "max": 0.156, "median": 0.104, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T00:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.0, "min": 8.0, "max": 34.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.0974, "min": 0.052, "max": 0.221, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T01:00:00", "timezone": "America/Chicago", "cpm": {"mean": 14.6833, "min": 8.0, "max": 21.0, "median": 14.5, "n": 60}, "usv_h": {"mean": 0.0954, "min": 0.052, "max": 0.137, "median": 0.094, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T02:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.2833, "min": 7.0, "max": 25.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.0993, "min": 0.045, "max": 0.162, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T03:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.3333, "min": 7.0, "max": 26.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.0995, "min": 0.045, "max": 0.169, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T04:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.2833, "min": 8.0, "max": 25.0, "median": 15.0, "n": 60}, "usv_h": {"mean": 0.0993, "min": 0.052, "max": 0.162, "median": 0.097, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T05:00:00", "timezone": "America/Chicago", "cpm": {"mean": 14.65, "min": 7.0, "max": 26.0, "median": 14.0, "n": 60}, "usv_h": {"mean": 0.0951, "min": 0.045, "max": 0.169, "median": 0.091, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T06:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.4167, "min": 8.0, "max": 23.0, "median": 16.0, "n": 60}, "usv_h": {"mean": 0.1002, "min": 0.052, "max": 0.149, "median": 0.104, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T07:00:00", "timezone": "America/Chicago", "cpm": {"mean": 14.7167, "min": 9.0, "max": 26.0, "median": 14.0, "n": 60}, "usv_h": {"mean": 0.0955, "min": 0.058, "max": 0.169, "median": 0.091, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T08:00:00", "timezone": "America/Chicago", "cpm": {"mean": 14.8667, "min": 5.0, "max": 24.0, "median": 14.0, "n": 60}, "usv_h": {"mean": 0.0965, "min": 0.032, "max": 0.156, "median": 0.091, "n": 60}, "sample_count": 60},
-    {"time_local": "2026-09-16T09:00:00", "timezone": "America/Chicago", "cpm": {"mean": 15.2105, "min": 10.0, "max": 25.0, "median": 15.0, "n": 38}, "usv_h": {"mean": 0.0989, "min": 0.065, "max": 0.162, "median": 0.097, "n": 38}, "sample_count": 38}
+  "daily": [
+    {"date": "2026-09-16", "timezone": "America/Chicago", "cpm": {"mean": 15.3147, "min": 5.0, "max": 32.0, "n": 839}, "usv_h": {"mean": 0.0995, "min": 0.032, "max": 0.208, "n": 839}, "sample_count": 839, "hour_count": 14},
+    {"date": "2026-09-17", "timezone": "America/Chicago", "cpm": {"mean": 15.2243, "min": 5.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.0989, "min": 0.032, "max": 0.189, "n": 1440}, "sample_count": 1440, "hour_count": 24},
+    {"date": "2026-09-18", "timezone": "America/Chicago", "cpm": {"mean": 15.3049, "min": 4.0, "max": 33.0, "n": 1440}, "usv_h": {"mean": 0.0994, "min": 0.026, "max": 0.214, "n": 1440}, "sample_count": 1440, "hour_count": 24},
+    {"date": "2026-09-19", "timezone": "America/Chicago", "cpm": {"mean": 15.0868, "min": 5.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.098, "min": 0.032, "max": 0.189, "n": 1440}, "sample_count": 1440, "hour_count": 24},
+    {"date": "2026-09-20", "timezone": "America/Chicago", "cpm": {"mean": 15.4618, "min": 4.0, "max": 31.0, "n": 1440}, "usv_h": {"mean": 0.1004, "min": 0.026, "max": 0.201, "n": 1440}, "sample_count": 1440, "hour_count": 24},
+    {"date": "2026-09-21", "timezone": "America/Chicago", "cpm": {"mean": 15.607, "min": 5.0, "max": 31.0, "n": 1440}, "usv_h": {"mean": 0.1014, "min": 0.032, "max": 0.201, "n": 1440}, "sample_count": 1440, "hour_count": 24},
+    {"date": "2026-09-22", "timezone": "America/Chicago", "cpm": {"mean": 14.5958, "min": 4.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.0948, "min": 0.026, "max": 0.189, "n": 1440}, "sample_count": 1440, "hour_count": 24},
+    {"date": "2026-09-23", "timezone": "America/Chicago", "cpm": {"mean": 14.8882, "min": 4.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.0967, "min": 0.026, "max": 0.189, "n": 1440}, "sample_count": 1440, "hour_count": 24},
+    {"date": "2026-09-24", "timezone": "America/Chicago", "cpm": {"mean": 14.7229, "min": 3.0, "max": 28.0, "n": 1440}, "usv_h": {"mean": 0.0956, "min": 0.02, "max": 0.182, "n": 1440}, "sample_count": 1440, "hour_count": 24},
+    {"date": "2026-09-25", "timezone": "America/Chicago", "cpm": {"mean": 14.9852, "min": 3.0, "max": 29.0, "n": 473}, "usv_h": {"mean": 0.0973, "min": 0.02, "max": 0.189, "n": 473}, "sample_count": 473, "hour_count": 8}
   ],
   "meta": {"generator": "grok/gmc800-ground-ingest", "uogw": true, "igdr": true}
 }
