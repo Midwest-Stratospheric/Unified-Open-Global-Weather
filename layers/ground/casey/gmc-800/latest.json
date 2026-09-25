@@ -3,53 +3,26 @@
   "window_start_local": "2026-09-16T10:01:00",
   "window_end_local": "2026-09-25T07:52:00",
   "window_hours": 214,
-  "prior_window": {
-    "date": "2026-09-16",
-    "window_start_local": "2026-09-15T12:40:00",
-    "window_end_local": "2026-09-16T09:40:00",
-    "note": "First ingest; this file is the continuation starting 2026-09-16 10:01 local"
-  },
-  "site": {
-    "id": "MSDS-GMC800-CASEY",
-    "name": "Casey, Illinois — Aerostratospheric GMC-800 fixed radiation / weather station",
-    "kind": "fixed_ground_station",
-    "lat": 39.2974,
-    "lon": -87.9818,
-    "latitude": "39.2974 N",
-    "longitude": "87.9818 W",
-    "location_mode": "fixed",
-    "timezone": "America/Chicago",
-    "instrument": "GQ Electronics GMC-800",
-    "operator": "Aerostratospheric / Midwest Stratospheric Data Systems"
-  },
-  "source": {
-    "provider": "GQ Electronics LLC",
-    "software": "GMC Data Viewer 2.75",
-    "export_csv": "20260925_07_47_18.csv",
-    "retrieved_at_utc": "2026-09-25T12:47:18Z",
-    "curator": "Aerostratospheric"
-  },
-  "data_kind": "in_situ_surface_radiation",
-  "native_interval": "1min",
-  "product_interval": "daily",
+  "policy": "Always commit the full hourly series for the ingest window, not a short latest-only slice.",
+  "prior_window": {"date": "2026-09-16", "window_start_local": "2026-09-15T12:40:00", "window_end_local": "2026-09-16T09:40:00"},
+  "site": {"id": "MSDS-GMC800-CASEY", "lat": 39.2974, "lon": -87.9818, "timezone": "America/Chicago", "instrument": "GQ Electronics GMC-800", "location_mode": "fixed"},
+  "source": {"provider": "GQ Electronics LLC", "software": "GMC Data Viewer 2.75", "export_csv": "20260925_07_47_18.csv", "retrieved_at_utc": "2026-09-25T12:47:18Z"},
   "observation_count": 12832,
   "hourly_count": 214,
   "daily_count": 10,
-  "stats": {
-    "cpm": {"mean": 15.1201, "min": 3.0, "max": 33.0, "median": 15.0, "n": 12832},
-    "usv_h": {"mean": 0.0982, "min": 0.02, "max": 0.214, "median": 0.097, "n": 12832}
-  },
+  "stats": {"cpm": {"mean": 15.1201, "min": 3.0, "max": 33.0, "median": 15.0, "n": 12832}, "usv_h": {"mean": 0.0982, "min": 0.02, "max": 0.214, "median": 0.097, "n": 12832}},
+  "files": {"hourly": "layers/ground/casey/gmc-800/hourly_2026-09-16_2026-09-25.csv", "minutes_dir": "layers/ground/casey/gmc-800/minutes/"},
   "daily": [
-    {"date": "2026-09-16", "timezone": "America/Chicago", "cpm": {"mean": 15.3147, "min": 5.0, "max": 32.0, "n": 839}, "usv_h": {"mean": 0.0995, "min": 0.032, "max": 0.208, "n": 839}, "sample_count": 839, "hour_count": 14},
-    {"date": "2026-09-17", "timezone": "America/Chicago", "cpm": {"mean": 15.2243, "min": 5.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.0989, "min": 0.032, "max": 0.189, "n": 1440}, "sample_count": 1440, "hour_count": 24},
-    {"date": "2026-09-18", "timezone": "America/Chicago", "cpm": {"mean": 15.3049, "min": 4.0, "max": 33.0, "n": 1440}, "usv_h": {"mean": 0.0994, "min": 0.026, "max": 0.214, "n": 1440}, "sample_count": 1440, "hour_count": 24},
-    {"date": "2026-09-19", "timezone": "America/Chicago", "cpm": {"mean": 15.0868, "min": 5.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.098, "min": 0.032, "max": 0.189, "n": 1440}, "sample_count": 1440, "hour_count": 24},
-    {"date": "2026-09-20", "timezone": "America/Chicago", "cpm": {"mean": 15.4618, "min": 4.0, "max": 31.0, "n": 1440}, "usv_h": {"mean": 0.1004, "min": 0.026, "max": 0.201, "n": 1440}, "sample_count": 1440, "hour_count": 24},
-    {"date": "2026-09-21", "timezone": "America/Chicago", "cpm": {"mean": 15.607, "min": 5.0, "max": 31.0, "n": 1440}, "usv_h": {"mean": 0.1014, "min": 0.032, "max": 0.201, "n": 1440}, "sample_count": 1440, "hour_count": 24},
-    {"date": "2026-09-22", "timezone": "America/Chicago", "cpm": {"mean": 14.5958, "min": 4.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.0948, "min": 0.026, "max": 0.189, "n": 1440}, "sample_count": 1440, "hour_count": 24},
-    {"date": "2026-09-23", "timezone": "America/Chicago", "cpm": {"mean": 14.8882, "min": 4.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.0967, "min": 0.026, "max": 0.189, "n": 1440}, "sample_count": 1440, "hour_count": 24},
-    {"date": "2026-09-24", "timezone": "America/Chicago", "cpm": {"mean": 14.7229, "min": 3.0, "max": 28.0, "n": 1440}, "usv_h": {"mean": 0.0956, "min": 0.02, "max": 0.182, "n": 1440}, "sample_count": 1440, "hour_count": 24},
-    {"date": "2026-09-25", "timezone": "America/Chicago", "cpm": {"mean": 14.9852, "min": 3.0, "max": 29.0, "n": 473}, "usv_h": {"mean": 0.0973, "min": 0.02, "max": 0.189, "n": 473}, "sample_count": 473, "hour_count": 8}
+    {"date": "2026-09-16", "cpm": {"mean": 15.3147, "min": 5.0, "max": 32.0, "n": 839}, "usv_h": {"mean": 0.0995, "min": 0.032, "max": 0.208, "n": 839}},
+    {"date": "2026-09-17", "cpm": {"mean": 15.2243, "min": 5.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.0989, "min": 0.032, "max": 0.189, "n": 1440}},
+    {"date": "2026-09-18", "cpm": {"mean": 15.3049, "min": 4.0, "max": 33.0, "n": 1440}, "usv_h": {"mean": 0.0994, "min": 0.026, "max": 0.214, "n": 1440}},
+    {"date": "2026-09-19", "cpm": {"mean": 15.0868, "min": 5.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.098, "min": 0.032, "max": 0.189, "n": 1440}},
+    {"date": "2026-09-20", "cpm": {"mean": 15.4618, "min": 4.0, "max": 31.0, "n": 1440}, "usv_h": {"mean": 0.1004, "min": 0.026, "max": 0.201, "n": 1440}},
+    {"date": "2026-09-21", "cpm": {"mean": 15.6069, "min": 5.0, "max": 31.0, "n": 1440}, "usv_h": {"mean": 0.1014, "min": 0.032, "max": 0.201, "n": 1440}},
+    {"date": "2026-09-22", "cpm": {"mean": 14.5958, "min": 4.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.0948, "min": 0.026, "max": 0.189, "n": 1440}},
+    {"date": "2026-09-23", "cpm": {"mean": 14.8882, "min": 4.0, "max": 29.0, "n": 1440}, "usv_h": {"mean": 0.0967, "min": 0.026, "max": 0.189, "n": 1440}},
+    {"date": "2026-09-24", "cpm": {"mean": 14.7229, "min": 3.0, "max": 28.0, "n": 1440}, "usv_h": {"mean": 0.0956, "min": 0.02, "max": 0.182, "n": 1440}},
+    {"date": "2026-09-25", "cpm": {"mean": 14.9852, "min": 3.0, "max": 29.0, "n": 473}, "usv_h": {"mean": 0.0973, "min": 0.02, "max": 0.189, "n": 473}}
   ],
-  "meta": {"generator": "grok/gmc800-ground-ingest", "uogw": true, "igdr": true}
+  "meta": {"generator": "grok/gmc800-ground-ingest", "comprehensive": true}
 }
