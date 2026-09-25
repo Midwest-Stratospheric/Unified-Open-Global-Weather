@@ -34,10 +34,11 @@ Do not relocate samples. If the unit is moved, open a new station id.
 | File | Role |
 |------|------|
 | `station.json` | Immutable site metadata (lat/lon, instrument, variables) |
-| `latest.json` | Current ingest: 21-hour window, hourly CPM / µSv/h rollup, min/mean/max/median |
-| `2026-09-16.json` | Dated pointer for the first ingest |
+| `latest.json` | Current ingest: daily CPM / µSv/h rollup plus last 24 hours hourly |
+| `2026-09-16.json` | Dated pointer for the first ingest (2026-09-15 12:40 – 2026-09-16 09:40) |
+| `2026-09-25.json` | Dated pointer for the second ingest (2026-09-16 10:01 – 2026-09-25 07:52) |
 
-Native logger interval from Data Viewer is **1 minute** (`Every Second` save type aggregated to CPM / µSv/h per minute). Hourly products average those minutes.
+Native logger interval from Data Viewer is **1 minute** (`Every Second` save type aggregated to CPM / µSv/h per minute). Daily products average those minutes.
 
 ## Radiation quantities
 
@@ -50,8 +51,10 @@ The GMC-800 registers beta, gamma, and X-ray. Values here are **as exported**; t
 
 First ingest (2026-09-15 12:40 – 2026-09-16 09:40 America/Chicago): 1,233 minute samples, mean **15.12 CPM** / **0.098 µSv/h**.
 
+Second ingest (2026-09-16 10:01 – 2026-09-25 07:52 America/Chicago): 12,832 minute samples, 214 consecutive hours, mean **15.12 CPM** / **0.098 µSv/h** (min 3 / max 33 CPM). Continues immediately after the first ingest with no multi-hour gaps.
+
 ## Source
 
-GQ Geiger Counter Data Viewer 2.75 history export (`20260916_09_40_54.csv` / `.bin`). Curated by Aerostratospheric. License for the curated package: CC BY 4.0 with instrument attribution to GQ Electronics.
+GQ Geiger Counter Data Viewer 2.75 history export (`20260916_09_40_54.csv` first window; `20260925_07_47_18.csv` second window). Curated by Aerostratospheric. License for the curated package: CC BY 4.0 with instrument attribution to GQ Electronics.
 
-Sibling copy: [IGDR station](https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository/blob/main/stations/msds-gmc800-casey.json) and [IGDR snapshot](https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository/blob/main/snapshots/2026-09-16/gmc-800-casey.json).
+Sibling copy: [IGDR station](https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository/blob/main/stations/msds-gmc800-casey.json) and [IGDR snapshot](https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository/blob/main/snapshots/2026-09-25/gmc-800-casey.json).
