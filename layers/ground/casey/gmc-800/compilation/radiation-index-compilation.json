@@ -1,0 +1,191 @@
+{
+  "title": "Aerostratospheric radiation index compilation",
+  "index": "Aerostratospheric radiation index",
+  "site": {
+    "id": "MSDS-GMC800-CASEY",
+    "lat": 39.2974,
+    "lon": -87.9818,
+    "timezone": "America/Chicago",
+    "instrument": "GQ Electronics GMC-800",
+    "location_mode": "fixed"
+  },
+  "window": {
+    "date": "2026-09-25",
+    "start_local": "2026-09-16T10:01:00",
+    "end_local": "2026-09-25T07:52:00",
+    "hours": 214,
+    "observation_count": 12832
+  },
+  "stats": {
+    "cpm": {
+      "mean": 15.1201,
+      "min": 3.0,
+      "max": 33.0,
+      "median": 15.0,
+      "n": 12832
+    },
+    "usv_h": {
+      "mean": 0.0982,
+      "min": 0.02,
+      "max": 0.214,
+      "median": 0.097,
+      "n": 12832
+    }
+  },
+  "daily": [
+    {
+      "date": "2026-09-16",
+      "cpm": {
+        "mean": 15.3147,
+        "min": 5.0,
+        "max": 32.0,
+        "n": 839
+      },
+      "usv_h": {
+        "mean": 0.0995,
+        "min": 0.032,
+        "max": 0.208,
+        "n": 839
+      }
+    },
+    {
+      "date": "2026-09-17",
+      "cpm": {
+        "mean": 15.2243,
+        "min": 5.0,
+        "max": 29.0,
+        "n": 1440
+      },
+      "usv_h": {
+        "mean": 0.0989,
+        "min": 0.032,
+        "max": 0.189,
+        "n": 1440
+      }
+    },
+    {
+      "date": "2026-09-18",
+      "cpm": {
+        "mean": 15.3049,
+        "min": 4.0,
+        "max": 33.0,
+        "n": 1440
+      },
+      "usv_h": {
+        "mean": 0.0994,
+        "min": 0.026,
+        "max": 0.214,
+        "n": 1440
+      }
+    },
+    {
+      "date": "2026-09-19",
+      "cpm": {
+        "mean": 15.0868,
+        "min": 5.0,
+        "max": 29.0,
+        "n": 1440
+      },
+      "usv_h": {
+        "mean": 0.098,
+        "min": 0.032,
+        "max": 0.189,
+        "n": 1440
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "cpm": {
+        "mean": 15.4618,
+        "min": 4.0,
+        "max": 31.0,
+        "n": 1440
+      },
+      "usv_h": {
+        "mean": 0.1004,
+        "min": 0.026,
+        "max": 0.201,
+        "n": 1440
+      }
+    },
+    {
+      "date": "2026-09-21",
+      "cpm": {
+        "mean": 15.6069,
+        "min": 5.0,
+        "max": 31.0,
+        "n": 1440
+      },
+      "usv_h": {
+        "mean": 0.1014,
+        "min": 0.032,
+        "max": 0.201,
+        "n": 1440
+      }
+    },
+    {
+      "date": "2026-09-22",
+      "cpm": {
+        "mean": 14.5958,
+        "min": 4.0,
+        "max": 29.0,
+        "n": 1440
+      },
+      "usv_h": {
+        "mean": 0.0948,
+        "min": 0.026,
+        "max": 0.189,
+        "n": 1440
+      }
+    },
+    {
+      "date": "2026-09-23",
+      "cpm": {
+        "mean": 14.8882,
+        "min": 4.0,
+        "max": 29.0,
+        "n": 1440
+      },
+      "usv_h": {
+        "mean": 0.0967,
+        "min": 0.026,
+        "max": 0.189,
+        "n": 1440
+      }
+    },
+    {
+      "date": "2026-09-24",
+      "cpm": {
+        "mean": 14.7229,
+        "min": 3.0,
+        "max": 28.0,
+        "n": 1440
+      },
+      "usv_h": {
+        "mean": 0.0956,
+        "min": 0.02,
+        "max": 0.182,
+        "n": 1440
+      }
+    },
+    {
+      "date": "2026-09-25",
+      "cpm": {
+        "mean": 14.9852,
+        "min": 3.0,
+        "max": 29.0,
+        "n": 473
+      },
+      "usv_h": {
+        "mean": 0.0973,
+        "min": 0.02,
+        "max": 0.189,
+        "n": 473
+      }
+    }
+  ],
+  "source_latest": "layers/ground/casey/gmc-800/latest.json",
+  "download_csv": "layers/ground/casey/gmc-800/compilation/radiation-index-compilation.csv",
+  "citation": "Aerostratospheric radiation index, Casey IL (MSDS-GMC800-CASEY). Unified-Open-Global-Weather.",
+  "notes": "CPM is counts per minute. usv_h is estimated dose rate in microsieverts per hour. Station bands on xDataHub: background up to 15 CPM, elevated over 15 CPM."
+}
