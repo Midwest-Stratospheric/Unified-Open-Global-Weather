@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-26",
-  "generated_at_utc": "2026-09-26T13:34:23Z",
+  "generated_at_utc": "2026-09-26T13:48:20Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 2,
+    "anomaly_events": 1,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -177,27 +177,18 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 2,
+      "total": 1,
       "alert": 0,
-      "watch": 2,
+      "watch": 1,
       "info": 0
     },
     "top": [
-      {
-        "kind": "low_pressure",
-        "severity": "watch",
-        "subject": "Reykjavik, IS",
-        "metric": "pressure_msl_hpa",
-        "value": 974.4,
-        "threshold": 980,
-        "detail": "Very low MSLP <= 980 hPa (example: 972 hPa deep low)"
-      },
       {
         "kind": "surface_heat",
         "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 36.4,
+        "value": 35.9,
         "threshold": 35,
         "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
       }
@@ -226,8 +217,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "2",
-      "detail": "alert 0 \u00b7 watch 2 \u00b7 info 0"
+      "value": "1",
+      "detail": "alert 0 \u00b7 watch 1 \u00b7 info 0"
     },
     {
       "id": "heat_index",
