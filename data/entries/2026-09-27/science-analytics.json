@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-09-27",
-  "generated_at_utc": "2026-09-27T14:30:55Z",
+  "generated_at_utc": "2026-09-27T14:47:00Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 7,
     "research_climate_cities": 10,
-    "anomaly_events": 1,
+    "anomaly_events": 3,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -184,8 +184,8 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 1,
-      "alert": 0,
+      "total": 3,
+      "alert": 2,
       "watch": 1,
       "info": 0
     },
@@ -195,9 +195,59 @@
         "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 35.9,
+        "value": 36.6,
         "threshold": 35,
         "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Berlin, DE",
+        "metric": "z_mad",
+        "value": 5.8457,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 20.0,
+            "z_pop": 2.1776,
+            "z_sample": 2.0161,
+            "z_mad": 5.8457,
+            "s_range": 0.6631,
+            "percentile": 87.5,
+            "mean": 15.5571,
+            "median": 14.8,
+            "pstdev": 2.0402,
+            "sample_stdev": 2.2037,
+            "mad": 0.6
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Singapore, SG",
+        "metric": "z_mad",
+        "value": -19.5605,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 26.7,
+            "z_pop": -2.1935,
+            "z_sample": -2.0308,
+            "z_mad": -19.5605,
+            "s_range": -0.7059,
+            "percentile": 12.5,
+            "mean": 29.1,
+            "median": 29.6,
+            "pstdev": 1.0941,
+            "sample_stdev": 1.1818,
+            "mad": 0.1
+          }
+        }
       }
     ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
@@ -224,8 +274,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "1",
-      "detail": "alert 0 \u00b7 watch 1 \u00b7 info 0"
+      "value": "3",
+      "detail": "alert 2 \u00b7 watch 1 \u00b7 info 0"
     },
     {
       "id": "heat_index",
