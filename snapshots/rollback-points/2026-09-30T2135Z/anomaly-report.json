@@ -1,0 +1,690 @@
+{
+  "schema": "uogw.anomaly_report.v2",
+  "date_utc": "2026-09-30",
+  "generated_at_utc": "2026-09-30T16:01:08Z",
+  "curator": "Midwest Stratospheric Data Systems",
+  "disclaimer": "Research screening only \u2014 not an official weather warning service.",
+  "methods": {
+    "absolute_thresholds": {
+      "temperature_c": {
+        "alert_high": 40,
+        "watch_high": 35,
+        "watch_low": -20,
+        "alert_low": -30
+      },
+      "pressure_msl_hpa": {
+        "watch_low": 980,
+        "info_high": 1040
+      },
+      "wind_speed_ms": {
+        "watch": 15,
+        "alert": 25
+      },
+      "wave_height_m": {
+        "watch": 4,
+        "alert": 6
+      },
+      "docs": "docs/ANOMALY_METHODS.md",
+      "config": "analytics/anomaly-thresholds.json"
+    },
+    "zscore_normalization": {
+      "z_pop": "(x-mean)/pstdev \u2014 primary trigger at |z|>=2.5 watch, |z|>=3 alert",
+      "z_sample": "(x-mean)/sample_stdev \u2014 reported for comparison",
+      "z_mad": "0.6745*(x-median)/MAD \u2014 robust; watch 3.5 / alert 5.0",
+      "s_range": "(x-mean)/(max-min+eps) \u2014 diagnostic",
+      "percentile": "empirical rank percent in baseline+today"
+    },
+    "examples_doc": "docs/ANOMALY_METHODS.md"
+  },
+  "counts": {
+    "total": 3,
+    "alert": 1,
+    "watch": 2,
+    "info": 0
+  },
+  "anomalies": [
+    {
+      "kind": "surface_heat",
+      "severity": "watch",
+      "subject": "Dubai, AE",
+      "metric": "temperature_c",
+      "value": 35.6,
+      "threshold": 35,
+      "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+    },
+    {
+      "kind": "temp_zscore_mad",
+      "severity": "alert",
+      "subject": "Johannesburg, ZA",
+      "metric": "z_mad",
+      "value": -5.6851,
+      "threshold": 5.0,
+      "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+      "extra": {
+        "methods": {
+          "n": 7,
+          "x": 11.4,
+          "z_pop": -1.804,
+          "z_sample": -1.6702,
+          "z_mad": -5.6851,
+          "s_range": -0.66,
+          "percentile": 12.5,
+          "mean": 20.7714,
+          "median": 23.2,
+          "pstdev": 5.1947,
+          "sample_stdev": 5.6109,
+          "mad": 1.4
+        }
+      }
+    },
+    {
+      "kind": "temp_zscore_mad",
+      "severity": "watch",
+      "subject": "Mumbai, IN",
+      "metric": "z_mad",
+      "value": 4.2718,
+      "threshold": 3.5,
+      "detail": "Robust MAD z-score |z|>=3.5",
+      "extra": {
+        "methods": {
+          "n": 7,
+          "x": 32.0,
+          "z_pop": 2.0558,
+          "z_sample": 1.9033,
+          "z_mad": 4.2718,
+          "s_range": 0.6957,
+          "percentile": 87.5,
+          "mean": 30.4,
+          "median": 30.1,
+          "pstdev": 0.7783,
+          "sample_stdev": 0.8406,
+          "mad": 0.3
+        }
+      }
+    }
+  ],
+  "zscore_by_city": [
+    {
+      "id": "casey_il",
+      "name": "Casey, IL, US",
+      "methods": {
+        "n": 7,
+        "x": 17.1,
+        "z_pop": 1.3413,
+        "z_sample": 1.2418,
+        "z_mad": 0.7675,
+        "s_range": 0.4643,
+        "percentile": 87.5,
+        "mean": 12.8286,
+        "median": 13.8,
+        "pstdev": 3.1847,
+        "sample_stdev": 3.4398,
+        "mad": 2.9
+      }
+    },
+    {
+      "id": "chicago_il",
+      "name": "Chicago, IL, US",
+      "methods": {
+        "n": 7,
+        "x": 16.0,
+        "z_pop": 1.3927,
+        "z_sample": 1.2894,
+        "z_mad": 1.1804,
+        "s_range": 0.4562,
+        "percentile": 87.5,
+        "mean": 13.1714,
+        "median": 12.5,
+        "pstdev": 2.031,
+        "sample_stdev": 2.1937,
+        "mad": 2.0
+      }
+    },
+    {
+      "id": "houston_tx",
+      "name": "Houston, TX, US",
+      "methods": {
+        "n": 7,
+        "x": 25.0,
+        "z_pop": 0.9603,
+        "z_sample": 0.889,
+        "z_mad": 0.742,
+        "s_range": 0.329,
+        "percentile": 75.0,
+        "mean": 23.9143,
+        "median": 23.9,
+        "pstdev": 1.1306,
+        "sample_stdev": 1.2212,
+        "mad": 1.0
+      }
+    },
+    {
+      "id": "toronto_ca",
+      "name": "Toronto, CA",
+      "methods": {
+        "n": 7,
+        "x": 14.8,
+        "z_pop": 0.9042,
+        "z_sample": 0.8372,
+        "z_mad": 0.6745,
+        "s_range": 0.3074,
+        "percentile": 62.5,
+        "mean": 12.3714,
+        "median": 11.8,
+        "pstdev": 2.6858,
+        "sample_stdev": 2.901,
+        "mad": 3.0
+      }
+    },
+    {
+      "id": "mexico_city_mx",
+      "name": "Mexico City, MX",
+      "methods": {
+        "n": 7,
+        "x": 14.6,
+        "z_pop": -0.0544,
+        "z_sample": -0.0503,
+        "z_mad": -0.6745,
+        "s_range": -0.0168,
+        "percentile": 37.5,
+        "mean": 14.6286,
+        "median": 14.8,
+        "pstdev": 0.5257,
+        "sample_stdev": 0.5678,
+        "mad": 0.2
+      }
+    },
+    {
+      "id": "sao_paulo_br",
+      "name": "Sao Paulo, BR",
+      "methods": {
+        "n": 7,
+        "x": 23.5,
+        "z_pop": 1.5182,
+        "z_sample": 1.4056,
+        "z_mad": 1.1871,
+        "s_range": 0.4936,
+        "percentile": 87.5,
+        "mean": 18.5143,
+        "median": 19.1,
+        "pstdev": 3.2839,
+        "sample_stdev": 3.547,
+        "mad": 2.5
+      }
+    },
+    {
+      "id": "buenos_aires_ar",
+      "name": "Buenos Aires, AR",
+      "methods": {
+        "n": 7,
+        "x": 9.6,
+        "z_pop": -1.9946,
+        "z_sample": -1.8467,
+        "z_mad": -2.9678,
+        "s_range": -0.6236,
+        "percentile": 12.5,
+        "mean": 13.5286,
+        "median": 14.0,
+        "pstdev": 1.9696,
+        "sample_stdev": 2.1274,
+        "mad": 1.0
+      }
+    },
+    {
+      "id": "lima_pe",
+      "name": "Lima, PE",
+      "methods": {
+        "n": 7,
+        "x": 20.4,
+        "z_pop": 1.5498,
+        "z_sample": 1.4349,
+        "z_mad": 3.3725,
+        "s_range": 0.5143,
+        "percentile": 87.5,
+        "mean": 19.6286,
+        "median": 19.4,
+        "pstdev": 0.4978,
+        "sample_stdev": 0.5376,
+        "mad": 0.2
+      }
+    },
+    {
+      "id": "london_uk",
+      "name": "London, UK",
+      "methods": {
+        "n": 7,
+        "x": 20.9,
+        "z_pop": 1.2591,
+        "z_sample": 1.1657,
+        "z_mad": 0.6745,
+        "s_range": 0.4812,
+        "percentile": 75.0,
+        "mean": 18.1571,
+        "median": 18.2,
+        "pstdev": 2.1784,
+        "sample_stdev": 2.3529,
+        "mad": 2.7
+      }
+    },
+    {
+      "id": "paris_fr",
+      "name": "Paris, FR",
+      "methods": {
+        "n": 7,
+        "x": 21.3,
+        "z_pop": 0.8237,
+        "z_sample": 0.7626,
+        "z_mad": 0.9636,
+        "s_range": 0.2577,
+        "percentile": 75.0,
+        "mean": 19.8571,
+        "median": 19.3,
+        "pstdev": 1.7516,
+        "sample_stdev": 1.892,
+        "mad": 1.4
+      }
+    },
+    {
+      "id": "berlin_de",
+      "name": "Berlin, DE",
+      "methods": {
+        "n": 7,
+        "x": 21.8,
+        "z_pop": 0.8582,
+        "z_sample": 0.7946,
+        "z_mad": 0.467,
+        "s_range": 0.3518,
+        "percentile": 62.5,
+        "mean": 18.5286,
+        "median": 20.0,
+        "pstdev": 3.8119,
+        "sample_stdev": 4.1173,
+        "mad": 2.6
+      }
+    },
+    {
+      "id": "rome_it",
+      "name": "Rome, IT",
+      "methods": {
+        "n": 7,
+        "x": 26.0,
+        "z_pop": 1.0124,
+        "z_sample": 0.9373,
+        "z_mad": 0.6263,
+        "s_range": 0.406,
+        "percentile": 68.75,
+        "mean": 24.4571,
+        "median": 24.7,
+        "pstdev": 1.524,
+        "sample_stdev": 1.6461,
+        "mad": 1.4
+      }
+    },
+    {
+      "id": "oslo_no",
+      "name": "Oslo, NO",
+      "methods": {
+        "n": 7,
+        "x": 14.0,
+        "z_pop": -1.7665,
+        "z_sample": -1.6354,
+        "z_mad": -1.8549,
+        "s_range": -0.5804,
+        "percentile": 12.5,
+        "mean": 14.9286,
+        "median": 15.1,
+        "pstdev": 0.5257,
+        "sample_stdev": 0.5678,
+        "mad": 0.4
+      }
+    },
+    {
+      "id": "stockholm_se",
+      "name": "Stockholm, SE",
+      "methods": {
+        "n": 7,
+        "x": 14.5,
+        "z_pop": -0.2118,
+        "z_sample": -0.196,
+        "z_mad": 0.2891,
+        "s_range": -0.0821,
+        "percentile": 62.5,
+        "mean": 14.8286,
+        "median": 14.2,
+        "pstdev": 1.5517,
+        "sample_stdev": 1.676,
+        "mad": 0.7
+      }
+    },
+    {
+      "id": "reykjavik_is",
+      "name": "Reykjavik, IS",
+      "methods": {
+        "n": 7,
+        "x": 12.1,
+        "z_pop": 1.9872,
+        "z_sample": 1.8398,
+        "z_mad": 2.0235,
+        "s_range": 0.6054,
+        "percentile": 87.5,
+        "mean": 8.2857,
+        "median": 8.2,
+        "pstdev": 1.9194,
+        "sample_stdev": 2.0732,
+        "mad": 1.3
+      }
+    },
+    {
+      "id": "moscow_ru",
+      "name": "Moscow, RU",
+      "methods": {
+        "n": 7,
+        "x": 15.7,
+        "z_pop": -0.3506,
+        "z_sample": -0.3246,
+        "z_mad": -0.184,
+        "s_range": -0.1048,
+        "percentile": 37.5,
+        "mean": 16.4857,
+        "median": 16.0,
+        "pstdev": 2.2408,
+        "sample_stdev": 2.4204,
+        "mad": 1.1
+      }
+    },
+    {
+      "id": "istanbul_tr",
+      "name": "Istanbul, TR",
+      "methods": {
+        "n": 7,
+        "x": 20.7,
+        "z_pop": 0.0868,
+        "z_sample": 0.0804,
+        "z_mad": 0.6745,
+        "s_range": 0.0274,
+        "percentile": 62.5,
+        "mean": 20.5714,
+        "median": 20.1,
+        "pstdev": 1.481,
+        "sample_stdev": 1.5997,
+        "mad": 0.6
+      }
+    },
+    {
+      "id": "cairo_eg",
+      "name": "Cairo, EG",
+      "methods": {
+        "n": 7,
+        "x": 29.8,
+        "z_pop": -0.4415,
+        "z_sample": -0.4087,
+        "z_mad": -0.6745,
+        "s_range": -0.1265,
+        "percentile": 25.0,
+        "mean": 30.5714,
+        "median": 30.4,
+        "pstdev": 1.7474,
+        "sample_stdev": 1.8874,
+        "mad": 0.6
+      }
+    },
+    {
+      "id": "nairobi_ke",
+      "name": "Nairobi, KE",
+      "methods": {
+        "n": 7,
+        "x": 27.7,
+        "z_pop": 0.56,
+        "z_sample": 0.5185,
+        "z_mad": 0.0,
+        "s_range": 0.2,
+        "percentile": 50.0,
+        "mean": 26.8,
+        "median": 27.7,
+        "pstdev": 1.6071,
+        "sample_stdev": 1.7359,
+        "mad": 0.5
+      }
+    },
+    {
+      "id": "johannesburg_za",
+      "name": "Johannesburg, ZA",
+      "methods": {
+        "n": 7,
+        "x": 11.4,
+        "z_pop": -1.804,
+        "z_sample": -1.6702,
+        "z_mad": -5.6851,
+        "s_range": -0.66,
+        "percentile": 12.5,
+        "mean": 20.7714,
+        "median": 23.2,
+        "pstdev": 5.1947,
+        "sample_stdev": 5.6109,
+        "mad": 1.4
+      }
+    },
+    {
+      "id": "lagos_ng",
+      "name": "Lagos, NG",
+      "methods": {
+        "n": 7,
+        "x": 28.5,
+        "z_pop": 1.572,
+        "z_sample": 1.4554,
+        "z_mad": 1.6862,
+        "s_range": 0.4847,
+        "percentile": 87.5,
+        "mean": 27.1429,
+        "median": 27.0,
+        "pstdev": 0.8633,
+        "sample_stdev": 0.9325,
+        "mad": 0.6
+      }
+    },
+    {
+      "id": "dubai_ae",
+      "name": "Dubai, AE",
+      "methods": {
+        "n": 7,
+        "x": 35.6,
+        "z_pop": -1.6829,
+        "z_sample": -1.558,
+        "z_mad": -1.5738,
+        "s_range": -0.5165,
+        "percentile": 12.5,
+        "mean": 36.2714,
+        "median": 36.3,
+        "pstdev": 0.399,
+        "sample_stdev": 0.4309,
+        "mad": 0.3
+      }
+    },
+    {
+      "id": "mumbai_in",
+      "name": "Mumbai, IN",
+      "methods": {
+        "n": 7,
+        "x": 32.0,
+        "z_pop": 2.0558,
+        "z_sample": 1.9033,
+        "z_mad": 4.2718,
+        "s_range": 0.6957,
+        "percentile": 87.5,
+        "mean": 30.4,
+        "median": 30.1,
+        "pstdev": 0.7783,
+        "sample_stdev": 0.8406,
+        "mad": 0.3
+      }
+    },
+    {
+      "id": "beijing_cn",
+      "name": "Beijing, CN",
+      "methods": {
+        "n": 7,
+        "x": 18.5,
+        "z_pop": -1.8715,
+        "z_sample": -1.7327,
+        "z_mad": -2.2034,
+        "s_range": -0.6049,
+        "percentile": 12.5,
+        "mean": 22.3714,
+        "median": 23.4,
+        "pstdev": 2.0686,
+        "sample_stdev": 2.2344,
+        "mad": 1.5
+      }
+    },
+    {
+      "id": "seoul_kr",
+      "name": "Seoul, KR",
+      "methods": {
+        "n": 7,
+        "x": 19.3,
+        "z_pop": -1.2289,
+        "z_sample": -1.1378,
+        "z_mad": -0.7588,
+        "s_range": -0.4195,
+        "percentile": 25.0,
+        "mean": 21.2714,
+        "median": 21.1,
+        "pstdev": 1.6042,
+        "sample_stdev": 1.7327,
+        "mad": 1.6
+      }
+    },
+    {
+      "id": "singapore_sg",
+      "name": "Singapore, SG",
+      "methods": {
+        "n": 7,
+        "x": 27.3,
+        "z_pop": -0.7952,
+        "z_sample": -0.7362,
+        "z_mad": -0.6745,
+        "s_range": -0.3193,
+        "percentile": 37.5,
+        "mean": 28.3857,
+        "median": 28.6,
+        "pstdev": 1.3653,
+        "sample_stdev": 1.4747,
+        "mad": 1.3
+      }
+    },
+    {
+      "id": "bangkok_th",
+      "name": "Bangkok, TH",
+      "methods": {
+        "n": 7,
+        "x": 29.4,
+        "z_pop": 1.7953,
+        "z_sample": 1.6621,
+        "z_mad": 1.4103,
+        "s_range": 0.6241,
+        "percentile": 87.5,
+        "mean": 27.0286,
+        "median": 27.1,
+        "pstdev": 1.3209,
+        "sample_stdev": 1.4268,
+        "mad": 1.1
+      }
+    },
+    {
+      "id": "jakarta_id",
+      "name": "Jakarta, ID",
+      "methods": {
+        "n": 7,
+        "x": 30.1,
+        "z_pop": -0.218,
+        "z_sample": -0.2018,
+        "z_mad": 0.0,
+        "s_range": -0.0664,
+        "percentile": 50.0,
+        "mean": 30.3857,
+        "median": 30.1,
+        "pstdev": 1.3109,
+        "sample_stdev": 1.4159,
+        "mad": 0.3
+      }
+    },
+    {
+      "id": "sydney_au",
+      "name": "Sydney, AU",
+      "methods": {
+        "n": 7,
+        "x": 18.4,
+        "z_pop": 0.6404,
+        "z_sample": 0.5929,
+        "z_mad": 0.4106,
+        "s_range": 0.2399,
+        "percentile": 62.5,
+        "mean": 17.1286,
+        "median": 17.0,
+        "pstdev": 1.9855,
+        "sample_stdev": 2.1445,
+        "mad": 2.3
+      }
+    },
+    {
+      "id": "auckland_nz",
+      "name": "Auckland, NZ",
+      "methods": {
+        "n": 7,
+        "x": 11.0,
+        "z_pop": -0.7258,
+        "z_sample": -0.6719,
+        "z_mad": -1.5176,
+        "s_range": -0.2082,
+        "percentile": 25.0,
+        "mean": 11.7286,
+        "median": 11.9,
+        "pstdev": 1.0039,
+        "sample_stdev": 1.0843,
+        "mad": 0.4
+      }
+    },
+    {
+      "id": "honolulu_us",
+      "name": "Honolulu, HI, US",
+      "methods": {
+        "n": 7,
+        "x": 26.4,
+        "z_pop": 1.9102,
+        "z_sample": 1.7685,
+        "z_mad": 3.1477,
+        "s_range": 0.5519,
+        "percentile": 87.5,
+        "mean": 25.1857,
+        "median": 25.0,
+        "pstdev": 0.6357,
+        "sample_stdev": 0.6866,
+        "mad": 0.3
+      }
+    },
+    {
+      "id": "anchorage_us",
+      "name": "Anchorage, AK, US",
+      "methods": {
+        "n": 7,
+        "x": 3.0,
+        "z_pop": -1.6581,
+        "z_sample": -1.5351,
+        "z_mad": -1.6084,
+        "s_range": -0.6,
+        "percentile": 12.5,
+        "mean": 5.7,
+        "median": 6.1,
+        "pstdev": 1.6283,
+        "sample_stdev": 1.7588,
+        "mad": 1.3
+      }
+    }
+  ],
+  "inputs": {
+    "global_cities": true,
+    "ndbc": true,
+    "casey": true,
+    "baseline_files_used": 34
+  }
+}
