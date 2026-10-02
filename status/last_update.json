@@ -1,42 +1,42 @@
 {
-  "generated_at_utc": "2026-10-02T14:30:40Z",
+  "generated_at_utc": "2026-10-02T18:01:54Z",
   "catalog_datasets": 26,
-  "layer_json_files": 851,
+  "layer_json_files": 855,
   "sources": {
     "anomaly": {
       "source": "uogw-anomaly-detection",
       "ok": true,
       "schema": "uogw.anomaly_report.v2",
-      "date": "2026-10-01",
+      "date": "2026-10-02",
       "total": 3,
       "alerts": 0,
-      "data_entry": "data/entries/2026-10-01/anomaly-report.json",
-      "generated_at_utc": "2026-10-01T16:39:23Z"
+      "data_entry": "data/entries/2026-10-02/anomaly-report.json",
+      "generated_at_utc": "2026-10-02T15:55:09Z"
     },
     "baseline": {
       "source": "uogw-rolling-baseline",
       "ok": true,
       "city_count": 34,
-      "data_entry": "data/entries/2026-10-01/rolling-baseline.json",
-      "generated_at_utc": "2026-10-01T16:24:53Z"
+      "data_entry": "data/entries/2026-10-02/rolling-baseline.json",
+      "generated_at_utc": "2026-10-02T15:46:08Z"
     },
     "charts": {
       "source": "uogw-charts",
       "ok": true,
       "date": "2026-10-02",
-      "generated_at_utc": "2026-10-02T14:10:18Z"
+      "generated_at_utc": "2026-10-02T16:26:10Z"
     },
     "component-snapshots": {
       "ok": true,
       "date": "2026-10-02",
-      "generated_at_utc": "2026-10-02T14:10:13Z"
+      "generated_at_utc": "2026-10-02T17:54:55Z"
     },
     "fair": {
       "source": "uogw-fair-metadata",
       "ok": true,
-      "date": "2026-10-01",
-      "data_entry": "data/entries/2026-10-01/fair-metadata.json",
-      "generated_at_utc": "2026-10-01T16:41:34Z"
+      "date": "2026-10-02",
+      "data_entry": "data/entries/2026-10-02/fair-metadata.json",
+      "generated_at_utc": "2026-10-02T15:58:07Z"
     },
     "global-samples": {
       "source": "open-meteo-samples",
@@ -81,17 +81,17 @@
     },
     "heal": {
       "schema": "uogw.heal_actions.v1",
-      "generated_at_utc": "2026-10-01T22:03:16Z",
+      "generated_at_utc": "2026-10-02T17:21:10Z",
       "actions": [
         {
-          "rollback_point": "2026-10-01T2203Z"
+          "rollback_point": "2026-10-02T1721Z"
         }
       ]
     },
     "health": {
       "schema": "uogw.health_report.v1",
-      "date_utc": "2026-10-01",
-      "generated_at_utc": "2026-10-01T22:03:16Z",
+      "date_utc": "2026-10-02",
+      "generated_at_utc": "2026-10-02T17:21:10Z",
       "ok": true,
       "critical_fail": false,
       "checks": [
@@ -186,7 +186,7 @@
       ],
       "heal_actions": [
         {
-          "rollback_point": "2026-10-01T2203Z"
+          "rollback_point": "2026-10-02T1721Z"
         }
       ],
       "redispatch_workflows": [],
@@ -204,7 +204,7 @@
     "hub-endpoints": {
       "ok": true,
       "date": "2026-10-02",
-      "generated_at_utc": "2026-10-02T14:10:21Z"
+      "generated_at_utc": "2026-10-02T16:26:13Z"
     },
     "igra": {
       "source": "noaa-igra",
@@ -266,36 +266,36 @@
     "ozone-health": {
       "ok": true,
       "date": "2026-10-02",
-      "generated_at_utc": "2026-10-02T14:11:03Z",
+      "generated_at_utc": "2026-10-02T17:53:19Z",
       "casey_band": "good"
     },
     "pre-tornado-clark": {
       "ok": true,
       "date": "2026-10-02",
-      "generated_at_utc": "2026-10-02T13:05:54Z",
+      "generated_at_utc": "2026-10-02T15:43:54Z",
       "score": 34,
       "level": "elevated"
     },
     "research-package": {
       "source": "uogw-research-package",
       "ok": true,
-      "date": "2026-10-01",
-      "data_entry": "data/entries/2026-10-01/science-package.json",
-      "research_summary": "data/entries/2026-10-01/research-summary.json",
-      "generated_at_utc": "2026-10-01T15:53:36Z"
+      "date": "2026-10-02",
+      "data_entry": "data/entries/2026-10-02/science-package.json",
+      "research_summary": "data/entries/2026-10-02/research-summary.json",
+      "generated_at_utc": "2026-10-02T15:14:35Z"
     },
     "satellite": {
       "source": "uogw-satellite-radiance",
       "ok": true,
       "product_count": 6,
-      "data_entry": "data/entries/2026-10-01/satellite-radiance-index.json",
-      "generated_at_utc": "2026-10-01T16:53:48Z"
+      "data_entry": "data/entries/2026-10-02/satellite-radiance-index.json",
+      "generated_at_utc": "2026-10-02T16:07:12Z"
     },
     "science-analytics": {
       "source": "uogw-science-analytics",
       "ok": true,
       "date": "2026-10-02",
-      "generated_at_utc": "2026-10-02T14:10:39Z",
+      "generated_at_utc": "2026-10-02T17:52:57Z",
       "data_entry": "data/entries/2026-10-02/science-analytics.json",
       "highlight_count": 5
     },
