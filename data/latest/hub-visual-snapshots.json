@@ -2,24 +2,24 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-10-02",
-  "generated_at_utc": "2026-10-02T08:35:11Z",
+  "generated_at_utc": "2026-10-02T10:52:20Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
-      "n": 32,
-      "min": 37.6,
-      "max": 99.1,
-      "mean": 70.259,
-      "median": 69.85,
-      "pstdev": 12.735
+      "n": 31,
+      "min": 32.5,
+      "max": 100.0,
+      "mean": 67.058,
+      "median": 63.9,
+      "pstdev": 14.393
     },
     "global_rh": {
-      "n": 32,
-      "min": 17.0,
+      "n": 31,
+      "min": 26.0,
       "max": 97.0,
-      "mean": 65.875,
-      "median": 67.0,
-      "pstdev": 22.185
+      "mean": 70.548,
+      "median": 79.0,
+      "pstdev": 20.775
     },
     "casey_temp_f": {
       "n": 24,
@@ -32,23 +32,23 @@
     "heat_index_flags": [
       {
         "name": "Dubai, AE",
-        "temperature_f": 99.1,
-        "relative_humidity_pct": 39,
-        "heat_index_f": 106.5,
+        "temperature_f": 100.0,
+        "relative_humidity_pct": 41,
+        "heat_index_f": 110.1,
         "level": "danger"
       },
       {
-        "name": "Mumbai, IN",
-        "temperature_f": 89.2,
-        "relative_humidity_pct": 69,
-        "heat_index_f": 102.9,
+        "name": "Bangkok, TH",
+        "temperature_f": 86.9,
+        "relative_humidity_pct": 75,
+        "heat_index_f": 99.9,
         "level": "extreme_caution"
       },
       {
-        "name": "Bangkok, TH",
-        "temperature_f": 85.5,
-        "relative_humidity_pct": 77,
-        "heat_index_f": 96.9,
+        "name": "Mumbai, IN",
+        "temperature_f": 95.9,
+        "relative_humidity_pct": 37,
+        "heat_index_f": 99.0,
         "level": "extreme_caution"
       }
     ],
@@ -56,8 +56,8 @@
       "hottest": {
         "name": "Dubai, AE",
         "id": "dubai_ae",
-        "temperature_c": 37.3,
-        "temperature_f": 99.1,
+        "temperature_c": 37.8,
+        "temperature_f": 100.0,
         "lat": 25.2048,
         "lon": 55.2708,
         "country": "AE"
@@ -65,8 +65,8 @@
       "coldest": {
         "name": "Anchorage, AK, US",
         "id": "anchorage_us",
-        "temperature_c": 3.1,
-        "temperature_f": 37.6,
+        "temperature_c": 0.3,
+        "temperature_f": 32.5,
         "lat": 61.2181,
         "lon": -149.9003,
         "country": "US"
