@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-10-02",
-  "generated_at_utc": "2026-10-02T15:15:48Z",
+  "generated_at_utc": "2026-10-02T15:55:27Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -184,20 +184,20 @@
     },
     "top": [
       {
-        "kind": "low_pressure",
-        "severity": "watch",
-        "subject": "Reykjavik, IS",
-        "metric": "pressure_msl_hpa",
-        "value": 975.0,
-        "threshold": 980,
-        "detail": "Very low MSLP <= 980 hPa (example: 972 hPa deep low)"
-      },
-      {
         "kind": "surface_heat",
         "severity": "watch",
         "subject": "Dubai, AE",
         "metric": "temperature_c",
-        "value": 37.3,
+        "value": 37.8,
+        "threshold": 35,
+        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
+      },
+      {
+        "kind": "surface_heat",
+        "severity": "watch",
+        "subject": "Mumbai, IN",
+        "metric": "temperature_c",
+        "value": 35.5,
         "threshold": 35,
         "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
       },
@@ -206,22 +206,22 @@
         "severity": "watch",
         "subject": "Jakarta, ID",
         "metric": "z_mad",
-        "value": -3.6423,
+        "value": -3.5074,
         "threshold": 3.5,
         "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 27.1,
-            "z_pop": -1.6455,
-            "z_sample": -1.5234,
-            "z_mad": -3.6423,
-            "s_range": -0.4753,
-            "percentile": 12.5,
-            "mean": 29.7143,
+            "x": 27.2,
+            "z_pop": -1.3599,
+            "z_sample": -1.259,
+            "z_mad": -3.5074,
+            "s_range": -0.5446,
+            "percentile": 25.0,
+            "mean": 28.9429,
             "median": 29.8,
-            "pstdev": 1.5887,
-            "sample_stdev": 1.716,
+            "pstdev": 1.2816,
+            "sample_stdev": 1.3843,
             "mad": 0.5
           }
         }
