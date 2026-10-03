@@ -2,24 +2,24 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-10-03",
-  "generated_at_utc": "2026-10-03T06:34:26Z",
+  "generated_at_utc": "2026-10-03T10:10:49Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
-      "n": 31,
-      "min": 32.5,
-      "max": 100.0,
-      "mean": 67.058,
-      "median": 63.9,
-      "pstdev": 14.393
+      "n": 32,
+      "min": 30.9,
+      "max": 100.4,
+      "mean": 66.681,
+      "median": 65.7,
+      "pstdev": 14.854
     },
     "global_rh": {
-      "n": 31,
+      "n": 32,
       "min": 26.0,
-      "max": 97.0,
-      "mean": 70.548,
-      "median": 79.0,
-      "pstdev": 20.775
+      "max": 99.0,
+      "mean": 69.406,
+      "median": 74.0,
+      "pstdev": 21.241
     },
     "casey_temp_f": {
       "n": 24,
@@ -32,23 +32,30 @@
     "heat_index_flags": [
       {
         "name": "Dubai, AE",
-        "temperature_f": 100.0,
-        "relative_humidity_pct": 41,
-        "heat_index_f": 110.1,
-        "level": "danger"
-      },
-      {
-        "name": "Bangkok, TH",
-        "temperature_f": 86.9,
-        "relative_humidity_pct": 75,
-        "heat_index_f": 99.9,
+        "temperature_f": 100.4,
+        "relative_humidity_pct": 31,
+        "heat_index_f": 103.6,
         "level": "extreme_caution"
       },
       {
         "name": "Mumbai, IN",
-        "temperature_f": 95.9,
-        "relative_humidity_pct": 37,
-        "heat_index_f": 99.0,
+        "temperature_f": 95.0,
+        "relative_humidity_pct": 43,
+        "heat_index_f": 100.7,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Singapore, SG",
+        "temperature_f": 85.5,
+        "relative_humidity_pct": 72,
+        "heat_index_f": 94.7,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Bangkok, TH",
+        "temperature_f": 84.2,
+        "relative_humidity_pct": 77,
+        "heat_index_f": 93.4,
         "level": "extreme_caution"
       }
     ],
@@ -56,8 +63,8 @@
       "hottest": {
         "name": "Dubai, AE",
         "id": "dubai_ae",
-        "temperature_c": 37.8,
-        "temperature_f": 100.0,
+        "temperature_c": 38.0,
+        "temperature_f": 100.4,
         "lat": 25.2048,
         "lon": 55.2708,
         "country": "AE"
@@ -65,8 +72,8 @@
       "coldest": {
         "name": "Anchorage, AK, US",
         "id": "anchorage_us",
-        "temperature_c": 0.3,
-        "temperature_f": 32.5,
+        "temperature_c": -0.6,
+        "temperature_f": 30.9,
         "lat": 61.2181,
         "lon": -149.9003,
         "country": "US"
