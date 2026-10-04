@@ -2,24 +2,24 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-10-04",
-  "generated_at_utc": "2026-10-04T09:49:35Z",
+  "generated_at_utc": "2026-10-04T10:51:57Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
       "n": 32,
-      "min": 30.9,
-      "max": 100.4,
-      "mean": 66.681,
-      "median": 65.7,
-      "pstdev": 14.854
+      "min": 45.9,
+      "max": 94.6,
+      "mean": 67.894,
+      "median": 66.4,
+      "pstdev": 12.692
     },
     "global_rh": {
       "n": 32,
-      "min": 26.0,
+      "min": 25.0,
       "max": 99.0,
-      "mean": 69.406,
-      "median": 74.0,
-      "pstdev": 21.241
+      "mean": 69.844,
+      "median": 73.0,
+      "pstdev": 18.097
     },
     "casey_temp_f": {
       "n": 24,
@@ -32,30 +32,23 @@
     "heat_index_flags": [
       {
         "name": "Dubai, AE",
-        "temperature_f": 100.4,
-        "relative_humidity_pct": 31,
-        "heat_index_f": 103.6,
-        "level": "extreme_caution"
+        "temperature_f": 94.6,
+        "relative_humidity_pct": 58,
+        "heat_index_f": 110.3,
+        "level": "danger"
       },
       {
         "name": "Mumbai, IN",
-        "temperature_f": 95.0,
-        "relative_humidity_pct": 43,
-        "heat_index_f": 100.7,
-        "level": "extreme_caution"
-      },
-      {
-        "name": "Singapore, SG",
-        "temperature_f": 85.5,
-        "relative_humidity_pct": 72,
-        "heat_index_f": 94.7,
+        "temperature_f": 92.5,
+        "relative_humidity_pct": 49,
+        "heat_index_f": 99.0,
         "level": "extreme_caution"
       },
       {
         "name": "Bangkok, TH",
-        "temperature_f": 84.2,
-        "relative_humidity_pct": 77,
-        "heat_index_f": 93.4,
+        "temperature_f": 87.1,
+        "relative_humidity_pct": 69,
+        "heat_index_f": 97.3,
         "level": "extreme_caution"
       }
     ],
@@ -63,19 +56,19 @@
       "hottest": {
         "name": "Dubai, AE",
         "id": "dubai_ae",
-        "temperature_c": 38.0,
-        "temperature_f": 100.4,
+        "temperature_c": 34.8,
+        "temperature_f": 94.6,
         "lat": 25.2048,
         "lon": 55.2708,
         "country": "AE"
       },
       "coldest": {
-        "name": "Anchorage, AK, US",
-        "id": "anchorage_us",
-        "temperature_c": -0.6,
-        "temperature_f": 30.9,
-        "lat": 61.2181,
-        "lon": -149.9003,
+        "name": "Casey, IL, US",
+        "id": "casey_il",
+        "temperature_c": 7.7,
+        "temperature_f": 45.9,
+        "lat": 39.2992,
+        "lon": -87.9925,
         "country": "US"
       }
     }
