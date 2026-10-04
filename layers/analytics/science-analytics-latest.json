@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
-  "date_utc": "2026-10-03",
-  "generated_at_utc": "2026-10-03T17:27:36Z",
+  "date_utc": "2026-10-04",
+  "generated_at_utc": "2026-10-04T10:50:55Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -21,44 +21,44 @@
     "global_city_temperature": {
       "celsius": {
         "n": 32,
-        "min": -0.6,
-        "max": 38.0,
-        "mean": 19.266,
-        "median": 18.7,
-        "pstdev": 8.25
+        "min": 7.7,
+        "max": 34.8,
+        "mean": 19.941,
+        "median": 19.1,
+        "pstdev": 7.051
       },
       "fahrenheit": {
         "n": 32,
-        "min": 30.9,
-        "max": 100.4,
-        "mean": 66.681,
-        "median": 65.7,
-        "pstdev": 14.854
+        "min": 45.9,
+        "max": 94.6,
+        "mean": 67.894,
+        "median": 66.4,
+        "pstdev": 12.692
       }
     },
     "global_city_humidity_pct": {
       "n": 32,
-      "min": 26.0,
+      "min": 25.0,
       "max": 99.0,
-      "mean": 69.406,
-      "median": 74.0,
-      "pstdev": 21.241
+      "mean": 69.844,
+      "median": 73.0,
+      "pstdev": 18.097
     },
     "global_city_pressure_hpa": {
       "n": 32,
-      "min": 994.6,
-      "max": 1031.5,
-      "mean": 1018.994,
-      "median": 1018.65,
-      "pstdev": 7.684
+      "min": 993.4,
+      "max": 1029.8,
+      "mean": 1018.05,
+      "median": 1018.35,
+      "pstdev": 7.143
     },
     "global_city_wind_ms": {
       "n": 32,
-      "min": 0.51,
-      "max": 7.8,
-      "mean": 2.794,
-      "median": 2.615,
-      "pstdev": 1.522
+      "min": 0.81,
+      "max": 10.6,
+      "mean": 2.928,
+      "median": 2.515,
+      "pstdev": 1.846
     },
     "casey_temperature": {
       "celsius": {
@@ -136,49 +136,42 @@
     "hottest": {
       "name": "Dubai, AE",
       "id": "dubai_ae",
-      "temperature_c": 38.0,
-      "temperature_f": 100.4,
+      "temperature_c": 34.8,
+      "temperature_f": 94.6,
       "lat": 25.2048,
       "lon": 55.2708,
       "country": "AE"
     },
     "coldest": {
-      "name": "Anchorage, AK, US",
-      "id": "anchorage_us",
-      "temperature_c": -0.6,
-      "temperature_f": 30.9,
-      "lat": 61.2181,
-      "lon": -149.9003,
+      "name": "Casey, IL, US",
+      "id": "casey_il",
+      "temperature_c": 7.7,
+      "temperature_f": 45.9,
+      "lat": 39.2992,
+      "lon": -87.9925,
       "country": "US"
     }
   },
   "heat_index_flags": [
     {
       "name": "Dubai, AE",
-      "temperature_f": 100.4,
-      "relative_humidity_pct": 31,
-      "heat_index_f": 103.6,
-      "level": "extreme_caution"
+      "temperature_f": 94.6,
+      "relative_humidity_pct": 58,
+      "heat_index_f": 110.3,
+      "level": "danger"
     },
     {
       "name": "Mumbai, IN",
-      "temperature_f": 95.0,
-      "relative_humidity_pct": 43,
-      "heat_index_f": 100.7,
-      "level": "extreme_caution"
-    },
-    {
-      "name": "Singapore, SG",
-      "temperature_f": 85.5,
-      "relative_humidity_pct": 72,
-      "heat_index_f": 94.7,
+      "temperature_f": 92.5,
+      "relative_humidity_pct": 49,
+      "heat_index_f": 99.0,
       "level": "extreme_caution"
     },
     {
       "name": "Bangkok, TH",
-      "temperature_f": 84.2,
-      "relative_humidity_pct": 77,
-      "heat_index_f": 93.4,
+      "temperature_f": 87.1,
+      "relative_humidity_pct": 69,
+      "heat_index_f": 97.3,
       "level": "extreme_caution"
     }
   ],
@@ -265,14 +258,14 @@
     {
       "id": "hottest_city",
       "label": "Hottest sample city",
-      "value": "100.4 \u00b0F",
+      "value": "94.6 \u00b0F",
       "detail": "Dubai, AE"
     },
     {
       "id": "coldest_city",
       "label": "Coldest sample city",
-      "value": "30.9 \u00b0F",
-      "detail": "Anchorage, AK, US"
+      "value": "45.9 \u00b0F",
+      "detail": "Casey, IL, US"
     },
     {
       "id": "casey_range",
@@ -289,7 +282,7 @@
     {
       "id": "heat_index",
       "label": "Elevated heat index",
-      "value": "103.6 \u00b0F",
+      "value": "110.3 \u00b0F",
       "detail": "Dubai, AE"
     }
   ],
