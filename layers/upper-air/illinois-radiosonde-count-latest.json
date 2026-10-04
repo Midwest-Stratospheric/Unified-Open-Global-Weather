@@ -2,7 +2,7 @@
   "schema": "uogw.illinois_radiosonde_count.v1",
   "ok": true,
   "date_utc": "2026-10-04",
-  "generated_at_utc": "2026-10-04T00:40:04Z",
+  "generated_at_utc": "2026-10-04T01:59:53Z",
   "region": {
     "name": "Illinois",
     "focus": "NWS radiosonde / rawinsonde launches",
@@ -11,16 +11,27 @@
   },
   "window": {
     "hours": 72,
-    "start_utc": "2026-10-01T00:40:04Z",
-    "end_utc": "2026-10-04T00:40:04Z"
+    "start_utc": "2026-10-01T01:59:53Z",
+    "end_utc": "2026-10-04T01:59:53Z"
   },
   "counts": {
-    "launches_3_days": 5,
-    "devices_likely_aloft": 0,
+    "launches_3_days": 6,
+    "devices_likely_aloft": 1,
     "aloft_window_hours": 2.0,
     "stations_reporting": 1
   },
-  "devices_likely_aloft": [],
+  "devices_likely_aloft": [
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-10-04T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.0,
+      "pwater_mm": 20.318819,
+      "shear_sfc_6km_smps": 18.436426,
+      "estimated_age_hours": 2.0
+    }
+  ],
   "launches_3_days": [
     {
       "station": "KILX",
@@ -66,6 +77,15 @@
       "sbcape_jkg": 0.0,
       "pwater_mm": 10.584949,
       "shear_sfc_6km_smps": 16.123272
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-10-04T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.0,
+      "pwater_mm": 20.318819,
+      "shear_sfc_6km_smps": 18.436426
     }
   ],
   "stations": [
@@ -75,7 +95,7 @@
       "state": "IL",
       "role": "primary",
       "ok": true,
-      "launches_3_days": 5,
+      "launches_3_days": 6,
       "launches": [
         {
           "station": "KILX",
@@ -121,6 +141,15 @@
           "sbcape_jkg": 0.0,
           "pwater_mm": 10.584949,
           "shear_sfc_6km_smps": 16.123272
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-10-04T00:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 0.0,
+          "pwater_mm": 20.318819,
+          "shear_sfc_6km_smps": 18.436426
         }
       ]
     }
