@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
   "date_utc": "2026-10-05",
-  "generated_at_utc": "2026-10-05T17:42:41Z",
+  "generated_at_utc": "2026-10-05T18:42:59Z",
   "curator": "Midwest Stratospheric Data Systems",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -13,7 +13,7 @@
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 6,
     "research_climate_cities": 9,
-    "anomaly_events": 0,
+    "anomaly_events": 2,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -191,12 +191,47 @@
   ],
   "anomalies": {
     "counts": {
-      "total": 0,
+      "total": 2,
       "alert": 0,
-      "watch": 0,
+      "watch": 2,
       "info": 0
     },
-    "top": [],
+    "top": [
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "watch",
+        "subject": "Seoul, KR",
+        "metric": "z_mad",
+        "value": -4.4324,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 14.6,
+            "z_pop": -1.7874,
+            "z_sample": -1.6548,
+            "z_mad": -4.4324,
+            "s_range": -0.6089,
+            "percentile": 12.5,
+            "mean": 18.3143,
+            "median": 19.2,
+            "pstdev": 2.0781,
+            "sample_stdev": 2.2446,
+            "mad": 0.7
+          }
+        }
+      },
+      {
+        "kind": "large_diurnal_range",
+        "severity": "watch",
+        "subject": "Casey, IL",
+        "metric": "diurnal_range_c",
+        "value": 20.2,
+        "threshold": 20,
+        "detail": "Diurnal range >= 20C (example: -2C to 19C => 21C)"
+      }
+    ],
     "disclaimer": "Research screening only \u2014 not an official weather warning service."
   },
   "highlights": [
@@ -221,8 +256,8 @@
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "0",
-      "detail": "alert 0 \u00b7 watch 0 \u00b7 info 0"
+      "value": "2",
+      "detail": "alert 0 \u00b7 watch 2 \u00b7 info 0"
     },
     {
       "id": "heat_index",
