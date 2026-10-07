@@ -5,27 +5,16 @@ on:
     - cron: "45 9 * * *"
     - cron: "15 12 * * *"
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - Daily Research Package
-      - Anomaly Detection Daily
-      - Global Samples Daily
-      - Charts Daily
-    types:
-      - completed
 
 concurrency:
   group: uogw-science-analytics
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: write
 
 jobs:
   analytics:
-    if: >
-      github.event_name != 'workflow_run' ||
-      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
