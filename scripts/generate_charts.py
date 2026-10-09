@@ -249,7 +249,7 @@ def main() -> int:
         f"NDBC stations: {len(ndbc_obs)}",
         f"Humidity cities: {len(hum_rows)}",
         f"Anomaly total: {(counts or {}).get('total', 'n/a')}",
-        "Midwest Stratospheric Data Systems",
+        "Aerostratospheric",
     ]
     y = 0.92
     for i, line in enumerate(lines):
@@ -262,7 +262,7 @@ def main() -> int:
         "",
         "Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.",
         "",
-        f"_Generated at {now} UTC · Midwest Stratospheric Data Systems_",
+        f"_Generated at {now} UTC · Aerostratospheric_",
         "",
         "## PNG charts",
         "",
@@ -273,7 +273,7 @@ def main() -> int:
         ("City temperature map (°F)", "global-city-temp-map.png",
          "Scatter map of city samples by longitude/latitude, colored by temperature (°F). Shows geographic pattern of the daily open sample set."),
         ("Casey hourly temperature (°F)", "casey-hourly-temperature.png",
-         "24-hour temperature trace for Casey, Illinois (MSDS home site). Useful for diurnal range and local extremes that feed anomaly rules."),
+         "24-hour Open-Meteo model temperature trace for the Casey, Illinois grid point (Weather data by Open-Meteo.com, CC BY 4.0; not station observations). Useful for diurnal range and local extremes that feed anomaly rules."),
         ("NDBC marine samples", "ndbc-marine-samples.png",
          "NOAA NDBC buoy sample panel: wave height (meters) plus water and air temperature (°F) for stations in today's marine pull."),
         ("Global city relative humidity (%)", "global-city-humidity.png",

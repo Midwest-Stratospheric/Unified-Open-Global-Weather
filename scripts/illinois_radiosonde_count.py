@@ -155,7 +155,7 @@ def main() -> int:
             "'Devices likely aloft' is an estimate (flight within last "
             f"{ALOFT_HOURS:.0f} hours), not radar tracking of each balloon."
         ),
-        "curator": "Midwest Stratospheric Data Systems",
+        "curator": "Aerostratospheric",
         "hub": "https://midwestsds.com/msds-data-hub.html#il-radiosondes",
     }
 

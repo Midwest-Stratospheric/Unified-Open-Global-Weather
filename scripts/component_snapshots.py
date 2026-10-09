@@ -298,7 +298,7 @@ def main() -> int:
     ]:
         payload["generated_at_utc"] = now_s
         payload["date_utc"] = date
-        payload["curator"] = "Midwest Stratospheric Data Systems"
+        payload["curator"] = "Aerostratospheric"
         for p in [
             Path(f"data/entries/{date}/{name}"),
             Path(f"data/latest/{name}"),

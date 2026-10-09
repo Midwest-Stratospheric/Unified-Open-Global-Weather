@@ -229,7 +229,7 @@ def feature_4_fair_card(scorecard: dict, coverage: dict, now: datetime) -> dict:
                 "open data",
                 "multi-layer",
                 "anomaly detection",
-                "Midwest Stratospheric",
+                "Aerostratospheric",
             ],
         },
         "accessible": {
@@ -241,7 +241,7 @@ def feature_4_fair_card(scorecard: dict, coverage: dict, now: datetime) -> dict:
             "related": ["aerostratospheric-defense-gir", "msds-data"],
         },
         "reusable": {
-            "citation": "Midwest Stratospheric Data Systems (2026). Unified Open Global Weather (UOGW).",
+            "citation": "Aerostratospheric (2026). Unified Open Global Weather (UOGW).",
             "intended_use": "Open research, education, cross-layer atmospheric analysis",
             "not_for": "Sole operational warning service",
         },
