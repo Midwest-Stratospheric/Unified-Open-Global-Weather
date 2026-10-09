@@ -1,12 +1,17 @@
+---
+license: other
+license_name: uogw-mixed-licenses
+license_link: https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/layers/ATTRIBUTION.md
+---
 <p align="center">
   <img src="./aero.svg" alt="Aerostratospheric" width="280"/>
 </p>
 
 # Unified Open Global Weather (UOGW)
 
-**An open atmospheric data commons for research — curated by [Midwest Stratospheric Data Systems](https://www.midwestsds.com) under Aerostratospheric**
+**An open atmospheric data commons for research — curated by [Aerostratospheric](https://www.midwestsds.com)**
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightblue.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: mixed (see ATTRIBUTION)](https://img.shields.io/badge/license-first--party%20CC%20BY%204.0%20%C2%B7%20third--party%20own%20terms-lightblue.svg)](./layers/ATTRIBUTION.md)
 [![Data Hub](https://img.shields.io/badge/Data%20Hub-midwestsds.com-00d4ff)](https://midwestsds.com/msds-data-hub.html)
 [![Catalog](https://img.shields.io/badge/catalog-25%2B%20datasets-0a1628)](./catalog/catalog.json)
 [![Anomaly detection](https://img.shields.io/badge/analytics-anomaly%20detection-orange)](./data/latest/anomaly-report.json)
@@ -23,7 +28,7 @@
 
 ## What UOGW is
 
-A **versioned, multi-layer discovery and sampling layer** for open atmospheric observations: ground, marine, upper-air, stratospheric/space, satellite/model, and first-party MSDS near-space flight products. Independent GitHub Actions keep indexes, science packages, anomaly reports, and °F charts fresh. UOGW does **not** replace agency systems of record; it organizes public access with attribution.
+A **versioned, multi-layer discovery and sampling layer** for open atmospheric observations: ground, marine, upper-air, stratospheric/space, satellite/model, and first-party Aerostratospheric near-space flight products. Independent GitHub Actions keep indexes, science packages, anomaly reports, and °F charts fresh. UOGW does **not** replace agency systems of record; it organizes public access with attribution.
 
 ---
 
@@ -61,7 +66,7 @@ Scatter map of the same city samples by longitude/latitude, colored by temperatu
 
 ![Casey hourly temperature](./visuals/latest/casey-hourly-temperature.png)
 
-24-hour temperature trace for Casey, Illinois (MSDS home site).
+24-hour Open-Meteo model temperature trace for the Casey, Illinois grid point. Model data, not station observations. Weather data by Open-Meteo.com, CC BY 4.0.
 
 ### NDBC marine samples
 
@@ -126,7 +131,7 @@ See [`docs/FEATURES.md`](./docs/FEATURES.md).
 | Repository | Role |
 |------------|------|
 | [aerostratospheric-defense-gir](https://github.com/Midwest-Stratospheric/aerostratospheric-defense-gir) | Open-tier geospatial hazard / defense-adjacent GIR + daily exec reports |
-| [msds-data](https://github.com/Midwest-Stratospheric/msds-data) | Casey ground weather + HAB flight packages |
+| [msds-data](https://github.com/Midwest-Stratospheric/msds-data) | Casey Open-Meteo model weather series (Weather data by Open-Meteo.com, CC BY 4.0) + HAB flight packages |
 | [International-Ground-Data-Repository](https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository) | IGRA / international ground indexes |
 | [x2griffon](https://github.com/Midwest-Stratospheric/x2griffon) | Payload platform |
 
@@ -144,15 +149,31 @@ See [`docs/FEATURES.md`](./docs/FEATURES.md).
 
 ---
 
-## Citation
+## License
 
-> Midwest Stratospheric Data Systems (2026). Unified Open Global Weather (UOGW). https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather
+UOGW contains both Aerostratospheric data and third-party data, so licensing is per source. Full list with terms links: [`layers/ATTRIBUTION.md`](./layers/ATTRIBUTION.md). This applies to `layers/`, `data/` and `snapshots/` here and on the Hugging Face mirror.
 
-Always cite upstream providers (Open-Meteo, NOAA NDBC, NOAA NCEI, NASA, etc.).
+- **Aerostratospheric first-party data and documentation:** CC BY 4.0 ([`layers/LICENSE`](./layers/LICENSE)). This covers the GMC-800 radiation station, the X-Sense logger, flight products and docs.
+- **Third-party layers keep their own terms:**
+  - NOAA / NWS U.S. government data (NWS, NCEI GHCN-Daily and IGRA, NDBC, SWPC, NCEP GFS) is public domain: https://www.weather.gov/disclaimer
+  - Open-Meteo data is CC BY 4.0 (https://open-meteo.com/en/license). This includes the Casey, Illinois daily/hourly series, which is **Open-Meteo model data, not observations from our station**. "Weather data by Open-Meteo.com, CC BY 4.0."
+  - Copernicus CAMS air-quality data (via Open-Meteo) is under the Copernicus licence: https://apps.ecmwf.int/datasets/licences/copernicus/
+  - Iowa Environmental Mesonet data is used per its terms: https://mesonet.agron.iastate.edu/disclaimer.php
+  - NOAA/NASA satellite catalog metadata follows the provider's data policies.
+- **Excluded:** KILCASEY47 data retrieved through the Weather Underground API (`layers/ground/casey/wunderground/`, `casey-wu.json`) is not licensed by us while the WU API terms are reviewed.
+- **Code** (scripts, workflows) is not licensed under CC BY 4.0.
 
 ---
 
-**Midwest Stratospheric Data Systems** (a limited partnership under Aerostratospheric, an Illinois nonprofit corporation) · Casey, Illinois · launchcontrol@midwestsds.com · NASA GLOBE **GO-4VW9B** · Ham **KE9CFY**
+## Citation
+
+> Aerostratospheric (2026). Unified Open Global Weather (UOGW). https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather
+
+Always cite upstream providers (Open-Meteo, NOAA NDBC, NOAA NCEI, NASA, etc.); see [`layers/ATTRIBUTION.md`](./layers/ATTRIBUTION.md).
+
+---
+
+Published by Aerostratospheric, Olney, Illinois. · launchcontrol@midwestsds.com · NASA GLOBE **GO-4VW9B** · Ham **KE9CFY**
 
 <p align="center">
   <img src="./aero.svg" alt="Aerostratospheric" width="220"/>
