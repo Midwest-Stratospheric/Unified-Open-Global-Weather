@@ -103,7 +103,7 @@ jobs:
               "ANOMALIES (research only)",
               f"  Alert={counts.get('alert', 0)}  Watch={counts.get('watch', 0)}  Total={counts.get('total', 0)}",
               "",
-              "Midwest Stratospheric Data Systems · launchcontrol@midwestsds.com",
+              "Aerostratospheric · launchcontrol@midwestsds.com",
           ]
           with open("/tmp/uogw-daily-email.txt", "w") as f:
               f.write("\n".join(lines) + "\n")

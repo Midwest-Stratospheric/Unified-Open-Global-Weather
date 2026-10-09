@@ -125,7 +125,7 @@ jobs:
               "ok_count": ok_n,
               "countries": countries,
               "country_count": len(countries),
-              "curator": "Midwest Stratospheric Data Systems",
+              "curator": "Aerostratospheric",
               "license_note": "Open-Meteo CC BY 4.0; cite Open-Meteo and original NWP sources",
               "cities": results,
           }
@@ -158,7 +158,7 @@ jobs:
               "observation_count": ok_n,
               "file": f"data/entries/{date}/global-cities.json",
           }
-          summary["curator"] = "Midwest Stratospheric Data Systems"
+          summary["curator"] = "Aerostratospheric"
           with open(summary_path, "w") as f:
               json.dump(summary, f, indent=2)
           with open("data/latest/summary.json", "w") as f:
