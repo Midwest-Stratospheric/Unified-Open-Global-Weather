@@ -1,6 +1,7 @@
 # Hugging Face daily mirror (UOGW)
 
-Published by **[Aerostratospheric](https://www.midwestsds.com/)**, Olney, Illinois.
+Published by **[Aerostratospheric](https://www.midwestsds.com/)**.  
+Midwest Stratospheric Data Systems operates as a limited partnership under Aerostratospheric.
 
 UOGW and GIR publish to **separate** Hugging Face datasets and model suites under [`aerostratospheric`](https://huggingface.co/aerostratospheric).
 

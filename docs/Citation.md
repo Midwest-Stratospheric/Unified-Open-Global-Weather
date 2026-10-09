@@ -19,12 +19,14 @@ UOGW is a **discovery and contribution layer**. Agencies and original projects r
 
 ## License note
 
-Aerostratospheric first-party data and documentation: **CC BY 4.0** (see [`layers/LICENSE`](../layers/LICENSE)).  
-Third-party data keeps its own terms; see [`layers/ATTRIBUTION.md`](../layers/ATTRIBUTION.md). Code is not licensed under CC BY 4.0.
+Curated indexes and MSDS products: **CC BY 4.0** (see repository license badge).  
+Original agency and project licenses always apply to source observations.
 
 ## Contact
 
-Published by Aerostratospheric, Olney, Illinois.  
+**Midwest Stratospheric Data Systems**  
+A limited partnership under Aerostratospheric, an Illinois nonprofit corporation  
+Casey, Illinois, USA  
 launchcontrol@midwestsds.com  
 https://www.midwestsds.com  
 

@@ -57,13 +57,13 @@ These fire regardless of recent history. Values are chosen for **research flaggi
 
 **Example:** Station `41001` `wave_height_m = 4.7` → `high_waves` / `watch`.
 
-### Casey, IL (Open-Meteo model series)
+### Local MSDS site (Casey, IL)
 
 | Example condition | Metric | Threshold | Severity |
 |-------------------|--------|-----------|----------|
 | Large diurnal swing | `max(T) − min(T)` over hourly series | **≥ 20 °C** | `watch` |
 
-**Example:** Hourly Casey Open-Meteo model series min −2 °C, max 19 °C → range 21 °C → `large_diurnal_range` / `watch`.
+**Example:** Hourly Casey series min −2 °C, max 19 °C → range 21 °C → `large_diurnal_range` / `watch`.
 
 ---
 

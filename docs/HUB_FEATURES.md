@@ -16,7 +16,7 @@ Main repository: https://github.com/Midwest-Stratospheric/Unified-Open-Global-We
 | Ozone health snapshot | `data/latest/ozone-health.json` | `scripts/ozone_health_snapshot.py` |
 | Space weather + GFS | `data/latest/space-gfs-snapshot.json` | `scripts/space_gfs_snapshot.py` |
 | Hub visual snapshots | `data/latest/hub-visual-snapshots.json` | `scripts/hub_visual_snapshots.py` |
-| Casey weather (Open-Meteo model data, not station observations) | msds-data + UOGW casey-hourly | ground daily |
+| Casey ground | msds-data + UOGW casey-hourly | ground daily |
 | NDBC marine | `data/latest/ndbc-realtime.json` | marine daily |
 
 ## Interactive hub-only tools (client-side)

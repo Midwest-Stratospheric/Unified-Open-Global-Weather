@@ -132,7 +132,7 @@ def main() -> int:
         "schema": "uogw.research_summary.v1",
         "date_utc": date,
         "generated_at_utc": now_s,
-        "curator": "Aerostratospheric",
+        "curator": "Midwest Stratospheric Data Systems",
         "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
         "data_hub": "https://www.midwestsds.com/portal.html",
         "purpose": "Daily multi-layer atmospheric research package.",
@@ -170,7 +170,7 @@ def main() -> int:
         "science_notes": [
             "Surface city samples use Open-Meteo (CC BY 4.0).",
             "Marine realtime from NOAA NDBC public feeds.",
-            "Casey hourly is Open-Meteo model data, not station observations (Weather data by Open-Meteo.com, CC BY 4.0).",
+            "Casey hourly is MSDS-curated Open-Meteo extract.",
             "IGRA/GHCN/NDBC counts are discovery indexes.",
         ],
         "status_sources": {
@@ -183,7 +183,7 @@ def main() -> int:
         "schema": "uogw.science_package.v1",
         "date_utc": date,
         "generated_at_utc": now_s,
-        "curator": "Aerostratospheric",
+        "curator": "Midwest Stratospheric Data Systems",
         "summary": summary,
         "daily_climate_research_cities": daily_climate,
         "global_city_observations": city_list,
@@ -196,7 +196,7 @@ def main() -> int:
             "ndbc": "NOAA NDBC",
             "igra": "NOAA NCEI IGRA",
             "ghcn": "NOAA NCEI GHCNd",
-            "msds": "Aerostratospheric",
+            "msds": "Midwest Stratospheric Data Systems",
         },
     }
 
