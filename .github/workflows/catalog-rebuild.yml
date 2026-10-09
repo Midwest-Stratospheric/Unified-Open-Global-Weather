@@ -55,7 +55,7 @@ jobs:
             "sources": sources,
             "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
             "data_hub": "https://www.midwestsds.com/portal.html",
-            "curator": "Midwest Stratospheric Data Systems"
+            "curator": "Aerostratospheric"
           }
           os.makedirs("status", exist_ok=True)
           with open("status/last_update.json", "w") as f:

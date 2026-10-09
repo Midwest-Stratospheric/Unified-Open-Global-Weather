@@ -212,7 +212,7 @@ def main() -> int:
             "xray": "visuals/latest/space-goes-xray.png",
             "gfs_casey": "visuals/latest/gfs-casey-forecast.png",
         },
-        "curator": "Midwest Stratospheric Data Systems",
+        "curator": "Aerostratospheric",
         "hub": "https://midwestsds.com/msds-data-hub.html#space-data",
     }
 
