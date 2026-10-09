@@ -4,7 +4,7 @@ All schedules run on **GitHub Actions** inside this repository. They do not depe
 
 | Workflow | Schedule (UTC) | Output |
 |----------|----------------|--------|
-| `msds-ground-daily.yml` | Daily | Casey ground → msds-data + `layers/ground/casey/` |
+| `msds-ground-daily.yml` | Daily | Casey Open-Meteo model data (Weather data by Open-Meteo.com, CC BY 4.0) → msds-data + `layers/ground/casey/` |
 | `igra-index-daily.yml` | Daily | IGRA station + Y2D index → `layers/upper-air/igra/` |
 | `ndbc-marine-daily.yml` | Daily | NDBC stations → `layers/marine/ndbc/` |
 | `global-samples-daily.yml` | ~05:00 | Worldwide city samples → `layers/ground/samples/` |
