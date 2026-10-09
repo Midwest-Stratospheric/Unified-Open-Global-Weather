@@ -8,7 +8,7 @@ Surface land stations, citizen science, and model-driven dailies.
 
 | Path | Content |
 |------|---------|
-| `layers/ground/casey/` | MSDS Casey, IL daily + latest |
+| `layers/ground/casey/` | Casey, IL products: GMC-800 radiation and X-Sense (first-party); daily + latest weather are Open-Meteo model data (Weather data by Open-Meteo.com, CC BY 4.0), not station observations |
 | `layers/ground/samples/` | Worldwide city surface samples |
 | `layers/ground/ghcn/` | GHCNd global station index (counts + samples) |
 | `layers/ground/international/` | Foreign open-source registry snapshots |
