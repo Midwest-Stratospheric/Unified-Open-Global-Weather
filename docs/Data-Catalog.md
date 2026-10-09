@@ -6,7 +6,7 @@ Machine-readable source of truth: [`catalog/catalog.json`](../catalog/catalog.js
 
 | ID | Layer | Title | Status |
 |----|-------|-------|--------|
-| `msds-ground-casey` | ground | Casey, Illinois Ground Weather (MSDS) | active daily |
+| `msds-ground-casey` | ground | Casey, Illinois weather — Open-Meteo model data (Weather data by Open-Meteo.com, CC BY 4.0) | active daily |
 | `msds-globe-site` | ground | NASA GLOBE — MSDS Site 422147 | active |
 | `msds-flights` | flight | X2Griffon / MSDS High-Altitude Flight Packages | active / expanding |
 | `noaa-igra` | upper-air | NOAA Integrated Global Radiosonde Archive (IGRA) | active daily index |
