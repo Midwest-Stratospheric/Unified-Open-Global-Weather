@@ -63,7 +63,7 @@ def rebuild_science_package() -> dict | None:
         "schema": "uogw.science_package.v1",
         "date_utc": (summary or {}).get("date_utc") or date,
         "generated_at_utc": now,
-        "curator": "Midwest Stratospheric Data Systems",
+        "curator": "Aerostratospheric",
         "rebuilt_by": "scripts/heal_latest.py",
         "summary": summary or {"note": "summary missing; partial rebuild"},
         "daily_climate_research_cities": (climate or {}).get("cities") or [],
@@ -78,7 +78,7 @@ def rebuild_science_package() -> dict | None:
         "attribution": {
             "open_meteo": "CC BY 4.0 — https://open-meteo.com/",
             "ndbc": "NOAA NDBC",
-            "msds": "Midwest Stratospheric Data Systems",
+            "msds": "Aerostratospheric",
         },
     }
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -99,6 +99,10 @@ def snapshot_latest_for_rollback() -> str | None:
     dest = ROOT / "snapshots" / "rollback-points" / stamp
     dest.mkdir(parents=True, exist_ok=True)
     for p in latest.glob("*"):
+        # disabled 2026-10-09 pending WU API terms review: do not republish
+        # KILCASEY47 Weather Underground API data (casey-wu.json) in new rollback points.
+        if p.name == "casey-wu.json":
+            continue
         if p.is_file():
             shutil.copy2(p, dest / p.name)
     meta = {

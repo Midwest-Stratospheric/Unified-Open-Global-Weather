@@ -14,6 +14,29 @@ jobs:
         run: |
           python3 <<'PY'
           import json, urllib.request, datetime, os
+          # Privacy: publish city-level places only (no street address, house number or ZIP) and coordinates rounded to 0.01 deg.
+          def city_level(addr):
+              """Reduce a reverse-geocoded address to city level, e.g. 'Casey, Illinois'. No street, number or ZIP."""
+              import re
+              if not addr or not isinstance(addr, str):
+                  return addr
+              parts = [p.strip() for p in addr.split(",") if p.strip()]
+              if len(parts) < 2:
+                  return None if re.search(r"\d", addr) else addr
+              if parts[-1] in ("United States", "USA", "United States of America"):
+                  parts = parts[:-1]
+              state = re.sub(r"\s*\d{5}(-\d{4})?$", "", parts[-1]).strip()
+              rest = parts[:-1]
+              county = rest[-1] if rest and rest[-1].endswith(" County") else None
+              if county:
+                  rest = rest[:-1]
+              city = rest[-1] if rest else None
+              if city and not re.search(r"\d", city) and not re.search(r"\b(Avenue|Ave|Street|St|Road|Rd|Route|Highway|Hwy|Drive|Dr|Lane|Ln|Boulevard|Blvd|Court|Ct|Way|Place|Pl|Parkway|Trail)\b", city):
+                  return f"{city}, {state}"
+              return f"{county}, {state}" if county else state
+
+          def rnd(v):
+              return round(v, 2) if isinstance(v, (int, float)) else v
           src = "https://raw.githubusercontent.com/Midwest-Stratospheric/xliveflights-data/main/flights.json"
           req = urllib.request.Request(src, headers={"User-Agent": "uogw-flight-layer"})
           try:
@@ -69,12 +92,12 @@ jobs:
                   "duration_s": dur,
                   "max_alt_ft": f.get("max_alt_ft"),
                   "max_speed_kt": f.get("max_speed_kt"),
-                  "start_place": sf.get("address"),
-                  "end_place": ef.get("address"),
-                  "start_lat": sf.get("lat"),
-                  "start_lon": sf.get("lon"),
-                  "end_lat": ef.get("lat"),
-                  "end_lon": ef.get("lon"),
+                  "start_place": city_level(sf.get("address")),
+                  "end_place": city_level(ef.get("address")),
+                  "start_lat": rnd(sf.get("lat")),
+                  "start_lon": rnd(sf.get("lon")),
+                  "end_lat": rnd(ef.get("lat")),
+                  "end_lon": rnd(ef.get("lon")),
                   "battery_pct": ef.get("battery_pct") if ef.get("battery_pct") is not None else sf.get("battery_pct"),
                   "signal_pct": ef.get("signal_pct") if ef.get("signal_pct") is not None else sf.get("signal_pct"),
                   "end_reason": f.get("end_reason") or "closed",
@@ -86,6 +109,13 @@ jobs:
                   catalog["captures"].insert(0, cap)
                   existing[fid] = 0
               changed = True
+          # Re-sanitize every capture (including older rows) on each run.
+          for c in catalog.get("captures") or []:
+              for k in ("start_place", "end_place"):
+                  c[k] = city_level(c.get(k))
+              for k in ("start_lat", "start_lon", "end_lat", "end_lon"):
+                  c[k] = rnd(c.get(k))
+          catalog["location_precision"] = "city level: place names reduced to city/county and state; coordinates rounded to 0.01 degree"
           catalog["updated_at"] = now
           catalog["count"] = len(catalog.get("captures") or [])
           catalog["captures"] = catalog.get("captures") or []
