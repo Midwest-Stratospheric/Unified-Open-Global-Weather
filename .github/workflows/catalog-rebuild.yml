@@ -79,7 +79,12 @@ jobs:
             git fetch origin main
             git rebase origin/main || {
               git rebase --abort || true
-              git reset --soft origin/main
+              # Fixed 2026-10-09: 'reset --soft' kept this run's stale tree in the index and
+              # reverted any files other commits had changed in the meantime. Rebuild the
+              # commit on top of origin/main with only the status file instead.
+              cp status/last_update.json /tmp/last_update.json
+              git reset --hard origin/main
+              cp /tmp/last_update.json status/last_update.json
               git add status/last_update.json
               git commit -m "chore(catalog): rebuild status rollup $(date -u +%Y-%m-%dT%H:%MZ)" || true
             }
