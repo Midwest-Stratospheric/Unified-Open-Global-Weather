@@ -138,7 +138,7 @@ def main() -> int:
         "primary_site": primary,
         "sites": sites_out,
         "chart": "visuals/latest/ozone-casey-trend.png",
-        "curator": "Midwest Stratospheric Data Systems",
+        "curator": "Aerostratospheric",
     }
 
     for p in [

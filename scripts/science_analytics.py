@@ -216,7 +216,7 @@ def main() -> int:
         "schema": "uogw.science_analytics.v1",
         "date_utc": date,
         "generated_at_utc": now_s,
-        "curator": "Midwest Stratospheric Data Systems",
+        "curator": "Aerostratospheric",
         "display_preference": {
             "hub_temperature_unit": "fahrenheit",
             "science_storage_unit": "celsius",

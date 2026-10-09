@@ -194,7 +194,7 @@ def process_file(path: Path):
             "filename": path.name,
             "raw_file": str(path.relative_to(ROOT)).replace("\\", "/"),
             "retrieved_at_utc": now,
-            "curator": "Midwest Stratospheric Data Systems",
+            "curator": "Aerostratospheric",
         },
         "data_kind": "in_situ_observations",
         "native_interval": "1min",

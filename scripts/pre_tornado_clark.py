@@ -369,7 +369,7 @@ def main() -> int:
             "https://www.spc.noaa.gov/",
             "https://alerts.weather.gov/",
         ],
-        "curator": "Midwest Stratospheric Data Systems",
+        "curator": "Aerostratospheric",
     }
 
     for p in [
