@@ -12,9 +12,11 @@
     "license": "CC BY 4.0",
     "url": "https://open-meteo.com/",
     "retrieved_at_utc": "2026-08-25T08:23:30Z",
-    "curator": "Midwest Stratospheric Data Systems"
+    "curator": "Midwest Stratospheric Data Systems",
+    "product": "Open-Meteo model data (not station observations)",
+    "attribution": "Weather data by Open-Meteo.com, CC BY 4.0."
   },
-  "data_kind": "observations",
+  "data_kind": "model_data",
   "observation_count": 24,
   "observations": [
     {
@@ -667,5 +669,6 @@
   "meta": {
     "generator": "uogw/msds-ground-daily",
     "uogw": true
-  }
+  },
+  "note": "Open-Meteo model data for the Casey, Illinois grid point. Not observations from an Aerostratospheric station."
 }
