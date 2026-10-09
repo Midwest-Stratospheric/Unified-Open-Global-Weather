@@ -149,7 +149,7 @@ jobs:
               "sample_station_ids": sample_ids,
               "sample_observation_count": len(observations),
               "note": "Full station list plus parsed realtime obs for sample buoys. Primary data at NDBC.",
-              "curator": "Midwest Stratospheric Data Systems",
+              "curator": "Aerostratospheric",
           }
 
           obs_doc = {
@@ -162,7 +162,7 @@ jobs:
               "station_ids": list(observations.keys()),
               "observation_count": len(observations),
               "observations": observations,
-              "curator": "Midwest Stratospheric Data Systems",
+              "curator": "Aerostratospheric",
               "license_note": "NOAA NDBC public data; cite NOAA NDBC",
           }
 

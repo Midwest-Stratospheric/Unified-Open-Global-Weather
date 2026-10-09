@@ -89,7 +89,7 @@ jobs:
               "sample_stations_by_country": samples_by_cc,
               "authority_url": "https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily",
               "raw_stations_url": ghcn_url,
-              "curator": "Midwest Stratospheric Data Systems",
+              "curator": "Aerostratospheric",
               "note": "Full GHCN station list is global (US + foreign). UOGW stores counts + samples; fetch full list from NOAA for complete inventory.",
           }
           for p in [
@@ -132,7 +132,7 @@ jobs:
               "date": date,
               "source_count": len(foreign_sources),
               "sources": foreign_sources,
-              "curator": "Midwest Stratospheric Data Systems",
+              "curator": "Aerostratospheric",
               "note": "Curated index of major foreign and international open weather authorities. UOGW links and tracks these; primary data remains at the source.",
           }
           for p in [

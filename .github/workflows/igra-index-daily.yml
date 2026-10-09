@@ -96,7 +96,7 @@ jobs:
               "countries_top30": [{"code": c, "stations": n} for c, n in by_country.most_common(30)],
               "sample_stations": stations[:50],
               "authority_url": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive",
-              "curator": "Midwest Stratospheric Data Systems",
+              "curator": "Aerostratospheric",
           }
           y2d_doc = {
               "source": "noaa-igra",
@@ -108,7 +108,7 @@ jobs:
               "file_count": len(y2d_files),
               "files_sample": y2d_files[:100],
               "authority_url": y2d_url,
-              "curator": "Midwest Stratospheric Data Systems",
+              "curator": "Aerostratospheric",
           }
 
           research_entry = {
@@ -127,7 +127,7 @@ jobs:
                   "southern_stations": sum(1 for s in stations if s["lat"] < 0),
               },
               "note": "IGRA full soundings remain at NOAA; UOGW publishes daily discovery indexes + summary stats for research navigation.",
-              "curator": "Midwest Stratospheric Data Systems",
+              "curator": "Aerostratospheric",
           }
 
           for p, doc in [
