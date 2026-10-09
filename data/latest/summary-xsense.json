@@ -1,23 +1,17 @@
 {
-  "date": "2026-10-07",
-  "generated_at_utc": "2026-10-07T18:57:37Z",
+  "date": "2026-10-08",
+  "generated_at_utc": "2026-10-08T18:51:59Z",
   "entries": {
     "global-cities": {
       "ok": true,
       "observation_count": 32,
-      "file": "data/entries/2026-10-07/global-cities.json"
-    },
-    "science-analytics": {
-      "ok": true,
-      "file": "data/entries/2026-10-07/science-analytics.json",
-      "highlights": 5,
-      "anomaly_total": 2
+      "file": "data/entries/2026-10-08/global-cities.json"
     },
     "igra-index": {
       "ok": true,
       "station_count": 2931,
       "y2d_file_count": 0,
-      "file": "data/entries/2026-10-07/igra-index.json"
+      "file": "data/entries/2026-10-08/igra-index.json"
     },
     "ndbc-realtime": {
       "ok": true,
@@ -30,11 +24,11 @@
         "41008",
         "46029"
       ],
-      "file": "data/entries/2026-10-07/ndbc-realtime.json"
+      "file": "data/entries/2026-10-08/ndbc-realtime.json"
     },
     "research-summary": {
       "ok": true,
-      "file": "data/entries/2026-10-07/research-summary.json",
+      "file": "data/entries/2026-10-08/research-summary.json",
       "dataset_count": 26,
       "global_cities_ok": 32,
       "ndbc_realtime_stations": 6,
@@ -43,35 +37,41 @@
     },
     "science-package": {
       "ok": true,
-      "file": "data/entries/2026-10-07/science-package.json"
+      "file": "data/entries/2026-10-08/science-package.json"
     },
     "daily-climate": {
       "ok": true,
       "observation_count": 10,
-      "file": "data/entries/2026-10-07/daily-climate.json"
+      "file": "data/entries/2026-10-08/daily-climate.json"
     },
     "anomaly-report": {
       "ok": true,
-      "total": 2,
+      "total": 4,
       "alerts": 1,
-      "watches": 1,
-      "file": "data/entries/2026-10-07/anomaly-report.json"
+      "watches": 3,
+      "file": "data/entries/2026-10-08/anomaly-report.json"
+    },
+    "science-analytics": {
+      "ok": true,
+      "file": "data/entries/2026-10-08/science-analytics.json",
+      "highlights": 5,
+      "anomaly_total": 4
     },
     "satellite-radiance-index": {
       "ok": true,
       "product_count": 6,
-      "file": "data/entries/2026-10-07/satellite-radiance-index.json"
+      "file": "data/entries/2026-10-08/satellite-radiance-index.json"
     },
     "casey-hourly": {
       "ok": true,
       "observation_count": 24,
-      "file": "data/entries/2026-10-07/casey-hourly.json"
+      "file": "data/entries/2026-10-08/casey-hourly.json"
     },
     "casey-xsense": {
       "ok": true,
       "observation_count": 24,
       "native_sample_count": 1440,
-      "file": "data/entries/2026-10-07/casey-xsense.json",
+      "file": "data/entries/2026-10-08/casey-xsense.json",
       "source": "X-Sense in-situ"
     }
   },
@@ -88,34 +88,34 @@
   },
   "derived_surface_stats": {
     "global_city_temperature_c": {
-      "mean": 19.453,
-      "min": 4.8,
-      "max": 37.0
+      "mean": 18.641,
+      "min": 3.9,
+      "max": 35.9
     },
     "global_city_humidity_pct": {
-      "mean": 68.719
+      "mean": 72.156
     },
     "global_city_pressure_hpa": {
-      "mean": 1014.569
+      "mean": 1014.528
     },
     "global_city_wind_ms": {
-      "mean": 2.596
+      "mean": 2.908
     },
     "casey_temperature_c": {
-      "min": 6.6,
-      "max": 24.7,
-      "mean": 15.129
+      "min": 9.1,
+      "max": 30.7,
+      "mean": 19.562
     },
     "ndbc_wave_height_m": {
-      "mean": 0.7,
+      "mean": 0.8,
       "n": 1
     },
     "ndbc_water_temp_c": {
-      "mean": 17.2,
+      "mean": 17.775,
       "n": 4
     },
     "ndbc_air_temp_c": {
-      "mean": 18.65,
+      "mean": 18.875,
       "n": 4
     }
   }
