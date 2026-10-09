@@ -144,7 +144,7 @@ jobs:
             if [ -f reports/latest.md ]; then head -n 100 reports/latest.md; else echo "_(no reports/latest.md)_"; fi
             echo ""
             echo "---"
-            echo "*Automated release ${TAG} · Midwest Stratospheric Data Systems / UOGW*"
+            echo "*Automated release ${TAG} · Aerostratospheric / UOGW*"
           } > /tmp/release-notes.md
 
       - name: Create GitHub Release
@@ -180,7 +180,7 @@ jobs:
             echo ""
             echo "────────────────────────────────────────"
             echo "Open atmospheric data commons. Research screening — not an official warning product."
-            echo "Midwest Stratospheric Data Systems · launchcontrol@midwestsds.com"
+            echo "Aerostratospheric · launchcontrol@midwestsds.com"
           } > /tmp/uogw-release-email.txt
 
       - name: Email release notification
