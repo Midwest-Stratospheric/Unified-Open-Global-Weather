@@ -1,4 +1,5 @@
-# Daily Casey IL ground OBSERVATIONS (hourly + daily) — dual-write msds-data + UOGW data/entries
+# Daily Casey IL Open-Meteo MODEL data (hourly + daily) — NOT station observations — dual-write msds-data + UOGW data/entries
+# Label: "Weather data by Open-Meteo.com, CC BY 4.0."
 name: MSDS Ground Daily
 
 on:
@@ -31,7 +32,7 @@ jobs:
           token: ${{ secrets.MSDS_DATA_TOKEN }}
           fetch-depth: 0
 
-      - name: Fetch Casey hourly observations
+      - name: Fetch Casey hourly Open-Meteo model data
         run: |
           set -e
           DATE=$(date -u -d yesterday +%Y-%m-%d 2>/dev/null || date -u -v-1d +%Y-%m-%d)
@@ -76,9 +77,12 @@ jobs:
               "license": "CC BY 4.0",
               "url": "https://open-meteo.com/",
               "retrieved_at_utc": now,
-              "curator": "Midwest Stratospheric Data Systems"
+              "curator": "Aerostratospheric",
+              "product": "Open-Meteo model data (not station observations)",
+              "attribution": "Weather data by Open-Meteo.com, CC BY 4.0."
             },
-            "data_kind": "observations",
+            "data_kind": "model_data",
+            "note": "Open-Meteo model data for the Casey, Illinois grid point. Not observations from an Aerostratospheric station.",
             "observation_count": len(observations),
             "observations": observations,
             "hourly": hourly,
@@ -135,7 +139,7 @@ jobs:
                   "data_entry": f"data/entries/{date}/casey-hourly.json",
                   "generated_at_utc": now,
               }, f, indent=2)
-          print(f"DATA ENTRY: {len(observations)} hourly obs -> data/entries/{date}/casey-hourly.json")
+          print(f"DATA ENTRY: {len(observations)} hourly Open-Meteo model rows -> data/entries/{date}/casey-hourly.json")
           PY
 
       - name: Commit UOGW data entry
@@ -150,7 +154,7 @@ jobs:
             exit 0
           fi
           OBS=$(python3 -c "import json; d=json.load(open('status/msds-ground.json')); print(d.get('observation_count',0))" 2>/dev/null || echo 0)
-          git commit -m "data(casey): ${OBS} hourly ground observations $(date -u +%Y-%m-%d)"
+          git commit -m "data(casey): ${OBS} hourly Open-Meteo model rows $(date -u +%Y-%m-%d)"
           for i in 1 2 3 4 5; do
             git fetch origin main
             git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
@@ -169,6 +173,6 @@ jobs:
           git config user.email "bot@midwestsds.com"
           git add ground-weather/daily || true
           if git diff --staged --quiet; then exit 0; fi
-          git commit -m "data(casey): daily ground observations $(date -u +%Y-%m-%d)"
+          git commit -m "data(casey): daily Open-Meteo model data $(date -u +%Y-%m-%d)"
           git pull --rebase origin main || true
           git push origin HEAD:main || true
