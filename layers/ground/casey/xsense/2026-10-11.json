@@ -1,1 +1,62 @@
-PLACEHOLDER_JSON
+{
+  "date": "2026-10-11",
+  "site": {
+    "name": "Casey, Illinois — MSDS ground station",
+    "lat": 39.2992,
+    "lon": -87.9925,
+    "elevation_m": 200,
+    "timezone": "America/Chicago",
+    "instrument": "X-Sense thermo-hygrometer"
+  },
+  "source": {
+    "provider": "X-Sense",
+    "kind": "in-situ ground station email export",
+    "email_from": "support@x-sense-iot.com",
+    "filename": "Thermo-hygrometer_Export Data_20261011.csv",
+    "retrieved_at_utc": "2026-10-12T18:01:24Z",
+    "curator": "Midwest Stratospheric Data Systems"
+  },
+  "data_kind": "in_situ_observations",
+  "native_interval": "1min",
+  "product_interval": "hourly",
+  "observation_count": 24,
+  "native_sample_count": 1440,
+  "stats": {
+    "temperature_c": {
+      "min": 21.28,
+      "max": 24.0,
+      "mean": 22.43
+    },
+    "temperature_f": {
+      "min": 70.3,
+      "max": 75.2,
+      "mean": 72.4
+    },
+    "relative_humidity_percent": {
+      "min": 49.0,
+      "max": 62.1,
+      "mean": 56.9
+    },
+    "dewpoint_c_mean": 13.41
+  },
+  "observations": [
+    {
+      "time": "2026-10-11 00:00",
+      "temperature_c_mean": 22.41,
+      "temperature_c_min": 22.28,
+      "temperature_c_max": 22.5,
+      "temperature_f_mean": 72.34,
+      "temperature_f_min": 72.1,
+      "temperature_f_max": 72.5,
+      "relative_humidity_percent_mean": 53.6,
+      "relative_humidity_percent_min": 53.3,
+      "relative_humidity_percent_max": 54.0,
+      "dewpoint_c_mean": 12.53,
+      "sample_count": 60
+    }
+  ],
+  "meta": {
+    "generator": "grok/xsense-ground-ingest",
+    "uogw": true
+  }
+}
