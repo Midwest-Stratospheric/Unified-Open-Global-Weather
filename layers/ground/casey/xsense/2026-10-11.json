@@ -1,9 +1,9 @@
 {
   "date": "2026-10-11",
   "site": {
-    "name": "Casey, Illinois — MSDS ground station",
-    "lat": 39.2992,
-    "lon": -87.9925,
+    "name": "Casey, Illinois \u2014 MSDS ground station",
+    "latitude": 39.2992,
+    "longitude": -87.9925,
     "elevation_m": 200,
     "timezone": "America/Chicago",
     "instrument": "X-Sense thermo-hygrometer"
@@ -12,51 +12,56 @@
     "provider": "X-Sense",
     "kind": "in-situ ground station email export",
     "email_from": "support@x-sense-iot.com",
-    "filename": "Thermo-hygrometer_Export Data_20261011.csv",
-    "retrieved_at_utc": "2026-10-12T18:01:24Z",
-    "curator": "Midwest Stratospheric Data Systems"
+    "filename": "2026-10-11.csv",
+    "raw_file": "layers/ground/casey/xsense/raw/2026-10-11.csv",
+    "retrieved_at_utc": "2026-10-13T18:02:12Z",
+    "curator": "Aerostratospheric"
   },
   "data_kind": "in_situ_observations",
   "native_interval": "1min",
   "product_interval": "hourly",
-  "observation_count": 24,
-  "native_sample_count": 1440,
+  "observation_count": 2,
+  "native_sample_count": 3,
   "stats": {
-    "temperature_c": {
-      "min": 21.28,
-      "max": 24.0,
-      "mean": 22.43
-    },
-    "temperature_f": {
-      "min": 70.3,
-      "max": 75.2,
-      "mean": 72.4
-    },
-    "relative_humidity_percent": {
-      "min": 49.0,
-      "max": 62.1,
-      "mean": 56.9
-    },
-    "dewpoint_c_mean": 13.41
+    "temperature_c_min": 22.39,
+    "temperature_c_max": 22.5,
+    "temperature_c_mean": 22.43,
+    "temperature_f_min": 72.3,
+    "temperature_f_max": 72.5,
+    "temperature_f_mean": 72.37,
+    "relative_humidity_pct_min": 51.6,
+    "relative_humidity_pct_max": 54.0,
+    "relative_humidity_pct_mean": 52.4
   },
   "observations": [
     {
-      "time": "2026-10-11 00:00",
-      "temperature_c_mean": 22.41,
-      "temperature_c_min": 22.28,
-      "temperature_c_max": 22.5,
-      "temperature_f_mean": 72.34,
-      "temperature_f_min": 72.1,
+      "time": "2026-10-11T00:00:00",
+      "sample_count": 1,
+      "temperature_f": 72.5,
+      "temperature_c": 22.5,
+      "temperature_f_min": 72.5,
       "temperature_f_max": 72.5,
-      "relative_humidity_percent_mean": 53.6,
-      "relative_humidity_percent_min": 53.3,
-      "relative_humidity_percent_max": 54.0,
-      "dewpoint_c_mean": 12.53,
-      "sample_count": 60
+      "relative_humidity_pct": 54.0,
+      "relative_humidity_pct_min": 54.0,
+      "relative_humidity_pct_max": 54.0
+    },
+    {
+      "time": "2026-10-11T23:00:00",
+      "sample_count": 2,
+      "temperature_f": 72.3,
+      "temperature_c": 22.39,
+      "temperature_f_min": 72.3,
+      "temperature_f_max": 72.3,
+      "relative_humidity_pct": 51.7,
+      "relative_humidity_pct_min": 51.6,
+      "relative_humidity_pct_max": 51.7
     }
   ],
   "meta": {
-    "generator": "grok/xsense-ground-ingest",
-    "uogw": true
+    "generator": "uogw/ingest_xsense_ground.py",
+    "uogw": true,
+    "native_dates": [
+      "2026-10-11"
+    ]
   }
 }
