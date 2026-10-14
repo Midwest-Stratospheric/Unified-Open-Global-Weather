@@ -1,0 +1,208 @@
+{
+  "schema": "uogw.hub_visual_snapshots.v1",
+  "ok": true,
+  "date_utc": "2026-10-14",
+  "generated_at_utc": "2026-10-14T14:41:32Z",
+  "heat": {
+    "title": "Heat & humidity snapshot",
+    "global_temp_f": {
+      "n": 32,
+      "min": 35.2,
+      "max": 98.4,
+      "mean": 67.672,
+      "median": 68.25,
+      "pstdev": 15.005
+    },
+    "global_rh": {
+      "n": 32,
+      "min": 26.0,
+      "max": 99.0,
+      "mean": 71.75,
+      "median": 79.5,
+      "pstdev": 21.24
+    },
+    "casey_temp_f": {
+      "n": 24,
+      "min": 65.3,
+      "max": 91.0,
+      "mean": 77.737,
+      "median": 77.25,
+      "pstdev": 8.93
+    },
+    "heat_index_flags": [
+      {
+        "name": "Dubai, AE",
+        "temperature_f": 94.1,
+        "relative_humidity_pct": 49,
+        "heat_index_f": 102.5,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Mumbai, IN",
+        "temperature_f": 98.4,
+        "relative_humidity_pct": 26,
+        "heat_index_f": 97.7,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Jakarta, ID",
+        "temperature_f": 87.6,
+        "relative_humidity_pct": 64,
+        "heat_index_f": 96.1,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Singapore, SG",
+        "temperature_f": 86.2,
+        "relative_humidity_pct": 70,
+        "heat_index_f": 95.6,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Lagos, NG",
+        "temperature_f": 83.5,
+        "relative_humidity_pct": 77,
+        "heat_index_f": 91.6,
+        "level": "extreme_caution"
+      }
+    ],
+    "extremes": {
+      "hottest": {
+        "name": "Mumbai, IN",
+        "id": "mumbai_in",
+        "temperature_c": 36.9,
+        "temperature_f": 98.4,
+        "lat": 19.076,
+        "lon": 72.8777,
+        "country": "IN"
+      },
+      "coldest": {
+        "name": "Anchorage, AK, US",
+        "id": "anchorage_us",
+        "temperature_c": 1.8,
+        "temperature_f": 35.2,
+        "lat": 61.2181,
+        "lon": -149.9003,
+        "country": "US"
+      }
+    }
+  },
+  "marine": {
+    "title": "Marine NDBC snapshot",
+    "station_count": 6,
+    "rows": [
+      {
+        "station": "46026",
+        "wave_height_m": null,
+        "water_temp_f": 58.5,
+        "air_temp_f": null
+      },
+      {
+        "station": "44025",
+        "wave_height_m": 0.6,
+        "water_temp_f": 72.5,
+        "air_temp_f": null
+      },
+      {
+        "station": "46013",
+        "wave_height_m": null,
+        "water_temp_f": null,
+        "air_temp_f": 58.8
+      },
+      {
+        "station": "46042",
+        "wave_height_m": null,
+        "water_temp_f": 58.1,
+        "air_temp_f": 59.4
+      },
+      {
+        "station": "41008",
+        "wave_height_m": null,
+        "water_temp_f": null,
+        "air_temp_f": 82.8
+      },
+      {
+        "station": "46029",
+        "wave_height_m": null,
+        "water_temp_f": 64.0,
+        "air_temp_f": 62.2
+      }
+    ]
+  },
+  "casey": {
+    "title": "Casey local conditions",
+    "date": "2026-10-13",
+    "observation_count": 24,
+    "temp_f_min": 65.3,
+    "temp_f_max": 91.0,
+    "temp_f_mean": 77.7,
+    "hourly": [
+      {
+        "time": "2026-10-13T12:00",
+        "temperature_f": 86.7,
+        "humidity": 42
+      },
+      {
+        "time": "2026-10-13T13:00",
+        "temperature_f": 89.1,
+        "humidity": 41
+      },
+      {
+        "time": "2026-10-13T14:00",
+        "temperature_f": 90.3,
+        "humidity": 40
+      },
+      {
+        "time": "2026-10-13T15:00",
+        "temperature_f": 90.1,
+        "humidity": 43
+      },
+      {
+        "time": "2026-10-13T16:00",
+        "temperature_f": 91.0,
+        "humidity": 42
+      },
+      {
+        "time": "2026-10-13T17:00",
+        "temperature_f": 90.3,
+        "humidity": 43
+      },
+      {
+        "time": "2026-10-13T18:00",
+        "temperature_f": 87.8,
+        "humidity": 45
+      },
+      {
+        "time": "2026-10-13T19:00",
+        "temperature_f": 81.7,
+        "humidity": 52
+      },
+      {
+        "time": "2026-10-13T20:00",
+        "temperature_f": 79.9,
+        "humidity": 58
+      },
+      {
+        "time": "2026-10-13T21:00",
+        "temperature_f": 78.4,
+        "humidity": 56
+      },
+      {
+        "time": "2026-10-13T22:00",
+        "temperature_f": 76.1,
+        "humidity": 65
+      },
+      {
+        "time": "2026-10-13T23:00",
+        "temperature_f": 75.4,
+        "humidity": 74
+      }
+    ]
+  },
+  "charts": {
+    "heat": "visuals/latest/hub-heat-cities.png",
+    "pressure": "visuals/latest/pressure-wind-sample.png",
+    "marine": "visuals/latest/hub-marine-waves.png",
+    "casey": "visuals/latest/hub-casey-recent.png"
+  }
+}
