@@ -1,1 +1,52 @@
-PLACEHOLDER - will use create instead
+{
+  "date": "2026-10-13",
+  "site": {
+    "name": "Casey, Illinois — MSDS ground station",
+    "lat": 39.2992,
+    "lon": -87.9925,
+    "elevation_m": 200,
+    "timezone": "America/Chicago",
+    "instrument": "X-Sense thermo-hygrometer"
+  },
+  "source": {
+    "provider": "X-Sense",
+    "kind": "in-situ ground station email export",
+    "email_from": "support@x-sense-iot.com",
+    "filename": "Thermo-hygrometer_Export Data_20261013.csv",
+    "retrieved_at_utc": "2026-10-14T18:01:27Z",
+    "curator": "Midwest Stratospheric Data Systems"
+  },
+  "data_kind": "in_situ_observations",
+  "native_interval": "1min",
+  "product_interval": "hourly",
+  "observation_count": 24,
+  "native_sample_count": 1440,
+  "stats": {
+    "temperature_c": {
+      "min": 22.39,
+      "max": 23.78,
+      "mean": 23.21
+    },
+    "temperature_f": {
+      "min": 72.3,
+      "max": 74.8,
+      "mean": 73.78
+    },
+    "relative_humidity_percent": {
+      "min": 52.2,
+      "max": 61.7,
+      "mean": 56.16
+    },
+    "dewpoint_c": {
+      "min": 12.38,
+      "max": 15.51,
+      "mean": 13.98
+    },
+    "native_sample_count": 1440
+  },
+  "observations": [],
+  "meta": {
+    "generator": "grok/xsense-ground-ingest",
+    "uogw": true
+  }
+}
