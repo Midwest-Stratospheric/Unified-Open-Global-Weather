@@ -1,7 +1,7 @@
 {
   "date": "2026-10-16",
   "site": {
-    "name": "Casey, Illinois — MSDS ground station",
+    "name": "Casey, Illinois \u2014 MSDS ground station",
     "lat": 39.2992,
     "lon": -87.9925,
     "elevation_m": 200,
@@ -13,7 +13,7 @@
     "kind": "in-situ ground station email export",
     "email_from": "support@x-sense-iot.com",
     "filename": "Thermo-hygrometer_Export Data_20261016.csv",
-    "retrieved_at_utc": "2026-10-17T18:01:00Z",
+    "retrieved_at_utc": "2026-10-17T18:01:09Z",
     "curator": "Midwest Stratospheric Data Systems"
   },
   "data_kind": "in_situ_observations",
@@ -38,12 +38,27 @@
       "mean": 58.58
     },
     "dewpoint_c": {
-      "min": 11.45,
-      "max": 16.78,
-      "mean": 13.92
+      "min": 8.87,
+      "max": 16.9,
+      "mean": 13.45
     }
   },
-  "observations": [],
+  "observations": [
+    {
+      "time": "2026-10-16T00:00:00",
+      "temperature_c_mean": 24.08,
+      "temperature_f_mean": 75.34,
+      "temperature_c_min": 24.0,
+      "temperature_c_max": 24.11,
+      "temperature_f_min": 75.2,
+      "temperature_f_max": 75.4,
+      "relative_humidity_percent_mean": 63.65,
+      "relative_humidity_percent_min": 63.2,
+      "relative_humidity_percent_max": 64.1,
+      "dewpoint_c_mean": 16.76,
+      "sample_count": 60
+    }
+  ],
   "meta": {
     "generator": "grok/xsense-ground-ingest",
     "uogw": true
