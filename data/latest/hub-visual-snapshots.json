@@ -2,87 +2,87 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-10-18",
-  "generated_at_utc": "2026-10-18T12:12:11Z",
+  "generated_at_utc": "2026-10-18T13:36:15Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
       "n": 32,
-      "min": 36.9,
-      "max": 93.0,
-      "mean": 63.228,
-      "median": 61.55,
-      "pstdev": 16.612
+      "min": 35.4,
+      "max": 93.6,
+      "mean": 61.506,
+      "median": 58.75,
+      "pstdev": 16.801
     },
     "global_rh": {
       "n": 32,
-      "min": 29.0,
-      "max": 96.0,
-      "mean": 71.594,
-      "median": 76.0,
-      "pstdev": 15.17
+      "min": 24.0,
+      "max": 98.0,
+      "mean": 70.469,
+      "median": 72.0,
+      "pstdev": 15.093
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 48.4,
-      "max": 70.3,
-      "mean": 53.517,
-      "median": 52.15,
-      "pstdev": 4.958
+      "min": 38.8,
+      "max": 57.0,
+      "mean": 47.204,
+      "median": 45.75,
+      "pstdev": 5.73
     },
     "heat_index_flags": [
       {
         "name": "Dubai, AE",
-        "temperature_f": 92.8,
-        "relative_humidity_pct": 63,
-        "heat_index_f": 109.1,
+        "temperature_f": 93.6,
+        "relative_humidity_pct": 60,
+        "heat_index_f": 109.0,
         "level": "danger"
       },
       {
         "name": "Mumbai, IN",
-        "temperature_f": 93.0,
-        "relative_humidity_pct": 52,
-        "heat_index_f": 101.9,
+        "temperature_f": 91.9,
+        "relative_humidity_pct": 59,
+        "heat_index_f": 103.8,
         "level": "extreme_caution"
       },
       {
         "name": "Jakarta, ID",
-        "temperature_f": 91.6,
-        "relative_humidity_pct": 53,
-        "heat_index_f": 99.4,
+        "temperature_f": 89.2,
+        "relative_humidity_pct": 58,
+        "heat_index_f": 96.8,
         "level": "extreme_caution"
       },
       {
         "name": "Singapore, SG",
-        "temperature_f": 86.0,
-        "relative_humidity_pct": 75,
-        "heat_index_f": 97.3,
+        "temperature_f": 89.4,
+        "relative_humidity_pct": 53,
+        "heat_index_f": 94.8,
         "level": "extreme_caution"
       },
       {
         "name": "Lagos, NG",
-        "temperature_f": 84.4,
-        "relative_humidity_pct": 77,
-        "heat_index_f": 93.9,
+        "temperature_f": 84.0,
+        "relative_humidity_pct": 81,
+        "heat_index_f": 94.4,
         "level": "extreme_caution"
       }
     ],
     "extremes": {
       "hottest": {
-        "name": "Mumbai, IN",
-        "id": "mumbai_in",
-        "temperature_c": 33.9,
-        "temperature_f": 93.0,
-        "lat": 19.076,
-        "lon": 72.8777,
-        "country": "IN"
+        "name": "Dubai, AE",
+        "id": "dubai_ae",
+        "temperature_c": 34.2,
+        "temperature_f": 93.6,
+        "lat": 25.2048,
+        "lon": 55.2708,
+        "country": "AE"
       },
       "coldest": {
-        "name": "Anchorage, AK, US",
-        "id": "anchorage_us",
-        "temperature_c": 2.7,
-        "temperature_f": 36.9,
-        "lat": 61.2181,
-        "lon": -149.9003,
+        "name": "Casey, IL, US",
+        "id": "casey_il",
+        "temperature_c": 1.9,
+        "temperature_f": 35.4,
+        "lat": 39.2992,
+        "lon": -87.9925,
         "country": "US"
       }
     }
