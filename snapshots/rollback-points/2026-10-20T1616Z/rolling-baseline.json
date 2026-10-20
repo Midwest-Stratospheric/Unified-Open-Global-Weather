@@ -1,0 +1,938 @@
+{
+  "schema": "uogw.rolling_baseline.v1",
+  "date_utc": "2026-10-20",
+  "generated_at_utc": "2026-10-20T14:16:56Z",
+  "window_days": 7,
+  "source_files": [
+    "layers/ground/samples/cities-2026-10-14.json",
+    "layers/ground/samples/cities-2026-10-15.json",
+    "layers/ground/samples/cities-2026-10-16.json",
+    "layers/ground/samples/cities-2026-10-17.json",
+    "layers/ground/samples/cities-2026-10-18.json",
+    "layers/ground/samples/cities-2026-10-19.json",
+    "layers/ground/samples/cities-2026-10-20.json"
+  ],
+  "city_count": 34,
+  "cities": {
+    "casey_il": {
+      "name": "Casey, IL, US",
+      "country": "US",
+      "temperature_c_mean": 10.2,
+      "temperature_c_std": 7.795,
+      "temperature_c": {
+        "n": 7,
+        "mean": 10.2,
+        "std": 7.795,
+        "min": 1.9,
+        "max": 22.8
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1023.614,
+        "std": 7.4,
+        "min": 1012.9,
+        "max": 1032.2
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 3.577,
+        "std": 2.347,
+        "min": 0.63,
+        "max": 7.88
+      }
+    },
+    "chicago_il": {
+      "name": "Chicago, IL, US",
+      "country": "US",
+      "temperature_c_mean": 8.757,
+      "temperature_c_std": 4.66,
+      "temperature_c": {
+        "n": 7,
+        "mean": 8.757,
+        "std": 4.66,
+        "min": 4.0,
+        "max": 16.3
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1023.543,
+        "std": 7.525,
+        "min": 1012.1,
+        "max": 1031.1
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 3.366,
+        "std": 1.681,
+        "min": 1.1,
+        "max": 6.14
+      }
+    },
+    "houston_tx": {
+      "name": "Houston, TX, US",
+      "country": "US",
+      "temperature_c_mean": 17.071,
+      "temperature_c_std": 5.783,
+      "temperature_c": {
+        "n": 7,
+        "mean": 17.071,
+        "std": 5.783,
+        "min": 11.3,
+        "max": 25.7
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1021.314,
+        "std": 5.142,
+        "min": 1014.8,
+        "max": 1028.1
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 2.416,
+        "std": 0.903,
+        "min": 1.6,
+        "max": 4.54
+      }
+    },
+    "toronto_ca": {
+      "name": "Toronto, CA",
+      "country": "CA",
+      "temperature_c_mean": 8.129,
+      "temperature_c_std": 3.824,
+      "temperature_c": {
+        "n": 7,
+        "mean": 8.129,
+        "std": 3.824,
+        "min": 3.0,
+        "max": 13.6
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1021.557,
+        "std": 9.836,
+        "min": 1002.1,
+        "max": 1030.6
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 2.486,
+        "std": 0.604,
+        "min": 1.3,
+        "max": 3.16
+      }
+    },
+    "mexico_city_mx": {
+      "name": "Mexico City, MX",
+      "country": "MX",
+      "temperature_c_mean": 12.714,
+      "temperature_c_std": 1.362,
+      "temperature_c": {
+        "n": 7,
+        "mean": 12.714,
+        "std": 1.362,
+        "min": 10.6,
+        "max": 14.5
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1020.543,
+        "std": 2.521,
+        "min": 1017.2,
+        "max": 1024.1
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 1.371,
+        "std": 0.849,
+        "min": 0.21,
+        "max": 3.18
+      }
+    },
+    "sao_paulo_br": {
+      "name": "Sao Paulo, BR",
+      "country": "BR",
+      "temperature_c_mean": 16.314,
+      "temperature_c_std": 1.63,
+      "temperature_c": {
+        "n": 7,
+        "mean": 16.314,
+        "std": 1.63,
+        "min": 14.1,
+        "max": 18.3
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1015.0,
+        "std": 2.912,
+        "min": 1011.9,
+        "max": 1020.2
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 1.691,
+        "std": 0.97,
+        "min": 0.25,
+        "max": 3.02
+      }
+    },
+    "buenos_aires_ar": {
+      "name": "Buenos Aires, AR",
+      "country": "AR",
+      "temperature_c_mean": 11.129,
+      "temperature_c_std": 2.275,
+      "temperature_c": {
+        "n": 7,
+        "mean": 11.129,
+        "std": 2.275,
+        "min": 7.8,
+        "max": 14.2
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1021.257,
+        "std": 1.195,
+        "min": 1019.2,
+        "max": 1022.5
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 3.15,
+        "std": 0.621,
+        "min": 2.18,
+        "max": 3.98
+      }
+    },
+    "lima_pe": {
+      "name": "Lima, PE",
+      "country": "PE",
+      "temperature_c_mean": 21.157,
+      "temperature_c_std": 0.466,
+      "temperature_c": {
+        "n": 7,
+        "mean": 21.157,
+        "std": 0.466,
+        "min": 20.5,
+        "max": 21.9
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1010.829,
+        "std": 0.836,
+        "min": 1009.9,
+        "max": 1012.7
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 2.75,
+        "std": 0.87,
+        "min": 1.51,
+        "max": 3.82
+      }
+    },
+    "london_uk": {
+      "name": "London, UK",
+      "country": "GB",
+      "temperature_c_mean": 12.4,
+      "temperature_c_std": 2.69,
+      "temperature_c": {
+        "n": 7,
+        "mean": 12.4,
+        "std": 2.69,
+        "min": 9.2,
+        "max": 18.1
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1024.4,
+        "std": 7.94,
+        "min": 1008.4,
+        "max": 1033.9
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 3.4,
+        "std": 1.018,
+        "min": 1.8,
+        "max": 4.5
+      }
+    },
+    "paris_fr": {
+      "name": "Paris, FR",
+      "country": "FR",
+      "temperature_c_mean": 12.9,
+      "temperature_c_std": 2.888,
+      "temperature_c": {
+        "n": 7,
+        "mean": 12.9,
+        "std": 2.888,
+        "min": 9.3,
+        "max": 17.7
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1024.057,
+        "std": 6.965,
+        "min": 1008.4,
+        "max": 1031.5
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 2.177,
+        "std": 0.795,
+        "min": 0.72,
+        "max": 3.1
+      }
+    },
+    "berlin_de": {
+      "name": "Berlin, DE",
+      "country": "DE",
+      "temperature_c_mean": 11.386,
+      "temperature_c_std": 1.829,
+      "temperature_c": {
+        "n": 7,
+        "mean": 11.386,
+        "std": 1.829,
+        "min": 8.3,
+        "max": 14.6
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1024.957,
+        "std": 4.546,
+        "min": 1017.3,
+        "max": 1032.3
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 2.773,
+        "std": 0.827,
+        "min": 1.73,
+        "max": 4.37
+      }
+    },
+    "madrid_es": {
+      "name": "Madrid, ES",
+      "country": "ES",
+      "temperature_c_mean": 16.82,
+      "temperature_c_std": 3.81,
+      "temperature_c": {
+        "n": 5,
+        "mean": 16.82,
+        "std": 3.81,
+        "min": 11.4,
+        "max": 21.7
+      },
+      "pressure_msl_hpa": {
+        "n": 5,
+        "mean": 1021.32,
+        "std": 5.303,
+        "min": 1014.2,
+        "max": 1028.2
+      },
+      "wind_speed_ms": {
+        "n": 5,
+        "mean": 2.548,
+        "std": 1.308,
+        "min": 1.21,
+        "max": 4.53
+      }
+    },
+    "rome_it": {
+      "name": "Rome, IT",
+      "country": "IT",
+      "temperature_c_mean": 20.1,
+      "temperature_c_std": 0.847,
+      "temperature_c": {
+        "n": 7,
+        "mean": 20.1,
+        "std": 0.847,
+        "min": 18.8,
+        "max": 21.7
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1021.529,
+        "std": 3.251,
+        "min": 1016.9,
+        "max": 1026.4
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 1.087,
+        "std": 0.472,
+        "min": 0.36,
+        "max": 1.87
+      }
+    },
+    "oslo_no": {
+      "name": "Oslo, NO",
+      "country": "NO",
+      "temperature_c_mean": 9.42,
+      "temperature_c_std": 2.668,
+      "temperature_c": {
+        "n": 5,
+        "mean": 9.42,
+        "std": 2.668,
+        "min": 6.1,
+        "max": 13.8
+      },
+      "pressure_msl_hpa": {
+        "n": 5,
+        "mean": 1022.14,
+        "std": 10.07,
+        "min": 1012.1,
+        "max": 1038.1
+      },
+      "wind_speed_ms": {
+        "n": 5,
+        "mean": 2.96,
+        "std": 2.339,
+        "min": 1.1,
+        "max": 7.5
+      }
+    },
+    "stockholm_se": {
+      "name": "Stockholm, SE",
+      "country": "SE",
+      "temperature_c_mean": 8.9,
+      "temperature_c_std": 2.5,
+      "temperature_c": {
+        "n": 6,
+        "mean": 8.9,
+        "std": 2.5,
+        "min": 5.8,
+        "max": 13.7
+      },
+      "pressure_msl_hpa": {
+        "n": 6,
+        "mean": 1025.85,
+        "std": 11.592,
+        "min": 1007.1,
+        "max": 1039.7
+      },
+      "wind_speed_ms": {
+        "n": 6,
+        "mean": 3.433,
+        "std": 1.826,
+        "min": 0.8,
+        "max": 6.2
+      }
+    },
+    "reykjavik_is": {
+      "name": "Reykjavik, IS",
+      "country": "IS",
+      "temperature_c_mean": 6.286,
+      "temperature_c_std": 1.915,
+      "temperature_c": {
+        "n": 7,
+        "mean": 6.286,
+        "std": 1.915,
+        "min": 2.4,
+        "max": 7.9
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 994.786,
+        "std": 20.857,
+        "min": 948.8,
+        "max": 1019.0
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 9.086,
+        "std": 4.772,
+        "min": 2.5,
+        "max": 18.6
+      }
+    },
+    "moscow_ru": {
+      "name": "Moscow, RU",
+      "country": "RU",
+      "temperature_c_mean": 9.683,
+      "temperature_c_std": 1.819,
+      "temperature_c": {
+        "n": 6,
+        "mean": 9.683,
+        "std": 1.819,
+        "min": 7.1,
+        "max": 12.5
+      },
+      "pressure_msl_hpa": {
+        "n": 6,
+        "mean": 1027.433,
+        "std": 7.851,
+        "min": 1019.7,
+        "max": 1040.7
+      },
+      "wind_speed_ms": {
+        "n": 6,
+        "mean": 1.785,
+        "std": 0.668,
+        "min": 1.06,
+        "max": 3.19
+      }
+    },
+    "cairo_eg": {
+      "name": "Cairo, EG",
+      "country": "EG",
+      "temperature_c_mean": 26.857,
+      "temperature_c_std": 2.044,
+      "temperature_c": {
+        "n": 7,
+        "mean": 26.857,
+        "std": 2.044,
+        "min": 25.4,
+        "max": 31.4
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1016.643,
+        "std": 2.949,
+        "min": 1012.8,
+        "max": 1020.5
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 3.073,
+        "std": 0.732,
+        "min": 1.97,
+        "max": 4.2
+      }
+    },
+    "nairobi_ke": {
+      "name": "Nairobi, KE",
+      "country": "KE",
+      "temperature_c_mean": 25.414,
+      "temperature_c_std": 2.398,
+      "temperature_c": {
+        "n": 7,
+        "mean": 25.414,
+        "std": 2.398,
+        "min": 22.9,
+        "max": 29.2
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1015.886,
+        "std": 1.364,
+        "min": 1014.2,
+        "max": 1017.6
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 2.554,
+        "std": 0.978,
+        "min": 1.45,
+        "max": 4.43
+      }
+    },
+    "johannesburg_za": {
+      "name": "Johannesburg, ZA",
+      "country": "ZA",
+      "temperature_c_mean": 25.557,
+      "temperature_c_std": 1.662,
+      "temperature_c": {
+        "n": 7,
+        "mean": 25.557,
+        "std": 1.662,
+        "min": 22.0,
+        "max": 27.7
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1017.414,
+        "std": 3.065,
+        "min": 1010.9,
+        "max": 1020.0
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 2.919,
+        "std": 1.888,
+        "min": 0.57,
+        "max": 6.99
+      }
+    },
+    "lagos_ng": {
+      "name": "Lagos, NG",
+      "country": "NG",
+      "temperature_c_mean": 29.0,
+      "temperature_c_std": 0.521,
+      "temperature_c": {
+        "n": 7,
+        "mean": 29.0,
+        "std": 0.521,
+        "min": 28.3,
+        "max": 30.1
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1014.0,
+        "std": 0.359,
+        "min": 1013.3,
+        "max": 1014.5
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 1.519,
+        "std": 0.367,
+        "min": 0.93,
+        "max": 2.06
+      }
+    },
+    "dubai_ae": {
+      "name": "Dubai, AE",
+      "country": "AE",
+      "temperature_c_mean": 34.267,
+      "temperature_c_std": 0.593,
+      "temperature_c": {
+        "n": 6,
+        "mean": 34.267,
+        "std": 0.593,
+        "min": 33.4,
+        "max": 35.3
+      },
+      "pressure_msl_hpa": {
+        "n": 6,
+        "mean": 1011.583,
+        "std": 1.395,
+        "min": 1009.8,
+        "max": 1013.5
+      },
+      "wind_speed_ms": {
+        "n": 6,
+        "mean": 3.152,
+        "std": 0.388,
+        "min": 2.46,
+        "max": 3.73
+      }
+    },
+    "mumbai_in": {
+      "name": "Mumbai, IN",
+      "country": "IN",
+      "temperature_c_mean": 34.567,
+      "temperature_c_std": 1.408,
+      "temperature_c": {
+        "n": 6,
+        "mean": 34.567,
+        "std": 1.408,
+        "min": 33.3,
+        "max": 36.9
+      },
+      "pressure_msl_hpa": {
+        "n": 6,
+        "mean": 1010.05,
+        "std": 0.905,
+        "min": 1008.4,
+        "max": 1011.3
+      },
+      "wind_speed_ms": {
+        "n": 6,
+        "mean": 2.27,
+        "std": 0.541,
+        "min": 1.66,
+        "max": 3.15
+      }
+    },
+    "beijing_cn": {
+      "name": "Beijing, CN",
+      "country": "CN",
+      "temperature_c_mean": 17.057,
+      "temperature_c_std": 3.664,
+      "temperature_c": {
+        "n": 7,
+        "mean": 17.057,
+        "std": 3.664,
+        "min": 10.9,
+        "max": 23.0
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1016.7,
+        "std": 5.193,
+        "min": 1008.3,
+        "max": 1023.6
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 1.961,
+        "std": 0.979,
+        "min": 0.4,
+        "max": 3.11
+      }
+    },
+    "tokyo_jp": {
+      "name": "Tokyo, JP",
+      "country": "JP",
+      "temperature_c_mean": 20.529,
+      "temperature_c_std": 0.848,
+      "temperature_c": {
+        "n": 7,
+        "mean": 20.529,
+        "std": 0.848,
+        "min": 19.2,
+        "max": 21.8
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1020.5,
+        "std": 5.11,
+        "min": 1010.8,
+        "max": 1027.1
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 1.16,
+        "std": 0.627,
+        "min": 0.58,
+        "max": 2.33
+      }
+    },
+    "seoul_kr": {
+      "name": "Seoul, KR",
+      "country": "KR",
+      "temperature_c_mean": 17.914,
+      "temperature_c_std": 2.395,
+      "temperature_c": {
+        "n": 7,
+        "mean": 17.914,
+        "std": 2.395,
+        "min": 14.4,
+        "max": 21.9
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1019.443,
+        "std": 4.025,
+        "min": 1012.6,
+        "max": 1024.6
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 1.62,
+        "std": 0.684,
+        "min": 0.95,
+        "max": 2.82
+      }
+    },
+    "singapore_sg": {
+      "name": "Singapore, SG",
+      "country": "SG",
+      "temperature_c_mean": 30.057,
+      "temperature_c_std": 0.847,
+      "temperature_c": {
+        "n": 7,
+        "mean": 30.057,
+        "std": 0.847,
+        "min": 29.1,
+        "max": 31.9
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1008.471,
+        "std": 0.506,
+        "min": 1007.8,
+        "max": 1009.4
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 1.894,
+        "std": 0.623,
+        "min": 0.63,
+        "max": 2.53
+      }
+    },
+    "bangkok_th": {
+      "name": "Bangkok, TH",
+      "country": "TH",
+      "temperature_c_mean": 27.95,
+      "temperature_c_std": 0.67,
+      "temperature_c": {
+        "n": 6,
+        "mean": 27.95,
+        "std": 0.67,
+        "min": 26.8,
+        "max": 29.1
+      },
+      "pressure_msl_hpa": {
+        "n": 6,
+        "mean": 1009.183,
+        "std": 0.867,
+        "min": 1008.0,
+        "max": 1010.4
+      },
+      "wind_speed_ms": {
+        "n": 6,
+        "mean": 1.153,
+        "std": 0.467,
+        "min": 0.57,
+        "max": 1.83
+      }
+    },
+    "jakarta_id": {
+      "name": "Jakarta, ID",
+      "country": "ID",
+      "temperature_c_mean": 32.433,
+      "temperature_c_std": 1.301,
+      "temperature_c": {
+        "n": 6,
+        "mean": 32.433,
+        "std": 1.301,
+        "min": 30.9,
+        "max": 34.0
+      },
+      "pressure_msl_hpa": {
+        "n": 6,
+        "mean": 1008.567,
+        "std": 0.632,
+        "min": 1007.6,
+        "max": 1009.4
+      },
+      "wind_speed_ms": {
+        "n": 6,
+        "mean": 3.308,
+        "std": 0.219,
+        "min": 2.95,
+        "max": 3.68
+      }
+    },
+    "auckland_nz": {
+      "name": "Auckland, NZ",
+      "country": "NZ",
+      "temperature_c_mean": 13.5,
+      "temperature_c_std": 2.06,
+      "temperature_c": {
+        "n": 5,
+        "mean": 13.5,
+        "std": 2.06,
+        "min": 10.5,
+        "max": 16.9
+      },
+      "pressure_msl_hpa": {
+        "n": 5,
+        "mean": 1025.14,
+        "std": 6.552,
+        "min": 1013.9,
+        "max": 1031.0
+      },
+      "wind_speed_ms": {
+        "n": 5,
+        "mean": 3.588,
+        "std": 1.163,
+        "min": 1.78,
+        "max": 4.88
+      }
+    },
+    "honolulu_us": {
+      "name": "Honolulu, HI, US",
+      "country": "US",
+      "temperature_c_mean": 23.814,
+      "temperature_c_std": 0.458,
+      "temperature_c": {
+        "n": 7,
+        "mean": 23.814,
+        "std": 0.458,
+        "min": 23.3,
+        "max": 24.4
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1017.029,
+        "std": 0.974,
+        "min": 1015.6,
+        "max": 1018.7
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 4.676,
+        "std": 1.039,
+        "min": 2.8,
+        "max": 5.63
+      }
+    },
+    "anchorage_us": {
+      "name": "Anchorage, AK, US",
+      "country": "US",
+      "temperature_c_mean": 2.7,
+      "temperature_c_std": 1.066,
+      "temperature_c": {
+        "n": 7,
+        "mean": 2.7,
+        "std": 1.066,
+        "min": 1.2,
+        "max": 4.6
+      },
+      "pressure_msl_hpa": {
+        "n": 7,
+        "mean": 1000.871,
+        "std": 8.316,
+        "min": 986.3,
+        "max": 1010.6
+      },
+      "wind_speed_ms": {
+        "n": 7,
+        "mean": 2.086,
+        "std": 1.415,
+        "min": 0.32,
+        "max": 4.08
+      }
+    },
+    "istanbul_tr": {
+      "name": "Istanbul, TR",
+      "country": "TR",
+      "temperature_c_mean": 15.25,
+      "temperature_c_std": 2.041,
+      "temperature_c": {
+        "n": 6,
+        "mean": 15.25,
+        "std": 2.041,
+        "min": 13.2,
+        "max": 19.1
+      },
+      "pressure_msl_hpa": {
+        "n": 6,
+        "mean": 1018.95,
+        "std": 3.252,
+        "min": 1013.5,
+        "max": 1024.2
+      },
+      "wind_speed_ms": {
+        "n": 6,
+        "mean": 4.9,
+        "std": 1.739,
+        "min": 1.84,
+        "max": 7.58
+      }
+    },
+    "sydney_au": {
+      "name": "Sydney, AU",
+      "country": "AU",
+      "temperature_c_mean": 17.0,
+      "temperature_c_std": 1.038,
+      "temperature_c": {
+        "n": 6,
+        "mean": 17.0,
+        "std": 1.038,
+        "min": 15.3,
+        "max": 18.5
+      },
+      "pressure_msl_hpa": {
+        "n": 6,
+        "mean": 1028.183,
+        "std": 1.937,
+        "min": 1024.9,
+        "max": 1030.3
+      },
+      "wind_speed_ms": {
+        "n": 6,
+        "mean": 3.35,
+        "std": 0.735,
+        "min": 1.9,
+        "max": 4.08
+      }
+    }
+  },
+  "curator": "Aerostratospheric",
+  "note": "Rolling observational baseline for research context and anomaly z-scores. Not a formal climate normal."
+}
