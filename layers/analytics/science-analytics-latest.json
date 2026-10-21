@@ -1,7 +1,7 @@
 {
   "schema": "uogw.science_analytics.v1",
-  "date_utc": "2026-10-20",
-  "generated_at_utc": "2026-10-20T17:10:40Z",
+  "date_utc": "2026-10-21",
+  "generated_at_utc": "2026-10-21T14:41:12Z",
   "curator": "Aerostratospheric",
   "display_preference": {
     "hub_temperature_unit": "fahrenheit",
@@ -12,8 +12,8 @@
     "global_cities_total": 34,
     "casey_hourly_count": 24,
     "ndbc_stations_sampled": 6,
-    "research_climate_cities": 9,
-    "anomaly_events": 5,
+    "research_climate_cities": 10,
+    "anomaly_events": 3,
     "baseline_present": true,
     "research_summary_present": true
   },
@@ -21,132 +21,132 @@
     "global_city_temperature": {
       "celsius": {
         "n": 32,
-        "min": 1.2,
-        "max": 35.3,
-        "mean": 16.703,
-        "median": 14.1,
-        "pstdev": 9.065
+        "min": 2.0,
+        "max": 34.6,
+        "mean": 17.387,
+        "median": 13.9,
+        "pstdev": 9.534
       },
       "fahrenheit": {
         "n": 32,
-        "min": 34.2,
-        "max": 95.5,
-        "mean": 62.062,
-        "median": 57.4,
-        "pstdev": 16.319
+        "min": 35.6,
+        "max": 94.3,
+        "mean": 63.294,
+        "median": 57.0,
+        "pstdev": 17.163
       }
     },
     "global_city_humidity_pct": {
       "n": 32,
-      "min": 16.0,
-      "max": 100.0,
-      "mean": 73.0,
-      "median": 78.5,
-      "pstdev": 19.378
+      "min": 12.0,
+      "max": 97.0,
+      "mean": 67.844,
+      "median": 72.5,
+      "pstdev": 19.42
     },
     "global_city_pressure_hpa": {
       "n": 32,
-      "min": 986.3,
-      "max": 1040.7,
-      "mean": 1017.916,
-      "median": 1018.85,
-      "pstdev": 10.425
+      "min": 997.2,
+      "max": 1036.6,
+      "mean": 1016.081,
+      "median": 1015.75,
+      "pstdev": 9.08
     },
     "global_city_wind_ms": {
       "n": 32,
-      "min": 0.57,
-      "max": 5.47,
-      "mean": 2.351,
-      "median": 2.19,
-      "pstdev": 1.095
+      "min": 0.5,
+      "max": 7.1,
+      "mean": 2.823,
+      "median": 2.71,
+      "pstdev": 1.512
     },
     "casey_temperature": {
       "celsius": {
         "n": 24,
-        "min": 3.0,
-        "max": 21.7,
-        "mean": 11.246,
-        "median": 9.65,
-        "pstdev": 6.868
+        "min": 5.5,
+        "max": 22.7,
+        "mean": 13.037,
+        "median": 11.3,
+        "pstdev": 6.407
       },
       "fahrenheit": {
         "n": 24,
-        "min": 37.4,
-        "max": 71.1,
-        "mean": 52.25,
-        "median": 49.35,
-        "pstdev": 12.369
+        "min": 41.9,
+        "max": 72.9,
+        "mean": 55.471,
+        "median": 52.3,
+        "pstdev": 11.534
       }
     },
     "casey_humidity_pct": {
       "n": 24,
-      "min": 20.0,
-      "max": 100.0,
-      "mean": 65.917,
-      "median": 71.5,
-      "pstdev": 27.206
+      "min": 21.0,
+      "max": 98.0,
+      "mean": 61.083,
+      "median": 66.5,
+      "pstdev": 26.725
     }
   },
   "marine": {
     "wave_height_m": {
       "n": 1,
-      "min": 0.5,
-      "max": 0.5,
-      "mean": 0.5,
-      "median": 0.5
+      "min": 0.4,
+      "max": 0.4,
+      "mean": 0.4,
+      "median": 0.4
     },
     "water_temperature": {
       "celsius": {
         "n": 4,
-        "min": 16.8,
-        "max": 22.7,
-        "mean": 18.4,
-        "median": 17.05,
-        "pstdev": 2.487
+        "min": 16.4,
+        "max": 23.0,
+        "mean": 18.425,
+        "median": 17.15,
+        "pstdev": 2.665
       },
       "fahrenheit": {
         "n": 4,
-        "min": 62.2,
-        "max": 72.9,
-        "mean": 65.125,
-        "median": 62.7,
-        "pstdev": 4.499
+        "min": 61.5,
+        "max": 73.4,
+        "mean": 65.15,
+        "median": 62.85,
+        "pstdev": 4.805
       }
     },
     "air_temperature": {
       "celsius": {
         "n": 4,
-        "min": 16.0,
-        "max": 28.2,
-        "mean": 19.25,
+        "min": 15.9,
+        "max": 28.4,
+        "mean": 19.275,
         "median": 16.4,
-        "pstdev": 5.17
+        "pstdev": 5.274
       },
       "fahrenheit": {
         "n": 4,
-        "min": 60.8,
-        "max": 82.8,
-        "mean": 66.65,
-        "median": 61.5,
-        "pstdev": 9.329
+        "min": 60.6,
+        "max": 83.1,
+        "mean": 66.7,
+        "median": 61.55,
+        "pstdev": 9.48
       }
     }
   },
   "extremes": {
     "hottest": {
-      "name": "Dubai, AE",
-      "id": "dubai_ae",
-      "temperature_c": 35.3,
-      "temperature_f": 95.5,
-      "lat": 25.2048,
-      "lon": 55.2708,
-      "country": "AE"
+      "name": "Mumbai, IN",
+      "id": "mumbai_in",
+      "temperature_c": 34.6,
+      "temperature_f": 94.3,
+      "lat": 19.076,
+      "lon": 72.8777,
+      "country": "IN"
     },
     "coldest": {
       "name": "Anchorage, AK, US",
       "id": "anchorage_us",
-      "temperature_c": 1.2,
-      "temperature_f": 34.2,
+      "temperature_c": 2.0,
+      "temperature_f": 35.6,
       "lat": 61.2181,
       "lon": -149.9003,
       "country": "US"
@@ -155,120 +155,84 @@
   "heat_index_flags": [
     {
       "name": "Mumbai, IN",
-      "temperature_f": 93.0,
-      "relative_humidity_pct": 55,
-      "heat_index_f": 103.8,
+      "temperature_f": 94.3,
+      "relative_humidity_pct": 46,
+      "heat_index_f": 101.0,
       "level": "extreme_caution"
     },
     {
       "name": "Dubai, AE",
-      "temperature_f": 95.5,
-      "relative_humidity_pct": 44,
-      "heat_index_f": 102.3,
+      "temperature_f": 93.6,
+      "relative_humidity_pct": 46,
+      "heat_index_f": 99.6,
       "level": "extreme_caution"
     },
     {
       "name": "Bangkok, TH",
-      "temperature_f": 84.4,
-      "relative_humidity_pct": 77,
-      "heat_index_f": 93.9,
+      "temperature_f": 86.5,
+      "relative_humidity_pct": 70,
+      "heat_index_f": 96.3,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Jakarta, ID",
+      "temperature_f": 88.7,
+      "relative_humidity_pct": 59,
+      "heat_index_f": 96.2,
       "level": "extreme_caution"
     },
     {
       "name": "Singapore, SG",
-      "temperature_f": 84.4,
-      "relative_humidity_pct": 76,
-      "heat_index_f": 93.5,
+      "temperature_f": 84.9,
+      "relative_humidity_pct": 75,
+      "heat_index_f": 94.4,
       "level": "extreme_caution"
     },
     {
       "name": "Lagos, NG",
-      "temperature_f": 82.9,
-      "relative_humidity_pct": 80,
-      "heat_index_f": 91.0,
+      "temperature_f": 83.5,
+      "relative_humidity_pct": 79,
+      "heat_index_f": 92.3,
       "level": "extreme_caution"
     }
   ],
   "anomalies": {
     "counts": {
-      "total": 5,
+      "total": 3,
       "alert": 1,
-      "watch": 3,
-      "info": 1
+      "watch": 2,
+      "info": 0
     },
     "top": [
       {
-        "kind": "high_pressure",
-        "severity": "info",
-        "subject": "Moscow, RU",
-        "metric": "pressure_msl_hpa",
-        "value": 1040.7,
-        "threshold": 1040,
-        "detail": "Very high MSLP >= 1040 hPa"
-      },
-      {
-        "kind": "surface_heat",
-        "severity": "watch",
-        "subject": "Dubai, AE",
-        "metric": "temperature_c",
-        "value": 35.3,
-        "threshold": 35,
-        "detail": "High heat: T>=35C (example: 36.2C mid-latitude hot day)"
-      },
-      {
         "kind": "temp_zscore_mad",
         "severity": "watch",
-        "subject": "Nairobi, KE",
+        "subject": "Reykjavik, IS",
         "metric": "z_mad",
-        "value": 3.5749,
+        "value": -4.5288,
         "threshold": 3.5,
         "detail": "Robust MAD z-score |z|>=3.5",
         "extra": {
           "methods": {
             "n": 7,
-            "x": 29.2,
-            "z_pop": 1.5788,
-            "z_sample": 1.4617,
-            "z_mad": 3.5749,
-            "s_range": 0.6009,
-            "percentile": 87.5,
-            "mean": 25.4143,
-            "median": 23.9,
-            "pstdev": 2.3979,
-            "sample_stdev": 2.59,
-            "mad": 1.0
-          }
-        }
-      },
-      {
-        "kind": "temp_zscore_mad",
-        "severity": "alert",
-        "subject": "Johannesburg, ZA",
-        "metric": "z_mad",
-        "value": -5.396,
-        "threshold": 5.0,
-        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
-        "extra": {
-          "methods": {
-            "n": 7,
-            "x": 22.0,
-            "z_pop": -2.1402,
-            "z_sample": -1.9814,
-            "z_mad": -5.396,
-            "s_range": -0.6241,
-            "percentile": 12.5,
-            "mean": 25.5571,
-            "median": 26.0,
-            "pstdev": 1.6621,
-            "sample_stdev": 1.7952,
-            "mad": 0.5
+            "x": 2.5,
+            "z_pop": -1.3799,
+            "z_sample": -1.2776,
+            "z_mad": -4.5288,
+            "s_range": -0.5792,
+            "percentile": 25.0,
+            "mean": 5.6857,
+            "median": 7.2,
+            "pstdev": 2.3086,
+            "sample_stdev": 2.4936,
+            "mad": 0.7
           }
         }
       },
       {
         "kind": "temp_zscore_mad",
         "severity": "watch",
-        "subject": "Bangkok, TH",
+        "subject": "Nairobi, KE",
         "metric": "z_mad",
         "value": 3.7098,
         "threshold": 3.5,
@@ -276,16 +240,41 @@
         "extra": {
           "methods": {
             "n": 7,
-            "x": 29.1,
-            "z_pop": 1.3329,
-            "z_sample": 1.234,
+            "x": 29.4,
+            "z_pop": 1.3935,
+            "z_sample": 1.2902,
             "z_mad": 3.7098,
-            "s_range": 0.4286,
-            "percentile": 81.25,
-            "mean": 28.1143,
+            "s_range": 0.5758,
+            "percentile": 87.5,
+            "mean": 25.6571,
+            "median": 23.9,
+            "pstdev": 2.6859,
+            "sample_stdev": 2.9011,
+            "mad": 1.0
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Bangkok, TH",
+        "metric": "z_mad",
+        "value": 7.7568,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 30.3,
+            "z_pop": 1.9553,
+            "z_sample": 1.8103,
+            "z_mad": 7.7568,
+            "s_range": 0.5755,
+            "percentile": 87.5,
+            "mean": 28.2857,
             "median": 28.0,
-            "pstdev": 0.7396,
-            "sample_stdev": 0.7988,
+            "pstdev": 1.0302,
+            "sample_stdev": 1.1127,
             "mad": 0.2
           }
         }
@@ -297,31 +286,31 @@
     {
       "id": "hottest_city",
       "label": "Hottest sample city",
-      "value": "95.5 \u00b0F",
-      "detail": "Dubai, AE"
+      "value": "94.3 \u00b0F",
+      "detail": "Mumbai, IN"
     },
     {
       "id": "coldest_city",
       "label": "Coldest sample city",
-      "value": "34.2 \u00b0F",
+      "value": "35.6 \u00b0F",
       "detail": "Anchorage, AK, US"
     },
     {
       "id": "casey_range",
       "label": "Casey daily range",
-      "value": "37.4\u201371.1 \u00b0F",
-      "detail": "2026-10-19"
+      "value": "41.9\u201372.9 \u00b0F",
+      "detail": "2026-10-20"
     },
     {
       "id": "anomalies",
       "label": "Anomaly flags",
-      "value": "5",
-      "detail": "alert 1 \u00b7 watch 3 \u00b7 info 1"
+      "value": "3",
+      "detail": "alert 1 \u00b7 watch 2 \u00b7 info 0"
     },
     {
       "id": "heat_index",
       "label": "Elevated heat index",
-      "value": "103.8 \u00b0F",
+      "value": "101.0 \u00b0F",
       "detail": "Mumbai, IN"
     }
   ],
