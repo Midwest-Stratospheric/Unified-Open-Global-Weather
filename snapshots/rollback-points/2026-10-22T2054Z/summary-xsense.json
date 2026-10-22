@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-21",
+  "generated_at_utc": "2026-10-21T17:14:38Z",
+  "entries": {
+    "global-cities": {
+      "ok": true,
+      "observation_count": 32,
+      "file": "data/entries/2026-10-21/global-cities.json"
+    },
+    "igra-index": {
+      "ok": false,
+      "station_count": 0,
+      "y2d_file_count": 0,
+      "file": "data/entries/2026-10-21/igra-index.json"
+    },
+    "ndbc-realtime": {
+      "ok": true,
+      "observation_count": 6,
+      "station_ids": [
+        "46026",
+        "44025",
+        "46013",
+        "46042",
+        "41008",
+        "46029"
+      ],
+      "file": "data/entries/2026-10-21/ndbc-realtime.json"
+    },
+    "research-summary": {
+      "ok": true,
+      "file": "data/entries/2026-10-21/research-summary.json",
+      "dataset_count": 26,
+      "global_cities_ok": 32,
+      "ndbc_realtime_stations": 6,
+      "casey_hourly_count": 24,
+      "daily_climate_cities": 10
+    },
+    "science-package": {
+      "ok": true,
+      "file": "data/entries/2026-10-21/science-package.json"
+    },
+    "daily-climate": {
+      "ok": true,
+      "observation_count": 10,
+      "file": "data/entries/2026-10-21/daily-climate.json"
+    },
+    "anomaly-report": {
+      "ok": true,
+      "total": 3,
+      "alerts": 1,
+      "watches": 2,
+      "file": "data/entries/2026-10-21/anomaly-report.json"
+    },
+    "science-analytics": {
+      "ok": true,
+      "file": "data/entries/2026-10-21/science-analytics.json",
+      "highlights": 5,
+      "anomaly_total": 3
+    },
+    "satellite-radiance-index": {
+      "ok": true,
+      "product_count": 6,
+      "file": "data/entries/2026-10-21/satellite-radiance-index.json"
+    },
+    "casey-hourly": {
+      "ok": true,
+      "observation_count": 24,
+      "file": "data/entries/2026-10-21/casey-hourly.json"
+    },
+    "casey-xsense": {
+      "ok": true,
+      "observation_count": 24,
+      "native_sample_count": 1440,
+      "file": "data/entries/2026-10-21/casey-xsense.json",
+      "source": "X-Sense in-situ"
+    }
+  },
+  "curator": "Aerostratospheric",
+  "indexes": {
+    "igra_stations": 0,
+    "igra_y2d_files": 0,
+    "ndbc_stations": 1940,
+    "ghcn_stations": 0,
+    "ghcn_countries": 0,
+    "foreign_open_sources": 18,
+    "global_city_samples": 34,
+    "global_city_ok": 32
+  },
+  "derived_surface_stats": {
+    "global_city_temperature_c": {
+      "mean": 17.387,
+      "min": 2.0,
+      "max": 34.6
+    },
+    "global_city_humidity_pct": {
+      "mean": 67.844
+    },
+    "global_city_pressure_hpa": {
+      "mean": 1016.081
+    },
+    "global_city_wind_ms": {
+      "mean": 2.823
+    },
+    "casey_temperature_c": {
+      "min": 5.5,
+      "max": 22.7,
+      "mean": 13.037
+    },
+    "ndbc_wave_height_m": {
+      "mean": 0.4,
+      "n": 1
+    },
+    "ndbc_water_temp_c": {
+      "mean": 18.425,
+      "n": 4
+    },
+    "ndbc_air_temp_c": {
+      "mean": 19.275,
+      "n": 4
+    }
+  }
+}
