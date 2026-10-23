@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-23",
+  "site": {
+    "id": "MSDS-LIGHTNING-CASEY",
+    "timezone": "America/Chicago",
+    "instrument": "Ecowitt gateway lightning sensor",
+    "location_mode": "fixed"
+  },
+  "source": {
+    "provider": "Aerostratospheric (Ecowitt gateway share, relayed by the cached feed https://www.midwestsds.com/data/lightning/lightning.php)",
+    "retrieved_at_utc": "2026-10-23T05:04:29Z"
+  },
+  "gateway_last_update_utc": "2026-10-23T05:03:00Z",
+  "lightning": {
+    "last_strike_utc": "2026-10-23T04:22:00Z",
+    "last_strike_local": "2026-10-22T23:22:00",
+    "last_strike_distance_mi": 9,
+    "last_strike_distance_km": 14.5,
+    "daily_count": 0,
+    "daily_min_distance_mi": null,
+    "one_hour_min_distance_mi": 9
+  },
+  "pressure": {
+    "relative_inhg": 29.54,
+    "relative_hpa": 1000.3,
+    "absolute_inhg": 29.54,
+    "daily_max_relative_inhg": 29.55,
+    "daily_min_relative_inhg": 29.54
+  },
+  "events_logged": 1,
+  "files": {
+    "events": "layers/ground/casey/lightning/events.csv",
+    "station": "layers/ground/casey/lightning/station.json"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "MSDS-LIGHTNING-CASEY",
+  "title": "Casey, Illinois lightning detector (Ecowitt gateway)",
+  "layer": "ground",
+  "station_type": "fixed_lightning_detector",
+  "timezone": "America/Chicago",
+  "status": "active",
+  "variables": [
+    "last_strike_distance_mi",
+    "last_strike_distance_km",
+    "last_strike_time",
+    "daily_strike_count",
+    "daily_min_distance_mi",
+    "one_hour_min_distance_mi",
+    "pressure_relative_inhg",
+    "pressure_absolute_inhg"
+  ],
+  "instrument": "Ecowitt gateway with lightning sensor (strike count and last-strike distance only; no energy or bearing)",
+  "location_mode": "fixed",
+  "location_note": "Casey, Illinois ground station. Exact coordinates are not published for this stream.",
+  "first_ingest": "2026-10-22",
+  "license": "CC BY 4.0, attribution: Aerostratospheric (midwestsds.com)",
+  "notes": "Strike times are logged when the gateway's last-strike time changes, so strikes between polls can be missed. Daily count resets at local midnight (America/Chicago)."
+}
