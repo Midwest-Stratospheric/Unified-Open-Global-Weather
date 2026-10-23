@@ -1,6 +1,6 @@
-# Casey weather station KILCASEY47 (Weather Underground)
+# Casey weather station KILCASEY47
 
-Fixed personal weather station **KILCASEY47** operated by Aerostratospheric at the Casey, Illinois ground station. Dashboard: https://www.wunderground.com/dashboard/pws/KILCASEY47
+Fixed personal weather station **KILCASEY47** operated by Aerostratospheric at the Casey, Illinois ground station.
 
 | File | Description |
 |------|-------------|
@@ -10,4 +10,6 @@ Fixed personal weather station **KILCASEY47** operated by Aerostratospheric at t
 
 Units are US customary (°F, mph, inHg, in, W/m²). Hours or days with missing observations show a smaller `n` or `wu_obs_count` (2026-09-22, 2026-10-05 and 2026-10-12 are partial days).
 
-Source: Weather Underground / The Weather Company PWS observations from the Aerostratospheric station (KILCASEY47). Data retrieved through the Weather Underground API is not licensed by us while the WU API terms are reviewed, matching the note in the repository README. Please credit "Aerostratospheric Fixed Weather Station KILCASEY47" if you use it.
+Source: Aerostratospheric Fixed Weather Station KILCASEY47. Licence: not yet specified for this layer; credit Aerostratospheric Fixed Weather Station KILCASEY47.
+
+Station data is provided to NOAA through the Citizen Weather Observer Program (CWOP) via KE9CFY.

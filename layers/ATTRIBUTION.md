@@ -20,12 +20,13 @@ Cite as: Aerostratospheric (2026). Unified Open Global Weather (UOGW). https://g
 | Index of links to open weather authorities (URLs only) | `layers/ground/international/` |
 | Documentation (`README.md` files, `docs/`) | — |
 
-## Excluded: KILCASEY47 (Weather Underground API data)
+## KILCASEY47 (Aerostratospheric Fixed Weather Station)
 
-`layers/ground/casey/wunderground/`, `data/latest/casey-wu.json` and `snapshots/rollback-points/*/casey-wu.json` hold observations from Aerostratospheric's station **KILCASEY47**, retrieved through the Weather Underground / The Weather Company API.
+`layers/ground/casey/wunderground/`, `data/latest/casey-wu.json` and `snapshots/rollback-points/*/casey-wu.json` hold observations from Aerostratospheric's station **KILCASEY47**.
 
-- **Not licensed:** they are **not** licensed under CC BY 4.0 or any other license from Aerostratospheric while the Weather Underground API terms are reviewed (https://www.wunderground.com/company/legal).
-- **No longer republished:** they are no longer added to new snapshots.
+- **Licence:** not yet specified for this layer; credit Aerostratospheric Fixed Weather Station KILCASEY47.
+- **Snapshots:** these files are not added to new snapshots.
+- Station data is provided to NOAA through the Citizen Weather Observer Program (CWOP) via KE9CFY.
 
 ## Third-party sources (their own terms apply)
 

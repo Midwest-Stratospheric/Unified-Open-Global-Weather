@@ -160,7 +160,7 @@ UOGW contains both Aerostratospheric data and third-party data, so licensing is 
   - Copernicus CAMS air-quality data (via Open-Meteo) is under the Copernicus licence: https://apps.ecmwf.int/datasets/licences/copernicus/
   - Iowa Environmental Mesonet data is used per its terms: https://mesonet.agron.iastate.edu/disclaimer.php
   - NOAA/NASA satellite catalog metadata follows the provider's data policies.
-- **Excluded:** KILCASEY47 data retrieved through the Weather Underground API (`layers/ground/casey/wunderground/`, `casey-wu.json`) is not licensed by us while the WU API terms are reviewed.
+- **KILCASEY47 station data** (`layers/ground/casey/wunderground/`): Licence: not yet specified for this layer; credit Aerostratospheric Fixed Weather Station KILCASEY47. Station data is provided to NOAA through the Citizen Weather Observer Program (CWOP) via KE9CFY.
 - **Code** (scripts, workflows) is not licensed under CC BY 4.0.
 
 ---
