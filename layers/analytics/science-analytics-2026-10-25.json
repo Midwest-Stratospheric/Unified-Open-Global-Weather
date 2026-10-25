@@ -1,0 +1,240 @@
+{
+  "schema": "uogw.science_analytics.v1",
+  "date_utc": "2026-10-25",
+  "generated_at_utc": "2026-10-25T13:56:14Z",
+  "curator": "Aerostratospheric",
+  "display_preference": {
+    "hub_temperature_unit": "fahrenheit",
+    "science_storage_unit": "celsius"
+  },
+  "coverage": {
+    "global_cities_ok": 33,
+    "global_cities_total": 34,
+    "casey_hourly_count": 24,
+    "ndbc_stations_sampled": 6,
+    "research_climate_cities": 10,
+    "anomaly_events": 0,
+    "baseline_present": true,
+    "research_summary_present": true
+  },
+  "surface": {
+    "global_city_temperature": {
+      "celsius": {
+        "n": 33,
+        "min": 3.0,
+        "max": 34.4,
+        "mean": 17.23,
+        "median": 14.6,
+        "pstdev": 8.694
+      },
+      "fahrenheit": {
+        "n": 33,
+        "min": 37.4,
+        "max": 93.9,
+        "mean": 63.018,
+        "median": 58.3,
+        "pstdev": 15.65
+      }
+    },
+    "global_city_humidity_pct": {
+      "n": 33,
+      "min": 30.0,
+      "max": 95.0,
+      "mean": 72.303,
+      "median": 74.0,
+      "pstdev": 17.037
+    },
+    "global_city_pressure_hpa": {
+      "n": 33,
+      "min": 980.2,
+      "max": 1032.4,
+      "mean": 1013.661,
+      "median": 1015.0,
+      "pstdev": 11.76
+    },
+    "global_city_wind_ms": {
+      "n": 33,
+      "min": 0.15,
+      "max": 9.6,
+      "mean": 3.448,
+      "median": 2.71,
+      "pstdev": 2.33
+    },
+    "casey_temperature": {
+      "celsius": {
+        "n": 24,
+        "min": 7.9,
+        "max": 22.5,
+        "mean": 14.137,
+        "median": 12.2,
+        "pstdev": 5.401
+      },
+      "fahrenheit": {
+        "n": 24,
+        "min": 46.2,
+        "max": 72.5,
+        "mean": 57.454,
+        "median": 54.0,
+        "pstdev": 9.721
+      }
+    },
+    "casey_humidity_pct": {
+      "n": 24,
+      "min": 35.0,
+      "max": 85.0,
+      "mean": 62.875,
+      "median": 67.5,
+      "pstdev": 15.936
+    }
+  },
+  "marine": {
+    "wave_height_m": {
+      "n": 1,
+      "min": 1.6,
+      "max": 1.6,
+      "mean": 1.6,
+      "median": 1.6
+    },
+    "water_temperature": {
+      "celsius": {
+        "n": 4,
+        "min": 16.2,
+        "max": 22.2,
+        "mean": 18.2,
+        "median": 17.2,
+        "pstdev": 2.355
+      },
+      "fahrenheit": {
+        "n": 4,
+        "min": 61.2,
+        "max": 72.0,
+        "mean": 64.775,
+        "median": 62.95,
+        "pstdev": 4.25
+      }
+    },
+    "air_temperature": {
+      "celsius": {
+        "n": 4,
+        "min": 16.0,
+        "max": 28.2,
+        "mean": 20.225,
+        "median": 18.35,
+        "pstdev": 4.719
+      },
+      "fahrenheit": {
+        "n": 4,
+        "min": 60.8,
+        "max": 82.8,
+        "mean": 68.4,
+        "median": 65.0,
+        "pstdev": 8.518
+      }
+    }
+  },
+  "extremes": {
+    "hottest": {
+      "name": "Mumbai, IN",
+      "id": "mumbai_in",
+      "temperature_c": 34.4,
+      "temperature_f": 93.9,
+      "lat": 19.076,
+      "lon": 72.8777,
+      "country": "IN"
+    },
+    "coldest": {
+      "name": "Reykjavik, IS",
+      "id": "reykjavik_is",
+      "temperature_c": 3.0,
+      "temperature_f": 37.4,
+      "lat": 64.1466,
+      "lon": -21.9426,
+      "country": "IS"
+    }
+  },
+  "heat_index_flags": [
+    {
+      "name": "Dubai, AE",
+      "temperature_f": 91.4,
+      "relative_humidity_pct": 60,
+      "heat_index_f": 103.1,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Mumbai, IN",
+      "temperature_f": 93.9,
+      "relative_humidity_pct": 42,
+      "heat_index_f": 98.0,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Bangkok, TH",
+      "temperature_f": 88.5,
+      "relative_humidity_pct": 61,
+      "heat_index_f": 96.7,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Jakarta, ID",
+      "temperature_f": 87.1,
+      "relative_humidity_pct": 66,
+      "heat_index_f": 95.9,
+      "level": "extreme_caution"
+    }
+  ],
+  "anomalies": {
+    "counts": {
+      "total": 0,
+      "alert": 0,
+      "watch": 0,
+      "info": 0
+    },
+    "top": [],
+    "disclaimer": "Research screening only \u2014 not an official weather warning service."
+  },
+  "highlights": [
+    {
+      "id": "hottest_city",
+      "label": "Hottest sample city",
+      "value": "93.9 \u00b0F",
+      "detail": "Mumbai, IN"
+    },
+    {
+      "id": "coldest_city",
+      "label": "Coldest sample city",
+      "value": "37.4 \u00b0F",
+      "detail": "Reykjavik, IS"
+    },
+    {
+      "id": "casey_range",
+      "label": "Casey daily range",
+      "value": "46.2\u201372.5 \u00b0F",
+      "detail": "2026-10-24"
+    },
+    {
+      "id": "anomalies",
+      "label": "Anomaly flags",
+      "value": "0",
+      "detail": "alert 0 \u00b7 watch 0 \u00b7 info 0"
+    },
+    {
+      "id": "heat_index",
+      "label": "Elevated heat index",
+      "value": "103.1 \u00b0F",
+      "detail": "Dubai, AE"
+    }
+  ],
+  "inputs": {
+    "global_cities": true,
+    "casey": true,
+    "ndbc": true,
+    "anomaly": true,
+    "baseline": true,
+    "climate": true
+  },
+  "hub": {
+    "data_hub_url": "https://midwestsds.com/msds-data-hub.html",
+    "charts_url": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/visuals/latest/CHARTS.md",
+    "science_package": "data/latest/science-package.json"
+  }
+}
