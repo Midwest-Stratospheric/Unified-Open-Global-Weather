@@ -1,8 +1,8 @@
-# UOGW Charts — 2026-10-27
+# UOGW Charts — 2026-10-28
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-10-27T18:47:14Z UTC · Aerostratospheric_
+_Generated at 2026-10-28T10:55:16Z UTC · Aerostratospheric_
 
 ## PNG charts
 
@@ -72,7 +72,7 @@ Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMA
 
 ```mermaid
 pie showData
-  title Anomaly flags 2026-10-27
+  title Anomaly flags 2026-10-28
   "alert" : 0
   "watch" : 4
   "info" : 0
@@ -82,8 +82,8 @@ pie showData
 
 | Metric | Value |
 |--------|-------|
-| Date UTC | 2026-10-27 |
-| Cities OK | 32 |
-| City T min/max °F | 34.5 / 97.3 |
+| Date UTC | 2026-10-28 |
+| Cities OK | 33 |
+| City T min/max °F | 29.7 / 90.3 |
 | Anomaly total | 4 |
 
