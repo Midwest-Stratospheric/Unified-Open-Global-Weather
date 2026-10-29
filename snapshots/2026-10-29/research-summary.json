@@ -1,0 +1,179 @@
+{
+  "schema": "uogw.research_summary.v1",
+  "date_utc": "2026-10-29",
+  "generated_at_utc": "2026-10-29T15:46:17Z",
+  "curator": "Aerostratospheric",
+  "repository": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
+  "data_hub": "https://www.midwestsds.com/portal.html",
+  "purpose": "Daily multi-layer atmospheric research package.",
+  "catalog": {
+    "dataset_count": 28,
+    "layers": [
+      "ground",
+      "marine",
+      "upper_air",
+      "stratospheric",
+      "satellite",
+      "flight"
+    ]
+  },
+  "indexes": {
+    "igra_stations": 2931,
+    "igra_y2d_files": 0,
+    "ndbc_stations": 1940,
+    "ghcn_stations": 133041,
+    "ghcn_countries": 218,
+    "foreign_open_sources": 18,
+    "global_city_samples": 34,
+    "global_city_ok": 32
+  },
+  "observations_today": {
+    "global_cities_ok": 32,
+    "ndbc_realtime_stations": 6,
+    "casey_hourly_count": 24,
+    "research_daily_climate_cities": 10
+  },
+  "derived_surface_stats": {
+    "global_city_temperature_c": {
+      "mean": 17.788,
+      "min": 2.2,
+      "max": 31.4
+    },
+    "global_city_humidity_pct": {
+      "mean": 69.938
+    },
+    "global_city_pressure_hpa": {
+      "mean": 1017.622
+    },
+    "global_city_wind_ms": {
+      "mean": 2.336
+    },
+    "casey_temperature_c": {
+      "min": 8.8,
+      "max": 25.0,
+      "mean": 16.038
+    },
+    "ndbc_wave_height_m": {
+      "mean": 0.9,
+      "n": 1
+    },
+    "ndbc_water_temp_c": {
+      "mean": 17.95,
+      "n": 4
+    },
+    "ndbc_air_temp_c": {
+      "mean": 19.7,
+      "n": 4
+    }
+  },
+  "files": {
+    "layer_json_count": 1258,
+    "entry_files": [
+      "data/entries/2026-10-29/global-cities.json",
+      "data/entries/2026-10-29/heat-humidity.json",
+      "data/entries/2026-10-29/hub-endpoints.json",
+      "data/entries/2026-10-29/hub-visual-snapshots.json",
+      "data/entries/2026-10-29/igra-index.json",
+      "data/entries/2026-10-29/illinois-radiosonde-count.json",
+      "data/entries/2026-10-29/marine-snapshot.json",
+      "data/entries/2026-10-29/ndbc-realtime.json",
+      "data/entries/2026-10-29/ozone-health.json",
+      "data/entries/2026-10-29/pre-tornado-clark.json",
+      "data/entries/2026-10-29/pressure-wind.json",
+      "data/entries/2026-10-29/space-gfs-snapshot.json",
+      "data/entries/2026-10-29/summary.json",
+      "data/entries/2026-10-29/visuals-manifest.json"
+    ]
+  },
+  "science_notes": [
+    "Surface city samples use Open-Meteo (CC BY 4.0).",
+    "Marine realtime from NOAA NDBC public feeds.",
+    "Casey hourly is Open-Meteo model data, not station observations (Weather data by Open-Meteo.com, CC BY 4.0).",
+    "IGRA/GHCN/NDBC counts are discovery indexes."
+  ],
+  "status_sources": {
+    "igra": {
+      "source": "noaa-igra",
+      "ok": true,
+      "station_count": 2931,
+      "file_count": 0,
+      "data_entry": "data/entries/2026-10-29/igra-index.json",
+      "generated_at_utc": "2026-10-29T13:32:53Z"
+    },
+    "ndbc": {
+      "source": "ndbc",
+      "ok": true,
+      "station_count": 1940,
+      "sample_stations": [
+        "41001",
+        "46026",
+        "44025",
+        "42040",
+        "46013",
+        "46042",
+        "41008",
+        "46029"
+      ],
+      "realtime_observation_count": 6,
+      "data_entry": "data/entries/2026-10-29/ndbc-realtime.json",
+      "generated_at_utc": "2026-10-29T14:40:09Z"
+    },
+    "global_samples": {
+      "source": "open-meteo-samples",
+      "ok": true,
+      "city_count": 34,
+      "ok_count": 32,
+      "country_count": 30,
+      "countries": [
+        "AE",
+        "AR",
+        "AU",
+        "BR",
+        "CA",
+        "CN",
+        "DE",
+        "EG",
+        "ES",
+        "FR",
+        "GB",
+        "ID",
+        "IN",
+        "IS",
+        "IT",
+        "JP",
+        "KE",
+        "KR",
+        "MX",
+        "NG",
+        "NO",
+        "NZ",
+        "PE",
+        "RU",
+        "SE",
+        "SG",
+        "TH",
+        "TR",
+        "US",
+        "ZA"
+      ],
+      "data_entry": "data/entries/2026-10-29/global-cities.json",
+      "generated_at_utc": "2026-10-29T11:11:00Z"
+    },
+    "msds_ground": {
+      "source": "msds-casey-ground",
+      "ok": true,
+      "date": "2026-10-28",
+      "observation_count": 24,
+      "data_entry": "data/entries/2026-10-28/casey-hourly.json",
+      "generated_at_utc": "2026-10-29T13:07:05Z"
+    },
+    "international": {
+      "source": "international-indexes",
+      "ok": true,
+      "ghcn_station_count": 133041,
+      "ghcn_country_count": 218,
+      "foreign_source_count": 18,
+      "generated_at_utc": "2026-10-29T11:39:28Z"
+    }
+  }
+}
