@@ -14,36 +14,69 @@
     "email_from": "support@x-sense-iot.com",
     "filename": "2026-10-27.csv",
     "raw_file": "layers/ground/casey/xsense/raw/2026-10-27.csv",
-    "retrieved_at_utc": "2026-10-28T19:03:44Z",
+    "retrieved_at_utc": "2026-10-29T18:47:54Z",
     "curator": "Aerostratospheric"
   },
   "data_kind": "in_situ_observations",
   "native_interval": "1min",
   "product_interval": "hourly",
-  "observation_count": 1,
-  "native_sample_count": 1,
+  "observation_count": 4,
+  "native_sample_count": 180,
   "stats": {
-    "temperature_c_min": 22.28,
-    "temperature_c_max": 22.28,
-    "temperature_c_mean": 22.28,
-    "temperature_f_min": 72.1,
-    "temperature_f_max": 72.1,
-    "temperature_f_mean": 72.1,
-    "relative_humidity_pct_min": 61.8,
-    "relative_humidity_pct_max": 61.8,
-    "relative_humidity_pct_mean": 61.8
+    "temperature_c_min": 22.0,
+    "temperature_c_max": 22.78,
+    "temperature_c_mean": 22.58,
+    "temperature_f_min": 71.6,
+    "temperature_f_max": 73.0,
+    "temperature_f_mean": 72.64,
+    "relative_humidity_pct_min": 61.7,
+    "relative_humidity_pct_max": 63.4,
+    "relative_humidity_pct_mean": 62.5
   },
   "observations": [
     {
-      "time": "2026-10-27T23:00:00",
+      "time": "2026-10-27T00:00:00",
       "sample_count": 1,
-      "temperature_f": 72.1,
-      "temperature_c": 22.28,
+      "temperature_f": 71.6,
+      "temperature_c": 22.0,
+      "temperature_f_min": 71.6,
+      "temperature_f_max": 71.6,
+      "relative_humidity_pct": 62.2,
+      "relative_humidity_pct_min": 62.2,
+      "relative_humidity_pct_max": 62.2
+    },
+    {
+      "time": "2026-10-27T21:00:00",
+      "sample_count": 59,
+      "temperature_f": 72.91,
+      "temperature_c": 22.72,
+      "temperature_f_min": 72.9,
+      "temperature_f_max": 73.0,
+      "relative_humidity_pct": 63.1,
+      "relative_humidity_pct_min": 62.9,
+      "relative_humidity_pct_max": 63.4
+    },
+    {
+      "time": "2026-10-27T22:00:00",
+      "sample_count": 60,
+      "temperature_f": 72.7,
+      "temperature_c": 22.61,
+      "temperature_f_min": 72.5,
+      "temperature_f_max": 72.9,
+      "relative_humidity_pct": 62.5,
+      "relative_humidity_pct_min": 62.2,
+      "relative_humidity_pct_max": 62.9
+    },
+    {
+      "time": "2026-10-27T23:00:00",
+      "sample_count": 60,
+      "temperature_f": 72.32,
+      "temperature_c": 22.4,
       "temperature_f_min": 72.1,
-      "temperature_f_max": 72.1,
-      "relative_humidity_pct": 61.8,
-      "relative_humidity_pct_min": 61.8,
-      "relative_humidity_pct_max": 61.8
+      "temperature_f_max": 72.5,
+      "relative_humidity_pct": 62.0,
+      "relative_humidity_pct_min": 61.7,
+      "relative_humidity_pct_max": 62.3
     }
   ],
   "meta": {
