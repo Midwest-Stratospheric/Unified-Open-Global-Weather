@@ -22,15 +22,18 @@ Do not replace a comprehensive commit with a short latest-only window.
 | File | Role |
 |------|------|
 | `station.json` | Site metadata |
-| `latest.json` | Current window stats + daily rollup (2026-10-09 ingest) |
+| `latest.json` | Current window stats + daily rollup (2026-10-31 ingest) |
 | `hourly_2026-09-16_2026-09-19.csv` | 86 hours (2026-09-25 ingest, part 1) |
 | `hourly_2026-09-20_2026-09-25.csv` | 128 hours (2026-09-25 ingest, part 2) |
 | `hourly_2026-09-25_2026-10-09.csv` | All 338 hours of the 2026-10-09 ingest |
 | `hourly_2026-09-25_2026-09-30.csv` / `hourly_2026-10-01_2026-10-09.csv` | Same 338 hours split into two parts (136 + 202); duplicates of the combined file |
 | `2026-09-16.json` / `2026-09-25.json` / `2026-10-09.json` | Dated pointers for each ingest |
+| `hourly_2026-10-09_2026-10-31.csv` | 534 hours (2026-10-31 ingest) |
+| `minutes/YYYY-MM-DD.csv` | Minute CPM/µSv/h, 2026-10-09 to 2026-10-31 |
+| `2026-10-31.json` | Dated pointer for the 2026-10-31 ingest |
 | `compilation/` | Daily compilation CSV/JSON (one row per day plus one window summary row) |
 
-Native 1-minute rows are **not published** in this folder. The hourly files summarize them (`n` = minutes in each hour).
+Minute rows are published under `minutes/` from 2026-10-09 onward. The hourly files summarize them (`n` = minutes in each hour).
 
 ## Ingest history
 
@@ -39,8 +42,9 @@ Native 1-minute rows are **not published** in this folder. The hourly files summ
 | 2026-09-16 | 2026-09-15 12:40 – 2026-09-16 09:40 | 1,233 | not in current hourly files (count recorded in `2026-09-16.json`) |
 | 2026-09-25 | 2026-09-16 10:01 – 2026-09-25 07:52 | 12,832 | 214 |
 | 2026-10-09 | 2026-09-25 08:05 – 2026-10-09 09:30 | 20,244 | 338 |
+| 2026-10-31 | 2026-10-09 10:00 – 2026-10-31 15:12 | 31,986 | 534 |
 
-Hourly coverage: **2026-09-16 10:00 to 2026-10-09 09:30 CT**, 552 unique hours, 33,076 minute readings, with no missing hours.
+Hourly coverage: **2026-09-16 10:00 to 2026-10-31 15:12 CT**, 1,086 hours, 65,062 minute readings. One gap: 2026-10-09 09:31–09:59 CT (between exports).
 
 Window stats:
 
@@ -53,6 +57,6 @@ CPM is counts per minute. µSv/h (microsieverts per hour) is the dose-rate estim
 
 ## Update cadence
 
-Updates are **manual exports** from the counter using GQ Data Viewer 2.75, committed when an export is made (so far on 2026-09-16, 2026-09-25 and 2026-10-09). This folder is not a real-time feed.
+Updates are **manual exports** from the counter using GQ Data Viewer 2.75, committed when an export is made (so far on 2026-09-16, 2026-09-25, 2026-10-09 and 2026-10-31). This folder is not a real-time feed.
 
 Source: GQ Data Viewer 2.75. CC BY 4.0 with GQ Electronics attribution.

@@ -1,13 +1,13 @@
 {
-  "date": "2026-10-09",
-  "window_start_local": "2026-09-25T08:05:00",
-  "window_end_local": "2026-10-09T09:30:00",
-  "window_hours": 338,
+  "date": "2026-10-31",
+  "window_start_local": "2026-10-09T10:00:00",
+  "window_end_local": "2026-10-31T15:11:00",
+  "window_hours": 534,
   "policy": "Always commit the full hourly series for the ingest window, not a short latest-only slice.",
   "prior_window": {
-    "date": "2026-09-25",
-    "window_start_local": "2026-09-16T10:01:00",
-    "window_end_local": "2026-09-25T07:52:00"
+    "date": "2026-10-09",
+    "window_start_local": "2026-09-25T08:05:00",
+    "window_end_local": "2026-10-09T09:30:00"
   },
   "site": {
     "id": "MSDS-GMC800-CASEY",
@@ -19,262 +19,378 @@
   },
   "source": {
     "provider": "GQ Electronics LLC",
-    "software": "GMC Data Viewer 2.75",
-    "export_csv": "20261009_09_30_00.csv",
-    "retrieved_at_utc": "2026-10-09T15:01:49Z"
+    "device": "GQ GMC-800",
+    "export": "raw history memory dump (1-second CPS), decoded to minute CPM",
+    "retrieved_at_utc": "2026-10-31T20:17:00Z"
   },
-  "observation_count": 20244,
-  "hourly_count": 338,
-  "daily_count": 15,
+  "observation_count": 31986,
+  "hourly_count": 534,
+  "daily_count": 23,
   "stats": {
     "cpm": {
-      "mean": 14.997,
+      "mean": 15.09,
       "min": 3.0,
-      "max": 32.0,
+      "max": 33.0,
       "median": 15.0,
-      "n": 20244
+      "n": 31986
     },
     "usv_h": {
-      "mean": 0.0974,
-      "min": 0.02,
-      "max": 0.208,
-      "median": 0.097,
-      "n": 20244
+      "mean": 0.0981,
+      "min": 0.0195,
+      "max": 0.2145,
+      "median": 0.0975,
+      "n": 31986
     }
   },
   "files": {
-    "hourly": "layers/ground/casey/gmc-800/hourly_2026-09-25_2026-10-09.csv",
-    "minutes_dir": "layers/ground/casey/gmc-800/minutes/",
-    "hourly_parts": [
-      "layers/ground/casey/gmc-800/hourly_2026-09-25_2026-09-30.csv",
-      "layers/ground/casey/gmc-800/hourly_2026-10-01_2026-10-09.csv"
-    ]
+    "hourly": "hourly_2026-10-09_2026-10-31.csv",
+    "minutes": "minutes/"
   },
   "daily": [
     {
-      "date": "2026-09-25",
-      "cpm": {
-        "mean": 14.801,
-        "min": 4.0,
-        "max": 32.0,
-        "n": 955
-      },
-      "usv_h": {
-        "mean": 0.0961,
-        "min": 0.026,
-        "max": 0.208,
-        "n": 955
-      }
-    },
-    {
-      "date": "2026-09-26",
-      "cpm": {
-        "mean": 14.9007,
-        "min": 3.0,
-        "max": 29.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0968,
-        "min": 0.02,
-        "max": 0.189,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-09-27",
-      "cpm": {
-        "mean": 14.8535,
-        "min": 3.0,
-        "max": 29.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0965,
-        "min": 0.02,
-        "max": 0.189,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-09-28",
-      "cpm": {
-        "mean": 14.8424,
-        "min": 4.0,
-        "max": 28.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0964,
-        "min": 0.026,
-        "max": 0.182,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-09-29",
-      "cpm": {
-        "mean": 14.9097,
-        "min": 4.0,
-        "max": 28.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0968,
-        "min": 0.026,
-        "max": 0.182,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-09-30",
-      "cpm": {
-        "mean": 15.184,
-        "min": 4.0,
-        "max": 28.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0986,
-        "min": 0.026,
-        "max": 0.182,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-10-01",
-      "cpm": {
-        "mean": 15.2302,
-        "min": 4.0,
-        "max": 31.0,
-        "n": 1438
-      },
-      "usv_h": {
-        "mean": 0.0989,
-        "min": 0.026,
-        "max": 0.201,
-        "n": 1438
-      }
-    },
-    {
-      "date": "2026-10-02",
-      "cpm": {
-        "mean": 15.0597,
-        "min": 5.0,
-        "max": 26.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0978,
-        "min": 0.032,
-        "max": 0.169,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-10-03",
-      "cpm": {
-        "mean": 14.7611,
-        "min": 4.0,
-        "max": 29.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0959,
-        "min": 0.026,
-        "max": 0.189,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-10-04",
-      "cpm": {
-        "mean": 15.0625,
-        "min": 5.0,
-        "max": 29.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0978,
-        "min": 0.032,
-        "max": 0.189,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-10-05",
-      "cpm": {
-        "mean": 14.9083,
-        "min": 5.0,
-        "max": 29.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0968,
-        "min": 0.032,
-        "max": 0.189,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-10-06",
-      "cpm": {
-        "mean": 15.1326,
-        "min": 4.0,
-        "max": 31.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0983,
-        "min": 0.026,
-        "max": 0.201,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-10-07",
-      "cpm": {
-        "mean": 15.2139,
-        "min": 3.0,
-        "max": 31.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0988,
-        "min": 0.02,
-        "max": 0.201,
-        "n": 1440
-      }
-    },
-    {
-      "date": "2026-10-08",
-      "cpm": {
-        "mean": 14.9896,
-        "min": 5.0,
-        "max": 32.0,
-        "n": 1440
-      },
-      "usv_h": {
-        "mean": 0.0974,
-        "min": 0.032,
-        "max": 0.208,
-        "n": 1440
-      }
-    },
-    {
       "date": "2026-10-09",
-      "cpm": {
-        "mean": 15.1068,
-        "min": 5.0,
-        "max": 27.0,
-        "n": 571
-      },
-      "usv_h": {
-        "mean": 0.0981,
-        "min": 0.032,
-        "max": 0.176,
-        "n": 571
-      }
+      "cpm_mean": "15.2988",
+      "cpm_min": "5.0",
+      "cpm_max": "31.0",
+      "cpm_n": "840",
+      "usv_h_mean": "0.0994",
+      "usv_h_min": "0.0325",
+      "usv_h_max": "0.2015",
+      "usv_h_n": "840",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-10",
+      "cpm_mean": "15.2278",
+      "cpm_min": "4.0",
+      "cpm_max": "29.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.099",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.1885",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-11",
+      "cpm_mean": "15.1507",
+      "cpm_min": "5.0",
+      "cpm_max": "28.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0985",
+      "usv_h_min": "0.0325",
+      "usv_h_max": "0.182",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-12",
+      "cpm_mean": "15.3944",
+      "cpm_min": "4.0",
+      "cpm_max": "30.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.1001",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.195",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-13",
+      "cpm_mean": "15.1162",
+      "cpm_min": "4.0",
+      "cpm_max": "29.0",
+      "cpm_n": "1437",
+      "usv_h_mean": "0.0983",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.1885",
+      "usv_h_n": "1437",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-14",
+      "cpm_mean": "15.1431",
+      "cpm_min": "4.0",
+      "cpm_max": "31.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0984",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.2015",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-15",
+      "cpm_mean": "15.4424",
+      "cpm_min": "4.0",
+      "cpm_max": "33.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.1004",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.2145",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-16",
+      "cpm_mean": "15.1271",
+      "cpm_min": "4.0",
+      "cpm_max": "29.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0983",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.1885",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-17",
+      "cpm_mean": "14.6174",
+      "cpm_min": "3.0",
+      "cpm_max": "29.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.095",
+      "usv_h_min": "0.0195",
+      "usv_h_max": "0.1885",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-18",
+      "cpm_mean": "14.6743",
+      "cpm_min": "4.0",
+      "cpm_max": "28.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0954",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.182",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-19",
+      "cpm_mean": "14.9409",
+      "cpm_min": "5.0",
+      "cpm_max": "29.0",
+      "cpm_n": "1439",
+      "usv_h_mean": "0.0971",
+      "usv_h_min": "0.0325",
+      "usv_h_max": "0.1885",
+      "usv_h_n": "1439",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-20",
+      "cpm_mean": "14.9972",
+      "cpm_min": "3.0",
+      "cpm_max": "28.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0975",
+      "usv_h_min": "0.0195",
+      "usv_h_max": "0.182",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-21",
+      "cpm_mean": "15.1056",
+      "cpm_min": "5.0",
+      "cpm_max": "27.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0982",
+      "usv_h_min": "0.0325",
+      "usv_h_max": "0.1755",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-22",
+      "cpm_mean": "15.1903",
+      "cpm_min": "4.0",
+      "cpm_max": "28.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0987",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.182",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-23",
+      "cpm_mean": "14.9535",
+      "cpm_min": "4.0",
+      "cpm_max": "30.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0972",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.195",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-24",
+      "cpm_mean": "14.9653",
+      "cpm_min": "5.0",
+      "cpm_max": "30.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0973",
+      "usv_h_min": "0.0325",
+      "usv_h_max": "0.195",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-25",
+      "cpm_mean": "15.0222",
+      "cpm_min": "3.0",
+      "cpm_max": "31.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0976",
+      "usv_h_min": "0.0195",
+      "usv_h_max": "0.2015",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-26",
+      "cpm_mean": "15.2",
+      "cpm_min": "4.0",
+      "cpm_max": "29.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0988",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.1885",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-27",
+      "cpm_mean": "15.1361",
+      "cpm_min": "4.0",
+      "cpm_max": "30.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0984",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.195",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-28",
+      "cpm_mean": "15.0806",
+      "cpm_min": "4.0",
+      "cpm_max": "33.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.098",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.2145",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-29",
+      "cpm_mean": "15.2097",
+      "cpm_min": "3.0",
+      "cpm_max": "30.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0989",
+      "usv_h_min": "0.0195",
+      "usv_h_max": "0.195",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-30",
+      "cpm_mean": "15.05",
+      "cpm_min": "4.0",
+      "cpm_max": "32.0",
+      "cpm_n": "1440",
+      "usv_h_mean": "0.0978",
+      "usv_h_min": "0.026",
+      "usv_h_max": "0.208",
+      "usv_h_n": "1440",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
+    },
+    {
+      "date": "2026-10-31",
+      "cpm_mean": "15.1363",
+      "cpm_min": "6.0",
+      "cpm_max": "30.0",
+      "cpm_n": "910",
+      "usv_h_mean": "0.0984",
+      "usv_h_min": "0.039",
+      "usv_h_max": "0.195",
+      "usv_h_n": "910",
+      "site_id": "MSDS-GMC800-CASEY",
+      "lat": "39.2974",
+      "lon": "-87.9818",
+      "timezone": "America/Chicago"
     }
   ],
   "meta": {
