@@ -2,7 +2,7 @@
   "schema": "uogw.illinois_radiosonde_count.v1",
   "ok": true,
   "date_utc": "2026-11-02",
-  "generated_at_utc": "2026-11-02T01:01:59Z",
+  "generated_at_utc": "2026-11-02T06:10:43Z",
   "region": {
     "name": "Illinois",
     "focus": "NWS radiosonde / rawinsonde launches",
@@ -11,11 +11,11 @@
   },
   "window": {
     "hours": 72,
-    "start_utc": "2026-10-30T01:01:59Z",
-    "end_utc": "2026-11-02T01:01:59Z"
+    "start_utc": "2026-10-30T06:10:43Z",
+    "end_utc": "2026-11-02T06:10:43Z"
   },
   "counts": {
-    "launches_3_days": 5,
+    "launches_3_days": 6,
     "devices_likely_aloft": 0,
     "aloft_window_hours": 2.0,
     "stations_reporting": 1
@@ -66,6 +66,15 @@
       "sbcape_jkg": 0.0,
       "pwater_mm": 28.245758,
       "shear_sfc_6km_smps": 9.501933
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-11-02T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.82462966,
+      "pwater_mm": 27.795631,
+      "shear_sfc_6km_smps": 17.539776
     }
   ],
   "stations": [
@@ -75,7 +84,7 @@
       "state": "IL",
       "role": "primary",
       "ok": true,
-      "launches_3_days": 5,
+      "launches_3_days": 6,
       "launches": [
         {
           "station": "KILX",
@@ -121,6 +130,15 @@
           "sbcape_jkg": 0.0,
           "pwater_mm": 28.245758,
           "shear_sfc_6km_smps": 9.501933
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-11-02T00:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 0.82462966,
+          "pwater_mm": 27.795631,
+          "shear_sfc_6km_smps": 17.539776
         }
       ]
     }
