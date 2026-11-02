@@ -1,0 +1,45 @@
+name: Open Sources Daily (space weather, regional obs, ILX soundings, UV/ozone)
+
+on:
+  schedule:
+    - cron: "40 11 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: uogw-open-sources
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Fetch
+        working-directory: scripts
+        run: |
+          rc=0
+          for s in fetch_swpc_space_weather fetch_nws_observations fetch_openmeteo_archive fetch_igra_ilx fetch_uv_ozone; do
+            python3 "$s.py" || { echo "::warning::$s failed"; rc=1; }
+          done
+          echo "partial_fail=$rc" >> "$GITHUB_ENV"
+      - name: Commit
+        run: |
+          set -e
+          git config user.name "uogw-bot"
+          git config user.email "bot@midwestsds.com"
+          git add layers/space-weather layers/ground/regional layers/upper-air/ilx-soundings layers/atmosphere || true
+          if git diff --staged --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "data(open-sources): SWPC, NWS, Open-Meteo, IGRA ILX, UV/ozone $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((i * 2))
+          done
+          exit 1
