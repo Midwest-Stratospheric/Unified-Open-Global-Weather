@@ -27,7 +27,7 @@ def write_csv(path: Path, rows: list[dict], fields: list[str] | None = None) -> 
     path.parent.mkdir(parents=True, exist_ok=True)
     fields = fields or (list(rows[0].keys()) if rows else [])
     with open(path, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
     return len(rows)
