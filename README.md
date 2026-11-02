@@ -48,6 +48,21 @@ Full consumer guide: **[docs/DATA_PACKAGES.md](./docs/DATA_PACKAGES.md)**
 
 ---
 
+## New open datasets (added 2026-11-02)
+
+Updated daily by [`open-sources-daily.yml`](./.github/workflows/open-sources-daily.yml). Each layer README lists source, license, fields, units and cadence.
+
+| Layer | Path | Source | License |
+|---|---|---|---|
+| Space weather: Kp, solar wind, X-ray flux, F10.7, geomagnetic/aurora summary | [`layers/space-weather/`](./layers/space-weather/) | NOAA SWPC | Public domain |
+| Regional surface obs (KMTO, KLWV, KHUF) | [`layers/ground/regional/nws/`](./layers/ground/regional/) | NOAA/NWS | Public domain |
+| Daily reanalysis, Casey + Birds IL | [`layers/ground/regional/open-meteo/`](./layers/ground/regional/) | Open-Meteo | CC BY 4.0 |
+| Radiosonde soundings, Lincoln IL (ILX) | [`layers/upper-air/ilx-soundings/`](./layers/upper-air/ilx-soundings/) | NOAA NCEI IGRA | Public domain |
+| UV index forecast, Casey | [`layers/atmosphere/uv-index/`](./layers/atmosphere/) | NOAA CPC / EPA | Public domain |
+| Modeled ozone + air quality, Casey + Birds | [`layers/atmosphere/ozone/`](./layers/atmosphere/) | Open-Meteo (CAMS) | CC BY 4.0 |
+
+---
+
 ## Built-in graphs and charts (°F)
 
 ### Global city temperatures
