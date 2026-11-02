@@ -52,3 +52,14 @@ The following are Aerostratospheric computations on the third-party inputs above
 - their `snapshots/` copies
 
 Our methods and structure are CC BY 4.0. The underlying values stay under the source terms above, so cite those providers as well.
+
+## Open public sources added 2026-11-02
+
+| Data | Paths | Provider | Terms |
+|---|---|---|---|
+| Kp, solar wind, GOES X-ray, F10.7, NOAA scales + 3-day forecast | `layers/space-weather/` | NOAA Space Weather Prediction Center | US Government work, public domain |
+| ASOS observations KMTO, KLWV, KHUF | `layers/ground/regional/nws/` | NOAA National Weather Service (api.weather.gov) | US Government work, public domain |
+| Daily reanalysis, Casey and Birds IL | `layers/ground/regional/open-meteo/` | Open-Meteo.com (ERA5, Copernicus C3S) | CC BY 4.0, https://open-meteo.com/en/license |
+| Radiosonde soundings, Lincoln IL (USM00074560) | `layers/upper-air/ilx-soundings/` | NOAA NCEI IGRA v2.2 | US Government work, public domain |
+| UV index forecast, ZIP 62420 | `layers/atmosphere/uv-index/` | NOAA Climate Prediction Center / US EPA Envirofacts | US Government work, public domain |
+| Modeled ozone, NO2, PM2.5, UV | `layers/atmosphere/ozone/` | Open-Meteo.com Air Quality (Copernicus CAMS) | CC BY 4.0, https://open-meteo.com/en/license |

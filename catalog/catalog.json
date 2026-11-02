@@ -15,7 +15,7 @@
   "attribution": "Midwest Stratospheric Data Systems (midwestsds.com) — always cite original data providers",
   "contact": "launchcontrol@midwestsds.com",
   "globe_registration": "GO-4VW9B",
-  "updated": "2026-09-16",
+  "updated": "2026-11-02",
   "related_repositories": {
     "uogw": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather",
     "msds_data": "https://github.com/Midwest-Stratospheric/msds-data",
@@ -30,33 +30,433 @@
     "flight": "MSDS high-altitude balloon packages"
   },
   "datasets": [
-    {"id": "msds-ground-casey", "layer": "ground", "title": "Casey, Illinois Weather — Open-Meteo model data (not station observations)", "attribution": "Weather data by Open-Meteo.com, CC BY 4.0.", "status": "active", "frequency": "daily", "access": {"pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/msds-data/main/ground-weather/daily/{YYYY-MM-DD}.json", "browse": "https://github.com/Midwest-Stratospheric/msds-data/tree/main/ground-weather/daily"}, "upstream": "Open-Meteo (CC BY 4.0)", "automation": "msds-ground-daily.yml"},
-    {"id": "msds-kilcasey47", "layer": "ground", "title": "Casey, Illinois Aerostratospheric Fixed Weather Station KILCASEY47", "status": "active", "frequency": "daily", "station_type": "fixed_ground_station", "access": {"latest": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/wunderground/latest.json", "hourly": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/wunderground/hourly_2026-09-21_2026-10-22.csv", "daily_summary": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/summary/daily_2026-09-16_2026-10-22.csv", "browse": "https://huggingface.co/datasets/aerostratospheric/uogw/tree/main/layers/ground/casey/wunderground"}, "upstream": "Aerostratospheric Fixed Weather Station KILCASEY47. Licence: not yet specified for this layer; credit Aerostratospheric Fixed Weather Station KILCASEY47.", "note": "Station data is provided to NOAA through the Citizen Weather Observer Program (CWOP) via KE9CFY."},
-    {"id": "msds-gmc800-casey", "layer": "ground", "title": "Casey, Illinois GMC-800 Fixed Radiation Station", "status": "active", "frequency": "event / history ingest", "station_type": "fixed_weather_and_radiation", "lat": 39.2974, "lon": -87.9818, "access": {"latest": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/ground/casey/gmc-800/latest.json", "station": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/ground/casey/gmc-800/station.json", "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/ground/casey/gmc-800", "igdr": "https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository/blob/main/stations/msds-gmc800-casey.json"}, "upstream": "GQ Electronics GMC-800 / Data Viewer 2.75"},
-    {"id": "msds-lightning-casey", "layer": "ground", "title": "Casey, Illinois lightning detector (Ecowitt gateway)", "status": "active", "frequency": "event log, refreshed with the daily sync", "station_type": "fixed_lightning_detector", "access": {"latest": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/lightning/latest.json", "station": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/lightning/station.json", "events": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/lightning/events.csv", "dataset": "https://huggingface.co/datasets/aerostratospheric/casey-lightning", "browse": "https://huggingface.co/datasets/aerostratospheric/uogw/tree/main/layers/ground/casey/lightning"}, "upstream": "Ecowitt gateway lightning sensor (Aerostratospheric first-party)."},
-    {"id": "msds-globe-site", "layer": "ground", "title": "NASA GLOBE — MSDS Site 422147", "status": "active", "access": {"api": "https://api.globe.gov/search/v1/measurement/protocol/measureddate/", "site_id": "422147", "registration": "GO-4VW9B", "portal": "https://www.globe.gov/globe-data"}, "upstream": "NASA GLOBE Program"},
-    {"id": "msds-flights", "layer": "flight", "title": "X2Griffon / MSDS High-Altitude Flight Packages", "status": "coming_soon", "first_expected": "2026-09-19", "access": {"repository": "https://github.com/Midwest-Stratospheric/msds-data/tree/main/flights", "planned_api": "/data/v1/flights"}},
-    {"id": "noaa-igra", "layer": "upper-air", "title": "NOAA Integrated Global Radiosonde Archive (IGRA)", "status": "active", "frequency": "daily", "coverage": "global", "access": {"authoritative": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive", "y2d": "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/", "igdr": "https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository"}, "citation": "Durre et al. (2016) IGRA v2, NOAA NCEI, DOI:10.7289/V5X63K0Q", "automation": "igra-index-daily.yml"},
-    {"id": "copernicus-cuon", "layer": "upper-air", "title": "Copernicus Comprehensive Upper-air Observation Network (CUON)", "status": "indexed", "access": {"authoritative": "https://climate.copernicus.eu/"}},
-    {"id": "gruan", "layer": "upper-air", "title": "GRUAN Reference Upper-Air Network", "status": "indexed", "access": {"authoritative": "https://www.gruan.org/"}},
-    {"id": "uwyo-soundings", "layer": "upper-air", "title": "University of Wyoming Atmospheric Soundings", "status": "indexed", "access": {"authoritative": "https://weather.uwyo.edu/upperair/sounding.html"}},
-    {"id": "noaa-ghcnd", "layer": "ground", "title": "NOAA Global Historical Climatology Network daily (GHCNd)", "status": "indexed", "coverage": "global", "access": {"authoritative": "https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily"}},
-    {"id": "iem-asos", "layer": "ground", "title": "Iowa Environmental Mesonet ASOS/METAR Archive", "status": "indexed", "access": {"authoritative": "https://mesonet.agron.iastate.edu/request/download.phtml"}},
-    {"id": "open-meteo", "layer": "ground", "title": "Open-Meteo Open Weather API", "status": "active", "access": {"authoritative": "https://open-meteo.com/", "license": "CC BY 4.0"}},
-    {"id": "nasa-power", "layer": "ground", "title": "NASA POWER Agroclimatology / Meteorology", "status": "indexed", "access": {"authoritative": "https://power.larc.nasa.gov/"}},
-    {"id": "cwop", "layer": "ground", "title": "Citizen Weather Observer Program (CWOP)", "status": "indexed", "access": {"authoritative": "https://www.wxqa.com/"}},
-    {"id": "ndbc-buoys", "layer": "marine", "title": "NOAA National Data Buoy Center (NDBC)", "status": "active_planned", "access": {"authoritative": "https://www.ndbc.noaa.gov/", "realtime": "https://www.ndbc.noaa.gov/data/realtime2/"}, "automation": "ndbc-marine-daily.yml"},
-    {"id": "argo", "layer": "marine", "title": "Argo Global Ocean Profiling Float Array", "status": "indexed", "access": {"authoritative": "https://argo.ucsd.edu/", "gdac": "https://www.argonet.org/"}},
-    {"id": "icoads", "layer": "marine", "title": "International Comprehensive Ocean-Atmosphere Data Set (ICOADS)", "status": "indexed", "access": {"authoritative": "https://icoads.noaa.gov/"}},
-    {"id": "noaa-tides", "layer": "marine", "title": "NOAA CO-OPS Water Levels / Tide Gauges", "status": "indexed", "access": {"authoritative": "https://tidesandcurrents.noaa.gov/"}},
-    {"id": "swoosh", "layer": "stratospheric", "title": "NASA SWOOSH Stratospheric Water and Ozone Satellite Homogenized", "status": "indexed", "access": {"authoritative": "https://csl.noaa.gov/groups/csl8/swoosh/"}},
-    {"id": "qbo", "layer": "stratospheric", "title": "Quasi-Biennial Oscillation (tropical stratospheric winds)", "status": "indexed", "access": {"authoritative": "https://www.geo.fu-berlin.de/en/met/ag/strat/produkte/qbo/index.html"}},
-    {"id": "woudc-ozone", "layer": "stratospheric", "title": "WOUDC Ozone Sonde / Total Ozone Network", "status": "indexed", "access": {"authoritative": "https://woudc.org/"}},
-    {"id": "shadoz", "layer": "stratospheric", "title": "SHADOZ Southern Hemisphere Additional Ozonesondes", "status": "indexed", "access": {"authoritative": "https://tropo.gsfc.nasa.gov/shadoz/"}},
-    {"id": "merra2", "layer": "satellite", "title": "NASA MERRA-2 Reanalysis (open products)", "status": "indexed", "access": {"authoritative": "https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/"}},
-    {"id": "goes-open", "layer": "satellite", "title": "NOAA GOES Open Data (ABI / products)", "status": "indexed", "access": {"authoritative": "https://www.goes.noaa.gov/", "aws": "https://registry.opendata.aws/noaa-goes/"}},
-    {"id": "cosmic-ro", "layer": "satellite", "title": "COSMIC / GNSS Radio Occultation (open products)", "status": "indexed", "access": {"authoritative": "https://www.cosmic.ucar.edu/"}},
-    {"id": "arm", "layer": "ground", "title": "DOE Atmospheric Radiation Measurement (ARM) User Facility", "status": "indexed", "access": {"authoritative": "https://www.arm.gov/"}},
-    {"id": "ecmwf-open", "layer": "satellite", "title": "ECMWF / Copernicus Open Datasets (selected)", "status": "indexed", "access": {"authoritative": "https://www.ecmwf.int/en/forecasts/datasets/open-data", "cds": "https://cds.climate.copernicus.eu/"}}
+    {
+      "id": "msds-ground-casey",
+      "layer": "ground",
+      "title": "Casey, Illinois Weather — Open-Meteo model data (not station observations)",
+      "attribution": "Weather data by Open-Meteo.com, CC BY 4.0.",
+      "status": "active",
+      "frequency": "daily",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/msds-data/main/ground-weather/daily/{YYYY-MM-DD}.json",
+        "browse": "https://github.com/Midwest-Stratospheric/msds-data/tree/main/ground-weather/daily"
+      },
+      "upstream": "Open-Meteo (CC BY 4.0)",
+      "automation": "msds-ground-daily.yml"
+    },
+    {
+      "id": "msds-kilcasey47",
+      "layer": "ground",
+      "title": "Casey, Illinois Aerostratospheric Fixed Weather Station KILCASEY47",
+      "status": "active",
+      "frequency": "daily",
+      "station_type": "fixed_ground_station",
+      "access": {
+        "latest": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/wunderground/latest.json",
+        "hourly": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/wunderground/hourly_2026-09-21_2026-10-22.csv",
+        "daily_summary": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/summary/daily_2026-09-16_2026-10-22.csv",
+        "browse": "https://huggingface.co/datasets/aerostratospheric/uogw/tree/main/layers/ground/casey/wunderground"
+      },
+      "upstream": "Aerostratospheric Fixed Weather Station KILCASEY47. Licence: not yet specified for this layer; credit Aerostratospheric Fixed Weather Station KILCASEY47.",
+      "note": "Station data is provided to NOAA through the Citizen Weather Observer Program (CWOP) via KE9CFY."
+    },
+    {
+      "id": "msds-gmc800-casey",
+      "layer": "ground",
+      "title": "Casey, Illinois GMC-800 Fixed Radiation Station",
+      "status": "active",
+      "frequency": "event / history ingest",
+      "station_type": "fixed_weather_and_radiation",
+      "lat": 39.2974,
+      "lon": -87.9818,
+      "access": {
+        "latest": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/ground/casey/gmc-800/latest.json",
+        "station": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/ground/casey/gmc-800/station.json",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/ground/casey/gmc-800",
+        "igdr": "https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository/blob/main/stations/msds-gmc800-casey.json"
+      },
+      "upstream": "GQ Electronics GMC-800 / Data Viewer 2.75"
+    },
+    {
+      "id": "msds-lightning-casey",
+      "layer": "ground",
+      "title": "Casey, Illinois lightning detector (Ecowitt gateway)",
+      "status": "active",
+      "frequency": "event log, refreshed with the daily sync",
+      "station_type": "fixed_lightning_detector",
+      "access": {
+        "latest": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/lightning/latest.json",
+        "station": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/lightning/station.json",
+        "events": "https://huggingface.co/datasets/aerostratospheric/uogw/resolve/main/layers/ground/casey/lightning/events.csv",
+        "dataset": "https://huggingface.co/datasets/aerostratospheric/casey-lightning",
+        "browse": "https://huggingface.co/datasets/aerostratospheric/uogw/tree/main/layers/ground/casey/lightning"
+      },
+      "upstream": "Ecowitt gateway lightning sensor (Aerostratospheric first-party)."
+    },
+    {
+      "id": "msds-globe-site",
+      "layer": "ground",
+      "title": "NASA GLOBE — MSDS Site 422147",
+      "status": "active",
+      "access": {
+        "api": "https://api.globe.gov/search/v1/measurement/protocol/measureddate/",
+        "site_id": "422147",
+        "registration": "GO-4VW9B",
+        "portal": "https://www.globe.gov/globe-data"
+      },
+      "upstream": "NASA GLOBE Program"
+    },
+    {
+      "id": "msds-flights",
+      "layer": "flight",
+      "title": "X2Griffon / MSDS High-Altitude Flight Packages",
+      "status": "coming_soon",
+      "first_expected": "2026-09-19",
+      "access": {
+        "repository": "https://github.com/Midwest-Stratospheric/msds-data/tree/main/flights",
+        "planned_api": "/data/v1/flights"
+      }
+    },
+    {
+      "id": "noaa-igra",
+      "layer": "upper-air",
+      "title": "NOAA Integrated Global Radiosonde Archive (IGRA)",
+      "status": "active",
+      "frequency": "daily",
+      "coverage": "global",
+      "access": {
+        "authoritative": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive",
+        "y2d": "https://www.ncei.noaa.gov/data/integrated-global-radiosonde-archive/access/data-y2d/",
+        "igdr": "https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository"
+      },
+      "citation": "Durre et al. (2016) IGRA v2, NOAA NCEI, DOI:10.7289/V5X63K0Q",
+      "automation": "igra-index-daily.yml"
+    },
+    {
+      "id": "copernicus-cuon",
+      "layer": "upper-air",
+      "title": "Copernicus Comprehensive Upper-air Observation Network (CUON)",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://climate.copernicus.eu/"
+      }
+    },
+    {
+      "id": "gruan",
+      "layer": "upper-air",
+      "title": "GRUAN Reference Upper-Air Network",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://www.gruan.org/"
+      }
+    },
+    {
+      "id": "uwyo-soundings",
+      "layer": "upper-air",
+      "title": "University of Wyoming Atmospheric Soundings",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://weather.uwyo.edu/upperair/sounding.html"
+      }
+    },
+    {
+      "id": "noaa-ghcnd",
+      "layer": "ground",
+      "title": "NOAA Global Historical Climatology Network daily (GHCNd)",
+      "status": "indexed",
+      "coverage": "global",
+      "access": {
+        "authoritative": "https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily"
+      }
+    },
+    {
+      "id": "iem-asos",
+      "layer": "ground",
+      "title": "Iowa Environmental Mesonet ASOS/METAR Archive",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://mesonet.agron.iastate.edu/request/download.phtml"
+      }
+    },
+    {
+      "id": "open-meteo",
+      "layer": "ground",
+      "title": "Open-Meteo Open Weather API",
+      "status": "active",
+      "access": {
+        "authoritative": "https://open-meteo.com/",
+        "license": "CC BY 4.0"
+      }
+    },
+    {
+      "id": "nasa-power",
+      "layer": "ground",
+      "title": "NASA POWER Agroclimatology / Meteorology",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://power.larc.nasa.gov/"
+      }
+    },
+    {
+      "id": "cwop",
+      "layer": "ground",
+      "title": "Citizen Weather Observer Program (CWOP)",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://www.wxqa.com/"
+      }
+    },
+    {
+      "id": "ndbc-buoys",
+      "layer": "marine",
+      "title": "NOAA National Data Buoy Center (NDBC)",
+      "status": "active_planned",
+      "access": {
+        "authoritative": "https://www.ndbc.noaa.gov/",
+        "realtime": "https://www.ndbc.noaa.gov/data/realtime2/"
+      },
+      "automation": "ndbc-marine-daily.yml"
+    },
+    {
+      "id": "argo",
+      "layer": "marine",
+      "title": "Argo Global Ocean Profiling Float Array",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://argo.ucsd.edu/",
+        "gdac": "https://www.argonet.org/"
+      }
+    },
+    {
+      "id": "icoads",
+      "layer": "marine",
+      "title": "International Comprehensive Ocean-Atmosphere Data Set (ICOADS)",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://icoads.noaa.gov/"
+      }
+    },
+    {
+      "id": "noaa-tides",
+      "layer": "marine",
+      "title": "NOAA CO-OPS Water Levels / Tide Gauges",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://tidesandcurrents.noaa.gov/"
+      }
+    },
+    {
+      "id": "swoosh",
+      "layer": "stratospheric",
+      "title": "NASA SWOOSH Stratospheric Water and Ozone Satellite Homogenized",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://csl.noaa.gov/groups/csl8/swoosh/"
+      }
+    },
+    {
+      "id": "qbo",
+      "layer": "stratospheric",
+      "title": "Quasi-Biennial Oscillation (tropical stratospheric winds)",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://www.geo.fu-berlin.de/en/met/ag/strat/produkte/qbo/index.html"
+      }
+    },
+    {
+      "id": "woudc-ozone",
+      "layer": "stratospheric",
+      "title": "WOUDC Ozone Sonde / Total Ozone Network",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://woudc.org/"
+      }
+    },
+    {
+      "id": "shadoz",
+      "layer": "stratospheric",
+      "title": "SHADOZ Southern Hemisphere Additional Ozonesondes",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://tropo.gsfc.nasa.gov/shadoz/"
+      }
+    },
+    {
+      "id": "merra2",
+      "layer": "satellite",
+      "title": "NASA MERRA-2 Reanalysis (open products)",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/"
+      }
+    },
+    {
+      "id": "goes-open",
+      "layer": "satellite",
+      "title": "NOAA GOES Open Data (ABI / products)",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://www.goes.noaa.gov/",
+        "aws": "https://registry.opendata.aws/noaa-goes/"
+      }
+    },
+    {
+      "id": "cosmic-ro",
+      "layer": "satellite",
+      "title": "COSMIC / GNSS Radio Occultation (open products)",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://www.cosmic.ucar.edu/"
+      }
+    },
+    {
+      "id": "arm",
+      "layer": "ground",
+      "title": "DOE Atmospheric Radiation Measurement (ARM) User Facility",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://www.arm.gov/"
+      }
+    },
+    {
+      "id": "ecmwf-open",
+      "layer": "satellite",
+      "title": "ECMWF / Copernicus Open Datasets (selected)",
+      "status": "indexed",
+      "access": {
+        "authoritative": "https://www.ecmwf.int/en/forecasts/datasets/open-data",
+        "cds": "https://cds.climate.copernicus.eu/"
+      }
+    },
+    {
+      "id": "uogw-swpc-kp",
+      "layer": "space-weather",
+      "title": "NOAA SWPC planetary Kp index",
+      "attribution": "NOAA Space Weather Prediction Center (public domain)",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/space-weather/kp-index/latest.csv",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/space-weather/kp-index/"
+      }
+    },
+    {
+      "id": "uogw-swpc-solar-wind",
+      "layer": "space-weather",
+      "title": "NOAA SWPC real-time solar wind (plasma + IMF)",
+      "attribution": "NOAA Space Weather Prediction Center (public domain)",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/space-weather/solar-wind/latest.csv",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/space-weather/solar-wind/"
+      }
+    },
+    {
+      "id": "uogw-swpc-xray",
+      "layer": "space-weather",
+      "title": "NOAA SWPC GOES X-ray flux",
+      "attribution": "NOAA Space Weather Prediction Center (public domain)",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/space-weather/xray-flux/latest.csv",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/space-weather/xray-flux/"
+      }
+    },
+    {
+      "id": "uogw-swpc-f107",
+      "layer": "space-weather",
+      "title": "NOAA SWPC F10.7 cm solar radio flux",
+      "attribution": "NOAA Space Weather Prediction Center (public domain)",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/space-weather/f107-solar-flux/latest.csv",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/space-weather/f107-solar-flux/"
+      }
+    },
+    {
+      "id": "uogw-swpc-geomagnetic",
+      "layer": "space-weather",
+      "title": "NOAA SWPC scales + 3-day geomagnetic forecast",
+      "attribution": "NOAA Space Weather Prediction Center (public domain)",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/space-weather/geomagnetic-summary/latest.json",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/space-weather/geomagnetic-summary/"
+      }
+    },
+    {
+      "id": "uogw-nws-regional",
+      "layer": "ground",
+      "title": "NOAA/NWS ASOS observations KMTO, KLWV, KHUF",
+      "attribution": "NOAA National Weather Service (public domain)",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/ground/regional/nws/{STATION}/latest.csv",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/ground/regional/nws/"
+      }
+    },
+    {
+      "id": "uogw-openmeteo-archive",
+      "layer": "ground",
+      "title": "Open-Meteo archive daily, Casey and Birds IL (reanalysis)",
+      "attribution": "Weather data by Open-Meteo.com, CC BY 4.0",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/ground/regional/open-meteo/{casey|birds}/daily-last-60d.csv",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/ground/regional/open-meteo/"
+      }
+    },
+    {
+      "id": "uogw-igra-ilx",
+      "layer": "upper-air",
+      "title": "NOAA IGRA radiosonde soundings, Lincoln IL (ILX)",
+      "attribution": "NOAA NCEI IGRA v2.2 (public domain)",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/upper-air/ilx-soundings/recent-soundings.csv",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/upper-air/ilx-soundings/"
+      }
+    },
+    {
+      "id": "uogw-uv-casey",
+      "layer": "atmosphere",
+      "title": "UV index hourly forecast, Casey IL",
+      "attribution": "NOAA CPC / US EPA (public domain)",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/atmosphere/uv-index/casey/latest.csv",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/atmosphere/uv-index/casey/"
+      }
+    },
+    {
+      "id": "uogw-ozone-cams",
+      "layer": "atmosphere",
+      "title": "Modeled surface ozone + air quality, Casey and Birds IL",
+      "attribution": "Air quality data by Open-Meteo.com (CAMS), CC BY 4.0",
+      "status": "active",
+      "frequency": "daily",
+      "automation": "open-sources-daily.yml",
+      "access": {
+        "pattern": "https://raw.githubusercontent.com/Midwest-Stratospheric/Unified-Open-Global-Weather/main/layers/atmosphere/ozone/{casey|birds}/latest.csv",
+        "browse": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/tree/main/layers/atmosphere/ozone/"
+      }
+    }
   ]
 }
