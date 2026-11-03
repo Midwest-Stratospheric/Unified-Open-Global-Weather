@@ -2,81 +2,88 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-11-03",
-  "generated_at_utc": "2026-11-03T14:21:32Z",
+  "generated_at_utc": "2026-11-03T17:23:07Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
-      "n": 33,
-      "min": 30.7,
-      "max": 88.7,
-      "mean": 63.333,
-      "median": 61.5,
-      "pstdev": 15.986
+      "n": 32,
+      "min": 33.1,
+      "max": 89.1,
+      "mean": 64.237,
+      "median": 63.25,
+      "pstdev": 15.417
     },
     "global_rh": {
-      "n": 33,
-      "min": 21.0,
+      "n": 32,
+      "min": 37.0,
       "max": 100.0,
-      "mean": 73.485,
-      "median": 71.0,
-      "pstdev": 19.428
+      "mean": 71.625,
+      "median": 73.0,
+      "pstdev": 16.906
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 56.1,
-      "max": 69.8,
-      "mean": 61.179,
-      "median": 58.5,
-      "pstdev": 4.592
+      "min": 54.1,
+      "max": 62.8,
+      "mean": 58.096,
+      "median": 57.35,
+      "pstdev": 2.927
     },
     "heat_index_flags": [
       {
         "name": "Dubai, AE",
-        "temperature_f": 88.7,
-        "relative_humidity_pct": 64,
-        "heat_index_f": 98.7,
+        "temperature_f": 89.1,
+        "relative_humidity_pct": 63,
+        "heat_index_f": 99.2,
         "level": "extreme_caution"
       },
       {
-        "name": "Bangkok, TH",
-        "temperature_f": 87.6,
-        "relative_humidity_pct": 68,
-        "heat_index_f": 98.1,
-        "level": "extreme_caution"
-      },
-      {
-        "name": "Jakarta, ID",
-        "temperature_f": 86.5,
-        "relative_humidity_pct": 68,
-        "heat_index_f": 95.4,
+        "name": "Lagos, NG",
+        "temperature_f": 85.8,
+        "relative_humidity_pct": 71,
+        "heat_index_f": 95.0,
         "level": "extreme_caution"
       },
       {
         "name": "Mumbai, IN",
-        "temperature_f": 87.3,
-        "relative_humidity_pct": 55,
-        "heat_index_f": 91.7,
+        "temperature_f": 87.4,
+        "relative_humidity_pct": 62,
+        "heat_index_f": 94.8,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Jakarta, ID",
+        "temperature_f": 88.3,
+        "relative_humidity_pct": 54,
+        "heat_index_f": 93.1,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Bangkok, TH",
+        "temperature_f": 83.5,
+        "relative_humidity_pct": 75,
+        "heat_index_f": 91.0,
         "level": "extreme_caution"
       }
     ],
     "extremes": {
       "hottest": {
-        "name": "Cairo, EG",
-        "id": "cairo_eg",
-        "temperature_c": 31.5,
-        "temperature_f": 88.7,
-        "lat": 30.0444,
-        "lon": 31.2357,
-        "country": "EG"
+        "name": "Dubai, AE",
+        "id": "dubai_ae",
+        "temperature_c": 31.7,
+        "temperature_f": 89.1,
+        "lat": 25.2048,
+        "lon": 55.2708,
+        "country": "AE"
       },
       "coldest": {
-        "name": "Anchorage, AK, US",
-        "id": "anchorage_us",
-        "temperature_c": -0.7,
-        "temperature_f": 30.7,
-        "lat": 61.2181,
-        "lon": -149.9003,
-        "country": "US"
+        "name": "Moscow, RU",
+        "id": "moscow_ru",
+        "temperature_c": 0.6,
+        "temperature_f": 33.1,
+        "lat": 55.7558,
+        "lon": 37.6173,
+        "country": "RU"
       }
     }
   },
@@ -87,26 +94,26 @@
       {
         "station": "46026",
         "wave_height_m": null,
-        "water_temp_f": 61.7,
+        "water_temp_f": 61.0,
         "air_temp_f": null
       },
       {
         "station": "44025",
-        "wave_height_m": 1.0,
-        "water_temp_f": 72.5,
+        "wave_height_m": 0.6,
+        "water_temp_f": 71.2,
         "air_temp_f": null
       },
       {
         "station": "46013",
         "wave_height_m": null,
         "water_temp_f": null,
-        "air_temp_f": 61.2
+        "air_temp_f": 58.6
       },
       {
         "station": "46042",
         "wave_height_m": null,
         "water_temp_f": 60.4,
-        "air_temp_f": 63.1
+        "air_temp_f": 60.3
       },
       {
         "station": "41008",
@@ -117,8 +124,8 @@
       {
         "station": "46029",
         "wave_height_m": null,
-        "water_temp_f": 61.3,
-        "air_temp_f": 61.7
+        "water_temp_f": 61.0,
+        "air_temp_f": 60.6
       }
     ]
   },
