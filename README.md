@@ -26,6 +26,12 @@ license_link: https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weath
 
 ---
 
+## Operation Canis Major
+
+<img src="https://www.midwestsds.com/images/operation-canis-major-patch.png" alt="Operation Canis Major patch" width="120" align="right">
+
+This project is part of [Operation Canis Major](https://www.midwestsds.com/operation-canis-major.html), often called Project Canis: Aerostratospheric's mission objective to provide open stratospheric and atmospheric research and data, unrestricted, to the public. Learn more: https://www.midwestsds.com/operation-canis-major.html
+
 ## What UOGW is
 
 A **versioned, multi-layer discovery and sampling layer** for open atmospheric observations: ground, marine, upper-air, stratospheric/space, satellite/model, and first-party Aerostratospheric near-space flight products. Independent GitHub Actions keep indexes, science packages, anomaly reports, and °F charts fresh. UOGW does **not** replace agency systems of record; it organizes public access with attribution.
