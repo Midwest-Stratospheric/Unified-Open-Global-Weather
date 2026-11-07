@@ -2,53 +2,60 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-11-07",
-  "generated_at_utc": "2026-11-07T14:03:16Z",
+  "generated_at_utc": "2026-11-07T15:56:01Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
       "n": 32,
-      "min": 28.6,
-      "max": 91.2,
-      "mean": 60.822,
-      "median": 62.25,
-      "pstdev": 17.1
+      "min": 26.4,
+      "max": 95.0,
+      "mean": 58.416,
+      "median": 55.2,
+      "pstdev": 19.603
     },
     "global_rh": {
       "n": 32,
-      "min": 32.0,
+      "min": 21.0,
       "max": 100.0,
-      "mean": 73.281,
-      "median": 77.0,
-      "pstdev": 17.364
+      "mean": 72.531,
+      "median": 73.5,
+      "pstdev": 17.446
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 47.3,
-      "max": 60.6,
-      "mean": 52.971,
-      "median": 51.6,
-      "pstdev": 4.207
+      "min": 34.9,
+      "max": 52.3,
+      "mean": 45.917,
+      "median": 47.1,
+      "pstdev": 5.099
     },
     "heat_index_flags": [
       {
         "name": "Lagos, NG",
-        "temperature_f": 86.0,
-        "relative_humidity_pct": 73,
-        "heat_index_f": 96.4,
+        "temperature_f": 86.7,
+        "relative_humidity_pct": 71,
+        "heat_index_f": 97.3,
         "level": "extreme_caution"
       },
       {
         "name": "Dubai, AE",
-        "temperature_f": 87.3,
-        "relative_humidity_pct": 60,
-        "heat_index_f": 93.7,
+        "temperature_f": 90.5,
+        "relative_humidity_pct": 49,
+        "heat_index_f": 95.1,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Jakarta, ID",
+        "temperature_f": 85.5,
+        "relative_humidity_pct": 73,
+        "heat_index_f": 95.1,
         "level": "extreme_caution"
       },
       {
         "name": "Mumbai, IN",
-        "temperature_f": 91.2,
-        "relative_humidity_pct": 42,
-        "heat_index_f": 93.3,
+        "temperature_f": 95.0,
+        "relative_humidity_pct": 21,
+        "heat_index_f": 91.7,
         "level": "extreme_caution"
       }
     ],
@@ -56,8 +63,8 @@
       "hottest": {
         "name": "Mumbai, IN",
         "id": "mumbai_in",
-        "temperature_c": 32.9,
-        "temperature_f": 91.2,
+        "temperature_c": 35.0,
+        "temperature_f": 95.0,
         "lat": 19.076,
         "lon": 72.8777,
         "country": "IN"
@@ -65,8 +72,8 @@
       "coldest": {
         "name": "Anchorage, AK, US",
         "id": "anchorage_us",
-        "temperature_c": -1.9,
-        "temperature_f": 28.6,
+        "temperature_c": -3.1,
+        "temperature_f": 26.4,
         "lat": 61.2181,
         "lon": -149.9003,
         "country": "US"
@@ -80,38 +87,38 @@
       {
         "station": "46026",
         "wave_height_m": null,
-        "water_temp_f": 59.7,
+        "water_temp_f": 59.4,
         "air_temp_f": null
       },
       {
         "station": "44025",
-        "wave_height_m": 2.0,
-        "water_temp_f": 70.5,
+        "wave_height_m": 3.2,
+        "water_temp_f": 68.7,
         "air_temp_f": null
       },
       {
         "station": "46013",
         "wave_height_m": null,
         "water_temp_f": null,
-        "air_temp_f": 55.9
+        "air_temp_f": 57.0
       },
       {
         "station": "46042",
         "wave_height_m": null,
-        "water_temp_f": 62.4,
-        "air_temp_f": 59.4
+        "water_temp_f": 61.9,
+        "air_temp_f": 59.2
       },
       {
         "station": "41008",
         "wave_height_m": null,
         "water_temp_f": null,
-        "air_temp_f": 82.4
+        "air_temp_f": 81.5
       },
       {
         "station": "46029",
         "wave_height_m": null,
-        "water_temp_f": 61.3,
-        "air_temp_f": 62.2
+        "water_temp_f": 60.6,
+        "air_temp_f": 61.5
       }
     ]
   },
