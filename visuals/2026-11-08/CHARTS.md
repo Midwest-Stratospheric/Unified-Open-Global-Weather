@@ -2,7 +2,7 @@
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-11-08T15:42:32Z UTC · Aerostratospheric_
+_Generated at 2026-11-08T16:09:36Z UTC · Aerostratospheric_
 
 ## PNG charts
 
@@ -52,7 +52,7 @@ UOGW counts **research flags** for the daily sample set — **not** National Wea
 | **Watch** | Elevated interest — heat/cold, wind, low pressure, or |z| >= 2.5 vs the 7-day baseline. |
 | **Info** | Lower urgency (hot + very dry, strong high, warm water sample). |
 
-Today: **alert 3** · **watch 2** · **info 0** · total **5**
+Today: **alert 1** · **watch 3** · **info 1** · total **5**
 
 Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMALY_GUIDE.md](../ANOMALY_GUIDE.md) · [CHART_DESCRIPTIONS.md](../CHART_DESCRIPTIONS.md)
 
@@ -73,9 +73,9 @@ Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMA
 ```mermaid
 pie showData
   title Anomaly flags 2026-11-08
-  "alert" : 3
-  "watch" : 2
-  "info" : 0
+  "alert" : 1
+  "watch" : 3
+  "info" : 1
 ```
 
 ## Snapshot table (°F)
