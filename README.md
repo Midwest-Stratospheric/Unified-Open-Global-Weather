@@ -155,6 +155,7 @@ See [`docs/FEATURES.md`](./docs/FEATURES.md).
 | [msds-data](https://github.com/Midwest-Stratospheric/msds-data) | Casey Open-Meteo model weather series (Weather data by Open-Meteo.com, CC BY 4.0) + HAB flight packages |
 | [International-Ground-Data-Repository](https://github.com/Midwest-Stratospheric/International-Ground-Data-Repository) | IGRA / international ground indexes |
 | [x2griffon](https://github.com/Midwest-Stratospheric/x2griffon) | Payload platform |
+| [non-human-biologics-research](https://github.com/Midwest-Stratospheric/non-human-biologics-research) | Non-human biologics research: open records for the AERO-554 non-human biologics study |
 
 ---
 
