@@ -2,60 +2,46 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-11-09",
-  "generated_at_utc": "2026-11-09T18:49:30Z",
+  "generated_at_utc": "2026-11-09T20:10:13Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
       "n": 33,
-      "min": 23.9,
-      "max": 95.4,
-      "mean": 57.936,
-      "median": 56.1,
-      "pstdev": 18.743
+      "min": 26.6,
+      "max": 90.3,
+      "mean": 58.858,
+      "median": 58.5,
+      "pstdev": 17.172
     },
     "global_rh": {
       "n": 33,
-      "min": 16.0,
-      "max": 99.0,
-      "mean": 73.97,
-      "median": 78.0,
-      "pstdev": 17.642
+      "min": 26.0,
+      "max": 100.0,
+      "mean": 73.606,
+      "median": 76.0,
+      "pstdev": 17.948
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 30.2,
-      "max": 53.8,
-      "mean": 40.221,
-      "median": 36.75,
-      "pstdev": 8.459
+      "min": 31.6,
+      "max": 63.5,
+      "mean": 46.146,
+      "median": 46.35,
+      "pstdev": 11.087
     },
     "heat_index_flags": [
       {
-        "name": "Jakarta, ID",
-        "temperature_f": 86.4,
-        "relative_humidity_pct": 70,
-        "heat_index_f": 96.1,
-        "level": "extreme_caution"
-      },
-      {
         "name": "Lagos, NG",
         "temperature_f": 86.0,
-        "relative_humidity_pct": 71,
-        "heat_index_f": 95.5,
+        "relative_humidity_pct": 73,
+        "heat_index_f": 96.4,
         "level": "extreme_caution"
       },
       {
         "name": "Dubai, AE",
-        "temperature_f": 90.1,
-        "relative_humidity_pct": 45,
-        "heat_index_f": 92.7,
-        "level": "extreme_caution"
-      },
-      {
-        "name": "Mumbai, IN",
-        "temperature_f": 95.4,
-        "relative_humidity_pct": 16,
-        "heat_index_f": 91.2,
+        "temperature_f": 87.3,
+        "relative_humidity_pct": 55,
+        "heat_index_f": 91.7,
         "level": "extreme_caution"
       }
     ],
@@ -63,8 +49,8 @@
       "hottest": {
         "name": "Mumbai, IN",
         "id": "mumbai_in",
-        "temperature_c": 35.2,
-        "temperature_f": 95.4,
+        "temperature_c": 32.4,
+        "temperature_f": 90.3,
         "lat": 19.076,
         "lon": 72.8777,
         "country": "IN"
@@ -72,8 +58,8 @@
       "coldest": {
         "name": "Anchorage, AK, US",
         "id": "anchorage_us",
-        "temperature_c": -4.5,
-        "temperature_f": 23.9,
+        "temperature_c": -3.0,
+        "temperature_f": 26.6,
         "lat": 61.2181,
         "lon": -149.9003,
         "country": "US"
