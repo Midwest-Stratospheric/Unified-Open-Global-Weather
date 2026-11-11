@@ -1,7 +1,6 @@
 name: ingest xliveflights captures
+# Disabled 2026-11-11 per Jeremy: liveflights ingests stopped
 on:
-  schedule:
-    - cron: "*/15 * * * *"
   workflow_dispatch:
 permissions:
   contents: write
