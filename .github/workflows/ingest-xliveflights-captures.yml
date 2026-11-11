@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Pull closed flights into UOGW flight layer
         run: |
           python3 <<'PY'
@@ -44,7 +46,7 @@ jobs:
           except Exception as e:
               print("source miss", e)
               flights = {"flights": []}
-          now = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+          now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
           path = "layers/flight/xliveflights-captures.json"
           catalog = {
               "layer": "flight",
@@ -119,16 +121,42 @@ jobs:
           catalog["updated_at"] = now
           catalog["count"] = len(catalog.get("captures") or [])
           catalog["captures"] = catalog.get("captures") or []
-          os.makedirs("layers/flight", exist_ok=True)
-          body = json.dumps(catalog, indent=2) + "\n"
-          open(path, "w").write(body)
-          open("layers/flight/xliveflights-captures-latest.json", "w").write(body)
-          print("captures", catalog["count"], "changed", changed)
+          def without_updated(d):
+              return {k: v for k, v in (d or {}).items() if k != "updated_at"}
+          prev = None
+          if os.path.exists(path):
+              try:
+                  prev = json.load(open(path))
+              except Exception:
+                  prev = None
+          data_changed = prev is None or without_updated(prev) != without_updated(catalog)
+          if not data_changed:
+              print("captures", catalog["count"], "changed", False)
+          else:
+              os.makedirs("layers/flight", exist_ok=True)
+              body = json.dumps(catalog, indent=2) + "\n"
+              open(path, "w").write(body)
+              open("layers/flight/xliveflights-captures-latest.json", "w").write(body)
+              print("captures", catalog["count"], "changed", True)
           PY
       - name: Commit if changed
         run: |
+          set -e
           git config user.name "uogw-flight-layer"
           git config user.email "launchcontrol@midwestsds.com"
           git add layers/flight/xliveflights-captures.json layers/flight/xliveflights-captures-latest.json
-          git diff --cached --quiet || git commit -m "flight layer: capture closed xLiveFlights metrics"
-          git push
+          if git diff --cached --quiet; then
+            echo "No capture changes"
+            exit 0
+          fi
+          git commit -m "flight layer: capture closed xLiveFlights metrics"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; git pull --rebase origin main || true; }
+            if git push origin HEAD:main; then
+              echo "Flight captures pushed"
+              exit 0
+            fi
+            sleep $((i * 3))
+          done
+          exit 1
