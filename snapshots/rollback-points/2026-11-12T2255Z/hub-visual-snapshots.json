@@ -1,0 +1,180 @@
+{
+  "schema": "uogw.hub_visual_snapshots.v1",
+  "ok": true,
+  "date_utc": "2026-11-12",
+  "generated_at_utc": "2026-11-12T19:57:13Z",
+  "heat": {
+    "title": "Heat & humidity snapshot",
+    "global_temp_f": {
+      "n": 32,
+      "min": 29.8,
+      "max": 87.6,
+      "mean": 60.869,
+      "median": 60.95,
+      "pstdev": 17.107
+    },
+    "global_rh": {
+      "n": 32,
+      "min": 19.0,
+      "max": 93.0,
+      "mean": 75.344,
+      "median": 83.5,
+      "pstdev": 17.601
+    },
+    "casey_temp_f": {
+      "n": 24,
+      "min": 39.6,
+      "max": 69.8,
+      "mean": 52.733,
+      "median": 51.1,
+      "pstdev": 10.473
+    },
+    "heat_index_flags": [
+      {
+        "name": "Lagos, NG",
+        "temperature_f": 85.1,
+        "relative_humidity_pct": 74,
+        "heat_index_f": 94.5,
+        "level": "extreme_caution"
+      }
+    ],
+    "extremes": {
+      "hottest": {
+        "name": "Johannesburg, ZA",
+        "id": "johannesburg_za",
+        "temperature_c": 30.9,
+        "temperature_f": 87.6,
+        "lat": -26.2041,
+        "lon": 28.0473,
+        "country": "ZA"
+      },
+      "coldest": {
+        "name": "Anchorage, AK, US",
+        "id": "anchorage_us",
+        "temperature_c": -1.2,
+        "temperature_f": 29.8,
+        "lat": 61.2181,
+        "lon": -149.9003,
+        "country": "US"
+      }
+    }
+  },
+  "marine": {
+    "title": "Marine NDBC snapshot",
+    "station_count": 6,
+    "rows": [
+      {
+        "station": "46026",
+        "wave_height_m": null,
+        "water_temp_f": 58.8,
+        "air_temp_f": null
+      },
+      {
+        "station": "44025",
+        "wave_height_m": 1.6,
+        "water_temp_f": 66.0,
+        "air_temp_f": null
+      },
+      {
+        "station": "46013",
+        "wave_height_m": null,
+        "water_temp_f": null,
+        "air_temp_f": 56.1
+      },
+      {
+        "station": "46042",
+        "wave_height_m": null,
+        "water_temp_f": 61.7,
+        "air_temp_f": 60.4
+      },
+      {
+        "station": "41008",
+        "wave_height_m": null,
+        "water_temp_f": null,
+        "air_temp_f": 79.9
+      },
+      {
+        "station": "46029",
+        "wave_height_m": null,
+        "water_temp_f": 55.6,
+        "air_temp_f": 56.7
+      }
+    ]
+  },
+  "casey": {
+    "title": "Casey local conditions",
+    "date": "2026-11-11",
+    "observation_count": 24,
+    "temp_f_min": 39.6,
+    "temp_f_max": 69.8,
+    "temp_f_mean": 52.7,
+    "hourly": [
+      {
+        "time": "2026-11-11T12:00",
+        "temperature_f": 67.8,
+        "humidity": 46
+      },
+      {
+        "time": "2026-11-11T13:00",
+        "temperature_f": 69.1,
+        "humidity": 50
+      },
+      {
+        "time": "2026-11-11T14:00",
+        "temperature_f": 69.8,
+        "humidity": 50
+      },
+      {
+        "time": "2026-11-11T15:00",
+        "temperature_f": 68.4,
+        "humidity": 54
+      },
+      {
+        "time": "2026-11-11T16:00",
+        "temperature_f": 65.7,
+        "humidity": 61
+      },
+      {
+        "time": "2026-11-11T17:00",
+        "temperature_f": 63.0,
+        "humidity": 62
+      },
+      {
+        "time": "2026-11-11T18:00",
+        "temperature_f": 57.4,
+        "humidity": 70
+      },
+      {
+        "time": "2026-11-11T19:00",
+        "temperature_f": 52.3,
+        "humidity": 80
+      },
+      {
+        "time": "2026-11-11T20:00",
+        "temperature_f": 51.8,
+        "humidity": 83
+      },
+      {
+        "time": "2026-11-11T21:00",
+        "temperature_f": 50.4,
+        "humidity": 83
+      },
+      {
+        "time": "2026-11-11T22:00",
+        "temperature_f": 49.1,
+        "humidity": 85
+      },
+      {
+        "time": "2026-11-11T23:00",
+        "temperature_f": 47.5,
+        "humidity": 85
+      }
+    ]
+  },
+  "charts": {
+    "heat": "visuals/latest/hub-heat-cities.png",
+    "pressure": "visuals/latest/pressure-wind-sample.png",
+    "marine": "visuals/latest/hub-marine-waves.png",
+    "casey": "visuals/latest/hub-casey-recent.png"
+  }
+}
