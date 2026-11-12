@@ -2,71 +2,57 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-11-12",
-  "generated_at_utc": "2026-11-12T16:19:09Z",
+  "generated_at_utc": "2026-11-12T17:45:25Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
-      "n": 33,
-      "min": 30.0,
+      "n": 32,
+      "min": 29.8,
       "max": 87.6,
-      "mean": 60.539,
-      "median": 60.1,
-      "pstdev": 18.19
+      "mean": 60.869,
+      "median": 60.95,
+      "pstdev": 17.107
     },
     "global_rh": {
-      "n": 33,
-      "min": 26.0,
-      "max": 100.0,
-      "mean": 73.485,
-      "median": 76.0,
-      "pstdev": 17.477
+      "n": 32,
+      "min": 19.0,
+      "max": 93.0,
+      "mean": 75.344,
+      "median": 83.5,
+      "pstdev": 17.601
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 44.6,
-      "max": 70.3,
-      "mean": 54.354,
-      "median": 50.3,
-      "pstdev": 9.921
+      "min": 39.6,
+      "max": 69.8,
+      "mean": 52.733,
+      "median": 51.1,
+      "pstdev": 10.473
     },
     "heat_index_flags": [
       {
-        "name": "Jakarta, ID",
-        "temperature_f": 84.6,
-        "relative_humidity_pct": 80,
-        "heat_index_f": 95.7,
-        "level": "extreme_caution"
-      },
-      {
         "name": "Lagos, NG",
-        "temperature_f": 85.6,
-        "relative_humidity_pct": 69,
-        "heat_index_f": 93.7,
-        "level": "extreme_caution"
-      },
-      {
-        "name": "Mumbai, IN",
-        "temperature_f": 87.6,
-        "relative_humidity_pct": 52,
-        "heat_index_f": 91.1,
+        "temperature_f": 85.1,
+        "relative_humidity_pct": 74,
+        "heat_index_f": 94.5,
         "level": "extreme_caution"
       }
     ],
     "extremes": {
       "hottest": {
-        "name": "Mumbai, IN",
-        "id": "mumbai_in",
+        "name": "Johannesburg, ZA",
+        "id": "johannesburg_za",
         "temperature_c": 30.9,
         "temperature_f": 87.6,
-        "lat": 19.076,
-        "lon": 72.8777,
-        "country": "IN"
+        "lat": -26.2041,
+        "lon": 28.0473,
+        "country": "ZA"
       },
       "coldest": {
         "name": "Anchorage, AK, US",
         "id": "anchorage_us",
-        "temperature_c": -1.1,
-        "temperature_f": 30.0,
+        "temperature_c": -1.2,
+        "temperature_f": 29.8,
         "lat": 61.2181,
         "lon": -149.9003,
         "country": "US"
