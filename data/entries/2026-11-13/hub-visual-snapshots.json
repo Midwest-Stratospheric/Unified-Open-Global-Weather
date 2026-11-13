@@ -2,39 +2,46 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-11-13",
-  "generated_at_utc": "2026-11-13T16:25:31Z",
+  "generated_at_utc": "2026-11-13T17:23:55Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
-      "n": 32,
-      "min": 29.8,
-      "max": 87.6,
-      "mean": 60.869,
-      "median": 60.95,
-      "pstdev": 17.107
+      "n": 28,
+      "min": 28.0,
+      "max": 89.2,
+      "mean": 62.571,
+      "median": 67.75,
+      "pstdev": 18.434
     },
     "global_rh": {
-      "n": 32,
-      "min": 19.0,
-      "max": 93.0,
-      "mean": 75.344,
-      "median": 83.5,
-      "pstdev": 17.601
+      "n": 28,
+      "min": 20.0,
+      "max": 100.0,
+      "mean": 69.286,
+      "median": 73.0,
+      "pstdev": 18.303
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 39.6,
-      "max": 69.8,
-      "mean": 52.733,
-      "median": 51.1,
-      "pstdev": 10.473
+      "min": 37.2,
+      "max": 48.2,
+      "mean": 42.558,
+      "median": 42.8,
+      "pstdev": 3.329
     },
     "heat_index_flags": [
       {
+        "name": "Jakarta, ID",
+        "temperature_f": 84.7,
+        "relative_humidity_pct": 77,
+        "heat_index_f": 94.7,
+        "level": "extreme_caution"
+      },
+      {
         "name": "Lagos, NG",
-        "temperature_f": 85.1,
-        "relative_humidity_pct": 74,
-        "heat_index_f": 94.5,
+        "temperature_f": 84.9,
+        "relative_humidity_pct": 67,
+        "heat_index_f": 91.4,
         "level": "extreme_caution"
       }
     ],
@@ -42,20 +49,20 @@
       "hottest": {
         "name": "Johannesburg, ZA",
         "id": "johannesburg_za",
-        "temperature_c": 30.9,
-        "temperature_f": 87.6,
+        "temperature_c": 31.8,
+        "temperature_f": 89.2,
         "lat": -26.2041,
         "lon": 28.0473,
         "country": "ZA"
       },
       "coldest": {
-        "name": "Anchorage, AK, US",
-        "id": "anchorage_us",
-        "temperature_c": -1.2,
-        "temperature_f": 29.8,
-        "lat": 61.2181,
-        "lon": -149.9003,
-        "country": "US"
+        "name": "Reykjavik, IS",
+        "id": "reykjavik_is",
+        "temperature_c": -2.2,
+        "temperature_f": 28.0,
+        "lat": 64.1466,
+        "lon": -21.9426,
+        "country": "IS"
       }
     }
   },
