@@ -2,7 +2,7 @@
   "schema": "uogw.illinois_radiosonde_count.v1",
   "ok": true,
   "date_utc": "2026-11-14",
-  "generated_at_utc": "2026-11-14T07:03:15Z",
+  "generated_at_utc": "2026-11-14T14:10:31Z",
   "region": {
     "name": "Illinois",
     "focus": "NWS radiosonde / rawinsonde launches",
@@ -11,8 +11,8 @@
   },
   "window": {
     "hours": 72,
-    "start_utc": "2026-11-11T07:03:15Z",
-    "end_utc": "2026-11-14T07:03:15Z"
+    "start_utc": "2026-11-11T14:10:31Z",
+    "end_utc": "2026-11-14T14:10:31Z"
   },
   "counts": {
     "launches_3_days": 6,
@@ -22,15 +22,6 @@
   },
   "devices_likely_aloft": [],
   "launches_3_days": [
-    {
-      "station": "KILX",
-      "name": "Lincoln, IL (ILX)",
-      "valid_utc": "2026-11-11T12:00:00Z",
-      "release_time": null,
-      "sbcape_jkg": 0.0,
-      "pwater_mm": 21.598753,
-      "shear_sfc_6km_smps": 25.917444
-    },
     {
       "station": "KILX",
       "name": "Lincoln, IL (ILX)",
@@ -75,6 +66,15 @@
       "sbcape_jkg": 5.840826,
       "pwater_mm": 7.7395606,
       "shear_sfc_6km_smps": 30.116701
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-11-14T12:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.0,
+      "pwater_mm": 7.142022,
+      "shear_sfc_6km_smps": 23.823528
     }
   ],
   "stations": [
@@ -86,15 +86,6 @@
       "ok": true,
       "launches_3_days": 6,
       "launches": [
-        {
-          "station": "KILX",
-          "name": "Lincoln, IL (ILX)",
-          "valid_utc": "2026-11-11T12:00:00Z",
-          "release_time": null,
-          "sbcape_jkg": 0.0,
-          "pwater_mm": 21.598753,
-          "shear_sfc_6km_smps": 25.917444
-        },
         {
           "station": "KILX",
           "name": "Lincoln, IL (ILX)",
@@ -139,6 +130,15 @@
           "sbcape_jkg": 5.840826,
           "pwater_mm": 7.7395606,
           "shear_sfc_6km_smps": 30.116701
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-11-14T12:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 0.0,
+          "pwater_mm": 7.142022,
+          "shear_sfc_6km_smps": 23.823528
         }
       ]
     }
