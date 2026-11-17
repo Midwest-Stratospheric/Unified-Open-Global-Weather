@@ -1,8 +1,8 @@
 {
   "schema": "uogw.illinois_radiosonde_count.v1",
   "ok": true,
-  "date_utc": "2026-11-16",
-  "generated_at_utc": "2026-11-16T22:32:17Z",
+  "date_utc": "2026-11-17",
+  "generated_at_utc": "2026-11-17T04:30:55Z",
   "region": {
     "name": "Illinois",
     "focus": "NWS radiosonde / rawinsonde launches",
@@ -11,8 +11,8 @@
   },
   "window": {
     "hours": 72,
-    "start_utc": "2026-11-13T22:32:17Z",
-    "end_utc": "2026-11-16T22:32:17Z"
+    "start_utc": "2026-11-14T04:30:55Z",
+    "end_utc": "2026-11-17T04:30:55Z"
   },
   "counts": {
     "launches_3_days": 6,
@@ -22,15 +22,6 @@
   },
   "devices_likely_aloft": [],
   "launches_3_days": [
-    {
-      "station": "KILX",
-      "name": "Lincoln, IL (ILX)",
-      "valid_utc": "2026-11-14T00:00:00Z",
-      "release_time": null,
-      "sbcape_jkg": 5.840826,
-      "pwater_mm": 7.7395606,
-      "shear_sfc_6km_smps": 30.116701
-    },
     {
       "station": "KILX",
       "name": "Lincoln, IL (ILX)",
@@ -75,6 +66,15 @@
       "sbcape_jkg": 0.0,
       "pwater_mm": 10.753323,
       "shear_sfc_6km_smps": 7.759935
+    },
+    {
+      "station": "KILX",
+      "name": "Lincoln, IL (ILX)",
+      "valid_utc": "2026-11-17T00:00:00Z",
+      "release_time": null,
+      "sbcape_jkg": 0.0,
+      "pwater_mm": 10.758843,
+      "shear_sfc_6km_smps": 10.485002
     }
   ],
   "stations": [
@@ -86,15 +86,6 @@
       "ok": true,
       "launches_3_days": 6,
       "launches": [
-        {
-          "station": "KILX",
-          "name": "Lincoln, IL (ILX)",
-          "valid_utc": "2026-11-14T00:00:00Z",
-          "release_time": null,
-          "sbcape_jkg": 5.840826,
-          "pwater_mm": 7.7395606,
-          "shear_sfc_6km_smps": 30.116701
-        },
         {
           "station": "KILX",
           "name": "Lincoln, IL (ILX)",
@@ -139,6 +130,15 @@
           "sbcape_jkg": 0.0,
           "pwater_mm": 10.753323,
           "shear_sfc_6km_smps": 7.759935
+        },
+        {
+          "station": "KILX",
+          "name": "Lincoln, IL (ILX)",
+          "valid_utc": "2026-11-17T00:00:00Z",
+          "release_time": null,
+          "sbcape_jkg": 0.0,
+          "pwater_mm": 10.758843,
+          "shear_sfc_6km_smps": 10.485002
         }
       ]
     }
