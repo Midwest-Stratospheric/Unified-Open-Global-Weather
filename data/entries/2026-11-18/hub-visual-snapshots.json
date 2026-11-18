@@ -2,71 +2,64 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-11-18",
-  "generated_at_utc": "2026-11-18T15:49:26Z",
+  "generated_at_utc": "2026-11-18T18:25:35Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
-      "n": 26,
-      "min": 27.5,
-      "max": 84.9,
-      "mean": 59.946,
-      "median": 60.6,
-      "pstdev": 17.285
+      "n": 34,
+      "min": 26.8,
+      "max": 89.6,
+      "mean": 59.5,
+      "median": 60.35,
+      "pstdev": 18.98
     },
     "global_rh": {
-      "n": 26,
-      "min": 40.0,
+      "n": 34,
+      "min": 25.0,
       "max": 100.0,
-      "mean": 76.385,
-      "median": 76.0,
-      "pstdev": 15.689
+      "mean": 72.029,
+      "median": 73.5,
+      "pstdev": 15.898
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 25.5,
-      "max": 54.5,
-      "mean": 38.433,
-      "median": 36.15,
-      "pstdev": 10.424
+      "min": 24.8,
+      "max": 58.6,
+      "mean": 40.658,
+      "median": 38.4,
+      "pstdev": 11.389
     },
     "heat_index_flags": [
       {
         "name": "Lagos, NG",
-        "temperature_f": 84.9,
-        "relative_humidity_pct": 74,
-        "heat_index_f": 94.0,
+        "temperature_f": 87.4,
+        "relative_humidity_pct": 69,
+        "heat_index_f": 98.1,
         "level": "extreme_caution"
       },
       {
         "name": "Bangkok, TH",
-        "temperature_f": 82.9,
-        "relative_humidity_pct": 83,
-        "heat_index_f": 92.0,
-        "level": "extreme_caution"
-      },
-      {
-        "name": "Jakarta, ID",
-        "temperature_f": 82.9,
-        "relative_humidity_pct": 81,
-        "heat_index_f": 91.4,
+        "temperature_f": 89.6,
+        "relative_humidity_pct": 56,
+        "heat_index_f": 96.6,
         "level": "extreme_caution"
       }
     ],
     "extremes": {
       "hottest": {
-        "name": "Lagos, NG",
-        "id": "lagos_ng",
-        "temperature_c": 29.4,
-        "temperature_f": 84.9,
-        "lat": 6.5244,
-        "lon": 3.3792,
-        "country": "NG"
+        "name": "Bangkok, TH",
+        "id": "bangkok_th",
+        "temperature_c": 32.0,
+        "temperature_f": 89.6,
+        "lat": 13.7563,
+        "lon": 100.5018,
+        "country": "TH"
       },
       "coldest": {
         "name": "Anchorage, AK, US",
         "id": "anchorage_us",
-        "temperature_c": -2.5,
-        "temperature_f": 27.5,
+        "temperature_c": -2.9,
+        "temperature_f": 26.8,
         "lat": 61.2181,
         "lon": -149.9003,
         "country": "US"
@@ -80,12 +73,12 @@
       {
         "station": "46026",
         "wave_height_m": null,
-        "water_temp_f": 59.5,
+        "water_temp_f": 60.3,
         "air_temp_f": null
       },
       {
         "station": "44025",
-        "wave_height_m": 1.0,
+        "wave_height_m": 1.2,
         "water_temp_f": 65.8,
         "air_temp_f": null
       },
@@ -93,25 +86,25 @@
         "station": "46013",
         "wave_height_m": null,
         "water_temp_f": null,
-        "air_temp_f": 55.4
+        "air_temp_f": 58.3
       },
       {
         "station": "46042",
         "wave_height_m": null,
-        "water_temp_f": 62.8,
-        "air_temp_f": 59.4
+        "water_temp_f": 60.8,
+        "air_temp_f": 61.7
       },
       {
         "station": "41008",
         "wave_height_m": null,
         "water_temp_f": null,
-        "air_temp_f": 77.7
+        "air_temp_f": 81.7
       },
       {
         "station": "46029",
         "wave_height_m": null,
-        "water_temp_f": 59.0,
-        "air_temp_f": 58.3
+        "water_temp_f": 58.8,
+        "air_temp_f": 57.0
       }
     ]
   },
