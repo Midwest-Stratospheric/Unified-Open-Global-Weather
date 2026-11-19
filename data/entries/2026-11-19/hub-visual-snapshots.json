@@ -2,46 +2,46 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-11-19",
-  "generated_at_utc": "2026-11-19T16:50:09Z",
+  "generated_at_utc": "2026-11-19T18:41:39Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
       "n": 34,
-      "min": 26.8,
-      "max": 89.6,
-      "mean": 59.5,
-      "median": 60.35,
-      "pstdev": 18.98
+      "min": 30.7,
+      "max": 88.0,
+      "mean": 60.132,
+      "median": 58.05,
+      "pstdev": 18.422
     },
     "global_rh": {
       "n": 34,
-      "min": 25.0,
+      "min": 34.0,
       "max": 100.0,
-      "mean": 72.029,
-      "median": 73.5,
-      "pstdev": 15.898
+      "mean": 69.441,
+      "median": 68.5,
+      "pstdev": 17.236
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 24.8,
-      "max": 58.6,
-      "mean": 40.658,
-      "median": 38.4,
-      "pstdev": 11.389
+      "min": 32.2,
+      "max": 64.9,
+      "mean": 46.808,
+      "median": 46.05,
+      "pstdev": 11.424
     },
     "heat_index_flags": [
       {
         "name": "Lagos, NG",
-        "temperature_f": 87.4,
-        "relative_humidity_pct": 69,
-        "heat_index_f": 98.1,
+        "temperature_f": 86.5,
+        "relative_humidity_pct": 71,
+        "heat_index_f": 96.8,
         "level": "extreme_caution"
       },
       {
         "name": "Bangkok, TH",
-        "temperature_f": 89.6,
-        "relative_humidity_pct": 56,
-        "heat_index_f": 96.6,
+        "temperature_f": 88.0,
+        "relative_humidity_pct": 54,
+        "heat_index_f": 92.6,
         "level": "extreme_caution"
       }
     ],
@@ -49,20 +49,20 @@
       "hottest": {
         "name": "Bangkok, TH",
         "id": "bangkok_th",
-        "temperature_c": 32.0,
-        "temperature_f": 89.6,
+        "temperature_c": 31.1,
+        "temperature_f": 88.0,
         "lat": 13.7563,
         "lon": 100.5018,
         "country": "TH"
       },
       "coldest": {
-        "name": "Anchorage, AK, US",
-        "id": "anchorage_us",
-        "temperature_c": -2.9,
-        "temperature_f": 26.8,
-        "lat": 61.2181,
-        "lon": -149.9003,
-        "country": "US"
+        "name": "Seoul, KR",
+        "id": "seoul_kr",
+        "temperature_c": -0.7,
+        "temperature_f": 30.7,
+        "lat": 37.5665,
+        "lon": 126.978,
+        "country": "KR"
       }
     }
   },
