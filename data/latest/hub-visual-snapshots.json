@@ -2,67 +2,74 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-11-20",
-  "generated_at_utc": "2026-11-20T16:23:53Z",
+  "generated_at_utc": "2026-11-20T18:02:12Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
       "n": 34,
-      "min": 30.7,
-      "max": 88.0,
-      "mean": 60.132,
-      "median": 58.05,
-      "pstdev": 18.422
+      "min": 27.9,
+      "max": 89.8,
+      "mean": 59.753,
+      "median": 58.5,
+      "pstdev": 18.877
     },
     "global_rh": {
       "n": 34,
-      "min": 34.0,
-      "max": 100.0,
-      "mean": 69.441,
-      "median": 68.5,
-      "pstdev": 17.236
+      "min": 28.0,
+      "max": 95.0,
+      "mean": 69.5,
+      "median": 70.5,
+      "pstdev": 18.098
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 32.2,
-      "max": 64.9,
-      "mean": 46.808,
-      "median": 46.05,
-      "pstdev": 11.424
+      "min": 36.9,
+      "max": 68.9,
+      "mean": 51.067,
+      "median": 49.55,
+      "pstdev": 11.106
     },
     "heat_index_flags": [
       {
         "name": "Lagos, NG",
-        "temperature_f": 86.5,
-        "relative_humidity_pct": 71,
-        "heat_index_f": 96.8,
+        "temperature_f": 85.6,
+        "relative_humidity_pct": 76,
+        "heat_index_f": 96.7,
         "level": "extreme_caution"
       },
       {
         "name": "Bangkok, TH",
-        "temperature_f": 88.0,
-        "relative_humidity_pct": 54,
-        "heat_index_f": 92.6,
+        "temperature_f": 87.8,
+        "relative_humidity_pct": 60,
+        "heat_index_f": 94.7,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Jakarta, ID",
+        "temperature_f": 82.4,
+        "relative_humidity_pct": 85,
+        "heat_index_f": 91.2,
         "level": "extreme_caution"
       }
     ],
     "extremes": {
       "hottest": {
-        "name": "Bangkok, TH",
-        "id": "bangkok_th",
-        "temperature_c": 31.1,
-        "temperature_f": 88.0,
-        "lat": 13.7563,
-        "lon": 100.5018,
-        "country": "TH"
+        "name": "Sao Paulo, BR",
+        "id": "sao_paulo_br",
+        "temperature_c": 32.1,
+        "temperature_f": 89.8,
+        "lat": -23.5505,
+        "lon": -46.6333,
+        "country": "BR"
       },
       "coldest": {
-        "name": "Seoul, KR",
-        "id": "seoul_kr",
-        "temperature_c": -0.7,
-        "temperature_f": 30.7,
-        "lat": 37.5665,
-        "lon": 126.978,
-        "country": "KR"
+        "name": "Anchorage, AK, US",
+        "id": "anchorage_us",
+        "temperature_c": -2.3,
+        "temperature_f": 27.9,
+        "lat": 61.2181,
+        "lon": -149.9003,
+        "country": "US"
       }
     }
   },
