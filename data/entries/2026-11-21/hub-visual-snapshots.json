@@ -2,71 +2,64 @@
   "schema": "uogw.hub_visual_snapshots.v1",
   "ok": true,
   "date_utc": "2026-11-21",
-  "generated_at_utc": "2026-11-21T09:51:31Z",
+  "generated_at_utc": "2026-11-21T16:58:25Z",
   "heat": {
     "title": "Heat & humidity snapshot",
     "global_temp_f": {
-      "n": 34,
-      "min": 27.9,
-      "max": 89.8,
-      "mean": 59.753,
+      "n": 33,
+      "min": 27.1,
+      "max": 87.1,
+      "mean": 60.039,
       "median": 58.5,
-      "pstdev": 18.877
+      "pstdev": 19.108
     },
     "global_rh": {
-      "n": 34,
-      "min": 28.0,
-      "max": 95.0,
-      "mean": 69.5,
-      "median": 70.5,
-      "pstdev": 18.098
+      "n": 33,
+      "min": 30.0,
+      "max": 100.0,
+      "mean": 68.212,
+      "median": 69.0,
+      "pstdev": 17.195
     },
     "casey_temp_f": {
       "n": 24,
-      "min": 36.9,
-      "max": 68.9,
-      "mean": 51.067,
-      "median": 49.55,
-      "pstdev": 11.106
+      "min": 39.4,
+      "max": 71.4,
+      "mean": 53.763,
+      "median": 52.3,
+      "pstdev": 11.25
     },
     "heat_index_flags": [
       {
         "name": "Lagos, NG",
-        "temperature_f": 85.6,
-        "relative_humidity_pct": 76,
-        "heat_index_f": 96.7,
+        "temperature_f": 87.1,
+        "relative_humidity_pct": 69,
+        "heat_index_f": 97.3,
         "level": "extreme_caution"
       },
       {
         "name": "Bangkok, TH",
-        "temperature_f": 87.8,
-        "relative_humidity_pct": 60,
-        "heat_index_f": 94.7,
-        "level": "extreme_caution"
-      },
-      {
-        "name": "Jakarta, ID",
-        "temperature_f": 82.4,
-        "relative_humidity_pct": 85,
-        "heat_index_f": 91.2,
+        "temperature_f": 85.6,
+        "relative_humidity_pct": 62,
+        "heat_index_f": 91.0,
         "level": "extreme_caution"
       }
     ],
     "extremes": {
       "hottest": {
-        "name": "Sao Paulo, BR",
-        "id": "sao_paulo_br",
-        "temperature_c": 32.1,
-        "temperature_f": 89.8,
-        "lat": -23.5505,
-        "lon": -46.6333,
-        "country": "BR"
+        "name": "Lagos, NG",
+        "id": "lagos_ng",
+        "temperature_c": 30.6,
+        "temperature_f": 87.1,
+        "lat": 6.5244,
+        "lon": 3.3792,
+        "country": "NG"
       },
       "coldest": {
         "name": "Anchorage, AK, US",
         "id": "anchorage_us",
-        "temperature_c": -2.3,
-        "temperature_f": 27.9,
+        "temperature_c": -2.7,
+        "temperature_f": 27.1,
         "lat": 61.2181,
         "lon": -149.9003,
         "country": "US"
@@ -80,12 +73,12 @@
       {
         "station": "46026",
         "wave_height_m": null,
-        "water_temp_f": 61.0,
+        "water_temp_f": 61.2,
         "air_temp_f": null
       },
       {
         "station": "44025",
-        "wave_height_m": 1.2,
+        "wave_height_m": 0.5,
         "water_temp_f": 64.6,
         "air_temp_f": null
       },
@@ -93,95 +86,95 @@
         "station": "46013",
         "wave_height_m": null,
         "water_temp_f": null,
-        "air_temp_f": 55.9
+        "air_temp_f": 55.2
       },
       {
         "station": "46042",
         "wave_height_m": null,
-        "water_temp_f": 62.6,
-        "air_temp_f": 59.4
+        "water_temp_f": 63.3,
+        "air_temp_f": 59.2
       },
       {
         "station": "41008",
         "wave_height_m": null,
         "water_temp_f": null,
-        "air_temp_f": 76.5
+        "air_temp_f": 77.5
       },
       {
         "station": "46029",
         "wave_height_m": null,
-        "water_temp_f": 58.6,
-        "air_temp_f": 57.9
+        "water_temp_f": 58.5,
+        "air_temp_f": 57.7
       }
     ]
   },
   "casey": {
     "title": "Casey local conditions",
-    "date": "2026-11-19",
+    "date": "2026-11-20",
     "observation_count": 24,
-    "temp_f_min": 36.9,
-    "temp_f_max": 68.9,
-    "temp_f_mean": 51.1,
+    "temp_f_min": 39.4,
+    "temp_f_max": 71.4,
+    "temp_f_mean": 53.8,
     "hourly": [
       {
-        "time": "2026-11-19T12:00",
-        "temperature_f": 65.8,
-        "humidity": 24
-      },
-      {
-        "time": "2026-11-19T13:00",
-        "temperature_f": 67.8,
+        "time": "2026-11-20T12:00",
+        "temperature_f": 70.2,
         "humidity": 32
       },
       {
-        "time": "2026-11-19T14:00",
-        "temperature_f": 68.9,
-        "humidity": 34
+        "time": "2026-11-20T13:00",
+        "temperature_f": 70.9,
+        "humidity": 33
       },
       {
-        "time": "2026-11-19T15:00",
-        "temperature_f": 68.5,
-        "humidity": 36
+        "time": "2026-11-20T14:00",
+        "temperature_f": 71.4,
+        "humidity": 27
       },
       {
-        "time": "2026-11-19T16:00",
-        "temperature_f": 65.8,
-        "humidity": 38
+        "time": "2026-11-20T15:00",
+        "temperature_f": 70.9,
+        "humidity": 27
       },
       {
-        "time": "2026-11-19T17:00",
+        "time": "2026-11-20T16:00",
+        "temperature_f": 68.2,
+        "humidity": 28
+      },
+      {
+        "time": "2026-11-20T17:00",
         "temperature_f": 60.3,
+        "humidity": 42
+      },
+      {
+        "time": "2026-11-20T18:00",
+        "temperature_f": 57.7,
         "humidity": 41
       },
       {
-        "time": "2026-11-19T18:00",
-        "temperature_f": 56.1,
-        "humidity": 46
+        "time": "2026-11-20T19:00",
+        "temperature_f": 54.1,
+        "humidity": 53
       },
       {
-        "time": "2026-11-19T19:00",
+        "time": "2026-11-20T20:00",
         "temperature_f": 53.2,
         "humidity": 51
       },
       {
-        "time": "2026-11-19T20:00",
-        "temperature_f": 50.5,
-        "humidity": 54
+        "time": "2026-11-20T21:00",
+        "temperature_f": 51.4,
+        "humidity": 51
       },
       {
-        "time": "2026-11-19T21:00",
-        "temperature_f": 48.6,
+        "time": "2026-11-20T22:00",
+        "temperature_f": 50.4,
         "humidity": 52
       },
       {
-        "time": "2026-11-19T22:00",
-        "temperature_f": 46.4,
-        "humidity": 61
-      },
-      {
-        "time": "2026-11-19T23:00",
-        "temperature_f": 45.5,
-        "humidity": 61
+        "time": "2026-11-20T23:00",
+        "temperature_f": 47.8,
+        "humidity": 62
       }
     ]
   },
