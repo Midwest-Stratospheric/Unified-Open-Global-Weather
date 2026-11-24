@@ -1,0 +1,187 @@
+{
+  "schema": "uogw.hub_visual_snapshots.v1",
+  "ok": true,
+  "date_utc": "2026-11-24",
+  "generated_at_utc": "2026-11-24T20:22:32Z",
+  "heat": {
+    "title": "Heat & humidity snapshot",
+    "global_temp_f": {
+      "n": 34,
+      "min": 13.3,
+      "max": 88.3,
+      "mean": 55.968,
+      "median": 55.4,
+      "pstdev": 21.088
+    },
+    "global_rh": {
+      "n": 34,
+      "min": 28.0,
+      "max": 99.0,
+      "mean": 70.294,
+      "median": 71.5,
+      "pstdev": 15.184
+    },
+    "casey_temp_f": {
+      "n": 24,
+      "min": 29.1,
+      "max": 42.3,
+      "mean": 35.108,
+      "median": 34.6,
+      "pstdev": 4.097
+    },
+    "heat_index_flags": [
+      {
+        "name": "Lagos, NG",
+        "temperature_f": 85.5,
+        "relative_humidity_pct": 77,
+        "heat_index_f": 96.9,
+        "level": "extreme_caution"
+      },
+      {
+        "name": "Bangkok, TH",
+        "temperature_f": 88.3,
+        "relative_humidity_pct": 54,
+        "heat_index_f": 93.1,
+        "level": "extreme_caution"
+      }
+    ],
+    "extremes": {
+      "hottest": {
+        "name": "Bangkok, TH",
+        "id": "bangkok_th",
+        "temperature_c": 31.3,
+        "temperature_f": 88.3,
+        "lat": 13.7563,
+        "lon": 100.5018,
+        "country": "TH"
+      },
+      "coldest": {
+        "name": "Anchorage, AK, US",
+        "id": "anchorage_us",
+        "temperature_c": -10.4,
+        "temperature_f": 13.3,
+        "lat": 61.2181,
+        "lon": -149.9003,
+        "country": "US"
+      }
+    }
+  },
+  "marine": {
+    "title": "Marine NDBC snapshot",
+    "station_count": 6,
+    "rows": [
+      {
+        "station": "46026",
+        "wave_height_m": null,
+        "water_temp_f": 61.3,
+        "air_temp_f": null
+      },
+      {
+        "station": "44025",
+        "wave_height_m": 0.5,
+        "water_temp_f": 64.2,
+        "air_temp_f": null
+      },
+      {
+        "station": "46013",
+        "wave_height_m": null,
+        "water_temp_f": null,
+        "air_temp_f": 56.7
+      },
+      {
+        "station": "46042",
+        "wave_height_m": null,
+        "water_temp_f": 65.7,
+        "air_temp_f": 61.3
+      },
+      {
+        "station": "41008",
+        "wave_height_m": null,
+        "water_temp_f": null,
+        "air_temp_f": 79.2
+      },
+      {
+        "station": "46029",
+        "wave_height_m": null,
+        "water_temp_f": 57.6,
+        "air_temp_f": 57.7
+      }
+    ]
+  },
+  "casey": {
+    "title": "Casey local conditions",
+    "date": "2026-11-23",
+    "observation_count": 24,
+    "temp_f_min": 29.1,
+    "temp_f_max": 42.3,
+    "temp_f_mean": 35.1,
+    "hourly": [
+      {
+        "time": "2026-11-23T12:00",
+        "temperature_f": 41.0,
+        "humidity": 66
+      },
+      {
+        "time": "2026-11-23T13:00",
+        "temperature_f": 41.9,
+        "humidity": 62
+      },
+      {
+        "time": "2026-11-23T14:00",
+        "temperature_f": 42.3,
+        "humidity": 56
+      },
+      {
+        "time": "2026-11-23T15:00",
+        "temperature_f": 41.9,
+        "humidity": 53
+      },
+      {
+        "time": "2026-11-23T16:00",
+        "temperature_f": 40.3,
+        "humidity": 56
+      },
+      {
+        "time": "2026-11-23T17:00",
+        "temperature_f": 36.9,
+        "humidity": 65
+      },
+      {
+        "time": "2026-11-23T18:00",
+        "temperature_f": 34.9,
+        "humidity": 69
+      },
+      {
+        "time": "2026-11-23T19:00",
+        "temperature_f": 32.9,
+        "humidity": 72
+      },
+      {
+        "time": "2026-11-23T20:00",
+        "temperature_f": 32.0,
+        "humidity": 73
+      },
+      {
+        "time": "2026-11-23T21:00",
+        "temperature_f": 31.3,
+        "humidity": 74
+      },
+      {
+        "time": "2026-11-23T22:00",
+        "temperature_f": 30.0,
+        "humidity": 80
+      },
+      {
+        "time": "2026-11-23T23:00",
+        "temperature_f": 29.1,
+        "humidity": 83
+      }
+    ]
+  },
+  "charts": {
+    "heat": "visuals/latest/hub-heat-cities.png",
+    "pressure": "visuals/latest/pressure-wind-sample.png",
+    "marine": "visuals/latest/hub-marine-waves.png",
+    "casey": "visuals/latest/hub-casey-recent.png"
+  }
+}
