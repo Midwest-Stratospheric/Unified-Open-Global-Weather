@@ -2,7 +2,7 @@
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-11-24T01:02:03Z UTC · Aerostratospheric_
+_Generated at 2026-11-24T15:25:18Z UTC · Aerostratospheric_
 
 ## PNG charts
 
@@ -84,6 +84,6 @@ pie showData
 |--------|-------|
 | Date UTC | 2026-11-24 |
 | Cities OK | 34 |
-| City T min/max °F | 15.8 / 86.2 |
+| City T min/max °F | 13.3 / 88.3 |
 | Anomaly total | 7 |
 
