@@ -2,7 +2,7 @@
 
 Temperatures shown in **Fahrenheit (°F)**. Generated automatically from repository data.
 
-_Generated at 2026-11-24T19:51:33Z UTC · Aerostratospheric_
+_Generated at 2026-11-24T20:17:07Z UTC · Aerostratospheric_
 
 ## PNG charts
 
@@ -52,7 +52,7 @@ UOGW counts **research flags** for the daily sample set — **not** National Wea
 | **Watch** | Elevated interest — heat/cold, wind, low pressure, or |z| >= 2.5 vs the 7-day baseline. |
 | **Info** | Lower urgency (hot + very dry, strong high, warm water sample). |
 
-Today: **alert 4** · **watch 3** · **info 0** · total **7**
+Today: **alert 1** · **watch 2** · **info 0** · total **3**
 
 Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMALY_GUIDE.md](../ANOMALY_GUIDE.md) · [CHART_DESCRIPTIONS.md](../CHART_DESCRIPTIONS.md)
 
@@ -73,8 +73,8 @@ Full methods: [docs/ANOMALY_METHODS.md](../../docs/ANOMALY_METHODS.md) · [ANOMA
 ```mermaid
 pie showData
   title Anomaly flags 2026-11-24
-  "alert" : 4
-  "watch" : 3
+  "alert" : 1
+  "watch" : 2
   "info" : 0
 ```
 
@@ -85,5 +85,5 @@ pie showData
 | Date UTC | 2026-11-24 |
 | Cities OK | 34 |
 | City T min/max °F | 13.3 / 88.3 |
-| Anomaly total | 7 |
+| Anomaly total | 3 |
 
