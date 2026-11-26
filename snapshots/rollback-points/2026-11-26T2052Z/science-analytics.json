@@ -1,0 +1,336 @@
+{
+  "schema": "uogw.science_analytics.v1",
+  "date_utc": "2026-11-26",
+  "generated_at_utc": "2026-11-26T19:17:42Z",
+  "curator": "Aerostratospheric",
+  "display_preference": {
+    "hub_temperature_unit": "fahrenheit",
+    "science_storage_unit": "celsius"
+  },
+  "coverage": {
+    "global_cities_ok": 34,
+    "global_cities_total": 34,
+    "casey_hourly_count": 24,
+    "ndbc_stations_sampled": 6,
+    "research_climate_cities": 10,
+    "anomaly_events": 5,
+    "baseline_present": true,
+    "research_summary_present": true
+  },
+  "surface": {
+    "global_city_temperature": {
+      "celsius": {
+        "n": 34,
+        "min": -10.6,
+        "max": 30.1,
+        "mean": 13.021,
+        "median": 11.15,
+        "pstdev": 10.925
+      },
+      "fahrenheit": {
+        "n": 34,
+        "min": 12.9,
+        "max": 86.2,
+        "mean": 55.429,
+        "median": 52.05,
+        "pstdev": 19.675
+      }
+    },
+    "global_city_humidity_pct": {
+      "n": 34,
+      "min": 46.0,
+      "max": 96.0,
+      "mean": 72.265,
+      "median": 74.0,
+      "pstdev": 13.971
+    },
+    "global_city_pressure_hpa": {
+      "n": 34,
+      "min": 968.7,
+      "max": 1031.4,
+      "mean": 1016.747,
+      "median": 1017.45,
+      "pstdev": 10.68
+    },
+    "global_city_wind_ms": {
+      "n": 34,
+      "min": 0.58,
+      "max": 10.82,
+      "mean": 3.03,
+      "median": 2.54,
+      "pstdev": 2.367
+    },
+    "casey_temperature": {
+      "celsius": {
+        "n": 24,
+        "min": -3.6,
+        "max": 4.4,
+        "mean": 1.125,
+        "median": 2.75,
+        "pstdev": 2.946
+      },
+      "fahrenheit": {
+        "n": 24,
+        "min": 25.5,
+        "max": 39.9,
+        "mean": 34.013,
+        "median": 36.95,
+        "pstdev": 5.307
+      }
+    },
+    "casey_humidity_pct": {
+      "n": 24,
+      "min": 66.0,
+      "max": 76.0,
+      "mean": 71.25,
+      "median": 71.0,
+      "pstdev": 2.89
+    }
+  },
+  "marine": {
+    "wave_height_m": {
+      "n": 1,
+      "min": 2.8,
+      "max": 2.8,
+      "mean": 2.8,
+      "median": 2.8
+    },
+    "water_temperature": {
+      "celsius": {
+        "n": 4,
+        "min": 14.1,
+        "max": 17.4,
+        "mean": 16.0,
+        "median": 16.25,
+        "pstdev": 1.255
+      },
+      "fahrenheit": {
+        "n": 4,
+        "min": 57.4,
+        "max": 63.3,
+        "mean": 60.8,
+        "median": 61.25,
+        "pstdev": 2.237
+      }
+    },
+    "air_temperature": {
+      "celsius": {
+        "n": 4,
+        "min": 13.6,
+        "max": 26.5,
+        "mean": 17.275,
+        "median": 14.5,
+        "pstdev": 5.369
+      },
+      "fahrenheit": {
+        "n": 4,
+        "min": 56.5,
+        "max": 79.7,
+        "mean": 63.1,
+        "median": 58.1,
+        "pstdev": 9.657
+      }
+    }
+  },
+  "extremes": {
+    "hottest": {
+      "name": "Bangkok, TH",
+      "id": "bangkok_th",
+      "temperature_c": 30.1,
+      "temperature_f": 86.2,
+      "lat": 13.7563,
+      "lon": 100.5018,
+      "country": "TH"
+    },
+    "coldest": {
+      "name": "Anchorage, AK, US",
+      "id": "anchorage_us",
+      "temperature_c": -10.6,
+      "temperature_f": 12.9,
+      "lat": 61.2181,
+      "lon": -149.9003,
+      "country": "US"
+    }
+  },
+  "heat_index_flags": [
+    {
+      "name": "Lagos, NG",
+      "temperature_f": 85.8,
+      "relative_humidity_pct": 76,
+      "heat_index_f": 97.3,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Bangkok, TH",
+      "temperature_f": 86.2,
+      "relative_humidity_pct": 58,
+      "heat_index_f": 90.8,
+      "level": "extreme_caution"
+    }
+  ],
+  "anomalies": {
+    "counts": {
+      "total": 5,
+      "alert": 4,
+      "watch": 1,
+      "info": 0
+    },
+    "top": [
+      {
+        "kind": "low_pressure",
+        "severity": "watch",
+        "subject": "Reykjavik, IS",
+        "metric": "pressure_msl_hpa",
+        "value": 968.7,
+        "threshold": 980,
+        "detail": "Very low MSLP <= 980 hPa (example: 972 hPa deep low)"
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Sao Paulo, BR",
+        "metric": "z_mad",
+        "value": -10.792,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 20.4,
+            "z_pop": -2.2376,
+            "z_sample": -2.0716,
+            "z_mad": -10.792,
+            "s_range": -0.641,
+            "percentile": 12.5,
+            "mean": 27.9,
+            "median": 28.4,
+            "pstdev": 3.3518,
+            "sample_stdev": 3.6203,
+            "mad": 0.5
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Lima, PE",
+        "metric": "z_mad",
+        "value": 10.1175,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 27.2,
+            "z_pop": 1.3416,
+            "z_sample": 1.2421,
+            "z_mad": 10.1175,
+            "s_range": 0.5546,
+            "percentile": 75.0,
+            "mean": 26.2571,
+            "median": 25.7,
+            "pstdev": 0.7028,
+            "sample_stdev": 0.7591,
+            "mad": 0.1
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Stockholm, SE",
+        "metric": "z_mad",
+        "value": -5.396,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": -0.5,
+            "z_pop": -1.8957,
+            "z_sample": -1.7551,
+            "z_mad": -5.396,
+            "s_range": -0.5134,
+            "percentile": 12.5,
+            "mean": 1.1429,
+            "median": 1.1,
+            "pstdev": 0.8666,
+            "sample_stdev": 0.9361,
+            "mad": 0.2
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Beijing, CN",
+        "metric": "z_mad",
+        "value": 5.8007,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 5.9,
+            "z_pop": 2.1768,
+            "z_sample": 2.0153,
+            "z_mad": 5.8007,
+            "s_range": 0.6147,
+            "percentile": 87.5,
+            "mean": 1.8429,
+            "median": 1.6,
+            "pstdev": 1.8638,
+            "sample_stdev": 2.0132,
+            "mad": 0.5
+          }
+        }
+      }
+    ],
+    "disclaimer": "Research screening only \u2014 not an official weather warning service."
+  },
+  "highlights": [
+    {
+      "id": "hottest_city",
+      "label": "Hottest sample city",
+      "value": "86.2 \u00b0F",
+      "detail": "Bangkok, TH"
+    },
+    {
+      "id": "coldest_city",
+      "label": "Coldest sample city",
+      "value": "12.9 \u00b0F",
+      "detail": "Anchorage, AK, US"
+    },
+    {
+      "id": "casey_range",
+      "label": "Casey daily range",
+      "value": "25.5\u201339.9 \u00b0F",
+      "detail": "2026-11-25"
+    },
+    {
+      "id": "anomalies",
+      "label": "Anomaly flags",
+      "value": "5",
+      "detail": "alert 4 \u00b7 watch 1 \u00b7 info 0"
+    },
+    {
+      "id": "heat_index",
+      "label": "Elevated heat index",
+      "value": "97.3 \u00b0F",
+      "detail": "Lagos, NG"
+    }
+  ],
+  "inputs": {
+    "global_cities": true,
+    "casey": true,
+    "ndbc": true,
+    "anomaly": true,
+    "baseline": true,
+    "climate": true
+  },
+  "hub": {
+    "data_hub_url": "https://midwestsds.com/msds-data-hub.html",
+    "charts_url": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/visuals/latest/CHARTS.md",
+    "science_package": "data/latest/science-package.json"
+  }
+}
