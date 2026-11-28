@@ -1,0 +1,286 @@
+{
+  "schema": "uogw.science_analytics.v1",
+  "date_utc": "2026-11-27",
+  "generated_at_utc": "2026-11-27T21:20:16Z",
+  "curator": "Aerostratospheric",
+  "display_preference": {
+    "hub_temperature_unit": "fahrenheit",
+    "science_storage_unit": "celsius"
+  },
+  "coverage": {
+    "global_cities_ok": 34,
+    "global_cities_total": 34,
+    "casey_hourly_count": 24,
+    "ndbc_stations_sampled": 6,
+    "research_climate_cities": 10,
+    "anomaly_events": 3,
+    "baseline_present": true,
+    "research_summary_present": true
+  },
+  "surface": {
+    "global_city_temperature": {
+      "celsius": {
+        "n": 34,
+        "min": -5.3,
+        "max": 29.8,
+        "mean": 13.765,
+        "median": 13.0,
+        "pstdev": 10.742
+      },
+      "fahrenheit": {
+        "n": 34,
+        "min": 22.5,
+        "max": 85.6,
+        "mean": 56.776,
+        "median": 55.4,
+        "pstdev": 19.33
+      }
+    },
+    "global_city_humidity_pct": {
+      "n": 34,
+      "min": 26.0,
+      "max": 99.0,
+      "mean": 72.941,
+      "median": 76.0,
+      "pstdev": 17.403
+    },
+    "global_city_pressure_hpa": {
+      "n": 34,
+      "min": 978.9,
+      "max": 1036.6,
+      "mean": 1015.776,
+      "median": 1017.05,
+      "pstdev": 10.318
+    },
+    "global_city_wind_ms": {
+      "n": 34,
+      "min": 0.22,
+      "max": 10.6,
+      "mean": 2.948,
+      "median": 2.525,
+      "pstdev": 2.035
+    },
+    "casey_temperature": {
+      "celsius": {
+        "n": 24,
+        "min": 2.6,
+        "max": 5.2,
+        "mean": 4.079,
+        "median": 4.4,
+        "pstdev": 0.851
+      },
+      "fahrenheit": {
+        "n": 24,
+        "min": 36.7,
+        "max": 41.4,
+        "mean": 39.35,
+        "median": 39.9,
+        "pstdev": 1.537
+      }
+    },
+    "casey_humidity_pct": {
+      "n": 24,
+      "min": 63.0,
+      "max": 96.0,
+      "mean": 86.667,
+      "median": 92.0,
+      "pstdev": 11.441
+    }
+  },
+  "marine": {
+    "wave_height_m": {
+      "n": 1,
+      "min": 1.3,
+      "max": 1.3,
+      "mean": 1.3,
+      "median": 1.3
+    },
+    "water_temperature": {
+      "celsius": {
+        "n": 4,
+        "min": 15.4,
+        "max": 17.5,
+        "mean": 16.65,
+        "median": 16.85,
+        "pstdev": 0.896
+      },
+      "fahrenheit": {
+        "n": 4,
+        "min": 59.7,
+        "max": 63.5,
+        "mean": 61.975,
+        "median": 62.35,
+        "pstdev": 1.615
+      }
+    },
+    "air_temperature": {
+      "celsius": {
+        "n": 4,
+        "min": 14.1,
+        "max": 26.1,
+        "mean": 17.825,
+        "median": 15.55,
+        "pstdev": 4.882
+      },
+      "fahrenheit": {
+        "n": 4,
+        "min": 57.4,
+        "max": 79.0,
+        "mean": 64.1,
+        "median": 60.0,
+        "pstdev": 8.794
+      }
+    }
+  },
+  "extremes": {
+    "hottest": {
+      "name": "Lagos, NG",
+      "id": "lagos_ng",
+      "temperature_c": 29.8,
+      "temperature_f": 85.6,
+      "lat": 6.5244,
+      "lon": 3.3792,
+      "country": "NG"
+    },
+    "coldest": {
+      "name": "Anchorage, AK, US",
+      "id": "anchorage_us",
+      "temperature_c": -5.3,
+      "temperature_f": 22.5,
+      "lat": 61.2181,
+      "lon": -149.9003,
+      "country": "US"
+    }
+  },
+  "heat_index_flags": [
+    {
+      "name": "Lagos, NG",
+      "temperature_f": 85.6,
+      "relative_humidity_pct": 73,
+      "heat_index_f": 95.4,
+      "level": "extreme_caution"
+    },
+    {
+      "name": "Bangkok, TH",
+      "temperature_f": 85.3,
+      "relative_humidity_pct": 62,
+      "heat_index_f": 90.5,
+      "level": "extreme_caution"
+    }
+  ],
+  "anomalies": {
+    "counts": {
+      "total": 3,
+      "alert": 1,
+      "watch": 2,
+      "info": 0
+    },
+    "top": [
+      {
+        "kind": "low_pressure",
+        "severity": "watch",
+        "subject": "Reykjavik, IS",
+        "metric": "pressure_msl_hpa",
+        "value": 978.9,
+        "threshold": 980,
+        "detail": "Very low MSLP <= 980 hPa (example: 972 hPa deep low)"
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "alert",
+        "subject": "Sao Paulo, BR",
+        "metric": "z_mad",
+        "value": -7.1947,
+        "threshold": 5.0,
+        "detail": "Robust MAD z-score |z|>=5 (outlier-resistant)",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 21.6,
+            "z_pop": -1.378,
+            "z_sample": -1.2757,
+            "z_mad": -7.1947,
+            "s_range": -0.5053,
+            "percentile": 25.0,
+            "mean": 26.4,
+            "median": 28.0,
+            "pstdev": 3.4834,
+            "sample_stdev": 3.7625,
+            "mad": 0.6
+          }
+        }
+      },
+      {
+        "kind": "temp_zscore_mad",
+        "severity": "watch",
+        "subject": "Beijing, CN",
+        "metric": "z_mad",
+        "value": 4.3842,
+        "threshold": 3.5,
+        "detail": "Robust MAD z-score |z|>=3.5",
+        "extra": {
+          "methods": {
+            "n": 7,
+            "x": 5.5,
+            "z_pop": 1.399,
+            "z_sample": 1.2952,
+            "z_mad": 4.3842,
+            "s_range": 0.4805,
+            "percentile": 75.0,
+            "mean": 2.3286,
+            "median": 1.6,
+            "pstdev": 2.267,
+            "sample_stdev": 2.4486,
+            "mad": 0.6
+          }
+        }
+      }
+    ],
+    "disclaimer": "Research screening only \u2014 not an official weather warning service."
+  },
+  "highlights": [
+    {
+      "id": "hottest_city",
+      "label": "Hottest sample city",
+      "value": "85.6 \u00b0F",
+      "detail": "Lagos, NG"
+    },
+    {
+      "id": "coldest_city",
+      "label": "Coldest sample city",
+      "value": "22.5 \u00b0F",
+      "detail": "Anchorage, AK, US"
+    },
+    {
+      "id": "casey_range",
+      "label": "Casey daily range",
+      "value": "36.7\u201341.4 \u00b0F",
+      "detail": "2026-11-26"
+    },
+    {
+      "id": "anomalies",
+      "label": "Anomaly flags",
+      "value": "3",
+      "detail": "alert 1 \u00b7 watch 2 \u00b7 info 0"
+    },
+    {
+      "id": "heat_index",
+      "label": "Elevated heat index",
+      "value": "95.4 \u00b0F",
+      "detail": "Lagos, NG"
+    }
+  ],
+  "inputs": {
+    "global_cities": true,
+    "casey": true,
+    "ndbc": true,
+    "anomaly": true,
+    "baseline": true,
+    "climate": true
+  },
+  "hub": {
+    "data_hub_url": "https://midwestsds.com/msds-data-hub.html",
+    "charts_url": "https://github.com/Midwest-Stratospheric/Unified-Open-Global-Weather/blob/main/visuals/latest/CHARTS.md",
+    "science_package": "data/latest/science-package.json"
+  }
+}
